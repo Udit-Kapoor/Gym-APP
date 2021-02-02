@@ -10,6 +10,7 @@ class H2OApp extends StatelessWidget {
   Widget build(_) {
     return MaterialApp(
       title: appTitle,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,

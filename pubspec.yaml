@@ -10,9 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
 # -------------Dependency Packages--------------
-
+font_awesome_flutter: ^8.11.0
 # ----------------------------------------------
-  cupertino_icons: ^1.0.0
+cupertino_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +26,8 @@ flutter:
   uses-material-design: true
 
 # -----------------Asset Images-----------------
+  assets:
+    - lib/assets/images/  
 
 # ----------------------------------------------
 
