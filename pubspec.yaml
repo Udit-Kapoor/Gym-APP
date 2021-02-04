@@ -13,6 +13,7 @@ dependencies:
 
 # ----------------------------------------------
   cupertino_icons: ^1.0.0
+  carousel_slider: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,7 +27,8 @@ flutter:
   uses-material-design: true
 
 # -----------------Asset Images-----------------
-
+  assets:
+    - image/
 # ----------------------------------------------
 
 # -----------------Asset Fonts------------------
