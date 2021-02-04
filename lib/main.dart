@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'lib.dart';
 
-void main() => runApp(H2OApp());
+void main() {
+  runApp(H2OApp());
+}
 
 class H2OApp extends StatelessWidget {
   @override
@@ -10,7 +12,6 @@ class H2OApp extends StatelessWidget {
       title: appTitle,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Poppins',
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
