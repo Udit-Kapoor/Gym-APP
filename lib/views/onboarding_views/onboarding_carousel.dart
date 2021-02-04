@@ -24,7 +24,8 @@ class _FullScreenState extends State<onboarding_views> {
                 });
               },
               height: getScreenHeight,
-              autoPlay: false,
+              autoPlay: true,
+              autoPlayAnimationDuration: Duration(seconds: 1),
               viewportFraction: 1.0),
           items: [
             onboarding_single_view("image/bg1.png",
