@@ -39,6 +39,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     final double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -108,6 +109,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  final List _images = List.generate(
+      8,
+      (index) =>
+          'https://images.unsplash.com/photo-1559949557-7d0ac3e655f2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=770&q=80');
+
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
@@ -129,7 +135,34 @@ class HomeScreen extends StatelessWidget {
                     MyGoalTile(height: height),
                     WeightChart(height: height),
                     MyAttendance(height: height),
-                    MyTransformation(height: height),
+                    Text(
+                      'My Transformation',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5.copyWith(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 5.0,
+                      children: [
+                        for (var i = 0; i < 8; i++)
+                          Container(
+                            padding: EdgeInsets.only(bottom: 10.0),
+                            height: 100,
+                            width: 100,
+                            child: Image.network('${_images[i]}'),
+                          ),
+                        Container(
+                          height: 100,
+                          width: 100,
+                          child: IconButton(
+                            icon: Icon(Icons.add_a_photo),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                    // MyTransformation(height: height),
                   ],
                 ),
               ),
@@ -154,52 +187,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class MyTransformation extends StatelessWidget {
-  MyTransformation({
-    Key key,
-    @required this.height,
-  }) : super(key: key);
-
-  final double height;
-
-  final List _images = List.generate(
-      8,
-      (index) =>
-          'https://images.unsplash.com/photo-1559949557-7d0ac3e655f2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=770&q=80');
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height * 0.4,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            'My Transformation',
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          Expanded(
-            child: Container(
-              child: GridView.builder(
-                  padding: EdgeInsets.all(5.0),
-                  itemCount: _images.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 5.0,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      child: Image.network('${_images[index]}'),
-                    );
-                  }),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
