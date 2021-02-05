@@ -3,7 +3,7 @@ import 'package:gym_app/views/views.dart';
 
 class Routes {
   Map<String, Widget Function(BuildContext)> _routes = {
-    '/': (c) => CustomerProfileView(),
+    '/': (c) => TrainerProfileView(),
     //'/': (c) => Home(),
   };
 

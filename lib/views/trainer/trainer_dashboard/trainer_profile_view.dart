@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/views/customer/customer_drawer/profile_picture.dart';
+import 'package:gym_app/views/customer/customer_drawer/text_field_widget.dart';
 
-import 'profile_picture.dart';
-import 'text_field_widget.dart';
-
-class CustomerProfileView extends StatelessWidget {
-  const CustomerProfileView({Key key}) : super(key: key);
+class TrainerProfileView extends StatelessWidget {
+  const TrainerProfileView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class CustomerProfileView extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   TextFieldWidget(
-                    borderText: 'C_ID',
+                    borderText: 'T_ID',
                     bodyText: '42069',
                   ),
                   TextFieldWidget(
@@ -145,11 +144,54 @@ class CustomerProfileView extends StatelessWidget {
                         bodyText: 'aadharcard.pdf',
                       ),
                       IconButton(
+                        padding: EdgeInsets.only(right: 50.0),
                         icon: Icon(
                           Icons.file_upload,
                         ),
                         onPressed: () {},
                       ),
+                    ],
+                  ),
+                  Stack(
+                    alignment: Alignment.centerRight,
+                    children: [
+                      TextFieldWidget(
+                        borderText: 'Resume/CV',
+                        bodyText: 'resume.pdf',
+                      ),
+                      IconButton(
+                        padding: EdgeInsets.only(right: 50.0),
+                        icon: Icon(
+                          Icons.file_upload,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'Joining Date',
+                          bodyText: '12-06-2020',
+                        ),
+                      ),
+                      Expanded(child: Container()),
+                    ],
+                  ),
+                  TextFieldWidget(
+                    borderText: 'MonthlySalary',
+                    bodyText: 'Rs 15000',
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'Next Salary Date',
+                          bodyText: '15-01-2021',
+                        ),
+                      ),
+                      Expanded(child: Container()),
                     ],
                   ),
                 ],
