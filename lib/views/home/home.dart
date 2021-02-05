@@ -145,16 +145,20 @@ class HomeScreen extends StatelessWidget {
                       alignment: WrapAlignment.center,
                       spacing: 5.0,
                       children: [
-                        for (var i = 0; i < 8; i++)
+                        for (var i = 0; i < _images.length; i++)
                           Container(
-                            padding: EdgeInsets.only(bottom: 10.0),
+                            padding: EdgeInsets.only(bottom: 5.0),
                             height: 100,
                             width: 100,
-                            child: Image.network('${_images[i]}'),
+                            child: Image.network(
+                              '${_images[i]}',
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         Container(
                           height: 100,
                           width: 100,
+                          color: Colors.grey[100],
                           child: IconButton(
                             icon: Icon(Icons.add_a_photo),
                             onPressed: () {},
@@ -162,7 +166,6 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // MyTransformation(height: height),
                   ],
                 ),
               ),
@@ -186,4 +189,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
 
+import 'text_field_widget.dart';
+
 class CustomerProfileView extends StatelessWidget {
   const CustomerProfileView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double _height = MediaQuery.of(context).size.height;
-    final double _width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.navigate_before,
-          color: Colors.black,
+        leading: IconButton(
+          icon: Icon(
+            Icons.navigate_before,
+            color: Colors.black,
+          ),
+          onPressed: () {},
         ),
-        title: Text('My Profile',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline6),
+        centerTitle: true,
+        title: Text(
+          'My Profile',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.qr_code_scanner,
+              color: Colors.black,
+            ),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Container(
         child: Column(
@@ -39,123 +53,109 @@ class CustomerProfileView extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
-                    borderText: 'Customer ID',
+                  TextFieldWidget(
+                    borderText: 'C_ID',
                     bodyText: '42069',
                   ),
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
+                  TextFieldWidget(
                     borderText: 'Full Name',
-                    bodyText: 'Pawan Sharma',
+                    bodyText: 'Pawan Kumar',
                   ),
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'D.O.B',
+                          bodyText: '12-06-1998',
+                        ),
+                      ),
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'Gender',
+                          bodyText: 'Male',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'Phone No.',
+                          bodyText: '9876543210',
+                        ),
+                      ),
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'Alt.Phone No.',
+                          bodyText: '9876543210',
+                        ),
+                      ),
+                    ],
+                  ),
+                  TextFieldWidget(
                     borderText: 'Email ID',
                     bodyText: 'abcd1234@gmail.com',
                   ),
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
+                  TextFieldWidget(
                     borderText: 'Address Line 1',
                     bodyText: '6th avenue Becker Street',
                   ),
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
+                  TextFieldWidget(
                     borderText: 'Address Line 2',
                     bodyText: '6th avenue Becker Street',
                   ),
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'City',
+                          bodyText: 'New Delhi',
+                        ),
+                      ),
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'State',
+                          bodyText: 'New Delhi',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFieldWidget(
+                          borderText: 'Pin Code',
+                          bodyText: '110069',
+                        ),
+                      ),
+                      Expanded(child: Container()),
+                    ],
+                  ),
+                  TextFieldWidget(
                     borderText: 'Landmark',
                     bodyText: 'Near J.R. Public School',
                   ),
-                  FieldWidget(
-                    height: _height,
-                    width: _width,
-                    borderText: 'ID Proof',
-                    bodyText: 'aadharcard.pdf',
+                  Stack(
+                    alignment: Alignment.centerRight,
+                    children: [
+                      TextFieldWidget(
+                        borderText: 'ID Proof',
+                        bodyText: 'aadharcard.pdf',
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.file_upload,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
                 ],
               ),
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class FieldWidget extends StatelessWidget {
-  const FieldWidget({
-    Key key,
-    @required double height,
-    @required double width,
-    @required this.borderText,
-    @required this.bodyText,
-  })  : _height = height,
-        _width = width,
-        super(key: key);
-
-  final double _height;
-  final double _width;
-  final String borderText;
-  final String bodyText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: _height * 0.12,
-      margin: EdgeInsets.symmetric(
-        horizontal: _width * 0.07,
-        vertical: 5,
-      ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            height: _height * 0.1,
-            width: _width,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black,
-                width: 0.5,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Center(
-              child: Text(
-                bodyText,
-                textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .copyWith(color: Colors.black),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              child: Container(
-                color: Colors.white,
-                child: Text(
-                  borderText,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
