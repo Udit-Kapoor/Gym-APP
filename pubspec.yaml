@@ -10,10 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 # -------------Dependency Packages--------------
-  font_awesome_flutter: ^8.11.0
-  flutter_zoom_drawer: ^1.0.4+1
+
 # ----------------------------------------------
-cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.0
+  carousel_slider: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -28,13 +28,9 @@ flutter:
 
 # -----------------Asset Images-----------------
   assets:
-    - lib/assets/images/  
-
+    - image/
 # ----------------------------------------------
 
 # -----------------Asset Fonts------------------
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: lib/assets/fonts/Poppins-Medium.ttf
+
 # ----------------------------------------------
