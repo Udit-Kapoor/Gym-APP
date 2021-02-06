@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BatchWiseClientsListView extends StatelessWidget {
-  const BatchWiseClientsListView({Key key}) : super(key: key);
+  BatchWiseClientsListView({Key key}) : super(key: key);
 
   BottomNavigationBarItem _buildItem(String label, IconData icon) {
     return BottomNavigationBarItem(
@@ -14,6 +14,14 @@ class BatchWiseClientsListView extends StatelessWidget {
     );
   }
 
+  final List<Widget> _timeTile = [
+    for (var i = 0; i < 10; i++)
+      TimeTile(
+        timeText: '11.00-12.00',
+        batchSize: 10,
+        remote: true,
+      ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,36 +93,7 @@ class BatchWiseClientsListView extends StatelessWidget {
               child: Wrap(
                 runSpacing: 10.0,
                 children: [
-                  TimeTile(
-                    timeText: '09.30-10.30',
-                    batchSize: 10,
-                    remote: false,
-                  ),
-                  TimeTile(
-                    timeText: '11.00-12.00',
-                    batchSize: 1,
-                    remote: true,
-                  ),
-                  TimeTile(
-                    timeText: '12.30-13.30',
-                    batchSize: 10,
-                    remote: false,
-                  ),
-                  TimeTile(
-                    timeText: '14.00-15.00',
-                    batchSize: 10,
-                    remote: false,
-                  ),
-                  TimeTile(
-                    timeText: '15.30-16.30',
-                    batchSize: 2,
-                    remote: true,
-                  ),
-                  TimeTile(
-                    timeText: '17.00-18.00',
-                    batchSize: 10,
-                    remote: false,
-                  ),
+                  for (var i = 0; i < _timeTile.length; i++) _timeTile[i],
                 ],
               ),
             ),
@@ -146,19 +125,22 @@ class TimeTile extends StatelessWidget {
     @required this.timeText,
     @required this.batchSize,
     @required this.remote,
+    this.onTap,
   }) : super(key: key);
   final String timeText;
   final int batchSize;
   final bool remote;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Expanded(
-          flex: 2,
-          child: Text(
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Spacer(),
+          Text(
             timeText,
             textAlign: TextAlign.center,
             style: Theme.of(context)
@@ -166,24 +148,19 @@ class TimeTile extends StatelessWidget {
                 .headline5
                 .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(batchSize.toString()),
-                Icon(Icons.person),
-                Icon(
-                  Icons.location_on,
-                  color: remote ? Colors.red : Colors.transparent,
-                ),
-              ],
-            ),
+          Spacer(flex: 3),
+          Text(batchSize.toString()),
+          Spacer(),
+          Icon(Icons.person),
+          Spacer(),
+          Icon(
+            Icons.location_on,
+            color: remote ? Colors.red : Colors.transparent,
           ),
-        ),
-      ],
+          Spacer(),
+         
+        ],
+      ),
     );
   }
 }
