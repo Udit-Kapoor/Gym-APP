@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class TeamPage extends StatefulWidget {
-  @override
-  _TeamPageState createState() => _TeamPageState();
-}
-
-class _TeamPageState extends State<TeamPage> {
+class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
+        //ToDO:Remove the sized box . Acting as app bar rn
+        SizedBox(
+          height: 55,
+        ),
         Container(
           height: 165,
           decoration: BoxDecoration(
@@ -173,6 +172,7 @@ class _TeamPageState extends State<TeamPage> {
             ),
           ],
         ),
+
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Center(
@@ -201,6 +201,7 @@ class _TeamPageState extends State<TeamPage> {
             ),
           ),
         ),
+
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: CarouselSlider(
