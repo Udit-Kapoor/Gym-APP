@@ -1,27 +1,36 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BatchWiseClientsListView extends StatelessWidget {
+class BatchWiseClientsListView extends StatefulWidget {
   BatchWiseClientsListView({Key key}) : super(key: key);
 
+  @override
+  _BatchWiseClientsListViewState createState() =>
+      _BatchWiseClientsListViewState();
+}
+
+class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
   BottomNavigationBarItem _buildItem(String label, IconData icon) {
     return BottomNavigationBarItem(
-      icon: Icon(
-        icon,
-        color: Colors.black,
-      ),
+      icon: Icon(icon, color: Colors.black),
       label: label,
     );
   }
 
   final List<Widget> _timeTile = [
-    for (var i = 0; i < 10; i++)
+    for (var i = 0; i < 9; i++)
       TimeTile(
-        timeText: '11.00-12.00',
-        batchSize: 10,
-        remote: true,
+        timeText: '1$i.00-1${i + 1}.00',
+        batchSize: Random().nextInt(20),
+        remote: (Random().nextInt(10) + 1) % 2 == 0 ? false : true,
+        onTap: () {
+          print(i);
+        },
       ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,7 +167,6 @@ class TimeTile extends StatelessWidget {
             color: remote ? Colors.red : Colors.transparent,
           ),
           Spacer(),
-         
         ],
       ),
     );
