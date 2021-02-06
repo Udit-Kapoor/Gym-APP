@@ -4,4 +4,4 @@ export 'home/home.dart';
 export 'login_view/login_view.dart';
 export 'onboarding_views/onboarding_views.dart';
 export 'trainer/trainer.dart';
-export 'trainer/trainer_dashboard/trainer_profile_view.dart';
+export 'trainer/trainer_drawer/trainer_profile_view.dart';
