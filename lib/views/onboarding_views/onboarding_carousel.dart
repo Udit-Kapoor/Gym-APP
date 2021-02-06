@@ -4,12 +4,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 var currentPos = 1;
 
-class onboarding_views extends StatefulWidget {
+class OnboardingViews extends StatefulWidget {
   @override
-  _FullScreenState createState() => _FullScreenState();
+  _OnboardingViewsState createState() => _OnboardingViewsState();
 }
 
-class _FullScreenState extends State<onboarding_views> {
+class _OnboardingViewsState extends State<OnboardingViews> {
   @override
   Widget build(BuildContext context) {
     var getScreenHeight = MediaQuery.of(context).size.height;
@@ -28,13 +28,13 @@ class _FullScreenState extends State<onboarding_views> {
               autoPlayAnimationDuration: Duration(seconds: 1),
               viewportFraction: 1.0),
           items: [
-            onboarding_single_view("image/bg1.png",
+            OnboardingSingleView("image/bg1.png",
                 "Here we help you achieve \n your physical goals", 0),
-            onboarding_single_view(
+            OnboardingSingleView(
                 "image/bg2.png",
                 "Hundreds of successful\n transformation stories are\n the proof of our gym’s\n brilliance",
                 1),
-            onboarding_single_view("image/bg3.png",
+            OnboardingSingleView("image/bg3.png",
                 "Join now and achieve\n your dream physique", 2),
           ]),
     ));

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class login_view extends StatefulWidget {
+class LoginView extends StatefulWidget {
   @override
-  _login_viewState createState() => _login_viewState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _login_viewState extends State<login_view> {
+class _LoginViewState extends State<LoginView> {
   bool _isCustomer = true;
 
-  Widget _CusOrEmp() {
+  Widget _cusOrEmp() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -512,7 +512,7 @@ class _login_viewState extends State<login_view> {
                             fontSize: 30),
                       ),
                     ),
-                    _CusOrEmp(),
+                    _cusOrEmp(),
                   ],
                 )
               ],

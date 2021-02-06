@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'my_attendance.dart';
+import 'my_drawer.dart';
+import 'my_goal_title.dart';
+import 'todays_workout_tile.dart';
+import 'weight_chart.dart';
+
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
 
@@ -69,10 +75,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: Stack(
         children: <Widget>[
-          // MyDrawer(
-          //   height: _height,
-          //   width: _width,
-          // ),
+          MyDrawer(
+            height: _height,
+            width: _width,
+          ),
           HomeScreen(
             height: _height,
             width: _width,
@@ -125,10 +131,10 @@ class HomeScreen extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children: [
-                    // TodaysWorkoutTile(),
-                    // MyGoalTile(height: height),
-                    // WeightChart(height: height),
-                    // MyAttendance(height: height),
+                    TodaysWorkoutTile(),
+                    MyGoalTile(height: height),
+                    WeightChart(height: height),
+                    MyAttendance(height: height),
                     Text(
                       'My Transformation',
                       textAlign: TextAlign.center,
@@ -156,7 +162,6 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // MyTransformation(height: height),
                   ],
                 ),
               ),

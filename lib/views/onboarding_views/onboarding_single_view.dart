@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class onboarding_single_view extends StatelessWidget {
+class OnboardingSingleView extends StatelessWidget {
   String imgPath;
   String bottomText;
   int currentPos;
@@ -10,7 +10,7 @@ class onboarding_single_view extends StatelessWidget {
     "image/bg3.png",
   ];
 
-  onboarding_single_view(this.imgPath, this.bottomText, this.currentPos);
+  OnboardingSingleView(this.imgPath, this.bottomText, this.currentPos);
 
   @override
   Widget build(BuildContext context) {

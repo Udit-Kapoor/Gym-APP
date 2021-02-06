@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'lib.dart';
+
+import 'views/trainer/clients_details_view.dart';
 
 void main() {
   runApp(H2OApp());
@@ -9,12 +10,14 @@ class H2OApp extends StatelessWidget {
   @override
   Widget build(_) {
     return MaterialApp(
-      title: appTitle,
+      title: 'H2O',
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: Routes().routes,
+      routes: {
+        '/ClientsDetailsView': (c) => ClientsDetailsView(),
+      },
     );
   }
 }

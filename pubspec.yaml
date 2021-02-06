@@ -9,28 +9,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-# -------------Dependency Packages--------------
-
-# ----------------------------------------------
-  cupertino_icons: ^1.0.0
   carousel_slider: ^3.0.0
+  cupertino_icons: ^1.0.0
+  font_awesome_flutter: ^8.11.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-# -----------Dev Dependency Packages------------
-
-# ----------------------------------------------
 
 flutter:
 
   uses-material-design: true
 
-# -----------------Asset Images-----------------
   assets:
     - image/
-# ----------------------------------------------
-
-# -----------------Asset Fonts------------------
-
-# ----------------------------------------------
