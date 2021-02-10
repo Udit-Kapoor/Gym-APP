@@ -17,7 +17,9 @@ class CustomerProfileView extends StatelessWidget {
             Icons.navigate_before,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         centerTitle: true,
         title: Text(

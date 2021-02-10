@@ -179,7 +179,7 @@ class TeamPage extends StatelessWidget {
             child: Text(
               "Behind The Scenes",
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-            ),
+            ), 
           ),
         ),
         Container(

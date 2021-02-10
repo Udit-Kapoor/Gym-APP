@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'my_attendance.dart';
-import 'my_drawer.dart';
-import 'my_goal_title.dart';
-import 'todays_workout_tile.dart';
-import 'weight_chart.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gym_app/views/home/home_index.dart';
+import 'package:gym_app/views/home/my_drawer.dart';
+import 'package:gym_app/views/home/workout_index.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -89,94 +87,116 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({
     Key key,
     @required this.height,
     @required this.width,
   }) : super(key: key);
-  final Duration duration = Duration(milliseconds: 300);
-
   final double height;
   final double width;
-  BottomNavigationBarItem _buildItem(String label, IconData icon) {
-    return BottomNavigationBarItem(
-      icon: Icon(
-        icon,
-        color: Colors.black,
-      ),
-      label: label,
-    );
-  }
 
-  final List _images = List.generate(
-      8,
-      (index) =>
-          'https://images.unsplash.com/photo-1559949557-7d0ac3e655f2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=770&q=80');
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final Duration duration = Duration(milliseconds: 300);
+
+  final List tabs = [
+    HomeIndex(),
+    Expanded(
+      child: Container(
+        color: Colors.blue,
+      ),
+    ),
+    WorkoutIndex(),
+    Expanded(
+      child: Container(
+        color: Colors.red,
+      ),
+    ),
+  ];
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       duration: duration,
-      top: isCollapsed ? 0 : height * 0.07,
-      bottom: isCollapsed ? 0 : height * 0.18,
-      left: isCollapsed ? 0 : width * 0.7,
-      right: isCollapsed ? 0 : -width * 0.7,
+      top: isCollapsed ? 0 : widget.height * 0.07,
+      bottom: isCollapsed ? 0 : widget.height * 0.18,
+      left: isCollapsed ? 0 : widget.width * 0.7,
+      right: isCollapsed ? 0 : -widget.width * 0.7,
       child: Material(
-        elevation: 5.0,
+        elevation: 4.0,
         child: Container(
           child: Column(
             children: [
-              Expanded(
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    TodaysWorkoutTile(),
-                    MyGoalTile(),
-                    WeightChart(),
-                    MyAttendance(),
-                    Text(
-                      'My Transformation',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline5.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      spacing: 5.0,
-                      children: [
-                        for (var i = 0; i < 8; i++)
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10.0),
-                            height: 100,
-                            width: 100,
-                            child: Image.network('${_images[i]}'),
+              tabs[_currentIndex],
+              BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                showUnselectedLabels: false,
+                showSelectedLabels: false,
+                elevation: 0.0,
+                onTap: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                items: [
+                  BottomNavigationBarItem(
+                    icon: _currentIndex == 0
+                        ? Icon(
+                            Icons.home,
+                            color: Colors.red,
+                            size: 30.0,
+                          )
+                        : Icon(
+                            Icons.home,
+                            color: Colors.black,
                           ),
-                        Container(
-                          height: 100,
-                          width: 100,
-                          child: IconButton(
-                            icon: Icon(Icons.add_a_photo),
-                            onPressed: () {},
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _currentIndex == 1
+                        ? Icon(
+                            FontAwesomeIcons.appleAlt,
+                            color: Colors.red,
+                            size: 30.0,
+                          )
+                        : Icon(
+                            FontAwesomeIcons.appleAlt,
+                            color: Colors.black,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: BottomNavigationBar(
-                  backgroundColor: Colors.black,
-                  elevation: 0.0,
-                  items: [
-                    _buildItem('Home', Icons.home),
-                    _buildItem('Diet', Icons.restaurant),
-                    _buildItem('Workout', Icons.work_outline),
-                    _buildItem('H2O', Icons.person),
-                  ],
-                ),
+                    label: 'Food',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _currentIndex == 2
+                        ? Icon(
+                            FontAwesomeIcons.dumbbell,
+                            color: Colors.red,
+                            size: 30.0,
+                          )
+                        : Icon(
+                            FontAwesomeIcons.dumbbell,
+                            color: Colors.black,
+                          ),
+                    label: 'workout',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _currentIndex == 3
+                        ? Icon(
+                            FontAwesomeIcons.users,
+                            color: Colors.red,
+                            size: 30.0,
+                          )
+                        : Icon(
+                            FontAwesomeIcons.users,
+                            color: Colors.black,
+                          ),
+                    label: 'H2O',
+                  ),
+                ],
               ),
             ],
           ),
