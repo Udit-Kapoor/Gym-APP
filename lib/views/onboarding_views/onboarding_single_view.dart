@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OnboardingSingleView extends StatelessWidget {
+
   final String imgPath;
   final String bottomText;
   final int currentPos;
