@@ -244,8 +244,8 @@ class _LoginViewState extends State<LoginView> {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: GestureDetector(
-        onTap: null,
         //Todo: Add Authentication
+        onTap: () => {Navigator.pushNamed(context, 'HomePage')},
         child: Icon(
           Icons.arrow_forward_rounded,
           size: 40,

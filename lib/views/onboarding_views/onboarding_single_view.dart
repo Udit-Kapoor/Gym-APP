@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class OnboardingSingleView extends StatelessWidget {
-
   final String imgPath;
   final String bottomText;
   final int currentPos;
@@ -58,7 +57,9 @@ class OnboardingSingleView extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30.0),
               child: GestureDetector(
                 //ToDo : Navigate to Login Screen
-                onTap: null,
+                onVerticalDragCancel: () => {
+                  Navigator.pushNamed(context, '/loginScreen'),
+                },
                 child: Container(
                   width: 300,
                   height: 20,
