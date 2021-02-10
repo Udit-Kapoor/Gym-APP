@@ -129,11 +129,11 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
               BottomNavigationBarItem(
                   icon: _currentIndex == 4
                       ? CircleAvatar(
-                          child:
-                              Icon(Icons.fitness_center, color: Colors.white),
+                          child: Icon(FontAwesomeIcons.dumbbell,
+                              color: Colors.white),
                           backgroundColor: Colors.red,
                         )
-                      : Icon(Icons.fitness_center, color: Colors.red),
+                      : Icon(FontAwesomeIcons.dumbbell, color: Colors.red),
                   label: 'Workout'),
             ],
           ),

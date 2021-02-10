@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gym_app/views/customer/customer_profile_view.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({
@@ -30,7 +31,16 @@ class MyDrawer extends StatelessWidget {
             title: Text('Hi! Pawan'),
             subtitle: Text('#42069'),
           ),
-          DrawerTextList(label: 'Profile', onTap: () {}),
+          DrawerTextList(
+              label: 'Profile',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CustomerProfileView(),
+                  ),
+                );
+              }),
           DrawerTextList(label: 'Gym Subscription', onTap: () {}),
           DrawerTextList(label: 'Order History', onTap: () {}),
           DrawerTextList(label: 'Complaint/Feedback', onTap: () {}),
