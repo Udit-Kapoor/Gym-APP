@@ -3,25 +3,24 @@ import 'package:flutter/material.dart';
 class MyAttendance extends StatelessWidget {
   const MyAttendance({
     Key key,
-    @required this.height,
   }) : super(key: key);
-
-  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height * 0.4,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            'My Attendance',
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              'My Attendance',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,60 +48,75 @@ class MyAttendance extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Flexible(
-                child: Container(
-                  height: height * 0.3,
-                  child: ListView.builder(
-                    itemCount: 30,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        leading: Text(
-                          'Day\n$index',
-                          textAlign: TextAlign.center,
-                        ),
-                        trailing: index % 2 == 0
-                            ? Icon(Icons.check_circle_outline,
-                                color: Colors.green)
-                            : Icon(Icons.cancel_outlined, color: Colors.red),
-                      );
-                    },
-                  ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    for (var i = 1; i <= 7; i++)
+                      DayWiseAttendance(
+                          weekDay: 'Mon',
+                          day: i,
+                          attend: i % 2 == 0 ? true : false)
+                  ],
                 ),
               ),
-              SizedBox(
-                width: 40,
-              ),
-              Flexible(
-                fit: FlexFit.tight,
-                child: Container(
-                  height: height * 0.3,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.donut_large,
-                        size: 40.0,
-                      ),
-                      Text(
-                        'Total\nAttendance',
-                        textAlign: TextAlign.center,
-                      ),
-                      Icon(
-                        Icons.donut_large,
-                        size: 40.0,
-                      ),
-                      Text(
-                        'Attendance\nPerc.',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.donut_large,
+                      size: 40.0,
+                    ),
+                    Text(
+                      'Total\nAttendance',
+                      textAlign: TextAlign.center,
+                    ),
+                    Icon(
+                      Icons.donut_large,
+                      size: 40.0,
+                    ),
+                    Text(
+                      'Attendance\nPerc.',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class DayWiseAttendance extends StatelessWidget {
+  const DayWiseAttendance(
+      {Key key, @required this.weekDay, @required this.day, this.attend})
+      : super(key: key);
+
+  final String weekDay;
+  final int day;
+  final bool attend;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(children: [
+        Spacer(),
+        Text(
+          '$weekDay\n$day',
+          textAlign: TextAlign.center,
+        ),
+        Spacer(
+          flex: 2,
+        ),
+        Icon(attend ? Icons.check_circle_outline : Icons.cancel_outlined,
+            color: attend ? Colors.green : Colors.red),
+        Spacer(),
+      ]),
     );
   }
 }

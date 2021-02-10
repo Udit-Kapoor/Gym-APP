@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.2
+  shared_preferences: ^0.5.12+4
   carousel_slider: ^3.0.0
   cupertino_icons: ^1.0.0
   font_awesome_flutter: ^8.11.0

@@ -77,11 +77,11 @@ class ShowIcon extends StatelessWidget {
 }
 
 class ReviewCard extends StatelessWidget {
-  String imgPath;
-  String name;
-  String gender;
-  String age;
-  String story;
+  final String imgPath;
+  final String name;
+  final String gender;
+  final String age;
+  final String story;
 
   ReviewCard(this.imgPath, this.name, this.gender, this.age, this.story);
 

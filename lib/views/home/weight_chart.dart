@@ -3,17 +3,12 @@ import 'package:flutter/material.dart';
 class WeightChart extends StatelessWidget {
   const WeightChart({
     Key key,
-    @required this.height,
   }) : super(key: key);
-
-  final double height;
-
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 4.0,
       child: Container(
-        height: height * 0.4,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -48,28 +43,32 @@ class WeightChart extends StatelessWidget {
               ],
             ),
             Container(
+              padding: EdgeInsets.all(10.0),
               child: Image.asset(
-                'lib/assets/images/chart.png',
+                'image/chart.png',
                 fit: BoxFit.scaleDown,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ChartIndicaters(
-                  dotColor: Color.fromRGBO(178, 223, 138, 1),
-                  label: 'This Month',
-                ),
-                ChartIndicaters(
-                  dotColor: Color.fromRGBO(166, 206, 227, 1),
-                  label: 'Last Month',
-                ),
-                ChartIndicaters(
-                  dotColor: Color.fromRGBO(31, 120, 180, 1),
-                  label: 'Last year',
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ChartIndicaters(
+                    dotColor: Color.fromRGBO(178, 223, 138, 1),
+                    label: 'This Month',
+                  ),
+                  ChartIndicaters(
+                    dotColor: Color.fromRGBO(166, 206, 227, 1),
+                    label: 'Last Month',
+                  ),
+                  ChartIndicaters(
+                    dotColor: Color.fromRGBO(31, 120, 180, 1),
+                    label: 'Last year',
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -19,18 +19,6 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
     );
   }
 
-  final List<Widget> _timeTile = [
-    for (var i = 0; i < 9; i++)
-      TimeTile(
-        timeText: '1$i.00-1${i + 1}.00',
-        batchSize: Random().nextInt(20),
-        remote: (Random().nextInt(10) + 1) % 2 == 0 ? false : true,
-        onTap: () {
-          print(i);
-        },
-      ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +33,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
         ),
         centerTitle: true,
         title: Image.asset(
-          'images/logo.png',
+          'image/logo.png',
           fit: BoxFit.fill,
         ),
       ),
@@ -102,7 +90,16 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
               child: Wrap(
                 runSpacing: 10.0,
                 children: [
-                  for (var i = 0; i < _timeTile.length; i++) _timeTile[i],
+                  for (var i = 0; i < 9; i++)
+                    TimeTile(
+                      timeText: '1$i.00-1${i + 1}.00',
+                      batchSize: Random().nextInt(20),
+                      remote:
+                          (Random().nextInt(10) + 1) % 2 == 0 ? false : true,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/ClientsList');
+                      },
+                    ),
                 ],
               ),
             ),
@@ -117,7 +114,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
           _buildItem('Clients', FontAwesomeIcons.users),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'images/logo.png',
+              'image/logo.png',
               fit: BoxFit.fill,
             ),
             label: 'gym',

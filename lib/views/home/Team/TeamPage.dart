@@ -6,7 +6,7 @@ class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
-        //ToDO:Remove the sized box . Acting as app bar rn
+        //TODO:Remove the sized box . Acting as app bar rn
         SizedBox(
           height: 55,
         ),

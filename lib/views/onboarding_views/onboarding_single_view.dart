@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class OnboardingSingleView extends StatelessWidget {
-  String imgPath;
-  String bottomText;
-  int currentPos;
-  List<String> listPaths = [
+
+  final String imgPath;
+  final String bottomText;
+  final int currentPos;
+  final List<String> listPaths = [
     "image/bg1.png",
     "image/bg2.png",
     "image/bg3.png",

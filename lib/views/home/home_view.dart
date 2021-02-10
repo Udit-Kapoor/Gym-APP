@@ -69,7 +69,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
         ],
         title: Image.asset(
-          'lib/assets/images/logo.png',
+          'image/logo.png',
           fit: BoxFit.fill,
         ),
       ),
@@ -132,9 +132,9 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   children: [
                     TodaysWorkoutTile(),
-                    MyGoalTile(height: height),
-                    WeightChart(height: height),
-                    MyAttendance(height: height),
+                    MyGoalTile(),
+                    WeightChart(),
+                    MyAttendance(),
                     Text(
                       'My Transformation',
                       textAlign: TextAlign.center,

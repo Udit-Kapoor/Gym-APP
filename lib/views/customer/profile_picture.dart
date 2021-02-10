@@ -15,7 +15,7 @@ class ProfilePicture extends StatelessWidget {
           CircleAvatar(
             radius: 70.0,
             child: Image.asset(
-              'lib/assets/images/profile.png',
+              'image/profile.png',
               fit: BoxFit.fill,
             ),
           ),
