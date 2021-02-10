@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/views/home/Activities/cafeteria_view.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -6,10 +7,6 @@ class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(children: [
-        //TODO:Remove the sized box . Acting as app bar rn
-        SizedBox(
-          height: 55,
-        ),
         Container(
           height: 165,
           decoration: BoxDecoration(
@@ -24,9 +21,12 @@ class TeamPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 17.0, left: 75),
               child: ShowIcon(
-                  title: "Cafeteria",
-                  col: Color(0xFFF5A300),
-                  img: "image/cafeIcon.png"),
+                title: "Cafeteria",
+                col: Color(0xFFF5A300),
+                img: "image/cafeIcon.png",
+                route:
+                    MaterialPageRoute(builder: (context) => cafeteria_view()),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 139),
@@ -172,14 +172,13 @@ class TeamPage extends StatelessWidget {
             ),
           ],
         ),
-
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Center(
             child: Text(
               "Behind The Scenes",
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-            ), 
+            ),
           ),
         ),
         Container(
@@ -201,7 +200,6 @@ class TeamPage extends StatelessWidget {
             ),
           ),
         ),
-
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: CarouselSlider(
