@@ -4,7 +4,6 @@ class WeightChart extends StatelessWidget {
   const WeightChart({
     Key key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Material(

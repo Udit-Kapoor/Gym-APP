@@ -7,8 +7,7 @@ import 'views/trainer/batch_wise_clients_list_view.dart';
 void main() {
   runApp(H2OApp());
 }
-
-  class H2OApp extends StatelessWidget {
+class H2OApp extends StatelessWidget {
     @override
     Widget build(_) {
       return MaterialApp(
@@ -25,4 +24,4 @@ void main() {
         },
       );
     }
-  }
+}
