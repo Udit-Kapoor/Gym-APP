@@ -1,15 +1,17 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class TodaysWorkoutTile extends StatelessWidget {
   const TodaysWorkoutTile({
-    Key key,
+    Key key
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 4.0,
       child: ListTile(
+        onTap: () {},
         contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
         tileColor: Colors.white,
         leading: Container(

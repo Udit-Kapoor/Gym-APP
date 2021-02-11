@@ -5,8 +5,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(children: [
+    return ListView(
+      children: [
         Container(
           height: 165,
           decoration: BoxDecoration(
@@ -150,24 +150,17 @@ class TeamPage extends StatelessWidget {
           ),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              width: 187,
-              height: 160,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("image/story1.jpeg"),
-                ),
+            Expanded(
+              child: Image.asset(
+                'image/story1.jpeg',
+                fit: BoxFit.fill,
               ),
             ),
-            Container(
-              width: 187,
-              height: 160,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("image/story2.jpg"),
-                ),
+            Expanded(
+              child: Image.asset(
+                'image/story2.jpg',
+                fit: BoxFit.fill,
               ),
             ),
           ],
@@ -214,7 +207,7 @@ class TeamPage extends StatelessWidget {
                     "Lorem ipsum"),
               ]),
         ),
-      ]),
+      ],
     );
   }
 }

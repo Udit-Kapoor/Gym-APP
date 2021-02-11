@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gym_app/views/customer/customer_gym_subscription_view.dart';
 import 'package:gym_app/views/customer/customer_profile_view.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -41,7 +42,15 @@ class MyDrawer extends StatelessWidget {
                   ),
                 );
               }),
-          DrawerTextList(label: 'Gym Subscription', onTap: () {}),
+          DrawerTextList(
+              label: 'Gym Subscription',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CustomerGymSubscriptionView()),
+                );
+              }),
           DrawerTextList(label: 'Order History', onTap: () {}),
           DrawerTextList(label: 'Complaint/Feedback', onTap: () {}),
           DrawerTextList(label: 'Help & Support', onTap: () {}),

@@ -10,6 +10,7 @@ class MyGoalTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border(
           bottom: BorderSide(color: Colors.black, width: 1),
         ),

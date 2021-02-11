@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/home/my_attendance.dart';
-import 'package:gym_app/views/home/my_goal_title.dart';
-import 'package:gym_app/views/home/todays_workout_tile.dart';
-import 'package:gym_app/views/home/weight_chart.dart';
+import 'package:gym_app/views/customer/my_attendance.dart';
+import 'package:gym_app/views/customer/my_goal_title.dart';
+import 'package:gym_app/views/customer/todays_workout_tile.dart';
+import 'package:gym_app/views/customer/weight_chart.dart';
 
 class HomeIndex extends StatelessWidget {
   HomeIndex({Key key}) : super(key: key);
+
+
+
   final List _images = List.generate(
       8,
       (index) =>
@@ -17,17 +20,23 @@ class HomeIndex extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          TodaysWorkoutTile(),
+          TodaysWorkoutTile(
+           
+          ),
           MyGoalTile(),
           WeightChart(),
+          SizedBox(height: 20.0),
           MyAttendance(),
-          Text(
-            'My Transformation',
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+            child: Text(
+              'My Transformation',
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
           ),
           Wrap(
             alignment: WrapAlignment.center,

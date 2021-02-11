@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/home/exercise_instructions.dart';
+import 'package:gym_app/views/customer/exercise_instructions.dart';
 
 class ExercisePage extends StatelessWidget {
   ExercisePage({Key key, @required this.muscle}) : super(key: key);

@@ -9,6 +9,7 @@ class WeightChart extends StatelessWidget {
     return Material(
       elevation: 4.0,
       child: Container(
+        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

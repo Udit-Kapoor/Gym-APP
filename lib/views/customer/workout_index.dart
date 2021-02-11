@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/home/exercise_page.dart';
+import 'package:gym_app/views/customer/exercise_page.dart';
 
 class WorkoutIndex extends StatelessWidget {
   WorkoutIndex({Key key}) : super(key: key);

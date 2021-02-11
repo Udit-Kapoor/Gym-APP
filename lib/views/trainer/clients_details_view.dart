@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gym_app/views/home/my_attendance.dart';
-import 'package:gym_app/views/home/my_goal_title.dart';
-import 'package:gym_app/views/home/todays_workout_tile.dart';
-import 'package:gym_app/views/home/weight_chart.dart';
+import 'package:gym_app/views/customer/customer_gym_subscription_view.dart';
+import 'package:gym_app/views/customer/my_attendance.dart';
+import 'package:gym_app/views/customer/my_goal_title.dart';
+import 'package:gym_app/views/customer/todays_workout_tile.dart';
+import 'package:gym_app/views/customer/weight_chart.dart';
 import 'package:gym_app/views/trainer/clients_information.dart';
-import 'package:gym_app/views/trainer/clients_subscription_information.dart';
 
 class ClientsDetailsView extends StatefulWidget {
   const ClientsDetailsView({Key key}) : super(key: key);
@@ -19,7 +19,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   final List tabs = [
     ClientsDashboard(),
     ClientsInformation(),
-    SubscriptionInfo(),
+    CustomerGymSubscriptionView(),
     Container(color: Colors.blueAccent),
     Container(color: Colors.amberAccent),
   ];
@@ -129,11 +129,11 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
               BottomNavigationBarItem(
                   icon: _currentIndex == 4
                       ? CircleAvatar(
-                          child: Icon(FontAwesomeIcons.dumbbell,
-                              color: Colors.white),
+                          child:
+                              Icon(Icons.fitness_center, color: Colors.white),
                           backgroundColor: Colors.red,
                         )
-                      : Icon(FontAwesomeIcons.dumbbell, color: Colors.red),
+                      : Icon(Icons.fitness_center, color: Colors.red),
                   label: 'Workout'),
             ],
           ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gym_app/views/home/home_index.dart';
-import 'package:gym_app/views/home/my_drawer.dart';
-import 'package:gym_app/views/home/workout_index.dart';
+import 'package:gym_app/views/home/Team/TeamPage.dart';
+import 'package:gym_app/views/customer/home_index.dart';
+import 'package:gym_app/views/customer/my_drawer.dart';
+import 'package:gym_app/views/customer/workout_index.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -36,6 +37,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     final double _height = MediaQuery.of(context).size.height;
     final double _width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
@@ -112,9 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     WorkoutIndex(),
     Expanded(
-      child: Container(
-        color: Colors.red,
-      ),
+      child: TeamPage(),
     ),
   ];
   int _currentIndex = 0;
@@ -130,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Material(
         elevation: 4.0,
         child: Container(
+          color: Colors.white,
           child: Column(
             children: [
               tabs[_currentIndex],
@@ -173,12 +174,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   BottomNavigationBarItem(
                     icon: _currentIndex == 2
                         ? Icon(
-                            FontAwesomeIcons.dumbbell,
+                            Icons.fitness_center,
                             color: Colors.red,
                             size: 30.0,
                           )
                         : Icon(
-                            FontAwesomeIcons.dumbbell,
+                            Icons.fitness_center,
                             color: Colors.black,
                           ),
                     label: 'workout',

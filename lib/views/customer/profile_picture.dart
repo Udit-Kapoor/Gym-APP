@@ -7,23 +7,26 @@ class ProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      width: 120,
-      child: Stack(
-        children: [
-          CircleAvatar(
-            radius: 70.0,
-            child: Image.asset(
-              'image/profile.png',
-              fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 120,
+        width: 120,
+        child: Stack(
+          children: [
+            CircleAvatar(
+              radius: 70.0,
+              child: Image.asset(
+                'image/profile.png',
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: IconButton(icon: Icon(Icons.camera_alt), onPressed: () {}),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Icon(Icons.camera_alt),
+            ),
+          ],
+        ),
       ),
     );
   }

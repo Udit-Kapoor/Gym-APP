@@ -6,13 +6,13 @@ class FoodTile extends StatelessWidget {
   const FoodTile({
     Key key,
     @required this.imgPath,
-    @required this.Name,
+    @required this.name,
     @required this.desc,
     @required this.rate,
   }) : super(key: key);
 
   final String imgPath;
-  final String Name;
+  final String name;
   final String desc;
   final String rate;
 
@@ -42,7 +42,7 @@ class FoodTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Name,
+                    name,
                     textAlign: TextAlign.left,
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
                   ),

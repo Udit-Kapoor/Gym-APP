@@ -93,6 +93,7 @@ class ReviewCard extends StatelessWidget {
       height: 100,
       width: 300,
       decoration: BoxDecoration(
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
