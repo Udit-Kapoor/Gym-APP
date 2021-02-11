@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/login/authentication.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -7,6 +8,25 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   bool _isCustomer = true;
+
+  String number;
+  String pass;
+
+  Future<void> _submit() async {
+    // print(number);
+    // print(pass);
+    try {
+      // await Provider.of<Authentication>(context, listen: false)
+      //     .login(number, pass);
+      await Authentication.login(number, pass);
+      Navigator.pushNamed(context, 'HomePage');
+    } catch (error) {
+      var errormessage = 'Authentication Failed. Please try Again';
+      //ToDO: Add Failed Alert
+      print(error);
+      print("Authentication failed");
+    }
+  }
 
   Widget _cusOrEmp() {
     return Row(
@@ -244,8 +264,9 @@ class _LoginViewState extends State<LoginView> {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: GestureDetector(
-        //Todo: Add Authentication
-        onTap: () => {Navigator.pushNamed(context, 'HomePage')},
+        onTap: () => {
+          _submit(),
+        },
         child: Icon(
           Icons.arrow_forward_rounded,
           size: 40,
@@ -540,6 +561,7 @@ class _LoginViewState extends State<LoginView> {
                         prefixIcon: Icon(Icons.phone),
                         hintText: "Mobile Number",
                       ),
+                      onChanged: (value) => {number = value},
                     ),
                   ),
                   Container(
@@ -560,6 +582,9 @@ class _LoginViewState extends State<LoginView> {
                         prefixIcon: Icon(Icons.lock_outline),
                         hintText: "Password",
                       ),
+                      onChanged: (value) => {
+                        pass = value,
+                      },
                     ),
                   ),
                   _showSubmit(),

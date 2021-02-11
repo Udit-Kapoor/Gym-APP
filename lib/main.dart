@@ -21,8 +21,8 @@ class H2OApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: {
-        // '/': (context) => OnboardingViews(),
-        '/': (context) => Home(),
+        '/': (context) => OnboardingViews(),
+        '/HomePage': (context) => Home(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
         '/loginScreen': (context) => LoginView(),
