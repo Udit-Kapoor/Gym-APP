@@ -9,6 +9,9 @@ class Authentication with ChangeNotifier {
     const url = 'https://p2c-gym.herokuapp.com/rest-auth/login/';
     try {
       final response = await http.post(url,
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
           body: json.encode({
             'username': number,
             'password': pass,
