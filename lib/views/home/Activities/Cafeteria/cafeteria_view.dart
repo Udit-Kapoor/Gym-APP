@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '_showSort.dart';
 import 'Food Tile.dart';
+import '_showSort.dart';
 
 const korangeCol = Color(0xFFEB3223);
 

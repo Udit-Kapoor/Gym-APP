@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/home/Activities/cafeteria_view.dart';
+import 'file:///D:/AndroidProjects/gym_app/lib/views/home/Activities/Cafeteria/cafeteria_view.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
