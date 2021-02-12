@@ -24,12 +24,12 @@ class H2OApp extends StatelessWidget {
           alignment: MainAxisAlignment.center,
         ),
       ),
+      home: LoginView(),
       routes: {
-        // '/': (context) => OnboardingViews(),
-        '/': (context) => CustomerHome(),
+        '/CustomerHome': (context) => CustomerHome(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
-        '/loginScreen': (context) => LoginView(),
+        '/LoginScreen': (context) => LoginView(),
         '/TeamPage': (context) => TeamPage(),
       },
     );

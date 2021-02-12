@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/models/api-response.dart';
+import 'package:gym_app/models/api_helper.dart';
 import 'package:gym_app/models/login/authentication.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -11,20 +15,17 @@ class _LoginViewState extends State<LoginView> {
 
   String number;
   String pass;
-
   Future<void> _submit() async {
-    // print(number);
-    // print(pass);
-    try {
-      // await Provider.of<Authentication>(context, listen: false)
-      //     .login(number, pass);
-      await Authentication.login(number, pass);
-      Navigator.pushNamed(context, 'HomePage');
-    } catch (error) {
-      var errormessage = 'Authentication Failed. Please try Again';
-      //ToDO: Add Failed Alert
-      print(error);
-      print("Authentication failed");
+    final sp = await SharedPreferences.getInstance();
+    ApiResponse login = await ApiHelper().postReq(
+      endpoint: "https://p2c-gym.herokuapp.com/rest-auth/login/",
+      data: {"username": number, "password": pass},
+    );
+    sp.setString("AUTH_KEY", login.data.key);
+    if (!login.error) {
+      Navigator.pushNamed(context, '/CustomerHome');
+    } else {
+      Fluttertoast.showToast(msg: "Authentication failed");
     }
   }
 

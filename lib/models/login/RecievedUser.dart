@@ -14,18 +14,18 @@ class RecievedUser {
 
   String key;
   int user;
-  UserType userType;
+  String userType;
 
   factory RecievedUser.fromJson(Map<String, dynamic> json) => RecievedUser(
         key: json["key"],
         user: json["user"],
-        userType: UserType.fromJson(json["user_type"]),
+        userType: UserType.fromJson(json["user_type"]).toString(),
       );
 
   Map<String, dynamic> toJson() => {
         "key": key,
         "user": user,
-        "user_type": userType.toJson(),
+        "user_type": userType,
       };
 }
 

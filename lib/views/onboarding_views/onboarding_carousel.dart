@@ -13,7 +13,6 @@ class _OnboardingViewsState extends State<OnboardingViews> {
   @override
   Widget build(BuildContext context) {
     var getScreenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
         body: Center(
       child: CarouselSlider(
@@ -24,7 +23,7 @@ class _OnboardingViewsState extends State<OnboardingViews> {
                 });
               },
               height: getScreenHeight,
-              autoPlay: true,
+              autoPlay: false,
               autoPlayAnimationDuration: Duration(seconds: 1),
               viewportFraction: 1.0),
           items: [
