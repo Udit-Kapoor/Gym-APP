@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///D:/AndroidProjects/gym_app/lib/views/home/Activities/Cafeteria/cafeteria_view.dart';
+import 'package:gym_app/views/home/Activities/Cafeteria/cafeteria_view.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
 
 class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
