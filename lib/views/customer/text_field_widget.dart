@@ -20,7 +20,7 @@ class TextFieldWidget extends StatelessWidget {
         autofocus: true,
         enabled: false,
         enableInteractiveSelection: false,
-        focusNode: FocusNode(),
+       
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           border: OutlineInputBorder(

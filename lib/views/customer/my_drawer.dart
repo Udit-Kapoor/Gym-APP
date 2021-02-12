@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gym_app/constant/contact_details.dart';
+import 'package:gym_app/views/customer/complaint_feedback.dart';
 import 'package:gym_app/views/customer/customer_gym_subscription_view.dart';
 import 'package:gym_app/views/customer/customer_profile_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({
@@ -52,8 +55,58 @@ class MyDrawer extends StatelessWidget {
                 );
               }),
           DrawerTextList(label: 'Order History', onTap: () {}),
-          DrawerTextList(label: 'Complaint/Feedback', onTap: () {}),
-          DrawerTextList(label: 'Help & Support', onTap: () {}),
+          DrawerTextList(
+              label: 'Complaint/Feedback',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ComplaintFeedback()),
+                );
+              }),
+          DrawerTextList(
+              label: 'Help & Support',
+              onTap: () {
+                return showDialog(
+                  context: (context),
+                  builder: (context) => AlertDialog(
+                    title: Text(
+                      'Need Assistance?',
+                      textAlign: TextAlign.center,
+                    ),
+                    actions: [
+                      IconButton(
+                        padding: EdgeInsets.only(right: 20.0),
+                        iconSize: 35.0,
+                        icon: Icon(
+                          Icons.phone,
+                          color: Colors.red,
+                        ),
+                        onPressed: () async {
+                          if (await canLaunch(kPhoneNumber)) {
+                            await launch(kPhoneNumber);
+                          }
+                        },
+                      ),
+                      IconButton(
+                        padding: EdgeInsets.only(left: 20.0),
+                        iconSize: 35.0,
+                        icon: Icon(
+                          Icons.mail_outline,
+                          color: Colors.red,
+                        ),
+                        onPressed: () async {
+                          if (await canLaunch(kEmailId)) {
+                            await launch(kEmailId);
+                          }
+                        },
+                      ),
+                    ],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                );
+              }),
           DrawerTextList(label: 'Change Password', onTap: () {}),
           DrawerTextList(label: 'Terms & Conditions', onTap: () {}),
           DrawerTextList(label: 'Privacy Policy', onTap: () {}),

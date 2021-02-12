@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/views/customer/exercise_page.dart';
+import 'package:gym_app/views/customer/my_trainer.dart';
 
 class WorkoutIndex extends StatelessWidget {
   WorkoutIndex({Key key}) : super(key: key);
@@ -28,7 +29,10 @@ class WorkoutIndex extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/MyTrainer');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyTrainer()),
+                );
               },
               child: Container(
                 decoration: BoxDecoration(

@@ -19,10 +19,13 @@ class H2OApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        buttonBarTheme: ButtonBarThemeData(
+          alignment: MainAxisAlignment.center,
+        ),
       ),
       routes: {
-        // '/': (context) => OnboardingViews(),
-        '/': (context) => Home(),
+        '/': (context) => OnboardingViews(),
+        // '/': (context) => Home(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
         '/loginScreen': (context) => LoginView(),
