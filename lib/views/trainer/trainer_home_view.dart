@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/views/home/Team/TeamPage.dart';
 import 'package:gym_app/views/customer/home_index.dart';
-import 'package:gym_app/views/customer/my_drawer.dart';
+import 'package:gym_app/views/customer/drawer/my_drawer.dart';
 import 'package:gym_app/views/customer/workout_index.dart';
+import 'package:gym_app/views/trainer/batch_wise_clients_list_view.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+class TrainerHome extends StatefulWidget {
+  const TrainerHome({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _TrainerHomeState createState() => _TrainerHomeState();
 }
 
 bool isCollapsed = true;
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _TrainerHomeState extends State<TrainerHome>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             );
           },
           icon: AnimatedIcon(
+            size: 30.0,
             progress: _controller,
             icon: AnimatedIcons.close_menu,
             color: Colors.black,
@@ -79,7 +82,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             height: _height,
             width: _width,
           ),
-          HomeScreen(
+          TrainerHomeScreen(
             height: _height,
             width: _width,
           ),
@@ -89,8 +92,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({
+class TrainerHomeScreen extends StatefulWidget {
+  TrainerHomeScreen({
     Key key,
     @required this.height,
     @required this.width,
@@ -99,23 +102,16 @@ class HomeScreen extends StatefulWidget {
   final double width;
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _TrainerHomeScreenState createState() => _TrainerHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
   final Duration duration = Duration(milliseconds: 300);
 
-  final List tabs = [
-    HomeIndex(),
-    Expanded(
-      child: Container(
-        color: Colors.blue,
-      ),
-    ),
-    WorkoutIndex(),
-    Expanded(
-      child: TeamPage(),
-    ),
+  final List trainerTabs = [
+    Expanded(child: Container(color: Colors.amber)),
+    BatchWiseClientsListView(),
+    Expanded(child: TeamPage()),
   ];
   int _currentIndex = 0;
 
@@ -130,10 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Material(
         elevation: 4.0,
         child: Container(
-          color: Colors.white,
           child: Column(
             children: [
-              tabs[_currentIndex],
+              trainerTabs[_currentIndex],
               BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 showUnselectedLabels: false,
@@ -161,32 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   BottomNavigationBarItem(
                     icon: _currentIndex == 1
                         ? Icon(
-                            FontAwesomeIcons.appleAlt,
-                            color: Colors.red,
-                            size: 30.0,
-                          )
-                        : Icon(
-                            FontAwesomeIcons.appleAlt,
-                            color: Colors.black,
-                          ),
-                    label: 'Food',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: _currentIndex == 2
-                        ? Icon(
-                            Icons.fitness_center,
-                            color: Colors.red,
-                            size: 30.0,
-                          )
-                        : Icon(
-                            Icons.fitness_center,
-                            color: Colors.black,
-                          ),
-                    label: 'workout',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: _currentIndex == 3
-                        ? Icon(
                             FontAwesomeIcons.users,
                             color: Colors.red,
                             size: 30.0,
@@ -196,6 +165,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.black,
                           ),
                     label: 'H2O',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: _currentIndex == 2
+                        ? Icon(
+                            Icons.water_damage_outlined,
+                            color: Colors.red,
+                            size: 30.0,
+                          )
+                        : Icon(
+                            Icons.water_damage_outlined,
+                            color: Colors.black,
+                          ),
+                    label: 'workout',
                   ),
                 ],
               ),

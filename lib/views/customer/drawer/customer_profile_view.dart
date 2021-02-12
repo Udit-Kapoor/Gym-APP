@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'profile_picture.dart';
-import 'text_field_widget.dart';
+import '../text_field_widget.dart';
 
 class CustomerProfileView extends StatelessWidget {
   const CustomerProfileView({Key key}) : super(key: key);

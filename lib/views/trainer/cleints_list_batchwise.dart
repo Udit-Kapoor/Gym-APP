@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ClientsList extends StatelessWidget {
-  const ClientsList({Key key}) : super(key: key);
+  const ClientsList({Key key, this.batchTimings}) : super(key: key);
+
+  final String batchTimings;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class ClientsList extends StatelessWidget {
                   onPressed: () {},
                 ),
                 Text(
-                  'Today',
+                  batchTimings,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headline5.copyWith(
                       fontWeight: FontWeight.bold, color: Colors.black),

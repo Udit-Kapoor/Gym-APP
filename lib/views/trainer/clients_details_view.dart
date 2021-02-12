@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gym_app/views/customer/customer_gym_subscription_view.dart';
+import 'package:gym_app/views/customer/drawer/customer_gym_subscription_view.dart';
 import 'package:gym_app/views/customer/my_attendance.dart';
 import 'package:gym_app/views/customer/my_goal_title.dart';
 import 'package:gym_app/views/customer/todays_workout_tile.dart';

@@ -5,6 +5,7 @@ class MyTrainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController reviewController = TextEditingController();
     final List<Map<String, dynamic>> _reviews = [
       {
         'profile_picture': 'image/profile.png',
@@ -112,7 +113,96 @@ class MyTrainer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              return showDialog(
+                context: (context),
+                builder: (context) => AlertDialog(
+                  title: Row(
+                    children: [
+                      CircleAvatar(
+                        // radius: 30.0,
+                        child: Image.asset(
+                          'image/profile.png',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          'Raja Kumar',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  content: TextField(
+                    controller: reviewController,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      hintText: 'Write your review here...',
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                  actions: [
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
+                        side: BorderSide(),
+                      ),
+                      child: Text(
+                        'Cancel',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.red,
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
+                        side: BorderSide(),
+                      ),
+                      child: Text(
+                         'Post Review',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+              );
+            },
             child: Container(
               alignment: Alignment.center,
               // height: 60.0,

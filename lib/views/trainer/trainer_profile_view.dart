@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../customer/profile_picture.dart';
+import '../customer/drawer/profile_picture.dart';
 import '../customer/text_field_widget.dart';
 
 class TrainerProfileView extends StatelessWidget {

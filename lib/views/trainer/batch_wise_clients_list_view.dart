@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gym_app/views/trainer/cleints_list_batchwise.dart';
 
 class BatchWiseClientsListView extends StatefulWidget {
   BatchWiseClientsListView({Key key}) : super(key: key);
@@ -12,32 +13,46 @@ class BatchWiseClientsListView extends StatefulWidget {
 }
 
 class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
-  BottomNavigationBarItem _buildItem(String label, IconData icon) {
-    return BottomNavigationBarItem(
-      icon: Icon(icon, color: Colors.black),
-      label: label,
-    );
-  }
-
+  final List<Map<String, dynamic>> batchList = [
+    {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    },
+     {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    }, {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    }, {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    }, {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    }, {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    }, {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    }, {
+      'timings': '10.00-11.00',
+      'batchSize': 5,
+      'remote': true,
+    },
+  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.navigate_before,
-            color: Colors.black,
-          ),
-          onPressed: () {},
-        ),
-        centerTitle: true,
-        title: Image.asset(
-          'image/logo.png',
-          fit: BoxFit.fill,
-        ),
-      ),
-      body: SingleChildScrollView(
+    return Expanded(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -90,14 +105,19 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
               child: Wrap(
                 runSpacing: 10.0,
                 children: [
-                  for (var i = 0; i < 9; i++)
+                  for (var batch in batchList) 
                     TimeTile(
-                      timeText: '1$i.00-1${i + 1}.00',
-                      batchSize: Random().nextInt(20),
+                      timeText: batch['timings'],
+                      batchSize:batch['batchSize'],
                       remote:
                           (Random().nextInt(10) + 1) % 2 == 0 ? false : true,
                       onTap: () {
-                        Navigator.pushNamed(context, '/ClientsList');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ClientsList(batchTimings:batch['timings'] ),
+                          ),
+                        );
                       },
                     ),
                 ],
@@ -105,21 +125,6 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        items: [
-          _buildItem('Home', Icons.home),
-          _buildItem('Clients', FontAwesomeIcons.users),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'image/logo.png',
-              fit: BoxFit.fill,
-            ),
-            label: 'gym',
-          ),
-        ],
       ),
     );
   }

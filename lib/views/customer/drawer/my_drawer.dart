@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/constant/contact_details.dart';
-import 'package:gym_app/views/customer/complaint_feedback.dart';
-import 'package:gym_app/views/customer/customer_gym_subscription_view.dart';
-import 'package:gym_app/views/customer/customer_profile_view.dart';
+import 'package:gym_app/views/customer/drawer/change_password.dart';
+import 'package:gym_app/views/customer/drawer/complaint_feedback.dart';
+import 'package:gym_app/views/customer/drawer/customer_gym_subscription_view.dart';
+import 'package:gym_app/views/customer/drawer/customer_profile_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -107,7 +108,16 @@ class MyDrawer extends StatelessWidget {
                   ),
                 );
               }),
-          DrawerTextList(label: 'Change Password', onTap: () {}),
+          DrawerTextList(
+              label: 'Change Password',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ForgotPassword(),
+                  ),
+                );
+              }),
           DrawerTextList(label: 'Terms & Conditions', onTap: () {}),
           DrawerTextList(label: 'Privacy Policy', onTap: () {}),
           Text(
@@ -137,11 +147,19 @@ class MyDrawer extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(FontAwesomeIcons.facebookF),
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (await canLaunch(kFacebook)) {
+                      await launch(kFacebook);
+                    }
+                  },
                 ),
                 IconButton(
                   icon: Icon(FontAwesomeIcons.instagram),
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (await canLaunch(kInstagram)) {
+                      await launch(kInstagram);
+                    }
+                  },
                 ),
               ],
             ),
