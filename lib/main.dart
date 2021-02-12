@@ -25,7 +25,7 @@ class H2OApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => OnboardingViews(),
-        // '/': (context) => Home(),
+        '/HomePage': (context) => Home(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
         '/loginScreen': (context) => LoginView(),
