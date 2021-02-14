@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/views/home/Activities/Cafeteria/cafeteriaView.dart';
+import 'package:gym_app/views/home/Activities/Supplements/supplementView.dart';
 import 'package:gym_app/views/home/Team/TeamPage.dart';
 import 'package:gym_app/views/customer/customer_home_view.dart';
 import 'package:gym_app/views/login_view/login_view.dart';
@@ -24,13 +26,16 @@ class H2OApp extends StatelessWidget {
           alignment: MainAxisAlignment.center,
         ),
       ),
-      home: LoginView(),
+      home: CustomerHome(),
+      //OnboardingViews(),
       routes: {
         '/CustomerHome': (context) => CustomerHome(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
         '/LoginScreen': (context) => LoginView(),
         '/TeamPage': (context) => TeamPage(),
+        'CafeteriaView': (context) => cafeteriaView(),
+        'SupplementView': (context) => supplementView(),
       },
     );
   }

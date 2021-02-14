@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'add_to_cart_view.dart';
+import 'addToCartView.dart';
 
 const korangeCol = Color(0xFFEB3223);
 
-class FoodTile extends StatelessWidget {
-  const FoodTile({
+class foodTile extends StatelessWidget {
+  const foodTile({
     Key key,
     @required this.imgPath,
     @required this.name,
@@ -22,7 +22,7 @@ class FoodTile extends StatelessWidget {
     return GestureDetector(
       onTap: () => {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return add_to_cart_view();
+          return addToCartView();
         })),
       },
       child: Card(
@@ -78,7 +78,7 @@ class FoodTile extends StatelessWidget {
                   onPressed: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return add_to_cart_view();
+                      return addToCartView();
                     })),
                   },
                 ),

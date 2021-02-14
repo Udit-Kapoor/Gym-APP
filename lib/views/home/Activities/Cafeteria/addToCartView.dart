@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 const kOrange = Color(0xFFEB3223);
 
-class add_to_cart_view extends StatefulWidget {
+class addToCartView extends StatefulWidget {
   @override
-  _add_to_cart_viewState createState() => _add_to_cart_viewState();
+  _addToCartViewState createState() => _addToCartViewState();
 }
 
-class _add_to_cart_viewState extends State<add_to_cart_view> {
+class _addToCartViewState extends State<addToCartView> {
   int qty = 0;
   String size = "small";
   @override

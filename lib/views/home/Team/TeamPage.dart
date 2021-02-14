@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/home/Activities/Cafeteria/cafeteria_view.dart';
+import 'package:gym_app/views/home/Activities/Cafeteria/cafeteriaView.dart';
+import 'package:gym_app/views/home/Activities/Supplements/supplementView.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 
 class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -25,8 +25,7 @@ class TeamPage extends StatelessWidget {
                 title: "Cafeteria",
                 col: Color(0xFFF5A300),
                 img: "image/cafeIcon.png",
-                route:
-                    MaterialPageRoute(builder: (context) => cafeteria_view()),
+                route: MaterialPageRoute(builder: (context) => cafeteriaView()),
               ),
             ),
             Padding(
@@ -50,9 +49,12 @@ class TeamPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 120),
               child: ShowIcon(
-                  title: "Buy Gym \n Supplements",
-                  col: Color(0xFF5985F5),
-                  img: "image/gymIcon.png"),
+                title: "Buy Gym \n Supplements",
+                col: Color(0xFF5985F5),
+                img: "image/gymIcon.png",
+                route:
+                    MaterialPageRoute(builder: (context) => supplementView()),
+              ),
             ),
           ],
         ),

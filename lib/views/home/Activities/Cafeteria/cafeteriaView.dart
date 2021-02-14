@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'Food Tile.dart';
-import '_showSort.dart';
+import 'package:gym_app/views/home/Activities/Cafeteria/cafeCart.dart';
+import 'foodTile.dart';
+import 'showSortCafeteria.dart';
 
 const korangeCol = Color(0xFFEB3223);
 
-class cafeteria_view extends StatefulWidget {
+class cafeteriaView extends StatefulWidget {
   @override
-  _cafeteria_viewState createState() => _cafeteria_viewState();
+  _cafeteriaViewState createState() => _cafeteriaViewState();
 }
 
-class _cafeteria_viewState extends State<cafeteria_view> {
+class _cafeteriaViewState extends State<cafeteriaView> {
   String foodValue = 'All';
 
   Widget SORT() {
@@ -23,7 +24,7 @@ class _cafeteria_viewState extends State<cafeteria_view> {
         showDialog(
             context: context,
             builder: (_) {
-              return showSort();
+              return showSortCafeteria();
             });
       },
     );
@@ -54,13 +55,18 @@ class _cafeteria_viewState extends State<cafeteria_view> {
                       color: Colors.black),
                 ),
                 IconButton(
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      size: 30,
-                      color: Colors.black,
-                    ),
-                    onPressed: null //ToDo: Show Cart
-                    ),
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    size: 30,
+                    color: Colors.black,
+                  ),
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return cafeCart();
+                    })),
+                  }, //ToDo: Show Cart
+                ),
               ],
             ),
           ),
@@ -143,49 +149,49 @@ class _cafeteria_viewState extends State<cafeteria_view> {
           Expanded(
             child: ListView(
               children: [
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
                   rate: "50",
                 ),
-                FoodTile(
+                foodTile(
                   imgPath: "image/profile.png",
                   name: "Burger",
                   desc: "delicious",
