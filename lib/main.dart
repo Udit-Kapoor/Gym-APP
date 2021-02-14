@@ -34,8 +34,8 @@ class H2OApp extends StatelessWidget {
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
         '/LoginScreen': (context) => LoginView(),
         '/TeamPage': (context) => TeamPage(),
-        'CafeteriaView': (context) => cafeteriaView(),
-        'SupplementView': (context) => supplementView(),
+        '/CafeteriaView': (context) => cafeteriaView(),
+        '/SupplementView': (context) => supplementView(),
       },
     );
   }
