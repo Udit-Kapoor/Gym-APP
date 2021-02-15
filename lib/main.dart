@@ -8,12 +8,25 @@ import 'package:gym_app/views/onboarding_views/onboarding_carousel.dart';
 import 'package:gym_app/views/trainer/cleints_list_batchwise.dart';
 import 'package:gym_app/views/trainer/clients_details_view.dart';
 import 'package:gym_app/views/trainer/trainer_home_view.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(H2OApp());
 }
 
 class H2OApp extends StatelessWidget {
+  Future<List> autoLogin() async {
+    final sp = await SharedPreferences.getInstance();
+    var b = sp.containsKey("AUTH_KEY");
+    var t;
+    if (b) {
+      t = sp.getBool("USER_TYPE");
+      return [b, t];
+    }
+    return [b];
+  }
+
   @override
   Widget build(_) {
     return MaterialApp(
@@ -26,9 +39,28 @@ class H2OApp extends StatelessWidget {
           alignment: MainAxisAlignment.center,
         ),
       ),
-      home: CustomerHome(),
-      //OnboardingViews(),
+      home: FutureBuilder(
+        future: autoLogin(),
+        builder: (c, s) {
+          var widget;
+          if (s.connectionState == ConnectionState.waiting) {
+            widget = Scaffold(body: Center(child: CircularProgressIndicator()));
+          } else if (s.data[0] && s.connectionState == ConnectionState.done) {
+            switch (s.data[1]) {
+              case "CUSTOMER":
+                widget = CustomerHome();
+                break;
+              case "TRAINER":
+                widget = TrainerHome();
+                break;
+            }
+          } else
+            widget = OnboardingViews();
+          return widget;
+        },
+      ),
       routes: {
+        '/TrainerHome': (context) => TrainerHome(),
         '/CustomerHome': (context) => CustomerHome(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),

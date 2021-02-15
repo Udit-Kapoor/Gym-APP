@@ -15,15 +15,23 @@ class _LoginViewState extends State<LoginView> {
 
   String number;
   String pass;
+
   Future<void> _submit() async {
     final sp = await SharedPreferences.getInstance();
-    ApiResponse login = await ApiHelper().postReq(
-      endpoint: "https://p2c-gym.herokuapp.com/rest-auth/login/",
+    ApiResponse login = await ApiHelper().login(
+      url: "https://p2c-gym.herokuapp.com/rest-auth/login/",
       data: {"username": number, "password": pass},
     );
     if (!login.error) {
       sp.setString("AUTH_KEY", login.data.key);
-      Navigator.pushNamed(context, '/CustomerHome');
+      var ut = login.data.userType;
+      if (ut.isCustomer) {
+        sp.setString("USER_TYPE", "CUSTOMER");
+        Navigator.pushReplacementNamed(context, '/CustomerHome');
+      } else {
+        sp.setString("USER_TYPE", "TRAINER");
+        Navigator.pushReplacementNamed(context, '/TrainerHome');
+      }
     } else {
       Fluttertoast.showToast(msg: "Authentication failed");
     }
