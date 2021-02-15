@@ -6,6 +6,7 @@ import 'package:gym_app/views/customer/my_goal_title.dart';
 import 'package:gym_app/views/customer/todays_workout_tile.dart';
 import 'package:gym_app/views/customer/weight_chart.dart';
 import 'package:gym_app/views/trainer/clients_information.dart';
+import 'package:gym_app/views/trainer/create_workout.dart';
 
 class ClientsDetailsView extends StatefulWidget {
   const ClientsDetailsView({Key key}) : super(key: key);
@@ -19,9 +20,8 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   final List tabs = [
     ClientsDashboard(),
     ClientsInformation(),
-    CustomerGymSubscriptionView(),
-    Container(color: Colors.blueAccent),
-    Container(color: Colors.amberAccent),
+    CustomerGymSubscription(),
+    CreateWorkout(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -119,15 +119,6 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                   label: 'Renew'),
               BottomNavigationBarItem(
                   icon: _currentIndex == 3
-                      ? CircleAvatar(
-                          child: Icon(FontAwesomeIcons.appleAlt,
-                              color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(FontAwesomeIcons.appleAlt, color: Colors.red),
-                  label: 'Food'),
-              BottomNavigationBarItem(
-                  icon: _currentIndex == 4
                       ? CircleAvatar(
                           child:
                               Icon(Icons.fitness_center, color: Colors.white),

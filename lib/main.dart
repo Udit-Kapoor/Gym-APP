@@ -39,28 +39,28 @@ class H2OApp extends StatelessWidget {
           alignment: MainAxisAlignment.center,
         ),
       ),
-      home: FutureBuilder(
-        future: autoLogin(),
-        builder: (c, s) {
-          var widget;
-          if (s.connectionState == ConnectionState.waiting) {
-            widget = Scaffold(body: Center(child: CircularProgressIndicator()));
-          } else if (s.data[0] && s.connectionState == ConnectionState.done) {
-            switch (s.data[1]) {
-              case "CUSTOMER":
-                widget = CustomerHome();
-                break;
-              case "TRAINER":
-                widget = TrainerHome();
-                break;
-            }
-          } else
-            widget = OnboardingViews();
-          return widget;
-        },
-      ),
+      // home: FutureBuilder(
+      //   future: autoLogin(),
+      //   builder: (c, s) {
+      //     var widget;
+      //     if (s.connectionState == ConnectionState.waiting) {
+      //       widget = Scaffold(body: Center(child: CircularProgressIndicator()));
+      //     } else if (s.data[0] && s.connectionState == ConnectionState.done) {
+      //       switch (s.data[1]) {
+      //         case "CUSTOMER":
+      //           widget = CustomerHome();
+      //           break;
+      //         case "TRAINER":
+      //           widget = TrainerHome();
+      //           break;
+      //       }
+      //     } else
+      //       widget = OnboardingViews();
+      //     return widget;
+      //   },
+      // ),
       routes: {
-        '/TrainerHome': (context) => TrainerHome(),
+        '/': (context) => ClientsDetailsView(),
         '/CustomerHome': (context) => CustomerHome(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
