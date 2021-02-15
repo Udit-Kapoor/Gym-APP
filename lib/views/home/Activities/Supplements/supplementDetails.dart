@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'supplementCart.dart';
 
 const korangeCol = Color(0xFFEB3223);
 
@@ -44,7 +45,12 @@ class _supplementDetailsState extends State<supplementDetails> {
                     size: 30,
                     color: Colors.black,
                   ),
-                  onPressed: null,
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return supplementCart();
+                    })),
+                  },
                   //ToDo: Show Cart
                 ),
               ],
