@@ -10,15 +10,32 @@ class ApiHelper {
   Future<SharedPreferences> s = SharedPreferences.getInstance();
 
   Future login({String url, Map data}) async {
-    Response login = await post(
-      url,
-      headers: {HttpHeaders.contentTypeHeader: "application/json"},
-      body: jsonEncode(data),
-    );
-    return RestAuthLogin.fromJson(jsonDecode(login.body));
+    try {
+      Response login = await post(
+        url,
+        headers: {HttpHeaders.contentTypeHeader: "application/json"},
+        body: jsonEncode(data),
+      );
+      return login.statusCode >= 200 && login.statusCode <= 205
+          ? ApiResponse(data: RestAuthLogin.fromJson(jsonDecode(login.body)))
+          : ApiResponse(error: true);
+    } on SocketException {
+      return ApiResponse(error: true, errorMessage: "NO INTERNET");
+    } on HttpException {
+      return ApiResponse(error: true, errorMessage: "HTTP ERROR");
+    } catch (e) {
+      return ApiResponse(error: true, errorMessage: e.toString());
+    }
   }
 
   final sp = SharedPreferences.getInstance();
+
+  Future logout() async {
+    final _sp = await sp;
+    await post("https://p2c-gym.herokuapp.com/rest-auth/logout/")
+        .then((value) => _sp.clear());
+  }
+
   Future<ApiResponse> postReq(
       {String endpoint, Map data, String query = ""}) async {
     final String url = endpoint + query;
@@ -32,12 +49,14 @@ class ApiHelper {
         },
         body: jsonEncode(data),
       );
-      return postReq.statusCode == 200
+      return postReq.statusCode >= 200 && postReq.statusCode <= 205
           ? ApiResponse(data: RestAuthLogin.fromJson(jsonDecode(postReq.body)))
           : ApiResponse(error: true);
     } on SocketException {
-      return ApiResponse(error: true, errorMessage: "NO INTERN");
-    } on HttpException {} catch (e) {
+      return ApiResponse(error: true, errorMessage: "NO INTERNET");
+    } on HttpException {
+      return ApiResponse(error: true, errorMessage: "HTTP Error");
+    } catch (e) {
       return ApiResponse(error: true, errorMessage: e.toString());
     }
   }

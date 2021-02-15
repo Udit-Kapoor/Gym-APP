@@ -80,7 +80,6 @@ class _CustomerHomeState extends State<CustomerHome> with SingleTickerProviderSt
             height: _height,
             width: _width,
           ),
-          
           CustomerHomeScreen(
             height: _height,
             width: _width,
