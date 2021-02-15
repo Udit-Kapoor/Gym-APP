@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/views/home/Activities/Cafeteria/cafeteriaView.dart';
+import 'package:gym_app/views/home/Activities/Supplements/supplementView.dart';
 import 'package:gym_app/views/home/Team/TeamPage.dart';
 import 'package:gym_app/views/customer/customer_home_view.dart';
 import 'package:gym_app/views/login_view/login_view.dart';
@@ -42,8 +44,7 @@ class H2OApp extends StatelessWidget {
         builder: (c, s) {
           var widget;
           if (s.connectionState == ConnectionState.waiting) {
-            widget =
-                Scaffold(body: Center(child: CircularProgressIndicator()));
+            widget = Scaffold(body: Center(child: CircularProgressIndicator()));
           } else if (s.data[0] && s.connectionState == ConnectionState.done) {
             switch (s.data[1]) {
               case "CUSTOMER":
@@ -65,6 +66,8 @@ class H2OApp extends StatelessWidget {
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
         '/LoginScreen': (context) => LoginView(),
         '/TeamPage': (context) => TeamPage(),
+        '/CafeteriaView': (context) => cafeteriaView(),
+        '/SupplementView': (context) => supplementView(),
       },
     );
   }

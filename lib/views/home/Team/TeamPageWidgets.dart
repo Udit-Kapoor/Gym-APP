@@ -48,13 +48,13 @@ class ShowIcon extends StatelessWidget {
   final String title;
   final Color col;
   final String img;
-  final MaterialPageRoute route;
+  final String route;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       //ToDo: Navigate to respective screens using PARAMETER
-      onTap: () => {Navigator.push(context, route)},
+      onTap: () => {Navigator.pushNamed(context, route)},
       child: Column(
         children: [
           Container(

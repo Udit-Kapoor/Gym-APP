@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 enum foodType { Veg, NonVeg }
 enum price { LowtoHigh, HightoLow }
 
-class showSort extends StatefulWidget {
+class showSortCafeteria extends StatefulWidget {
   @override
-  _showSortState createState() => _showSortState();
+  _showSortCafeteriaState createState() => _showSortCafeteriaState();
 }
 
-class _showSortState extends State<showSort> {
+class _showSortCafeteriaState extends State<showSortCafeteria> {
   foodType f = foodType.Veg;
   price p = price.LowtoHigh;
   @override
