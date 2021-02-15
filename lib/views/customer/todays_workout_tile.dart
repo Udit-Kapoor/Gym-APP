@@ -3,9 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 
 class TodaysWorkoutTile extends StatelessWidget {
-  const TodaysWorkoutTile({
-    Key key
-  }) : super(key: key);
+  const TodaysWorkoutTile({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -18,13 +16,15 @@ class TodaysWorkoutTile extends StatelessWidget {
           color: Colors.red,
           height: 60.0,
           width: 60.0,
-          child: Text(
-            '30\nOct',
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                .copyWith(color: Colors.white),
+          child: Center(
+            child: Text(
+              '30\nOct',
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(color: Colors.white),
+            ),
           ),
         ),
         title: Text('Today\'s Workout'),

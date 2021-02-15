@@ -109,12 +109,14 @@ class TrainerProfileView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextFieldWidget(
+                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
                           borderText: 'City',
                           bodyText: 'New Delhi',
                         ),
                       ),
                       Expanded(
                         child: TextFieldWidget(
+                          padding: EdgeInsets.fromLTRB(5.0, 10.0, 20.0, 10.0),
                           borderText: 'State',
                           bodyText: 'New Delhi',
                         ),
@@ -125,6 +127,7 @@ class TrainerProfileView extends StatelessWidget {
                     children: [
                       Expanded(
                         child: TextFieldWidget(
+                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
                           borderText: 'Pin Code',
                           bodyText: '110069',
                         ),
@@ -136,37 +139,13 @@ class TrainerProfileView extends StatelessWidget {
                     borderText: 'Landmark',
                     bodyText: 'Near J.R. Public School',
                   ),
-                  Stack(
-                    alignment: Alignment.centerRight,
-                    children: [
-                      TextFieldWidget(
-                        borderText: 'ID Proof',
-                        bodyText: 'aadharcard.pdf',
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.only(right: 50.0),
-                        icon: Icon(
-                          Icons.file_upload,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
+                  TextFieldWidget(
+                    borderText: 'ID Proof',
+                    bodyText: 'aadharcard.pdf',
                   ),
-                  Stack(
-                    alignment: Alignment.centerRight,
-                    children: [
-                      TextFieldWidget(
-                        borderText: 'Resume/CV',
-                        bodyText: 'resume.pdf',
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.only(right: 50.0),
-                        icon: Icon(
-                          Icons.file_upload,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
+                  TextFieldWidget(
+                    borderText: 'Resume/CV',
+                    bodyText: 'resume.pdf',
                   ),
                   Row(
                     children: [

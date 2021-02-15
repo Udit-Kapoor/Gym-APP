@@ -21,8 +21,8 @@ class _LoginViewState extends State<LoginView> {
       endpoint: "https://p2c-gym.herokuapp.com/rest-auth/login/",
       data: {"username": number, "password": pass},
     );
-    sp.setString("AUTH_KEY", login.data.key);
     if (!login.error) {
+      sp.setString("AUTH_KEY", login.data.key);
       Navigator.pushNamed(context, '/CustomerHome');
     } else {
       Fluttertoast.showToast(msg: "Authentication failed");

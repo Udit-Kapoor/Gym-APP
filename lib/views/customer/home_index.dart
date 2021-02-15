@@ -7,8 +7,6 @@ import 'package:gym_app/views/customer/weight_chart.dart';
 class HomeIndex extends StatelessWidget {
   HomeIndex({Key key}) : super(key: key);
 
-
-
   final List _images = List.generate(
       8,
       (index) =>
@@ -20,9 +18,7 @@ class HomeIndex extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          TodaysWorkoutTile(
-           
-          ),
+          TodaysWorkoutTile(),
           MyGoalTile(),
           WeightChart(),
           SizedBox(height: 20.0),
@@ -40,14 +36,15 @@ class HomeIndex extends StatelessWidget {
           ),
           Wrap(
             alignment: WrapAlignment.center,
+            
             spacing: 5.0,
             children: [
               for (var i = 0; i < 8; i++)
                 Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
+                  padding: EdgeInsets.only(bottom: 5.0),
                   height: 100,
                   width: 100,
-                  child: Image.network('${_images[i]}'),
+                  child: Image.network('${_images[i]}', fit: BoxFit.fill),
                 ),
               Container(
                 height: 100,

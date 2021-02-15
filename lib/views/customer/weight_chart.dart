@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
+enum DurationMethod {
+  all,
+  week,
+  month,
+}
+
 class WeightChart extends StatelessWidget {
-  const WeightChart({
-    Key key,
-  }) : super(key: key);
+  DurationMethod _method = DurationMethod.all;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -13,33 +17,91 @@ class WeightChart extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              'Weight Chart',
-              style: Theme.of(context).textTheme.headline5.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                'Weight Chart',
+                style: Theme.of(context).textTheme.headline5.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+              ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // mainAxisAlignment: MainAxisAlignment.,
               children: [
-                GestureDetector(
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    size: 20.0,
-                  ),
-                  onTap: () {},
+                Spacer(flex: 4),
+                IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  onPressed: () {},
                 ),
                 Text('October'),
-                GestureDetector(
-                  child: RotatedBox(
-                    quarterTurns: 2,
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 20.0,
-                    ),
-                  ),
-                  onTap: () {},
+                IconButton(
+                  icon: Icon(Icons.arrow_forward_ios),
+                  onPressed: () {},
+                ),
+                Spacer(flex: 2),
+                IconButton(
+                  padding: EdgeInsets.only(right: 5.0),
+                  icon: Icon(Icons.sort),
+                  onPressed: () {
+                    showDialog(
+                        context: (context),
+                        builder: (context) {
+                          return AlertDialog(
+                            content: StatefulBuilder(builder:
+                                (BuildContext context, StateSetter setState) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  RadioListTile(
+                                    dense: true,
+                                    controlAffinity:
+                                        ListTileControlAffinity.trailing,
+                                    toggleable: true,
+                                    title: Text('All'),
+                                    value: DurationMethod.all,
+                                    groupValue: _method,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _method = value;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile(
+                                    dense: true,
+                                    controlAffinity:
+                                        ListTileControlAffinity.trailing,
+                                    toggleable: true,
+                                    title: Text('This Week'),
+                                    value: DurationMethod.week,
+                                    groupValue: _method,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _method = value;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile(
+                                    dense: true,
+                                    controlAffinity:
+                                        ListTileControlAffinity.trailing,
+                                    toggleable: true,
+                                    title: Text('This Month'),
+                                    value: DurationMethod.month,
+                                    groupValue: _method,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _method = value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              );
+                            }),
+                          );
+                        });
+                  },
                 ),
               ],
             ),
@@ -97,9 +159,7 @@ class ChartIndicaters extends StatelessWidget {
             color: dotColor,
           ),
           SizedBox(width: 5),
-          Text(
-            label,
-          ),
+          Text(label),
         ],
       ),
     );

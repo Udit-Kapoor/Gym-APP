@@ -14,7 +14,8 @@ class CustomerHome extends StatefulWidget {
 
 bool isCollapsed = true;
 
-class _CustomerHomeState extends State<CustomerHome> with SingleTickerProviderStateMixin {
+class _CustomerHomeState extends State<CustomerHome>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   @override
   void initState() {
@@ -80,7 +81,6 @@ class _CustomerHomeState extends State<CustomerHome> with SingleTickerProviderSt
             height: _height,
             width: _width,
           ),
-          
           CustomerHomeScreen(
             height: _height,
             width: _width,
@@ -109,15 +109,8 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
 
   final List tabs = [
     HomeIndex(),
-    Expanded(
-      child: Container(
-        color: Colors.blue,
-      ),
-    ),
     WorkoutIndex(),
-    Expanded(
-      child: TeamPage(),
-    ),
+    Expanded(child: TeamPage()),
   ];
   int _currentIndex = 0;
 
@@ -163,19 +156,6 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                   BottomNavigationBarItem(
                     icon: _currentIndex == 1
                         ? Icon(
-                            FontAwesomeIcons.appleAlt,
-                            color: Colors.red,
-                            size: 30.0,
-                          )
-                        : Icon(
-                            FontAwesomeIcons.appleAlt,
-                            color: Colors.black,
-                          ),
-                    label: 'Food',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: _currentIndex == 2
-                        ? Icon(
                             Icons.fitness_center,
                             color: Colors.red,
                             size: 30.0,
@@ -187,7 +167,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                     label: 'workout',
                   ),
                   BottomNavigationBarItem(
-                    icon: _currentIndex == 3
+                    icon: _currentIndex == 2
                         ? Icon(
                             FontAwesomeIcons.users,
                             color: Colors.red,

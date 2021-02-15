@@ -18,7 +18,7 @@ class WorkoutIndex extends StatelessWidget {
     ['27 Dec', 'Back'],
     ['28 Dec', 'Legs'],
   ];
-
+  final String trainersName = 'Pawan Pandit ';
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -56,7 +56,7 @@ class WorkoutIndex extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Pawan Pandit ',
+                            text: trainersName,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
@@ -96,32 +96,68 @@ class WorkoutIndex extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Container(
-                        padding: EdgeInsets.all(20.0),
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 10.0),
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              muscle[0],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6
-                                  .copyWith(fontWeight: FontWeight.w400),
+
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          elevation: 4.0,
+                          child: Container(
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
-                            Text(
-                              muscle[1],
-                              style: Theme.of(context).textTheme.headline6,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  muscle[0],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  muscle[1],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(fontWeight: FontWeight.w700),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
+                      // child: Container(
+                      //   padding: EdgeInsets.all(20.0),
+                      //   margin: EdgeInsets.symmetric(
+                      //       horizontal: 20.0, vertical: 10.0),
+                      //   height: 80,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     borderRadius: BorderRadius.circular(20.0),
+                      //   ),
+                      // child: Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       muscle[0],
+                      //       style: Theme.of(context)
+                      //           .textTheme
+                      //           .headline6
+                      //           .copyWith(fontWeight: FontWeight.w400),
+                      //     ),
+                      //     Text(
+                      //       muscle[1],
+                      //       style: Theme.of(context).textTheme.headline6,
+                      //     ),
+                      //   ],
+                      // ),
+                      // ),
                     ),
                   ),
               ],

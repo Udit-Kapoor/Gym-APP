@@ -63,12 +63,9 @@ class ExercisePage extends StatelessWidget {
                     .headline5
                     .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
               ),
-              RotatedBox(
-                quarterTurns: 2,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  onPressed: () {},
-                ),
+              IconButton(
+                icon: Icon(Icons.arrow_forward_ios),
+                onPressed: () {},
               ),
               Spacer(),
             ],
@@ -84,20 +81,14 @@ class ExercisePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                ExerciseInstructions(exercise: exc),
-                          ),
+                              builder: (context) =>
+                                  ExerciseInstructions(exercise: exc)),
                         );
                       },
                       child: Card(
-                        // padding: EdgeInsets.all(20.0),
-                        // margin: EdgeInsets.symmetric(
-                        //     horizontal: 20.0, vertical: 10.0),
-                        // height: 80,
-                        // decoration: BoxDecoration(
-                        //   color: Colors.white,
-                        //   // borderRadius: BorderRadius.circular(20.0),
-                        // ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                         elevation: 4.0,
                         child: Container(
                           height: 80.0,
@@ -105,12 +96,14 @@ class ExercisePage extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: Text(
-                            exc,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(fontWeight: FontWeight.w400),
+                          child: Center(
+                            child: Text(
+                              exc,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  .copyWith(fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       ),
