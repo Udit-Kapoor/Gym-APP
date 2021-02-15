@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'supplementTile.dart';
 import 'showSortSupplements.dart';
+import 'supplementCart.dart';
 
 const korangeCol = Color(0xFFEB3223);
 
@@ -54,14 +55,19 @@ class _supplementViewState extends State<supplementView> {
                       color: Colors.black),
                 ),
                 IconButton(
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      size: 30,
-                      color: Colors.black,
-                    ),
-                    onPressed: null
-                    //ToDo: Show Cart
-                    ),
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    size: 30,
+                    color: Colors.black,
+                  ),
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return supplementCart();
+                    })),
+                  },
+                  //ToDo: Show Cart
+                ),
               ],
             ),
           ),
