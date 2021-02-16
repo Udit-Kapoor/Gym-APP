@@ -216,6 +216,7 @@ class _dietSubscriptionState extends State<dietSubscription> {
                 Spacer(),
                 Text(
                   "Diet Food Subscription",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20,

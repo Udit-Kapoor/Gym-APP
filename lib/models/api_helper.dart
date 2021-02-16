@@ -66,8 +66,7 @@ class ApiHelper {
     }
   }
 
-  Future<ApiResponse> getReq(
-      {String endpoint, Map data, String query = ""}) async {
+  Future<ApiResponse> getReq({String endpoint, String query = ""}) async {
     final String url = endpoint + query;
     final _sp = await sp;
     try {
