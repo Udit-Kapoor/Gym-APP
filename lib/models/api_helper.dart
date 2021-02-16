@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:gym_app/models/api-response.dart';
 import 'package:gym_app/models/login/rest_auth_login.dart';
 import 'package:http/http.dart';
@@ -30,10 +31,14 @@ class ApiHelper {
 
   final sp = SharedPreferences.getInstance();
 
-  Future logout() async {
+  Future logout(context) async {
     final _sp = await sp;
     await post("https://p2c-gym.herokuapp.com/rest-auth/logout/")
-        .then((value) => _sp.clear());
+        .then((value) => {
+              _sp.clear(),
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/LoginScreen', (route) => false),
+            });
   }
 
   Future<ApiResponse> postReq(

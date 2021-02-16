@@ -42,9 +42,11 @@ class TeamPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 17.0, left: 65),
               child: ShowIcon(
-                  title: "Diet Food \n Subscription",
-                  col: Color(0xFF1CB203),
-                  img: "image/dietIcon.png"),
+                title: "Diet Food \n Subscription",
+                col: Color(0xFF1CB203),
+                img: "image/dietIcon.png",
+                route: "/DietView",
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 120),

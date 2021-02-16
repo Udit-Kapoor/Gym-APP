@@ -168,6 +168,7 @@ class _supplementDetailsState extends State<supplementDetails> {
                           Expanded(
                             child: DropdownButton<String>(
                                 value: size,
+                                isExpanded: true,
                                 icon: Icon(Icons.keyboard_arrow_down),
                                 iconSize: 42,
                                 underline: SizedBox(),
@@ -213,6 +214,7 @@ class _supplementDetailsState extends State<supplementDetails> {
                           Expanded(
                             child: DropdownButton<String>(
                                 value: flavour,
+                                isExpanded: true,
                                 icon: Icon(Icons.keyboard_arrow_down),
                                 iconSize: 42,
                                 underline: SizedBox(),

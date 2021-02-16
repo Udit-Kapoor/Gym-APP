@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/views/home/Activities/Cafeteria/cafeteriaView.dart';
+import 'package:gym_app/views/home/Activities/Diet/dietSubscription.dart';
 import 'package:gym_app/views/home/Activities/Supplements/supplementView.dart';
 import 'package:gym_app/views/home/Team/TeamPage.dart';
 import 'package:gym_app/views/customer/customer_home_view.dart';
@@ -21,7 +22,7 @@ class H2OApp extends StatelessWidget {
     var b = sp.containsKey("AUTH_KEY");
     var t;
     if (b) {
-      t = sp.getBool("USER_TYPE");
+      t = sp.getString("USER_TYPE");
       return [b, t];
     }
     return [b];
@@ -39,35 +40,40 @@ class H2OApp extends StatelessWidget {
           alignment: MainAxisAlignment.center,
         ),
       ),
-      // home: FutureBuilder(
-      //   future: autoLogin(),
-      //   builder: (c, s) {
-      //     var widget;
-      //     if (s.connectionState == ConnectionState.waiting) {
-      //       widget = Scaffold(body: Center(child: CircularProgressIndicator()));
-      //     } else if (s.data[0] && s.connectionState == ConnectionState.done) {
-      //       switch (s.data[1]) {
-      //         case "CUSTOMER":
-      //           widget = CustomerHome();
-      //           break;
-      //         case "TRAINER":
-      //           widget = TrainerHome();
-      //           break;
-      //       }
-      //     } else
-      //       widget = OnboardingViews();
-      //     return widget;
-      //   },
-      // ),
+      home: FutureBuilder(
+        initialData: [false],
+        future: autoLogin(),
+        builder: (c, s) {
+          var widget;
+          if (s.connectionState == ConnectionState.waiting) {
+            widget = Scaffold(body: Center(child: CircularProgressIndicator()));
+          } else if (s.data != null &&
+              s.data[0] &&
+              s.connectionState == ConnectionState.done) {
+            switch (s.data[1]) {
+              case "CUSTOMER":
+                widget = CustomerHome();
+                break;
+              case "TRAINER":
+                widget = TrainerHome();
+                break;
+            }
+          } else
+            widget = OnboardingViews();
+          return widget;
+        },
+      ),
       routes: {
-        '/': (context) => ClientsDetailsView(),
+        //'/': (context) => ClientsDetailsView(),
         '/CustomerHome': (context) => CustomerHome(),
         '/ClientsList': (context) => ClientsList(),
         '/ClientsDetailsView': (context) => ClientsDetailsView(),
+        '/TrainerHome': (context) => TrainerHome(),
         '/LoginScreen': (context) => LoginView(),
         '/TeamPage': (context) => TeamPage(),
         '/CafeteriaView': (context) => cafeteriaView(),
         '/SupplementView': (context) => supplementView(),
+        '/DietView': (context) => dietSubscription(),
       },
     );
   }

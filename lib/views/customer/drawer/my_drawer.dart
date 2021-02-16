@@ -135,7 +135,8 @@ class MyDrawer extends StatelessWidget {
               SizedBox(
                 width: 10.0,
               ),
-              DrawerTextList(label: 'Logout', onTap: ApiHelper().logout),
+              DrawerTextList(
+                  label: 'Logout', onTap: () => ApiHelper().logout(context)),
             ],
           ),
           Text(
