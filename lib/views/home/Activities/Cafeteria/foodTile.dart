@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/cart/cafeteria_items.dart';
 import 'addToCartView.dart';
 
 const korangeCol = Color(0xFFEB3223);
@@ -10,19 +11,23 @@ class foodTile extends StatelessWidget {
     @required this.name,
     @required this.desc,
     @required this.rate,
+    this.model,
   }) : super(key: key);
 
   final String imgPath;
   final String name;
   final String desc;
   final String rate;
+  final CafeteriaItems model;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return addToCartView();
+          return addToCartView(
+            model: model,
+          );
         })),
       },
       child: Card(

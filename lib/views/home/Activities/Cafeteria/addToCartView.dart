@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/cart/cafeteria_items.dart';
 
 const kOrange = Color(0xFFEB3223);
 
 class addToCartView extends StatefulWidget {
+  final CafeteriaItems model;
+
+  addToCartView({Key key, this.model}) : super(key: key);
+
   @override
   _addToCartViewState createState() => _addToCartViewState();
 }
@@ -59,7 +64,7 @@ class _addToCartViewState extends State<addToCartView> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0, left: 10),
                 child: Text(
-                  "lorem ipsum delicious blavla...",
+                  widget.model.ingredients,
                 ),
               ),
             ),
@@ -70,7 +75,7 @@ class _addToCartViewState extends State<addToCartView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Burger A",
+                  widget.model.name,
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 ),
                 Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/cart/cafeteria_items.dart';
 import 'package:gym_app/views/home/Activities/Cafeteria/cafeCart.dart';
 import 'foodTile.dart';
 import 'showSortCafeteria.dart';
@@ -146,60 +147,35 @@ class _cafeteriaViewState extends State<cafeteriaView> {
               ],
             ),
           ),
-          Expanded(
-            child: ListView(
-              children: [
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-                foodTile(
-                  imgPath: "image/profile.png",
-                  name: "Burger",
-                  desc: "delicious",
-                  rate: "50",
-                ),
-              ],
-            ),
-          )
+          FutureBuilder(
+            future: getCafeItems(),
+            builder: (c, s) {
+              if (s.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (s.hasData &&
+                  s.connectionState == ConnectionState.done) {
+                var model = cafeteriaItemsFromJson(s.data.data);
+                print(model);
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: model.length,
+                      itemBuilder: (c, i) {
+                        return foodTile(
+                          imgPath: 'image/burger.jpg',
+                          name: model[i].name,
+                          desc: model[i].ingredients,
+                          rate: "50",
+                          model: model[i],
+                        );
+                      }),
+                );
+              } else {
+                return Text("No data found");
+              }
+            },
+          ),
         ],
       ),
     );
