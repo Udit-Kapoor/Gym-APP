@@ -41,11 +41,12 @@ class CustomerProfileView extends StatelessWidget {
       body: FutureBuilder(
         future: customerPro(),
         builder: (c, s) {
-          var cp = customerProfileModelFromJson(s.data);
           var widget;
           if (s.connectionState == ConnectionState.waiting) {
             widget = Center(child: CircularProgressIndicator());
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
+            var cp = customerProfileModelFromJson(s.data.data);
+            print(cp);
             widget = Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

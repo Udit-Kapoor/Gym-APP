@@ -55,7 +55,7 @@ class ApiHelper {
         body: jsonEncode(data),
       );
       return postReq.statusCode >= 200 && postReq.statusCode <= 205
-          ? ApiResponse(data: RestAuthLogin.fromJson(jsonDecode(postReq.body)))
+          ? ApiResponse(data: postReq.body)
           : ApiResponse(error: true);
     } on SocketException {
       return ApiResponse(error: true, errorMessage: "NO INTERNET");
@@ -78,7 +78,7 @@ class ApiHelper {
           HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
         },
       );
-      return ApiResponse(data: RestAuthLogin.fromJson(jsonDecode(getReq.body)));
+      return ApiResponse(data: getReq.body);
     } catch (e) {
       return ApiResponse(error: true, errorMessage: e.toString());
     }
