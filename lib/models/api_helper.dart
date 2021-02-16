@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/api-response.dart';
+import 'package:gym_app/models/api_response.dart';
 import 'package:gym_app/models/login/rest_auth_login.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
