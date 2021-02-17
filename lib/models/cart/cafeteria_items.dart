@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:gym_app/models/api_helper.dart';
+import 'package:gym_app/models/api_response.dart';
+
 List<CafeteriaItems> cafeteriaItemsFromJson(String str) =>
     List<CafeteriaItems>.from(
         json.decode(str).map((x) => CafeteriaItems.fromJson(x)));
@@ -69,4 +72,10 @@ class Category {
         "name": name,
         "active": active,
       };
+}
+
+Future<ApiResponse> getCafeItems() async {
+  ApiResponse cp = await ApiHelper()
+      .getReq(endpoint: "https://p2c-gym.herokuapp.com/facilities/item/");
+  return cp;
 }
