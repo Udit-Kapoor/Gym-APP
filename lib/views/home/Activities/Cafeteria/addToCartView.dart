@@ -15,6 +15,7 @@ class addToCartView extends StatefulWidget {
 class _addToCartViewState extends State<addToCartView> {
   int qty = 0;
   String size = "small";
+  int idx = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +80,7 @@ class _addToCartViewState extends State<addToCartView> {
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 ),
                 Text(
-                  "50 Rs / 1 pc",
+                  widget.model.itemVarients[idx].price.toString() + "Rs / 1 pc",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                 )
               ],
@@ -131,6 +132,7 @@ class _addToCartViewState extends State<addToCartView> {
                   onTap: () => {
                     setState(() {
                       size = "small";
+                      idx = 0;
                     }),
                   },
                   child: Container(
@@ -156,6 +158,7 @@ class _addToCartViewState extends State<addToCartView> {
                   onTap: () => {
                     setState(() {
                       size = "medium";
+                      idx = 1;
                     }),
                   },
                   child: Container(
@@ -181,6 +184,7 @@ class _addToCartViewState extends State<addToCartView> {
                   onTap: () => {
                     setState(() {
                       size = "large";
+                      idx = 2;
                     }),
                   },
                   child: Container(
@@ -212,7 +216,8 @@ class _addToCartViewState extends State<addToCartView> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
-                  "100 Rs",
+                  (widget.model.itemVarients[idx].price * qty).toString() +
+                      " Rs",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 )
               ],
@@ -222,7 +227,10 @@ class _addToCartViewState extends State<addToCartView> {
             padding: const EdgeInsets.only(top: 20.0, left: 25),
             child: GestureDetector(
               //ToDo: Add POST REQUEST and NAVIGATE to CART
-              onTap: null,
+              onTap: () => addToCart({
+                "quantity": qty,
+                "item": widget.model.itemVarients[idx].id,
+              }),
               child: Container(
                 height: 50,
                 width: 330,

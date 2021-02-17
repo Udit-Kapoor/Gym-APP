@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/cart/cafeteria_items.dart';
 import 'cafeOrderPlacedView.dart';
 
 const kOrange = Color(0xFFEB3223);
@@ -92,6 +93,34 @@ class _cafeCartState extends State<cafeCart> {
                   ),
                   SizedBox(
                     height: 12,
+                  ),
+                  FutureBuilder(
+                    future: getCart(),
+                    builder: (c, s) {
+                      if (s.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (s.hasData &&
+                          s.connectionState == ConnectionState.done) {
+                        //ToDO: Change Model + Contact Sameer
+                        var model = cafeteriaItemsFromJson(s.data.data);
+                        print(model);
+                        return Expanded(
+                          child: ListView.builder(
+                              itemCount: model.length,
+                              itemBuilder: (c, i) {
+                                return BillItem(
+                                    name: null,
+                                    size: null,
+                                    qty: null,
+                                    bill: null);
+                              }),
+                        );
+                      } else {
+                        return Text("No data found");
+                      }
+                    },
                   ),
                   BillItem(
                       name: "Burger A", size: "S", qty: "2", bill: "Rs 100"),

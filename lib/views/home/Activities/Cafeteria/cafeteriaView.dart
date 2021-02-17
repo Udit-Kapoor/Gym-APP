@@ -166,7 +166,7 @@ class _cafeteriaViewState extends State<cafeteriaView> {
                           imgPath: 'image/burger.jpg',
                           name: model[i].name,
                           desc: model[i].ingredients,
-                          rate: "50",
+                          rate: model[i].itemVarients[0].price.toString(),
                           model: model[i],
                         );
                       }),

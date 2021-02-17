@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/models/api_response.dart';
 import 'package:gym_app/models/login/rest_auth_login.dart';
 import 'package:http/http.dart';
@@ -35,9 +36,17 @@ class ApiHelper {
     final _sp = await sp;
     await post("https://p2c-gym.herokuapp.com/rest-auth/logout/")
         .then((value) => {
-              _sp.clear(),
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/LoginScreen', (route) => false),
+              if (value.statusCode >= 200 && value.statusCode <= 205)
+                {
+                  _sp.clear(),
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/LoginScreen', (route) => false),
+                  Fluttertoast.showToast(msg: "Logout Successful"),
+                }
+              else
+                {
+                  Fluttertoast.showToast(msg: "Logout Failed"),
+                }
             });
   }
 
