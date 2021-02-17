@@ -132,6 +132,7 @@ class _supplementViewState extends State<supplementView> {
           ),
           Expanded(
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
                 supplementTile(
                     imgPath: "image/protien.jpg",

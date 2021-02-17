@@ -72,6 +72,7 @@ class ExercisePage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
                 for (var exc in _exerciseList)
                   Padding(

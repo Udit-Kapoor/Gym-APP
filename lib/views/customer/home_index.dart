@@ -16,6 +16,7 @@ class HomeIndex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: [
           TodaysWorkoutTile(),
@@ -36,7 +37,6 @@ class HomeIndex extends StatelessWidget {
           ),
           Wrap(
             alignment: WrapAlignment.center,
-            
             spacing: 5.0,
             children: [
               for (var i = 0; i < 8; i++)

@@ -70,6 +70,7 @@ class Clients extends StatelessWidget {
             flex: 11,
             child: Container(
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: [
                   for (var i = 0; i < 10; i++)
                     ClientsListTile(

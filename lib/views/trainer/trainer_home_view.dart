@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/views/home/Team/TeamPage.dart';
-import 'package:gym_app/views/customer/home_index.dart';
 import 'package:gym_app/views/customer/drawer/my_drawer.dart';
-import 'package:gym_app/views/customer/workout_index.dart';
 import 'package:gym_app/views/trainer/batch_wise_clients_list_view.dart';
 
 class TrainerHome extends StatefulWidget {

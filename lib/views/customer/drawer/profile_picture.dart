@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePicture extends StatelessWidget {
   final String imageUrl;
   const ProfilePicture({
-    Key key,@required this.imageUrl,
+    Key key,
+    @required this.imageUrl,
   }) : super(key: key);
+
+  Future<bool> checkImage() async =>
+      (await http.head(imageUrl)).statusCode == 200 ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +22,7 @@ class ProfilePicture extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 70.0,
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.fill,
-              ),
+              backgroundImage: NetworkImage(imageUrl),
             ),
             Align(
               alignment: Alignment.bottomRight,

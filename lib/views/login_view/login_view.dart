@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/models/api_response.dart';
 import 'package:gym_app/models/api_helper.dart';
-import 'package:gym_app/models/login/authentication.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {

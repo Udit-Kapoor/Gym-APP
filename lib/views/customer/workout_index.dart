@@ -81,6 +81,7 @@ class WorkoutIndex extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
                 for (var muscle in muscleList)
                   Material(

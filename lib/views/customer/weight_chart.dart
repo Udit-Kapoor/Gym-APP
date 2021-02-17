@@ -6,8 +6,14 @@ enum DurationMethod {
   month,
 }
 
-class WeightChart extends StatelessWidget {
+class WeightChart extends StatefulWidget {
+  @override
+  _WeightChartState createState() => _WeightChartState();
+}
+
+class _WeightChartState extends State<WeightChart> {
   DurationMethod _method = DurationMethod.all;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -28,7 +34,6 @@ class WeightChart extends StatelessWidget {
               ),
             ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.,
               children: [
                 Spacer(flex: 4),
                 IconButton(

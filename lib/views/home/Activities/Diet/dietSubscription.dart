@@ -260,6 +260,7 @@ class _dietSubscriptionState extends State<dietSubscription> {
             child: Padding(
               padding: const EdgeInsets.only(left: 25.0, right: 25),
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: [
                   Container(
                     width: 320,

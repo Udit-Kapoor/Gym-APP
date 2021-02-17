@@ -58,6 +58,7 @@ class _supplementDetailsState extends State<supplementDetails> {
           ),
           Expanded(
               child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               SizedBox(
                 height: 30,

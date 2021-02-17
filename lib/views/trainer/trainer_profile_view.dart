@@ -52,6 +52,7 @@ class TrainerProfileView extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 children: [
                   TextFieldWidget(

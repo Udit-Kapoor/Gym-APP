@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/views/customer/drawer/customer_gym_subscription_view.dart';
 import 'package:gym_app/views/customer/my_attendance.dart';
 import 'package:gym_app/views/customer/my_goal_title.dart';
@@ -145,6 +144,7 @@ class ClientsDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: BouncingScrollPhysics(),
       children: [
         TodaysWorkoutTile(),
         MyGoalTile(),

@@ -58,6 +58,7 @@ class CustomerGymSubscription extends StatelessWidget {
           String _activities = _actList.join(', ');
 
           widget = ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               SizedBox(height: 20.0),
               TextFieldWidget(
@@ -81,7 +82,7 @@ class CustomerGymSubscription extends StatelessWidget {
                     child: TextFieldWidget(
                       padding: EdgeInsets.fromLTRB(5.0, 10.0, 20.0, 10.0),
                       borderText: 'End Date',
-                      bodyText: cg.endDate,
+                      bodyText: cg.endDate.toString(),
                     ),
                   )
                 ],
@@ -105,9 +106,8 @@ class CustomerGymSubscription extends StatelessWidget {
               ),
               TextFieldWidget(
                 borderText: 'Exercise Plan',
-                bodyText: cg.exercisePlan['active']
-                    ? cg.exercisePlan['name']
-                    : 'none',
+                bodyText:
+                    cg.exercisePlan.active ? cg.exercisePlan.name : 'none',
               ),
               TextFieldWidget(
                 borderText: 'Facilities Opted',

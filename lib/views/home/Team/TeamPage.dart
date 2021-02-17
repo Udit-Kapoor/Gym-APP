@@ -7,6 +7,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 class TeamPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
+      physics: BouncingScrollPhysics(),
       children: [
         Container(
           height: 165,

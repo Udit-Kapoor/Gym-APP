@@ -64,6 +64,7 @@ class CustomerProfileView extends StatelessWidget {
                   ),
                   Expanded(
                     child: ListView(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       children: [
                         TextFieldWidget(
@@ -95,12 +96,10 @@ class CustomerProfileView extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         TextFieldWidget(
                           borderText: 'Phone No.',
                           bodyText: cp.phone,
                         ),
-
                         if (cp.alternatePhone.isNotEmpty)
                           TextFieldWidget(
                             borderText: 'Alt.Phone No.',
@@ -145,11 +144,6 @@ class CustomerProfileView extends StatelessWidget {
                             Expanded(child: Container()),
                           ],
                         ),
-                        //TODO: Removed Landmark
-                        // TextFieldWidget(
-                        //   borderText: 'Landmark',
-                        //   bodyText: cp.,
-                        // ),
                         Stack(
                           alignment: Alignment.centerRight,
                           children: [
