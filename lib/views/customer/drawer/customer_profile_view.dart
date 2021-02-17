@@ -46,7 +46,7 @@ class CustomerProfileView extends StatelessWidget {
             widget = Center(child: CircularProgressIndicator());
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var cp = customerProfileModelFromJson(s.data.data);
-            print(cp);
+
             widget = Container(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +54,7 @@ class CustomerProfileView extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  ProfilePicture(),
+                  ProfilePicture(imageUrl: cp.photo),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -68,68 +68,68 @@ class CustomerProfileView extends StatelessWidget {
                       children: [
                         TextFieldWidget(
                           borderText: 'C_ID',
-                          bodyText: '42069',
+                          bodyText: cp.cid,
                         ),
                         TextFieldWidget(
                           borderText: 'Full Name',
-                          bodyText: 'Pawan Kumar',
+                          bodyText:
+                              '${cp.firstName} ${cp.middleName} ${cp.lastName} ',
                         ),
                         Row(
                           children: [
                             Expanded(
                               child: TextFieldWidget(
+                                padding:
+                                    EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
                                 borderText: 'D.O.B',
-                                bodyText: '12-06-1998',
+                                bodyText: cp.dateOfBirth.toUtc().toString(),
                               ),
                             ),
                             Expanded(
                               child: TextFieldWidget(
+                                padding:
+                                    EdgeInsets.fromLTRB(5.0, 10.0, 20.0, 10.0),
                                 borderText: 'Gender',
-                                bodyText: 'Male',
+                                bodyText: cp.gender,
                               ),
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextFieldWidget(
-                                borderText: 'Phone No.',
-                                bodyText: '9876543210',
-                              ),
-                            ),
-                            Expanded(
-                              child: TextFieldWidget(
-                                borderText: 'Alt.Phone No.',
-                                bodyText: '9876543210',
-                              ),
-                            ),
-                          ],
+
+                        TextFieldWidget(
+                          borderText: 'Phone No.',
+                          bodyText: cp.phone,
                         ),
+
+                        if (cp.alternatePhone.isNotEmpty)
+                          TextFieldWidget(
+                            borderText: 'Alt.Phone No.',
+                            bodyText: cp.alternatePhone,
+                          ),
                         TextFieldWidget(
                           borderText: 'Email ID',
-                          bodyText: 'abcd1234@gmail.com',
+                          bodyText: cp.email,
                         ),
                         TextFieldWidget(
                           borderText: 'Address Line 1',
-                          bodyText: '6th avenue Becker Street',
+                          bodyText: cp.address1,
                         ),
                         TextFieldWidget(
                           borderText: 'Address Line 2',
-                          bodyText: '6th avenue Becker Street',
+                          bodyText: cp.address2,
                         ),
                         Row(
                           children: [
                             Expanded(
                               child: TextFieldWidget(
                                 borderText: 'City',
-                                bodyText: 'New Delhi',
+                                bodyText: cp.city,
                               ),
                             ),
                             Expanded(
                               child: TextFieldWidget(
                                 borderText: 'State',
-                                bodyText: 'New Delhi',
+                                bodyText: cp.state,
                               ),
                             ),
                           ],
@@ -139,26 +139,29 @@ class CustomerProfileView extends StatelessWidget {
                             Expanded(
                               child: TextFieldWidget(
                                 borderText: 'Pin Code',
-                                bodyText: '110069',
+                                bodyText: cp.pincode.toString(),
                               ),
                             ),
                             Expanded(child: Container()),
                           ],
                         ),
-                        TextFieldWidget(
-                          borderText: 'Landmark',
-                          bodyText: 'Near J.R. Public School',
-                        ),
+                        //TODO: Removed Landmark
+                        // TextFieldWidget(
+                        //   borderText: 'Landmark',
+                        //   bodyText: cp.,
+                        // ),
                         Stack(
                           alignment: Alignment.centerRight,
                           children: [
                             TextFieldWidget(
                               borderText: 'ID Proof',
-                              bodyText: 'aadharcard.pdf',
+                              bodyText: cp.idProof,
                             ),
                             IconButton(
+                              padding: EdgeInsets.fromLTRB(8, 8, 25, 8),
+                              alignment: Alignment.centerLeft,
                               icon: Icon(
-                                Icons.file_upload,
+                                Icons.remove_red_eye,
                               ),
                               onPressed: () {},
                             ),

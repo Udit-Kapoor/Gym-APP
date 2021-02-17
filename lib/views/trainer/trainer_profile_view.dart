@@ -41,7 +41,8 @@ class TrainerProfileView extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            ProfilePicture(),
+//TODO: Add profile picture
+            //ProfilePicture(),
             SizedBox(
               height: 10.0,
             ),

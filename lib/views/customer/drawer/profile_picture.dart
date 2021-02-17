@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfilePicture extends StatelessWidget {
+  final String imageUrl;
   const ProfilePicture({
-    Key key,
+    Key key,@required this.imageUrl,
   }) : super(key: key);
 
   @override
@@ -16,8 +17,8 @@ class ProfilePicture extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 70.0,
-              child: Image.asset(
-                'image/profile.png',
+              child: Image.network(
+                imageUrl,
                 fit: BoxFit.fill,
               ),
             ),

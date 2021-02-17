@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/customer%20model/customer_subscription_model.dart';
 import 'package:gym_app/views/customer/text_field_widget.dart';
 
 class CustomerGymSubscriptionView extends StatelessWidget {
@@ -39,64 +40,89 @@ class CustomerGymSubscription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        SizedBox(height: 20.0),
-        TextFieldWidget(
-          borderText: 'Batch Timings',
-          bodyText: '09.30 a.m. - 10.30 a.m.',
-        ),
-        TextFieldWidget(
-          borderText: 'My Gym Subscription',
-          bodyText: '3 Months\t2000 Rs',
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: TextFieldWidget(
-                padding: EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
-                borderText: 'Start Date',
-                bodyText: '12-06-2020',
+    return FutureBuilder(
+      future: customerGymSub(),
+      builder: (c, s) {
+        var widget;
+        if (s.connectionState == ConnectionState.waiting) {
+          widget = Container(child: Center(child: CircularProgressIndicator()));
+        } else if (s.hasData && s.connectionState == ConnectionState.done) {
+          var cg = customerSubscriptionModelFromJson(s.data.data);
+
+          List _facList = [];
+          for (var fac in cg.specialFacility) _facList.add(fac.name);
+          String _facilites = _facList.join(', ');
+
+          List _actList = [];
+          for (var act in cg.specialActivity) _actList.add(act.name);
+          String _activities = _actList.join(', ');
+
+          widget = ListView(
+            children: [
+              SizedBox(height: 20.0),
+              TextFieldWidget(
+                borderText: 'Batch Timings',
+                bodyText: '${cg.batchTimeFrom} - ${cg.batchTimeTo}',
               ),
-            ),
-            Expanded(
-              child: TextFieldWidget(
-                padding: EdgeInsets.fromLTRB(5.0, 10.0, 20.0, 10.0),
-                borderText: 'End Date',
-                bodyText: '12-09-2020',
+              TextFieldWidget(
+                borderText: 'My Gym Subscription',
+                bodyText: '${cg.plan.months} Months   \t${cg.plan.amount} Rs',
               ),
-            )
-          ],
-        ),
-        TextFieldWidget(
-          borderText: 'Motive for Joining Gym',
-          bodyText: 'Weight Loss',
-        ),
-        TextFieldWidget(
-          borderText: 'Health Issues',
-          bodyText: 'None',
-        ),
-        TextFieldWidget(
-          borderText: 'Trainer Name',
-          bodyText: 'Pawan Kumar',
-        ),
-        TextFieldWidget(
-          borderText: 'Diet',
-          bodyText: 'Fat Loss Veg Diet 2',
-        ),
-        TextFieldWidget(
-          borderText: 'Exercise Plan',
-          bodyText: 'Exercise Plan B',
-        ),
-        TextFieldWidget(
-          borderText: 'Facilities Opted',
-          bodyText: 'Shower, Steam',
-        ),
-        TextFieldWidget(
-          borderText: 'Extra Activities Opted',
-          bodyText: 'Zumba, Yoga',
-        ),
-      ],
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFieldWidget(
+                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
+                      borderText: 'Start Date',
+                      bodyText: cg.startDate.toString(),
+                    ),
+                  ),
+                  Expanded(
+                    child: TextFieldWidget(
+                      padding: EdgeInsets.fromLTRB(5.0, 10.0, 20.0, 10.0),
+                      borderText: 'End Date',
+                      bodyText: cg.endDate,
+                    ),
+                  )
+                ],
+              ),
+              TextFieldWidget(
+                borderText: 'Motive for Joining Gym',
+                bodyText: cg.motive.isNotEmpty ? cg.motive : 'none',
+              ),
+              TextFieldWidget(
+                borderText: 'Health Issues',
+                bodyText: cg.healthIssues.isNotEmpty ? cg.healthIssues : 'none',
+              ),
+              //TODO: Api Doesn't have trainer name
+              // TextFieldWidget(
+              //   borderText: 'Trainer Name',
+              //   bodyText: cg.,
+              // ),
+              TextFieldWidget(
+                borderText: 'Diet',
+                bodyText: cg.dietPlan,
+              ),
+              TextFieldWidget(
+                borderText: 'Exercise Plan',
+                bodyText: cg.exercisePlan['active']
+                    ? cg.exercisePlan['name']
+                    : 'none',
+              ),
+              TextFieldWidget(
+                borderText: 'Facilities Opted',
+                bodyText: cg.specialFacility.length > 0 ? _facilites : 'none',
+              ),
+              TextFieldWidget(
+                borderText: 'Extra Activities Opted',
+                bodyText: cg.specialActivity.length > 0 ? _activities : 'none',
+              ),
+            ],
+          );
+        } else
+          widget = Container(child: Center(child: Text("OOPS! NO DATA!")));
+        return widget;
+      },
     );
   }
 }
