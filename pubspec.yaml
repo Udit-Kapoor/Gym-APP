@@ -1,5 +1,6 @@
 name: gym_app
-description: A Flutter project for Health2Offer Gym. Offering customers and trainers easy access to the services in their pocket. 
+description: A Flutter project for Health2Offer Gym. Offering customers and
+  trainers easy access to the services in their pocket.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
@@ -12,12 +13,14 @@ dependencies:
   carousel_slider: ^3.0.0
   cupertino_icons: ^1.0.0
   expandable: ^4.1.4
+  charts_flutter: ^0.9.0
   fluttertoast: ^7.1.6
   font_awesome_flutter: ^8.11.0
   http: ^0.12.2
   provider: ^4.3.2+2
   shared_preferences: ^0.5.12+4
   url_launcher: ^5.7.10
+  rive: ^0.6.8
 
 dev_dependencies:
   flutter_test:
@@ -32,4 +35,4 @@ flutter:
   fonts:
     - family: Custom
       fonts:
-        - asset: lib/ui/icons/Custom.ttf
+        - asset: lib/styles/icons/Custom.ttf

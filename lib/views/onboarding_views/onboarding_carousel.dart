@@ -27,13 +27,13 @@ class _OnboardingViewsState extends State<OnboardingViews> {
               autoPlayAnimationDuration: Duration(seconds: 1),
               viewportFraction: 1.0),
           items: [
-            OnboardingSingleView("image/bg1.png",
+            OnboardingSingleView("lib/assets/bg1.png",
                 "Here we help you achieve \n your physical goals", 0),
             OnboardingSingleView(
-                "image/bg2.png",
+                "lib/assets/bg2.png",
                 "Hundreds of successful\n transformation stories are\n the proof of our gym’s\n brilliance",
                 1),
-            OnboardingSingleView("image/bg3.png",
+            OnboardingSingleView("lib/assets/bg3.png",
                 "Join now and achieve\n your dream physique", 2),
           ]),
     ));

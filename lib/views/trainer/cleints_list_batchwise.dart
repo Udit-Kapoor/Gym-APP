@@ -22,7 +22,7 @@ class ClientsList extends StatelessWidget {
         ),
         centerTitle: true,
         title: Image.asset(
-          'image/logo.png',
+          'lib/assets/logo.png',
           fit: BoxFit.fill,
         ),
       ),

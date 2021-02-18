@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ExerciseInstructions extends StatelessWidget {
-  const ExerciseInstructions({Key key, @required this.exercise}) : super(key: key);
+  const ExerciseInstructions({Key key, @required this.exercise})
+      : super(key: key);
 
   final String exercise;
 
@@ -51,7 +52,7 @@ class ExerciseInstructions extends StatelessWidget {
                 child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: [
-                    Image.asset('image/video.png'),
+                    Image.asset('lib/assets/video.png'),
                     IconButton(
                       padding: EdgeInsets.all(0.0),
                       iconSize: 71,

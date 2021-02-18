@@ -10,3 +10,5 @@ const String kInstagram = 'https://www.instagram.com/health_2_offer/';
 const String kFacebook = 'https://www.facebook.com/Health2Offer';
 
 const String gymAppTitle4Recents = 'H2O';
+const String loginUsernameHeader = "Mobile Number";
+const String loginPasswordHeader = "Password";

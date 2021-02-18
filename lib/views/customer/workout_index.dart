@@ -47,7 +47,7 @@ class WorkoutIndex extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 30.0,
                         child: Image.asset(
-                          'image/profile.png',
+                          'lib/assets/profile.png',
                           fit: BoxFit.fill,
                         ),
                       ),

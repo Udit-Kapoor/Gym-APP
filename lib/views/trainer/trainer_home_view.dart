@@ -68,7 +68,7 @@ class _TrainerHomeState extends State<TrainerHome>
             ),
         ],
         title: Image.asset(
-          'image/logo.png',
+          'lib/assets/logo.png',
           fit: BoxFit.fill,
         ),
       ),

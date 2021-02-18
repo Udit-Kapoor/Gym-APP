@@ -70,7 +70,7 @@ class _SupplementDetailsState extends State<SupplementDetails> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                         image: DecorationImage(
-                          image: AssetImage("image/protien.jpg"),
+                          image: AssetImage("lib/assets/protien.jpg"),
                         )),
                   ),
                   SizedBox(
@@ -82,7 +82,7 @@ class _SupplementDetailsState extends State<SupplementDetails> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                         image: DecorationImage(
-                          image: AssetImage("image/protien.jpg"),
+                          image: AssetImage("lib/assets/protien.jpg"),
                         )),
                   ),
                 ],

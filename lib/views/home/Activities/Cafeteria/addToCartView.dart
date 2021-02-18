@@ -30,7 +30,7 @@ class _addToCartViewState extends State<addToCartView> {
                 width: 400,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("image/burger.jpg"),
+                    image: AssetImage("lib/assets/burger.jpg"),
                   ),
                 ),
               ),

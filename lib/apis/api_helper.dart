@@ -3,8 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gym_app/apis/api_response.dart';
-import 'package:gym_app/models/login/rest_auth_login.dart';
+import 'package:gym_app/lib.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,10 +40,29 @@ class ApiHelper {
     }
   }
 
-  final sp = SharedPreferences.getInstance();
+  Future<void> submit(BuildContext ctx, String number, String pass) async {
+    final sp = await SharedPreferences.getInstance();
+    ApiResponse login = await ApiHelper().login(
+      url: "https://p2c-gym.herokuapp.com/rest-auth/login/",
+      data: {"username": number, "password": pass},
+    );
+    if (!login.error) {
+      sp.setString("AUTH_KEY", login.data.key);
+      var ut = login.data.userType;
+      if (ut.isCustomer) {
+        sp.setString("USER_TYPE", "CUSTOMER");
+        Navigator.pushReplacementNamed(ctx, '/CustomerHome');
+      } else {
+        sp.setString("USER_TYPE", "TRAINER");
+        Navigator.pushReplacementNamed(ctx, '/TrainerHome');
+      }
+    } else {
+      Fluttertoast.showToast(msg: "Authentication failed");
+    }
+  }
 
   Future logout(context) async {
-    final _sp = await sp;
+    final _sp = await s;
     await post("https://p2c-gym.herokuapp.com/rest-auth/logout/")
         .then((value) => {
               if (value.statusCode >= 200 && value.statusCode <= 205)
@@ -64,7 +82,7 @@ class ApiHelper {
   Future<ApiResponse> postReq(
       {String endpoint, Map data, String query = ""}) async {
     final String url = endpoint + query;
-    final _sp = await sp;
+    final _sp = await s;
     try {
       Response postReq = await post(
         url,
@@ -88,7 +106,7 @@ class ApiHelper {
 
   Future<ApiResponse> getReq({String endpoint, String query = ""}) async {
     final String url = endpoint + query;
-    SharedPreferences _sp = await sp;
+    SharedPreferences _sp = await s;
     try {
       Response getReq = await get(
         url,

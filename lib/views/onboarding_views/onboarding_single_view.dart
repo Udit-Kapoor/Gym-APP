@@ -5,9 +5,9 @@ class OnboardingSingleView extends StatelessWidget {
   final String bottomText;
   final int currentPos;
   final List<String> listPaths = [
-    "image/bg1.png",
-    "image/bg2.png",
-    "image/bg3.png",
+    "lib/assets/bg1.png",
+    "lib/assets/bg2.png",
+    "lib/assets/bg3.png",
   ];
 
   OnboardingSingleView(this.imgPath, this.bottomText, this.currentPos);

@@ -8,7 +8,7 @@ class MyTrainer extends StatelessWidget {
     final TextEditingController reviewController = TextEditingController();
     final List<Map<String, dynamic>> _reviews = [
       {
-        'profile_picture': 'image/profile.png',
+        'profile_picture': 'lib/assets/profile.png',
         'name': 'Raja Kumar',
         'rating': 4,
         'time': 'a week ago',
@@ -16,21 +16,21 @@ class MyTrainer extends StatelessWidget {
             'He is very good trainer. He is very good trainer. He is very good trainer. He is very good trainer. He is very good trainer. '
       },
       {
-        'profile_picture': 'image/profile.png',
+        'profile_picture': 'lib/assets/profile.png',
         'name': 'Raja Kumar',
         'rating': 4,
         'time': 'a week ago',
         'description': 'He is very good trainer'
       },
       {
-        'profile_picture': 'image/profile.png',
+        'profile_picture': 'lib/assets/profile.png',
         'name': 'Raja Kumar',
         'rating': 4,
         'time': 'a week ago',
         'description': 'He is very good trainer'
       },
       {
-        'profile_picture': 'image/profile.png',
+        'profile_picture': 'lib/assets/profile.png',
         'name': 'Raja Kumar',
         'rating': 4,
         'time': 'a week ago',
@@ -55,7 +55,7 @@ class MyTrainer extends StatelessWidget {
         ),
         centerTitle: true,
         title: Image.asset(
-          'image/logo.png',
+          'lib/assets/logo.png',
           fit: BoxFit.fill,
         ),
       ),
@@ -68,7 +68,7 @@ class MyTrainer extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20.0),
                 child: CircleAvatar(
                   radius: 40.0,
-                  child: Image.asset('image/profile.png'),
+                  child: Image.asset('lib/assets/profile.png'),
                 ),
               ),
               Expanded(
@@ -122,7 +122,7 @@ class MyTrainer extends StatelessWidget {
                       CircleAvatar(
                         // radius: 30.0,
                         child: Image.asset(
-                          'image/profile.png',
+                          'lib/assets/profile.png',
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -189,7 +189,7 @@ class MyTrainer extends StatelessWidget {
                         side: BorderSide(),
                       ),
                       child: Text(
-                         'Post Review',
+                        'Post Review',
                         style: Theme.of(context)
                             .textTheme
                             .headline6
