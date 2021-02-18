@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/lib.dart';
 
-const kOrange = Color(0xFFEB3223);
-
-class dietSubscription extends StatefulWidget {
+class DietSubscription extends StatefulWidget {
   @override
-  _dietSubscriptionState createState() => _dietSubscriptionState();
+  _DietSubscriptionState createState() => _DietSubscriptionState();
 }
 
 //ToDo: Add Validators...
-class _dietSubscriptionState extends State<dietSubscription> {
+class _DietSubscriptionState extends State<DietSubscription> {
   String planProvider = "BluFit";
   String fitnessGoal = "Weight Loss";
   String dietPref = "Keto";
@@ -246,7 +245,7 @@ class _dietSubscriptionState extends State<dietSubscription> {
                 Text(
                   "Weight Loss Pure Veg Diet Food",
                   style: TextStyle(
-                      color: kOrange,
+                      color: kOrangeCol,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),

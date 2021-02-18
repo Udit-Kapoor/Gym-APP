@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gym_app/models/api_helper.dart';
-import 'package:gym_app/models/api_response.dart';
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';
 
 // To parse this JSON data, do
 //

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gym_app/views/home/Team/TeamPage.dart';
-import 'package:gym_app/views/customer/home_index.dart';
-import 'package:gym_app/views/customer/drawer/my_drawer.dart';
-import 'package:gym_app/views/customer/workout_index.dart';
+import 'package:gym_app/lib.dart';
 
 class CustomerHome extends StatefulWidget {
   const CustomerHome({Key key}) : super(key: key);
@@ -12,11 +9,10 @@ class CustomerHome extends StatefulWidget {
   _CustomerHomeState createState() => _CustomerHomeState();
 }
 
-bool isCollapsed = true;
-
 class _CustomerHomeState extends State<CustomerHome>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
+  bool isCollapsed = true;
   @override
   void initState() {
     _controller = AnimationController(
@@ -82,6 +78,7 @@ class _CustomerHomeState extends State<CustomerHome>
             width: _width,
           ),
           CustomerHomeScreen(
+            isCollapsed: isCollapsed,
             height: _height,
             width: _width,
           ),
@@ -94,9 +91,11 @@ class _CustomerHomeState extends State<CustomerHome>
 class CustomerHomeScreen extends StatefulWidget {
   CustomerHomeScreen({
     Key key,
+    @required this.isCollapsed,
     @required this.height,
     @required this.width,
   }) : super(key: key);
+  final bool isCollapsed;
   final double height;
   final double width;
 
@@ -118,10 +117,10 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       duration: duration,
-      top: isCollapsed ? 0 : widget.height * 0.07,
-      bottom: isCollapsed ? 0 : widget.height * 0.18,
-      left: isCollapsed ? 0 : widget.width * 0.7,
-      right: isCollapsed ? 0 : -widget.width * 0.7,
+      top: widget.isCollapsed ? 0 : widget.height * 0.07,
+      bottom: widget.isCollapsed ? 0 : widget.height * 0.18,
+      left: widget.isCollapsed ? 0 : widget.width * 0.7,
+      right: widget.isCollapsed ? 0 : -widget.width * 0.7,
       child: Material(
         elevation: 4.0,
         child: Container(

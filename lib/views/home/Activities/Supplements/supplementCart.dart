@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'supplementCartItem.dart';
+import 'package:gym_app/lib.dart';
 
-const kOrange = Color(0xFFEB3223);
-
-class supplementCart extends StatefulWidget {
+class SupplementCart extends StatefulWidget {
   @override
-  _supplementCartState createState() => _supplementCartState();
+  _SupplementCartState createState() => _SupplementCartState();
 }
 
-class _supplementCartState extends State<supplementCart> {
+class _SupplementCartState extends State<SupplementCart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +38,7 @@ class _supplementCartState extends State<supplementCart> {
             ),
           ),
           //ToDo: Not Updating qty..
-          supplementCartItem(
+          SupplementCartItem(
             imgPath: "image/protien.jpg",
             title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
             size: "6.6 lb",
@@ -95,7 +93,7 @@ class _supplementCartState extends State<supplementCart> {
                 height: 50,
                 width: 330,
                 decoration: BoxDecoration(
-                  color: kOrange,
+                  color: kOrangeCol,
                   // border: Border.all(color: Colors.black, width: 0.0),
                   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
                 ),

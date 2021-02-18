@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
+import '../../../../constants/constants.dart';
 
-enum foodType { Veg, NonVeg }
-enum price { LowtoHigh, HightoLow }
-enum seller { All, HealthKart, VendorC }
-
-class showSortSupplements extends StatefulWidget {
+class ShowSortSupplements extends StatefulWidget {
   @override
-  _showSortSupplementsState createState() => _showSortSupplementsState();
+  _ShowSortSupplementsState createState() => _ShowSortSupplementsState();
 }
 
-class _showSortSupplementsState extends State<showSortSupplements> {
-  foodType f = foodType.Veg;
-  price p = price.LowtoHigh;
-  seller s = seller.All;
+class _ShowSortSupplementsState extends State<ShowSortSupplements> {
+  FoodType f = FoodType.VEG;
+  Price p = Price.LOWTOHIGH;
+  Seller s = Seller.ALL;
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0)), //this right here
       child: Container(
         height: 420,
         width: 100,
@@ -32,9 +27,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("Veg"),
                   Radio(
-                      value: foodType.Veg,
+                      value: FoodType.VEG,
                       groupValue: f,
-                      onChanged: (foodType value) {
+                      onChanged: (FoodType value) {
                         setState(() {
                           f = value;
                         });
@@ -46,9 +41,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("Non-Veg"),
                   Radio(
-                      value: foodType.NonVeg,
+                      value: FoodType.NONVEG,
                       groupValue: f,
-                      onChanged: (foodType value) {
+                      onChanged: (FoodType value) {
                         setState(() {
                           f = value;
                         });
@@ -61,9 +56,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("Low To High"),
                   Radio(
-                      value: price.LowtoHigh,
+                      value: Price.LOWTOHIGH,
                       groupValue: p,
-                      onChanged: (price value) {
+                      onChanged: (Price value) {
                         setState(() {
                           p = value;
                         });
@@ -75,9 +70,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("High To Low"),
                   Radio(
-                      value: price.HightoLow,
+                      value: Price.HIGHTOLOW,
                       groupValue: p,
-                      onChanged: (price value) {
+                      onChanged: (Price value) {
                         setState(() {
                           p = value;
                         });
@@ -90,9 +85,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("All"),
                   Radio(
-                      value: seller.All,
+                      value: Seller.ALL,
                       groupValue: s,
-                      onChanged: (seller value) {
+                      onChanged: (Seller value) {
                         setState(() {
                           s = value;
                         });
@@ -104,9 +99,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("HealthKart"),
                   Radio(
-                      value: seller.HealthKart,
+                      value: Seller.HEALTHKART,
                       groupValue: s,
-                      onChanged: (seller value) {
+                      onChanged: (Seller value) {
                         setState(() {
                           s = value;
                         });
@@ -118,9 +113,9 @@ class _showSortSupplementsState extends State<showSortSupplements> {
                 children: [
                   Text("Vendor C"),
                   Radio(
-                      value: seller.VendorC,
+                      value: Seller.VENDORC,
                       groupValue: s,
-                      onChanged: (seller value) {
+                      onChanged: (Seller value) {
                         setState(() {
                           s = value;
                         });

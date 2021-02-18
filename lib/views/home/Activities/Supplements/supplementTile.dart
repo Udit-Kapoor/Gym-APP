@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'supplementDetails.dart';
-class supplementTile extends StatelessWidget {
-  const supplementTile({
+
+import 'Supplements.dart';
+
+class SupplementTile extends StatelessWidget {
+  const SupplementTile({
     Key key,
     @required this.imgPath,
     @required this.title,
@@ -30,8 +32,11 @@ class supplementTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: GestureDetector(
         //ToDO: Navigate to ItemDetails...
-        onTap: ()=>{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => supplementDetails()),)
+        onTap: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SupplementDetails()),
+          )
         },
         child: Card(
           shape: RoundedRectangleBorder(

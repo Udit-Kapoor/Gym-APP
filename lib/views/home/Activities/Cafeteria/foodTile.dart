@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cart/cafeteria_items.dart';
-import 'addToCartView.dart';
+import 'package:gym_app/lib.dart';
 
-const korangeCol = Color(0xFFEB3223);
-
-class foodTile extends StatelessWidget {
-  const foodTile({
+class FoodTile extends StatelessWidget {
+  const FoodTile({
     Key key,
     @required this.imgPath,
     @required this.name,
@@ -78,7 +75,7 @@ class foodTile extends StatelessWidget {
                   icon: Icon(
                     Icons.add_shopping_cart,
                     size: 30,
-                    color: korangeCol,
+                    color: kOrangeCol,
                   ),
                   onPressed: () => {
                     Navigator.push(context,

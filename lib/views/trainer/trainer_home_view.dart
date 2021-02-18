@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gym_app/views/home/Team/TeamPage.dart';
-import 'package:gym_app/views/customer/drawer/my_drawer.dart';
-import 'package:gym_app/views/trainer/batch_wise_clients_list_view.dart';
+import 'package:gym_app/lib.dart';
 
 class TrainerHome extends StatefulWidget {
   const TrainerHome({Key key}) : super(key: key);
@@ -107,7 +105,7 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
   final Duration duration = Duration(milliseconds: 300);
 
   final List trainerTabs = [
-    Expanded(child: Container(color: Colors.amber)),
+    Expanded(child: Container(color: Colors.amber)), //TODO trainer dashboard
     BatchWiseClientsListView(),
     Expanded(child: TeamPage()),
   ];
@@ -165,16 +163,11 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                     label: 'H2O',
                   ),
                   BottomNavigationBarItem(
-                    icon: _currentIndex == 2
-                        ? Icon(
-                            Icons.water_damage_outlined,
-                            color: Colors.red,
-                            size: 30.0,
-                          )
-                        : Icon(
-                            Icons.water_damage_outlined,
-                            color: Colors.black,
-                          ),
+                    icon: Icon(
+                      Custom.h2o,
+                      color: _currentIndex == 2 ? Colors.red : Colors.black,
+                      size: _currentIndex == 2 ? 30.0 : 24.0,
+                    ),
                     label: 'workout',
                   ),
                 ],

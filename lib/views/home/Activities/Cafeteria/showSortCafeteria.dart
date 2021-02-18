@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/lib.dart';
 
-enum foodType { Veg, NonVeg }
-enum price { LowtoHigh, HightoLow }
-
-class showSortCafeteria extends StatefulWidget {
+class ShowSortCafeteria extends StatefulWidget {
   @override
-  _showSortCafeteriaState createState() => _showSortCafeteriaState();
+  _ShowSortCafeteriaState createState() => _ShowSortCafeteriaState();
 }
 
-class _showSortCafeteriaState extends State<showSortCafeteria> {
-  foodType f = foodType.Veg;
-  price p = price.LowtoHigh;
+class _ShowSortCafeteriaState extends State<ShowSortCafeteria> {
+  FoodType f = FoodType.VEG;
+  Price p = Price.LOWTOHIGH;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -30,9 +28,9 @@ class _showSortCafeteriaState extends State<showSortCafeteria> {
                 children: [
                   Text("Veg"),
                   Radio(
-                      value: foodType.Veg,
+                      value: FoodType.VEG,
                       groupValue: f,
-                      onChanged: (foodType value) {
+                      onChanged: (FoodType value) {
                         setState(() {
                           f = value;
                         });
@@ -44,9 +42,9 @@ class _showSortCafeteriaState extends State<showSortCafeteria> {
                 children: [
                   Text("Non-Veg"),
                   Radio(
-                      value: foodType.NonVeg,
+                      value: FoodType.NONVEG,
                       groupValue: f,
-                      onChanged: (foodType value) {
+                      onChanged: (FoodType value) {
                         setState(() {
                           f = value;
                         });
@@ -59,9 +57,9 @@ class _showSortCafeteriaState extends State<showSortCafeteria> {
                 children: [
                   Text("Low To High"),
                   Radio(
-                      value: price.LowtoHigh,
+                      value: Price.LOWTOHIGH,
                       groupValue: p,
-                      onChanged: (price value) {
+                      onChanged: (Price value) {
                         setState(() {
                           p = value;
                         });
@@ -73,9 +71,9 @@ class _showSortCafeteriaState extends State<showSortCafeteria> {
                 children: [
                   Text("High To Low"),
                   Radio(
-                      value: price.HightoLow,
+                      value: Price.HIGHTOLOW,
                       groupValue: p,
-                      onChanged: (price value) {
+                      onChanged: (Price value) {
                         setState(() {
                           p = value;
                         });

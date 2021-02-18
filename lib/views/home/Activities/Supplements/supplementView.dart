@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'supplementTile.dart';
-import 'showSortSupplements.dart';
-import 'supplementCart.dart';
+import 'package:gym_app/lib.dart';
 
-const korangeCol = Color(0xFFEB3223);
-
-class supplementView extends StatefulWidget {
+class SupplementView extends StatefulWidget {
   @override
-  _supplementViewState createState() => _supplementViewState();
+  _SupplementViewState createState() => _SupplementViewState();
 }
 
-class _supplementViewState extends State<supplementView> {
+class _SupplementViewState extends State<SupplementView> {
   String supplementType = 'All';
 
-  Widget SORT() {
+  Widget sort() {
     return IconButton(
       icon: Icon(
         Icons.sort,
@@ -24,7 +20,7 @@ class _supplementViewState extends State<supplementView> {
         showDialog(
             context: context,
             builder: (_) {
-              return showSortSupplements();
+              return ShowSortSupplements();
             });
       },
     );
@@ -63,7 +59,7 @@ class _supplementViewState extends State<supplementView> {
                   onPressed: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return supplementCart();
+                      return SupplementCart();
                     })),
                   },
                   //ToDo: Show Cart
@@ -83,7 +79,7 @@ class _supplementViewState extends State<supplementView> {
                   suffixIcon: Icon(
                     Icons.search,
                     size: 30,
-                    color: korangeCol,
+                    color: kOrangeCol,
                   ),
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -126,7 +122,7 @@ class _supplementViewState extends State<supplementView> {
                     );
                   }).toList(),
                 ),
-                SORT(),
+                sort(),
               ],
             ),
           ),
@@ -134,7 +130,7 @@ class _supplementViewState extends State<supplementView> {
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: [
-                supplementTile(
+                SupplementTile(
                     imgPath: "image/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
@@ -144,7 +140,7 @@ class _supplementViewState extends State<supplementView> {
                     protein: "12 gm protein",
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
-                supplementTile(
+                SupplementTile(
                     imgPath: "image/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
@@ -154,7 +150,7 @@ class _supplementViewState extends State<supplementView> {
                     protein: "12 gm protein",
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
-                supplementTile(
+                SupplementTile(
                     imgPath: "image/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
@@ -164,7 +160,7 @@ class _supplementViewState extends State<supplementView> {
                     protein: "12 gm protein",
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
-                supplementTile(
+                SupplementTile(
                     imgPath: "image/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
@@ -174,7 +170,7 @@ class _supplementViewState extends State<supplementView> {
                     protein: "12 gm protein",
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
-                supplementTile(
+                SupplementTile(
                     imgPath: "image/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",

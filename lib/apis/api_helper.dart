@@ -3,13 +3,24 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gym_app/models/api_response.dart';
+import 'package:gym_app/apis/api_response.dart';
 import 'package:gym_app/models/login/rest_auth_login.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiHelper {
   Future<SharedPreferences> s = SharedPreferences.getInstance();
+
+  Future<List> autoLogin() async {
+    SharedPreferences sp = await s;
+    bool b = sp.containsKey("AUTH_KEY");
+    String t;
+    if (b) {
+      t = sp.getString("USER_TYPE");
+      return [b, t];
+    }
+    return [b];
+  }
 
   Future login({String url, Map data}) async {
     try {
@@ -77,7 +88,7 @@ class ApiHelper {
 
   Future<ApiResponse> getReq({String endpoint, String query = ""}) async {
     final String url = endpoint + query;
-    final _sp = await sp;
+    SharedPreferences _sp = await sp;
     try {
       Response getReq = await get(
         url,

@@ -1,0 +1,12 @@
+export 'customer_home_view.dart';
+export 'drawer/drawer.dart';
+export 'exercise_instructions.dart';
+export 'exercise_page.dart';
+export 'home_index.dart';
+export 'my_attendance.dart';
+export 'my_goal_title.dart';
+export 'my_trainer.dart';
+export 'text_field_widget.dart';
+export 'todays_workout_tile.dart';
+export 'weight_chart.dart';
+export 'workout_index.dart';

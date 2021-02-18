@@ -1,0 +1,11 @@
+export 'batch_wise_clients_list_view.dart';
+export 'cleints_details.dart';
+export 'cleints_list_batchwise.dart';
+export 'clients_details_view.dart';
+export 'clients_information.dart';
+export 'clients_subscription_information.dart';
+export 'clients_todays_workout_tile.dart';
+export 'create_new_workout.dart';
+export 'create_workout.dart';
+export 'trainer_home_view.dart';
+export 'trainer_profile_view.dart';

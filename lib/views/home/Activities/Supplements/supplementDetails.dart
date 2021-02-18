@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'supplementCart.dart';
 
-const korangeCol = Color(0xFFEB3223);
+import '../../../../constants/constants.dart';
+import 'Supplements.dart';
 
-enum seller { HealthKart, VendorC }
-
-class supplementDetails extends StatefulWidget {
+class SupplementDetails extends StatefulWidget {
   @override
-  _supplementDetailsState createState() => _supplementDetailsState();
+  _SupplementDetailsState createState() => _SupplementDetailsState();
 }
 
-class _supplementDetailsState extends State<supplementDetails> {
-  seller s = seller.HealthKart;
+class _SupplementDetailsState extends State<SupplementDetails> {
+  Seller s = Seller.HEALTHKART;
   String size = "4.4 lbs";
   String flavour = "Chocolate";
 
@@ -48,7 +46,7 @@ class _supplementDetailsState extends State<supplementDetails> {
                   onPressed: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return supplementCart();
+                      return SupplementCart();
                     })),
                   },
                   //ToDo: Show Cart
@@ -122,9 +120,9 @@ class _supplementDetailsState extends State<supplementDetails> {
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),
                         Radio(
-                            value: seller.HealthKart,
+                            value: Seller.HEALTHKART,
                             groupValue: s,
-                            onChanged: (seller value) {
+                            onChanged: (Seller value) {
                               setState(() {
                                 s = value;
                               });
@@ -135,9 +133,9 @@ class _supplementDetailsState extends State<supplementDetails> {
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),
                         Radio(
-                            value: seller.VendorC,
+                            value: Seller.VENDORC,
                             groupValue: s,
-                            onChanged: (seller value) {
+                            onChanged: (Seller value) {
                               setState(() {
                                 s = value;
                               });

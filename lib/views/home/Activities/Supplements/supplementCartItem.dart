@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'supplementDetails.dart';
+import 'package:gym_app/lib.dart';
 
-enum seller { HealthKart, VendorC }
-
-class supplementCartItem extends StatefulWidget {
-  const supplementCartItem({
+class SupplementCartItem extends StatefulWidget {
+  const SupplementCartItem({
     Key key,
     @required this.imgPath,
     @required this.title,
@@ -22,13 +20,13 @@ class supplementCartItem extends StatefulWidget {
   final String seller;
 
   @override
-  _supplementCartItemState createState() => _supplementCartItemState();
+  _SupplementCartItemState createState() => _SupplementCartItemState();
 }
 
-class _supplementCartItemState extends State<supplementCartItem> {
+class _SupplementCartItemState extends State<SupplementCartItem> {
   @override
   Widget build(BuildContext context) {
-    seller s = seller.HealthKart;
+    Seller s = Seller.HEALTHKART;
     int qty = 1;
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),

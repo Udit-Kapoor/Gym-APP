@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:gym_app/constant/contact_details.dart';
-import 'package:gym_app/models/api_helper.dart';
-import 'package:gym_app/views/customer/drawer/change_password.dart';
-import 'package:gym_app/views/customer/drawer/complaint_feedback.dart';
-import 'package:gym_app/views/customer/drawer/customer_gym_subscription_view.dart';
-import 'package:gym_app/views/customer/drawer/customer_profile_view.dart';
+import 'package:gym_app/lib.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatelessWidget {

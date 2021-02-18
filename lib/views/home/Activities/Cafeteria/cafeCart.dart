@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cart/cafeteria_items.dart';
-import 'cafeOrderPlacedView.dart';
+import 'package:gym_app/constants/constants.dart';
+import 'package:gym_app/models/models.dart';
 
-const kOrange = Color(0xFFEB3223);
+import 'Cafeteria.dart';
 
-class cafeCart extends StatefulWidget {
+class CafeCart extends StatefulWidget {
   @override
-  _cafeCartState createState() => _cafeCartState();
+  _CafeCartState createState() => _CafeCartState();
 }
 
-class _cafeCartState extends State<cafeCart> {
+class _CafeCartState extends State<CafeCart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +182,7 @@ class _cafeCartState extends State<cafeCart> {
                 height: 50,
                 width: 330,
                 decoration: BoxDecoration(
-                  color: kOrange,
+                  color: kOrangeCol,
                   // border: Border.all(color: Colors.black, width: 0.0),
                   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
                 ),

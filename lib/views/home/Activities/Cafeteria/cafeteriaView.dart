@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cart/cafeteria_items.dart';
-import 'package:gym_app/views/home/Activities/Cafeteria/cafeCart.dart';
-import 'foodTile.dart';
-import 'showSortCafeteria.dart';
+import 'package:gym_app/lib.dart';
 
 const korangeCol = Color(0xFFEB3223);
 
-class cafeteriaView extends StatefulWidget {
+class CafeteriaView extends StatefulWidget {
   @override
-  _cafeteriaViewState createState() => _cafeteriaViewState();
+  _CafeteriaViewState createState() => _CafeteriaViewState();
 }
 
-class _cafeteriaViewState extends State<cafeteriaView> {
+class _CafeteriaViewState extends State<CafeteriaView> {
   String foodValue = 'All';
 
-  Widget SORT() {
+  Widget sort() {
     return IconButton(
       icon: Icon(
         Icons.sort,
@@ -25,7 +22,7 @@ class _cafeteriaViewState extends State<cafeteriaView> {
         showDialog(
             context: context,
             builder: (_) {
-              return showSortCafeteria();
+              return ShowSortCafeteria();
             });
       },
     );
@@ -64,7 +61,7 @@ class _cafeteriaViewState extends State<cafeteriaView> {
                   onPressed: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return cafeCart();
+                      return CafeCart();
                     })),
                   }, //ToDo: Show Cart
                 ),
@@ -126,7 +123,7 @@ class _cafeteriaViewState extends State<cafeteriaView> {
                     );
                   }).toList(),
                 ),
-                SORT(),
+                sort(),
               ],
             ),
           ),
@@ -162,7 +159,7 @@ class _cafeteriaViewState extends State<cafeteriaView> {
                   child: ListView.builder(
                       itemCount: model.length,
                       itemBuilder: (c, i) {
-                        return foodTile(
+                        return FoodTile(
                           imgPath: 'image/burger.jpg',
                           name: model[i].name,
                           desc: model[i].ingredients,

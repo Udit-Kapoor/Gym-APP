@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:gym_app/models/api_helper.dart';
-import 'package:gym_app/models/api_response.dart';
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';
 
 CustomerProfileModel customerProfileModelFromJson(String str) =>
     CustomerProfileModel.fromJson(json.decode(str));
