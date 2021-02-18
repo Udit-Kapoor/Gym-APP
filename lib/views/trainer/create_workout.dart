@@ -1,6 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/views/views.dart';
 
 Map<String, List<String>> workoutPlan = {
   'chest': [
@@ -56,7 +57,8 @@ Map<String, List<String>> workoutPlan = {
 List workoutPlanName = ['chest', 'leg', 'triceps', 'biceps', 'tummy', 'brain'];
 
 class CreateWorkout extends StatefulWidget {
-  const CreateWorkout({Key key}) : super(key: key);
+  final Function incrementCallBack;
+  const CreateWorkout({Key key, this.incrementCallBack}) : super(key: key);
 
   @override
   _CreateWorkoutState createState() => _CreateWorkoutState();
@@ -95,25 +97,23 @@ class _CreateWorkoutState extends State<CreateWorkout> {
             ],
           ),
         ),
-        WorkoutPlanNamesListView(),
+        WorkoutPlanNamesListView(incrementCallback: widget.incrementCallBack),
         Padding(
           padding: const EdgeInsets.only(bottom: 20.0),
           child: FloatingActionButton.extended(
             onPressed: () async {
               try {
-                DateTime date = DateTime(1900);
                 DateTime tDate = DateTime.now();
-                date = await showDatePicker(
+                await showDatePicker(
                   context: context,
                   initialDate: tDate,
                   firstDate: tDate,
                   lastDate: DateTime(tDate.year + 20),
                 );
-                // dateCtl.text = myFormat.format(date);
                 Fluttertoast.showToast(msg: "Creating");
-                Navigator.pushNamed(context, '/CreateNewWorkout');
+                //TODO incrementIndex();
               } on NoSuchMethodError {
-                // return dateCtl.text = '';
+                Fluttertoast.showToast(msg: "No Date Selected");
               } catch (e) {
                 return e;
               }
@@ -134,6 +134,8 @@ class _CreateWorkoutState extends State<CreateWorkout> {
 }
 
 class WorkoutPlanNamesListView extends StatelessWidget {
+  final Function incrementCallback;
+  WorkoutPlanNamesListView({this.incrementCallback});
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -149,18 +151,27 @@ class WorkoutPlanNamesListView extends StatelessWidget {
                   ),
                   elevation: 4.0,
                   child: Expandable(
-                    collapsed: ExpandableButton(child: HeaderText(idx: i)),
-                    expanded: ExpandableButton(
-                      child: Column(
-                        children: [
-                          HeaderText(idx: i),
-                          for (var i in [1, 2, 3, 4, 6, 8, 7, 9, 9])
-                            ListTile(
-                              title: Text(i.toString()),
-                              subtitle: Text("Core"),
-                            ),
-                        ],
+                    collapsed: ExpandableButton(
+                      child: HeaderText(
+                        idx: i,
+                        expanded: false,
                       ),
+                    ),
+                    expanded: Column(
+                      children: [
+                        HeaderText(
+                          idx: i,
+                          expanded: true,
+                          collapse: ExpandableButton(
+                              child: Icon(Icons.keyboard_arrow_down)),
+                          editFunction: incrementCallback,
+                        ),
+                        for (var i in [1, 2, 3, 4, 6, 8, 7, 9, 9])
+                          ListTile(
+                            title: Text(i.toString()),
+                            subtitle: Text("Core"),
+                          ),
+                      ],
                     ),
                   ),
                 ),
@@ -173,7 +184,10 @@ class WorkoutPlanNamesListView extends StatelessWidget {
 
 class HeaderText extends StatelessWidget {
   final int idx;
-  HeaderText({this.idx});
+  final bool expanded;
+  final Function editFunction;
+  final Widget collapse;
+  HeaderText({this.idx, this.expanded, this.editFunction, this.collapse});
 
   @override
   Widget build(BuildContext context) {
@@ -184,12 +198,20 @@ class HeaderText extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Center(
-        child: Text(
-          workoutPlanName[idx],
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              .copyWith(fontWeight: FontWeight.w400),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            if (expanded) collapse,
+            Text(
+              workoutPlanName[idx],
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            if (expanded)
+              IconButton(icon: Icon(Icons.edit), onPressed: editFunction)
+          ],
         ),
       ),
     );

@@ -14,7 +14,7 @@ class H2OApp extends StatelessWidget {
         future: Future.delayed(Duration(seconds: 5)),
         builder: (c, s) {
           if (s.connectionState == ConnectionState.waiting)
-            return SplashScreen();
+            return Scaffold(body: Center(child: CircularProgressIndicator()));
           else
             return GymHomeView();
         },

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/customer/drawer/customer_gym_subscription_view.dart';
-import 'package:gym_app/views/customer/my_attendance.dart';
-import 'package:gym_app/views/customer/my_goal_title.dart';
-import 'package:gym_app/views/customer/todays_workout_tile.dart';
-import 'package:gym_app/views/customer/weight_chart.dart';
-import 'package:gym_app/views/trainer/clients_information.dart';
-import 'package:gym_app/views/trainer/create_workout.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/lib.dart';
 
 class ClientsDetailsView extends StatefulWidget {
   const ClientsDetailsView({Key key}) : super(key: key);
@@ -16,119 +11,164 @@ class ClientsDetailsView extends StatefulWidget {
 
 class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   int _currentIndex = 0;
-  final List tabs = [
-    ClientsDashboard(),
-    ClientsInformation(),
-    CustomerGymSubscription(),
-    CreateWorkout(),
-  ];
+  int _workoutIndex = 0;
+  List tabs;
+  incrementIndex() {
+    setState(() {
+      _workoutIndex++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.navigate_before,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    tabs = [
+      ClientsDashboard(),
+      ClientsInformation(),
+      CustomerGymSubscription(),
+      if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
+      if (_workoutIndex == 1)
+        Container(
+          height: 200,
+          width: 50,
+          color: Colors.amber,
         ),
-        centerTitle: true,
-        title: Image.asset(
-          'lib/assets/logo.png',
-          fit: BoxFit.fill,
+      if (_workoutIndex == 2)
+        Container(
+          height: 200,
+          width: 50,
+          color: Colors.blue,
         ),
-      ),
-      body: Column(
-        children: [
-          ListTile(
-            leading: CircleAvatar(
-              radius: 50.0,
-              child: Image.asset(
-                'lib/assets/clients.png',
-                fit: BoxFit.fill,
-              ),
+      if (_workoutIndex == 3)
+        Container(
+          height: 200,
+          width: 50,
+          color: Colors.black,
+        ),
+    ];
+    return WillPopScope(
+      onWillPop: () async {
+        switch (_workoutIndex) {
+          case 0:
+            return true;
+          case 1:
+            _workoutIndex = 0;
+            return false;
+          case 2:
+            _workoutIndex = 1;
+            return false;
+          case 3:
+            _workoutIndex = 2;
+            return false;
+          default:
+            return false;
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: Icon(
+              Icons.navigate_before,
+              color: Colors.black,
             ),
-            title: Text(
-              'Angelina Perry',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-            subtitle: Text(
-              '#60492',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.black),
-            ),
-            trailing: CircleAvatar(
-              backgroundColor: Colors.green,
-              child: IconButton(
-                icon: Icon(
-                  Icons.phone,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ),
-          BottomNavigationBar(
-            showSelectedLabels: true,
-            iconSize: 30.0,
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            onTap: (int index) {
-              setState(() {
-                _currentIndex = index;
-                print(_currentIndex);
-              });
+            onPressed: () {
+              Navigator.pop(context);
             },
-            items: [
-              BottomNavigationBarItem(
-                icon: _currentIndex == 0
-                    ? CircleAvatar(
-                        child: Icon(Icons.bar_chart, color: Colors.white),
-                        backgroundColor: Colors.red,
-                      )
-                    : Icon(Icons.bar_chart, color: Colors.red),
-                label: 'Graph',
-              ),
-              BottomNavigationBarItem(
-                  icon: _currentIndex == 1
-                      ? CircleAvatar(
-                          child:
-                              Icon(Icons.person_outline, color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(Icons.person_outline, color: Colors.red),
-                  label: 'User'),
-              BottomNavigationBarItem(
-                  icon: _currentIndex == 2
-                      ? CircleAvatar(
-                          child: Icon(Icons.autorenew, color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(Icons.autorenew, color: Colors.red),
-                  label: 'Renew'),
-              BottomNavigationBarItem(
-                  icon: _currentIndex == 3
-                      ? CircleAvatar(
-                          child:
-                              Icon(Icons.fitness_center, color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(Icons.fitness_center, color: Colors.red),
-                  label: 'Workout'),
-            ],
           ),
-          Expanded(child: tabs[_currentIndex]),
-        ],
+          centerTitle: true,
+          title: Image.asset(
+            'lib/assets/logo.png',
+            fit: BoxFit.fill,
+          ),
+        ),
+        body: Column(
+          children: [
+            ListTile(
+              leading: CircleAvatar(
+                radius: 50.0,
+                child: Image.asset(
+                  'lib/assets/clients.png',
+                  fit: BoxFit.fill,
+                ),
+              ),
+              title: Text(
+                'Angelina Perry',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              subtitle: Text(
+                '#60492',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.black),
+              ),
+              trailing: CircleAvatar(
+                backgroundColor: Colors.green,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.phone,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+            BottomNavigationBar(
+              showSelectedLabels: true,
+              iconSize: 30.0,
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _currentIndex,
+              onTap: (int index) {
+                setState(() {
+                  _currentIndex = index;
+                  print(_currentIndex);
+                });
+              },
+              items: [
+                BottomNavigationBarItem(
+                  icon: _currentIndex == 0
+                      ? CircleAvatar(
+                          child: Icon(Icons.bar_chart, color: Colors.white),
+                          backgroundColor: Colors.red,
+                        )
+                      : Icon(Icons.bar_chart, color: Colors.red),
+                  label: 'Graph',
+                ),
+                BottomNavigationBarItem(
+                    icon: _currentIndex == 1
+                        ? CircleAvatar(
+                            child:
+                                Icon(Icons.person_outline, color: Colors.white),
+                            backgroundColor: Colors.red,
+                          )
+                        : Icon(Icons.person_outline, color: Colors.red),
+                    label: 'User'),
+                BottomNavigationBarItem(
+                    icon: _currentIndex == 2
+                        ? CircleAvatar(
+                            child: Icon(Icons.autorenew, color: Colors.white),
+                            backgroundColor: Colors.red,
+                          )
+                        : Icon(Icons.autorenew, color: Colors.red),
+                    label: 'Renew'),
+                BottomNavigationBarItem(
+                    icon: _currentIndex == 3
+                        ? CircleAvatar(
+                            child:
+                                Icon(Icons.fitness_center, color: Colors.white),
+                            backgroundColor: Colors.red,
+                          )
+                        : Icon(Icons.fitness_center, color: Colors.red),
+                    label: 'Workout'),
+              ],
+            ),
+            Expanded(child: tabs[_currentIndex]),
+          ],
+        ),
       ),
     );
   }

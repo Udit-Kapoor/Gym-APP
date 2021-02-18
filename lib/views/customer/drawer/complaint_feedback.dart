@@ -131,6 +131,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
                       isExpanded: true,
+                      isDense: true,
                       value: dropDownValue,
                       onChanged: (value) {
                         setState(() {

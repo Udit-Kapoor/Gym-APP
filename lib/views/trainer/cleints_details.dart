@@ -17,7 +17,7 @@ class Clients extends StatelessWidget {
         ),
         centerTitle: true,
         title: Image.asset(
-          'images/logo.png',
+          'lib/assets/logo.png',
           fit: BoxFit.fill,
         ),
       ),
@@ -116,7 +116,7 @@ class ClientsListTile extends StatelessWidget {
           child: ListTile(
             leading: CircleAvatar(
               child: Image.asset(
-                'images/clients.png',
+                'lib/assets/clients.png',
                 fit: BoxFit.fill,
               ),
             ),
