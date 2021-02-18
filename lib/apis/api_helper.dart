@@ -120,4 +120,26 @@ class ApiHelper {
       return ApiResponse(error: true, errorMessage: e.toString());
     }
   }
+
+  Future<ApiResponse> deleteReq({String endpoint}) async {
+    final String url = endpoint;
+    final _sp = await s;
+    try {
+      Response delReq = await delete(
+        url,
+        headers: {
+          HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
+        },
+      );
+      return delReq.statusCode >= 200 && delReq.statusCode <= 205
+          ? ApiResponse(data: delReq.body)
+          : ApiResponse(error: true);
+    } on SocketException {
+      return ApiResponse(error: true, errorMessage: "NO INTERNET");
+    } on HttpException {
+      return ApiResponse(error: true, errorMessage: "HTTP Error");
+    } catch (e) {
+      return ApiResponse(error: true, errorMessage: e.toString());
+    }
+  }
 }

@@ -7,9 +7,60 @@ class CafeCart extends StatefulWidget {
 }
 
 class _CafeCartState extends State<CafeCart> {
+  CafeteriaCart localModel;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        //ToDo: Add Place Order POST req and Navigate to Order Placed
+        elevation: 5,
+        onPressed: () => {
+          placeOrder({"cart": localModel.id}),
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return cafeOrderPlacedView();
+          })),
+        },
+        label: Container(
+          height: 50,
+          width: 330,
+          // decoration: BoxDecoration(
+          //   color: kOrangeCol,
+          //   // border: Border.all(color: Colors.black, width: 0.0),
+          //   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
+          // ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Final Bill",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    (localModel == null ? 0 : localModel.totalBill).toString() +
+                        " Rs",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+              SizedBox(width: 20),
+              Text(
+                "Checkout",
+                style: TextStyle(
+                    color: Colors.white, decoration: TextDecoration.underline),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         children: [
           Padding(
@@ -43,6 +94,7 @@ class _CafeCartState extends State<CafeCart> {
           Padding(
             padding: const EdgeInsets.only(left: 26.0, right: 26),
             child: Container(
+              height: 500,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Color(0xFFDADADA),
@@ -55,15 +107,18 @@ class _CafeCartState extends State<CafeCart> {
                     height: 7,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      SizedBox(
+                        width: 5,
+                      ),
                       Text(
                         "Item",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
-                        width: 50,
+                        width: 60,
                       ),
                       Text(
                         "Size",
@@ -71,7 +126,7 @@ class _CafeCartState extends State<CafeCart> {
                             fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
-                        width: 36,
+                        width: 5,
                       ),
                       Text(
                         "Qty",
@@ -79,10 +134,18 @@ class _CafeCartState extends State<CafeCart> {
                             fontWeight: FontWeight.bold, fontSize: 15),
                       ),
                       SizedBox(
-                        width: 43,
+                        width: 5,
                       ),
                       Text(
                         "Bill",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Remove",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
                       ),
@@ -100,27 +163,37 @@ class _CafeCartState extends State<CafeCart> {
                         );
                       } else if (s.hasData &&
                           s.connectionState == ConnectionState.done) {
-                        //ToDO: Change Model + Contact Sameer
+                        //ToDO: Change Container UI
                         var model = cafeteriaCartFromJson(s.data.data);
                         print(model);
-                        return Expanded(
-                          child: ListView.builder(
-                              itemCount: model[0].order.length,
-                              itemBuilder: (c, i) {
-                                return BillItem(
-                                    name: null,
-                                    size: null,
-                                    qty: null,
-                                    bill: null);
-                              }),
-                        );
+                        if (model[0].active) {
+                          localModel = model[0];
+                          return Expanded(
+                            child: ListView.builder(
+                                itemCount: model[0].order.length,
+                                itemBuilder: (c, i) {
+                                  return BillItem(
+                                    name: model[0].order[i].item.item.name,
+                                    size: model[0].order[i].item.size,
+                                    qty: model[0].order[i].quantity.toString(),
+                                    bill: (model[0].order[i].item.price *
+                                            model[0].order[i].quantity)
+                                        .toString(),
+                                    id: model[0].order[i].id,
+                                    setState: () => setState(() {}),
+                                  );
+                                }),
+                          );
+                        } else {
+                          return Center(
+                            child: Text("Nothing in Cart"),
+                          );
+                        }
                       } else {
                         return Text("No data found");
                       }
                     },
                   ),
-                  BillItem(
-                      name: "Burger A", size: "S", qty: "2", bill: "Rs 100"),
                   SizedBox(
                     height: 30,
                   ),
@@ -137,7 +210,11 @@ class _CafeCartState extends State<CafeCart> {
                   "Tax",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text("20 Rs"),
+                Text((localModel == null
+                            ? 0
+                            : localModel.totalBill - localModel.totalCost)
+                        .toString() +
+                    " Rs"),
               ],
             ),
           ),
@@ -160,56 +237,9 @@ class _CafeCartState extends State<CafeCart> {
                       "Total Bill",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text("120 Rs"),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 350.0),
-            child: GestureDetector(
-              //ToDo: Add Place Order POST req and Navigate to Order Placed
-              onTap: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return cafeOrderPlacedView();
-                })),
-              },
-              child: Container(
-                height: 50,
-                width: 330,
-                decoration: BoxDecoration(
-                  color: kOrangeCol,
-                  // border: Border.all(color: Colors.black, width: 0.0),
-                  borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Final Bill",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "120 Rs",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Text(
-                      "Checkout",
-                      style: TextStyle(
-                          color: Colors.white,
-                          decoration: TextDecoration.underline),
-                    ),
+                    Text((localModel == null ? 0 : localModel.totalCost)
+                            .toString() +
+                        " Rs"),
                   ],
                 ),
               ),
@@ -228,45 +258,53 @@ class BillItem extends StatelessWidget {
     @required this.size,
     @required this.qty,
     @required this.bill,
+    @required this.id,
+    @required this.setState,
   }) : super(key: key);
 
   final String name;
   final String size;
   final String qty;
   final String bill;
+  final int id;
+
+  final Function setState;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        SizedBox(
+          width: 5,
+        ),
         Text(
           name,
           style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
         ),
         SizedBox(
-          width: 50,
+          width: 60,
         ),
         Text(
           size,
           style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
         ),
         SizedBox(
-          width: 36,
+          width: 10,
         ),
         Text(
           qty,
           style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
         ),
         SizedBox(
-          width: 43,
+          width: 10,
         ),
         Text(
           bill,
           style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
         ),
         SizedBox(
-          width: 14,
+          width: 5,
         ),
         IconButton(
             icon: Icon(
@@ -275,7 +313,10 @@ class BillItem extends StatelessWidget {
               size: 20,
             ),
             //ToDo: Add Remove from Cart POST req
-            onPressed: null)
+            onPressed: () => {
+                  delItem(id),
+                  setState(),
+                })
       ],
     );
   }

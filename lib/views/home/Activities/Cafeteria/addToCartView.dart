@@ -13,7 +13,7 @@ class addToCartView extends StatefulWidget {
 }
 
 class _addToCartViewState extends State<addToCartView> {
-  int qty = 0;
+  int qty = 1;
   String size = "small";
   int idx = 0;
   @override
