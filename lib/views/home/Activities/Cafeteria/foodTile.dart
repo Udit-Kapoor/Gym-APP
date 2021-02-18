@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cart/cafeteria_items.dart';
+import 'package:gym_app/models/cafe/cafeteria_items.dart';
 import 'addToCartView.dart';
 
 const korangeCol = Color(0xFFEB3223);

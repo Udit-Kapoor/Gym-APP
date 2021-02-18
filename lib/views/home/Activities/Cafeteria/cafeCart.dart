@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cart/cafeteria_items.dart';
+import 'package:gym_app/models/cafe/cafeteriaCART.dart';
 import 'cafeOrderPlacedView.dart';
 
 const kOrange = Color(0xFFEB3223);
@@ -104,11 +104,11 @@ class _cafeCartState extends State<cafeCart> {
                       } else if (s.hasData &&
                           s.connectionState == ConnectionState.done) {
                         //ToDO: Change Model + Contact Sameer
-                        var model = cafeteriaItemsFromJson(s.data.data);
+                        var model = cafeteriaCartFromJson(s.data.data);
                         print(model);
                         return Expanded(
                           child: ListView.builder(
-                              itemCount: model.length,
+                              itemCount: model[0].order.length,
                               itemBuilder: (c, i) {
                                 return BillItem(
                                     name: null,

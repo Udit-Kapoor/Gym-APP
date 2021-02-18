@@ -127,12 +127,6 @@ Future<ApiResponse> getCafeItems() async {
   return cp;
 }
 
-Future<ApiResponse> getCart() async {
-  ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "https://p2c-gym.herokuapp.com/facilities/cafeteria_cart/");
-  return cp;
-}
-
 void addToCart(Map data) async {
   ApiResponse add = await ApiHelper().postReq(
       endpoint: "https://p2c-gym.herokuapp.com/facilities/cafeteria_order/",

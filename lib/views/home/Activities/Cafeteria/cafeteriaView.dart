@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cart/cafeteria_items.dart';
+import 'package:gym_app/models/cafe/cafeteria_items.dart';
 import 'package:gym_app/views/home/Activities/Cafeteria/cafeCart.dart';
 import 'foodTile.dart';
 import 'showSortCafeteria.dart';

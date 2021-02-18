@@ -9,7 +9,6 @@ import 'package:gym_app/views/onboarding_views/onboarding_carousel.dart';
 import 'package:gym_app/views/trainer/cleints_list_batchwise.dart';
 import 'package:gym_app/views/trainer/clients_details_view.dart';
 import 'package:gym_app/views/trainer/trainer_home_view.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
