@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
@@ -832,4 +833,26 @@ Future<ApiResponse> getCart() async {
   ApiResponse cp = await ApiHelper().getReq(
       endpoint: "https://p2c-gym.herokuapp.com/facilities/cafeteria_cart/");
   return cp;
+}
+
+void delItem(int id) async {
+  ApiResponse cp = await ApiHelper().deleteReq(
+      endpoint:
+          "https://p2c-gym.herokuapp.com/facilities/cafeteria_order/$id/");
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Error in Deleting Item");
+  } else {
+    Fluttertoast.showToast(msg: "Item Deleted");
+  }
+}
+
+void placeOrder(Map data) async {
+  ApiResponse cp = await ApiHelper().postReq(
+      endpoint: "https://p2c-gym.herokuapp.com/facilities/ordered_cart/",
+      data: data);
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Error in Deleting Item");
+  } else {
+    Fluttertoast.showToast(msg: "Item Deleted");
+  }
 }

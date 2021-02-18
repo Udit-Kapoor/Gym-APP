@@ -16,6 +16,7 @@ class _CafeCartState extends State<CafeCart> {
         //ToDo: Add Place Order POST req and Navigate to Order Placed
         elevation: 5,
         onPressed: () => {
+          placeOrder({"cart": localModel.id}),
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return cafeOrderPlacedView();
           })),
@@ -172,13 +173,15 @@ class _CafeCartState extends State<CafeCart> {
                                 itemCount: model[0].order.length,
                                 itemBuilder: (c, i) {
                                   return BillItem(
-                                      name: model[0].order[i].item.item.name,
-                                      size: model[0].order[i].item.size,
-                                      qty:
-                                          model[0].order[i].quantity.toString(),
-                                      bill: (model[0].order[i].item.price *
-                                              model[0].order[i].quantity)
-                                          .toString());
+                                    name: model[0].order[i].item.item.name,
+                                    size: model[0].order[i].item.size,
+                                    qty: model[0].order[i].quantity.toString(),
+                                    bill: (model[0].order[i].item.price *
+                                            model[0].order[i].quantity)
+                                        .toString(),
+                                    id: model[0].order[i].id,
+                                    setState: () => setState(() {}),
+                                  );
                                 }),
                           );
                         } else {
@@ -255,12 +258,17 @@ class BillItem extends StatelessWidget {
     @required this.size,
     @required this.qty,
     @required this.bill,
+    @required this.id,
+    @required this.setState,
   }) : super(key: key);
 
   final String name;
   final String size;
   final String qty;
   final String bill;
+  final int id;
+
+  final Function setState;
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +313,10 @@ class BillItem extends StatelessWidget {
               size: 20,
             ),
             //ToDo: Add Remove from Cart POST req
-            onPressed: null)
+            onPressed: () => {
+                  delItem(id),
+                  setState(),
+                })
       ],
     );
   }
