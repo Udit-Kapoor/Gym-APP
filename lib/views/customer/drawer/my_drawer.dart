@@ -26,7 +26,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.all(0),
             leading: Image.asset(
-              'image/profile.png',
+              'lib/assets/profile.png',
               alignment: Alignment.topLeft,
             ),
             title: Text('Hi! Pawan'),

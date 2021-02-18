@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/lib.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -11,7 +12,7 @@ class TeamPage extends StatelessWidget {
           height: 165,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('image/team1.jpg'),
+              image: AssetImage('lib/assets/team1.jpg'),
               fit: BoxFit.fill,
             ),
           ),
@@ -21,18 +22,20 @@ class TeamPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 17.0, left: 75),
               child: ShowIcon(
+                isIcon: true,
                 title: "Cafeteria",
                 col: Color(0xFFF5A300),
-                img: "image/cafeIcon.png",
+                img: Custom.cafeteria,
                 route: "/CafeteriaView",
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 139),
               child: ShowIcon(
+                  isIcon: false,
                   title: "PoolBoard",
                   col: Color(0xFFEB3223),
-                  img: "image/poolIcon.png"),
+                  img: "lib/assets/poolIcon.png"),
             ),
           ],
         ),
@@ -41,18 +44,20 @@ class TeamPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 17.0, left: 65),
               child: ShowIcon(
+                isIcon: true,
                 title: "Diet Food \n Subscription",
                 col: Color(0xFF1CB203),
-                img: "image/dietIcon.png",
+                img: Custom.apple,
                 route: "/DietView",
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 120),
               child: ShowIcon(
+                  isIcon: true,
                   title: "Buy Gym \n Supplements",
                   col: Color(0xFF5985F5),
-                  img: "image/gymIcon.png",
+                  img: Custom.supplement,
                   route: "/SupplementView"),
             ),
           ],
@@ -70,13 +75,13 @@ class TeamPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 30),
-              child:
-                  TeamImage(name: "Kapil(Founder)", img: "image/profile.png"),
+              child: TeamImage(
+                  name: "Kapil(Founder)", img: "lib/assets/profile.png"),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 70),
               child: TeamImage(
-                  name: "Pawan(Co-Founder)", img: "image/profile.png"),
+                  name: "Pawan(Co-Founder)", img: "lib/assets/profile.png"),
             ),
           ],
         ),
@@ -93,11 +98,11 @@ class TeamPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 30),
-              child: TeamImage(name: "Kapil", img: "image/profile.png"),
+              child: TeamImage(name: "Kapil", img: "lib/assets/profile.png"),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 70),
-              child: TeamImage(name: "Pawan", img: "image/profile.png"),
+              child: TeamImage(name: "Pawan", img: "lib/assets/profile.png"),
             ),
           ],
         ),
@@ -105,11 +110,11 @@ class TeamPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 30),
-              child: TeamImage(name: "Kuldeep", img: "image/profile.png"),
+              child: TeamImage(name: "Kuldeep", img: "lib/assets/profile.png"),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 70),
-              child: TeamImage(name: "Pooja", img: "image/profile.png"),
+              child: TeamImage(name: "Pooja", img: "lib/assets/profile.png"),
             ),
           ],
         ),
@@ -117,7 +122,7 @@ class TeamPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 30),
-              child: TeamImage(name: "Shankar", img: "image/profile.png"),
+              child: TeamImage(name: "Shankar", img: "lib/assets/profile.png"),
             ),
           ],
         ),
@@ -134,11 +139,11 @@ class TeamPage extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 30),
-              child: TeamImage(name: "Lorem", img: "image/profile.png"),
+              child: TeamImage(name: "Lorem", img: "lib/assets/profile.png"),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 70),
-              child: TeamImage(name: "Ipsum", img: "image/profile.png"),
+              child: TeamImage(name: "Ipsum", img: "lib/assets/profile.png"),
             ),
           ],
         ),
@@ -155,13 +160,13 @@ class TeamPage extends StatelessWidget {
           children: [
             Expanded(
               child: Image.asset(
-                'image/story1.jpeg',
+                'lib/assets/story1.jpeg',
                 fit: BoxFit.fill,
               ),
             ),
             Expanded(
               child: Image.asset(
-                'image/story2.jpg',
+                'lib/assets/story2.jpg',
                 fit: BoxFit.fill,
               ),
             ),
@@ -181,7 +186,7 @@ class TeamPage extends StatelessWidget {
           height: 160,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("image/story2.jpg"),
+              image: AssetImage("lib/assets/story2.jpg"),
               fit: BoxFit.fill,
             ),
           ),
@@ -201,11 +206,11 @@ class TeamPage extends StatelessWidget {
               options: CarouselOptions(
                   height: 250, autoPlay: false, enlargeCenterPage: true),
               items: [
-                ReviewCard("image/profile.png", "Neha K.", "Female", "24",
+                ReviewCard("lib/assets/profile.png", "Neha K.", "Female", "24",
                     "lorem ipsum"),
-                ReviewCard("image/profile.png", "Neha K.", "Female", "24",
+                ReviewCard("lib/assets/profile.png", "Neha K.", "Female", "24",
                     "Lorem ipsum"),
-                ReviewCard("image/profile.png", "Neha K.", "Female", "24",
+                ReviewCard("lib/assets/profile.png", "Neha K.", "Female", "24",
                     "Lorem ipsum"),
               ]),
         ),

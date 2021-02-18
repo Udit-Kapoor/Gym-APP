@@ -160,7 +160,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
                       itemCount: model.length,
                       itemBuilder: (c, i) {
                         return FoodTile(
-                          imgPath: 'image/burger.jpg',
+                          imgPath: 'lib/assets/burger.jpg',
                           name: model[i].name,
                           desc: model[i].ingredients,
                           rate: model[i].itemVarients[0].price.toString(),

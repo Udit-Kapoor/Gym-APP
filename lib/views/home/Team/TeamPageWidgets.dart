@@ -39,15 +39,16 @@ class TeamImage extends StatelessWidget {
 class ShowIcon extends StatelessWidget {
   const ShowIcon({
     Key key,
+    @required this.isIcon,
     @required this.title,
     @required this.col,
     @required this.img,
     this.route,
   }) : super(key: key);
-
+  final bool isIcon;
   final String title;
   final Color col;
-  final String img;
+  final dynamic img;
   final String route;
 
   @override
@@ -62,7 +63,7 @@ class ShowIcon extends StatelessWidget {
             width: 44.5,
             decoration: BoxDecoration(shape: BoxShape.circle, color: col),
             child: Center(
-              child: Image.asset(img),
+              child: isIcon ? Icon(img) : Image.asset(img),
             ),
           ),
           SizedBox(height: 3),

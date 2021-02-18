@@ -39,7 +39,7 @@ class _SupplementCartState extends State<SupplementCart> {
           ),
           //ToDo: Not Updating qty..
           SupplementCartItem(
-            imgPath: "image/protien.jpg",
+            imgPath: "lib/assets/protien.jpg",
             title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
             size: "6.6 lb",
             flavour: "Chocolate",

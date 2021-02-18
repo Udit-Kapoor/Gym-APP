@@ -10,7 +10,15 @@ class H2OApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: gymAppTitle4Recents,
       theme: themeData(),
-      home: GymHomeView(),
+      home: FutureBuilder(
+        future: Future.delayed(Duration(seconds: 5)),
+        builder: (c, s) {
+          if (s.connectionState == ConnectionState.waiting)
+            return SplashScreen();
+          else
+            return GymHomeView();
+        },
+      ),
       routes: routesMap(),
     );
   }

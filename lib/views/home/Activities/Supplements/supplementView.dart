@@ -131,7 +131,7 @@ class _SupplementViewState extends State<SupplementView> {
               physics: BouncingScrollPhysics(),
               children: [
                 SupplementTile(
-                    imgPath: "image/protien.jpg",
+                    imgPath: "lib/assets/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
                     flavour: "Chocolate",
@@ -141,7 +141,7 @@ class _SupplementViewState extends State<SupplementView> {
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
                 SupplementTile(
-                    imgPath: "image/protien.jpg",
+                    imgPath: "lib/assets/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
                     flavour: "Chocolate",
@@ -151,7 +151,7 @@ class _SupplementViewState extends State<SupplementView> {
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
                 SupplementTile(
-                    imgPath: "image/protien.jpg",
+                    imgPath: "lib/assets/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
                     flavour: "Chocolate",
@@ -161,7 +161,7 @@ class _SupplementViewState extends State<SupplementView> {
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
                 SupplementTile(
-                    imgPath: "image/protien.jpg",
+                    imgPath: "lib/assets/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
                     flavour: "Chocolate",
@@ -171,7 +171,7 @@ class _SupplementViewState extends State<SupplementView> {
                     cal: "387 calories",
                     vit: "27 vitamins and minerals"),
                 SupplementTile(
-                    imgPath: "image/protien.jpg",
+                    imgPath: "lib/assets/protien.jpg",
                     title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
                     size: "6.6 lb",
                     flavour: "Chocolate",

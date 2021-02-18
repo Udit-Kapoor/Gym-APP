@@ -39,7 +39,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
         ),
         centerTitle: true,
         title: Image.asset(
-          'image/logo.png',
+          'lib/assets/logo.png',
           fit: BoxFit.fill,
         ),
       ),
@@ -49,7 +49,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
             leading: CircleAvatar(
               radius: 50.0,
               child: Image.asset(
-                'image/clients.png',
+                'lib/assets/clients.png',
                 fit: BoxFit.fill,
               ),
             ),

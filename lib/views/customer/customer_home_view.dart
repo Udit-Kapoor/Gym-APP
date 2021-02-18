@@ -67,7 +67,7 @@ class _CustomerHomeState extends State<CustomerHome>
             ),
         ],
         title: Image.asset(
-          'image/logo.png',
+          'lib/assets/logo.png',
           fit: BoxFit.fill,
         ),
       ),

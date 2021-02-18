@@ -4,3 +4,4 @@ export 'models/models.dart';
 export 'styles/styles.dart';
 export 'views/views.dart';
 export 'gym_home.dart';
+export 'assets/assets.dart';

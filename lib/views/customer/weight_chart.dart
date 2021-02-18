@@ -110,13 +110,10 @@ class _WeightChartState extends State<WeightChart> {
                 ),
               ],
             ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Image.asset(
-                'image/chart.png',
-                fit: BoxFit.scaleDown,
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.all(10.0),
+            //   child: ,
+            // ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Row(

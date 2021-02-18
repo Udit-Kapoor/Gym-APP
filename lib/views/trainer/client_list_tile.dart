@@ -28,7 +28,7 @@ class ClientsListTile extends StatelessWidget {
           child: ListTile(
             leading: CircleAvatar(
               child: Image.asset(
-                'image/clients.png',
+                'lib/assets/clients.png',
                 fit: BoxFit.fill,
               ),
             ),
