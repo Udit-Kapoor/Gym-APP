@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/views/home/Activities/Cafeteria/cafeteriaView.dart';
-import 'package:gym_app/views/home/Activities/Supplements/supplementView.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 

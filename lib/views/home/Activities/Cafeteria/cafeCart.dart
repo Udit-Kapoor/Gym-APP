@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/constants/constants.dart';
-import 'package:gym_app/models/models.dart';
-
-import 'Cafeteria.dart';
+import 'package:gym_app/lib.dart';
 
 class CafeCart extends StatefulWidget {
   @override
@@ -104,11 +101,11 @@ class _CafeCartState extends State<CafeCart> {
                       } else if (s.hasData &&
                           s.connectionState == ConnectionState.done) {
                         //ToDO: Change Model + Contact Sameer
-                        var model = cafeteriaItemsFromJson(s.data.data);
+                        var model = cafeteriaCartFromJson(s.data.data);
                         print(model);
                         return Expanded(
                           child: ListView.builder(
-                              itemCount: model.length,
+                              itemCount: model[0].order.length,
                               itemBuilder: (c, i) {
                                 return BillItem(
                                     name: null,
