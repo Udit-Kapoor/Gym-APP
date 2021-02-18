@@ -7,6 +7,7 @@ class CafeCart extends StatefulWidget {
 }
 
 class _CafeCartState extends State<CafeCart> {
+  CafeteriaCart localModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,17 +104,29 @@ class _CafeCartState extends State<CafeCart> {
                         //ToDO: Change Model + Contact Sameer
                         var model = cafeteriaCartFromJson(s.data.data);
                         print(model);
-                        return Expanded(
-                          child: ListView.builder(
-                              itemCount: model[0].order.length,
-                              itemBuilder: (c, i) {
-                                return BillItem(
-                                    name: null,
-                                    size: null,
-                                    qty: null,
-                                    bill: null);
-                              }),
-                        );
+                        if (model[0].active) {
+                          localModel = model[0];
+                          return Expanded(
+                            child: ListView.builder(
+                                itemCount: model[0].order.length,
+                                itemBuilder: (c, i) {
+                                  return BillItem(
+                                      name: model[0].order[i].item.item.name,
+                                      size: model[0].order[i].item.size,
+                                      qty:
+                                          model[0].order[i].quantity.toString(),
+                                      bill: model[0]
+                                          .order[i]
+                                          .item
+                                          .price
+                                          .toString());
+                                }),
+                          );
+                        } else {
+                          return Center(
+                            child: Text("Nothing in Cart"),
+                          );
+                        }
                       } else {
                         return Text("No data found");
                       }
@@ -137,7 +150,7 @@ class _CafeCartState extends State<CafeCart> {
                   "Tax",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text("20 Rs"),
+                Text(localModel.tax.toString() + " Rs"),
               ],
             ),
           ),
@@ -160,7 +173,7 @@ class _CafeCartState extends State<CafeCart> {
                       "Total Bill",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Text("120 Rs"),
+                    Text(localModel.totalBill.toString() + " Rs"),
                   ],
                 ),
               ),
