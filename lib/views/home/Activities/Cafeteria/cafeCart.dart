@@ -13,7 +13,6 @@ class _CafeCartState extends State<CafeCart> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
-        //ToDo: Add Place Order POST req and Navigate to Order Placed
         elevation: 5,
         onPressed: () => {
           //ToDo: TEST ORDER PLACING
@@ -155,7 +154,6 @@ class _CafeCartState extends State<CafeCart> {
                         );
                       } else if (s.hasData &&
                           s.connectionState == ConnectionState.done) {
-                        //ToDO: Change Container UI
                         var model = cafeteriaCartFromJson(s.data.data);
                         print(model);
                         if (model[0].active) {

@@ -9,41 +9,96 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   bool isCustomer = true;
   String number, pass;
-  Widget _userType(bool ut, String label) => GestureDetector(
-        onTap: () => setState(() => isCustomer = ut),
-        child: Container(
-          height: 80,
-          width: 80,
-          child: Center(
-            child: Text(
-              label,
-              style: TextStyle(
-                color: ut ? whiteColor : greyColor,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(color: ut ? whiteColor : greyColor, width: 2),
-            shape: BoxShape.circle,
-          ),
-        ),
-      );
+  // Widget _userType(bool ut, String label) => GestureDetector(
+  //       onTap: () => setState(() => isCustomer = ut),
+  //       child: Container(
+  //         height: 80,
+  //         width: 80,
+  //         child: Center(
+  //           child: Text(
+  //             label,
+  //             textAlign: TextAlign.center,
+  //             style: TextStyle(
+  //               color: isCustomer ? whiteColor : greyColor,
+  //               fontSize: 14,
+  //               fontWeight: FontWeight.w400,
+  //             ),
+  //           ),
+  //         ),
+  //         decoration: BoxDecoration(
+  //           border: Border.all(
+  //               color: isCustomer ? whiteColor : greyColor, width: 2),
+  //           shape: BoxShape.circle,
+  //         ),
+  //       ),
+  //     );
 
   Widget _cusOrEmp() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _userType(true, 'Customer'),
-        SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isCustomer = true;
+            });
+          },
+          child: Container(
+            height: 80,
+            width: 80,
+            child: Center(
+              child: Text(
+                'Customer',
+                style: TextStyle(
+                    color: isCustomer ? Colors.white : Color(0xFF868686),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: isCustomer ? Colors.white : Color(0xFF868686),
+                    width: 2),
+                shape: BoxShape.circle),
+          ),
+        ),
+        SizedBox(
+          width: 10,
+        ),
         Container(
           height: 130,
           width: 1,
-          color: whiteColor,
+          color: Colors.white,
         ),
-        SizedBox(width: 10),
-        _userType(false, 'H2O \n Employee'),
+        SizedBox(
+          width: 10,
+        ),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isCustomer = false;
+            });
+          },
+          child: Container(
+            height: 80,
+            width: 80,
+            child: Center(
+              child: Text(
+                'H2O \n Employee',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: isCustomer ? Color(0xFF868686) : Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: isCustomer ? Color(0xFF868686) : Colors.white,
+                    width: 2),
+                shape: BoxShape.circle),
+          ),
+        ),
       ],
     );
   }
@@ -159,8 +214,7 @@ class _LoginViewState extends State<LoginView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: null,
-                                    //ToDo: Navigator.pop
+                                    onTap: () => {Navigator.pop(context)},
                                     child: Container(
                                       width: 80,
                                       height: 33,
@@ -299,8 +353,7 @@ class _LoginViewState extends State<LoginView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: null,
-                                    //ToDo: Navigator.pop
+                                    onTap: () => {Navigator.pop(context)},
                                     child: Container(
                                       width: 80,
                                       height: 33,
@@ -382,8 +435,7 @@ class _LoginViewState extends State<LoginView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: null,
-                                    //ToDo: Navigator.pop
+                                    onTap: () => {Navigator.pop(context)},
                                     child: Container(
                                       width: 80,
                                       height: 33,
@@ -485,6 +537,9 @@ class _LoginViewState extends State<LoginView> {
                         hintText: loginPasswordHeader,
                       ),
                       onChanged: (value) => pass = value,
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     GestureDetector(
                       onTap: () => ApiHelper().submit(context, number, pass),

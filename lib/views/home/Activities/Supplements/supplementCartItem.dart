@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 
-class SupplementCartItem extends StatelessWidget {
+class SupplementCartItem extends StatefulWidget {
   const SupplementCartItem({
     Key key,
     @required this.imgPath,
@@ -20,6 +20,12 @@ class SupplementCartItem extends StatelessWidget {
   final String price;
   final String seller;
   final Function setState;
+
+  @override
+  _SupplementCartItemState createState() => _SupplementCartItemState();
+}
+
+class _SupplementCartItemState extends State<SupplementCartItem> {
   @override
   Widget build(BuildContext context) {
     Seller s = Seller.HEALTHKART;
@@ -46,7 +52,7 @@ class SupplementCartItem extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                         image: DecorationImage(
-                          image: AssetImage(imgPath),
+                          image: AssetImage(widget.imgPath),
                         )),
                   ),
                   Column(
@@ -55,7 +61,7 @@ class SupplementCartItem extends StatelessWidget {
                     children: [
                       //ToDO:How to Wrap Long text without \n
                       Text(
-                        title,
+                        widget.title,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ),
@@ -63,7 +69,7 @@ class SupplementCartItem extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        size + " , " + flavour,
+                        widget.size + " , " + widget.flavour,
                         style: TextStyle(fontSize: 8),
                       ),
                       Row(
@@ -75,7 +81,7 @@ class SupplementCartItem extends StatelessWidget {
                                 height: 10,
                               ),
                               Text(
-                                "Rs " + price,
+                                "Rs " + widget.price,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 12),
                               ),
@@ -132,8 +138,13 @@ class SupplementCartItem extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               onPressed: () => {
-                                    qty++,
-                                    setState(),
+                                    // qty++,
+
+                                    setState(() {
+                                      qty++;
+                                      print(qty);
+                                    }),
+                                    widget.setState(),
                                   }),
                           Text('$qty'),
                           IconButton(
@@ -144,7 +155,8 @@ class SupplementCartItem extends StatelessWidget {
                               ),
                               onPressed: () => {
                                     if (qty > 1) qty--,
-                                    setState(),
+                                    widget.setState(),
+                                    setState(() {}),
                                   }),
                         ],
                       ),

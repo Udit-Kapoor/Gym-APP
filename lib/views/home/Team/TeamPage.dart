@@ -72,14 +72,19 @@ class TeamPage extends StatelessWidget {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 30),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(
                   name: "Kapil(Founder)", img: "lib/assets/profile.png"),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 70),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(
                   name: "Pawan(Co-Founder)", img: "lib/assets/profile.png"),
             ),
@@ -95,33 +100,46 @@ class TeamPage extends StatelessWidget {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 30),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Kapil", img: "lib/assets/profile.png"),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 70),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Pawan", img: "lib/assets/profile.png"),
             ),
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 30),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Kuldeep", img: "lib/assets/profile.png"),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 70),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Pooja", img: "lib/assets/profile.png"),
             ),
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 30),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Shankar", img: "lib/assets/profile.png"),
             ),
           ],
@@ -136,13 +154,18 @@ class TeamPage extends StatelessWidget {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 30),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Lorem", img: "lib/assets/profile.png"),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 70),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: TeamImage(name: "Ipsum", img: "lib/assets/profile.png"),
             ),
           ],

@@ -850,9 +850,5 @@ void placeOrder(Map data) async {
   ApiResponse cp = await ApiHelper().postReq(
       endpoint: "https://p2c-gym.herokuapp.com/facilities/ordered_cart/",
       data: data);
-  if (cp.error) {
-    Fluttertoast.showToast(msg: "Error in Deleting Item");
-  } else {
-    Fluttertoast.showToast(msg: "Item Deleted");
-  }
+  // return cp.error;
 }
