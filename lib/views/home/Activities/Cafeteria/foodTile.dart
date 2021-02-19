@@ -80,7 +80,9 @@ class FoodTile extends StatelessWidget {
                   onPressed: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return addToCartView();
+                      return addToCartView(
+                        model: model,
+                      );
                     })),
                   },
                 ),
