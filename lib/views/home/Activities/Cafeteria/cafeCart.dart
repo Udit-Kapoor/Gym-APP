@@ -16,6 +16,7 @@ class _CafeCartState extends State<CafeCart> {
         //ToDo: Add Place Order POST req and Navigate to Order Placed
         elevation: 5,
         onPressed: () => {
+          //ToDo: TEST ORDER PLACING
           placeOrder({"cart": localModel.id}),
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return cafeOrderPlacedView();
@@ -61,33 +62,24 @@ class _CafeCartState extends State<CafeCart> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(
+              Icons.chevron_left,
+              size: 40,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context)),
+        title: Text(
+          "My Basket",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+        ),
+        //centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                    icon: Icon(
-                      Icons.chevron_left,
-                      size: 40,
-                      color: Colors.black,
-                    ),
-                    onPressed: () => Navigator.pop(context)),
-                SizedBox(
-                  width: 30,
-                ),
-                Text(
-                  "My Basket",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-              ],
-            ),
-          ),
           SizedBox(
             height: 30,
           ),

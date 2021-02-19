@@ -31,42 +31,40 @@ class _CafeteriaViewState extends State<CafeteriaView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(
+              Icons.chevron_left,
+              size: 40,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context)),
+        title: Text(
+          "Cafetreia",
+          style: TextStyle(
+              fontWeight: FontWeight.w700, fontSize: 20, color: Colors.black),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.shopping_cart,
+              size: 30,
+              color: Colors.black,
+            ),
+            onPressed: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CafeCart();
+              })),
+            }, //ToDo: Show Cart
+          ),
+        ],
+        backgroundColor: Colors.white,
+      ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    icon: Icon(
-                      Icons.chevron_left,
-                      size: 40,
-                      color: Colors.black,
-                    ),
-                    onPressed: () => Navigator.pop(context)),
-                Text(
-                  "Cafetreia",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                  onPressed: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return CafeCart();
-                    })),
-                  }, //ToDo: Show Cart
-                ),
-              ],
-            ),
+          SizedBox(
+            height: 10,
           ),
           Container(
             height: 50,

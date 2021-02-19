@@ -10,32 +10,67 @@ class _SupplementCartState extends State<SupplementCart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(
+              Icons.chevron_left,
+              size: 40,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context)),
+        title: Text(
+          "My Basket",
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        //ToDo: Add Place Order POST req and Navigate to Order Placed
+        onPressed: null,
+        label: Container(
+          height: 50,
+          width: 330,
+          // decoration: BoxDecoration(
+          //   color: kOrangeCol,
+          //   // border: Border.all(color: Colors.black, width: 0.0),
+          //   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
+          // ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Final Bill",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "2199 Rs",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+              SizedBox(width: 20),
+              Text(
+                "Checkout",
+                style: TextStyle(
+                    color: Colors.white, decoration: TextDecoration.underline),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                    icon: Icon(
-                      Icons.chevron_left,
-                      size: 40,
-                      color: Colors.black,
-                    ),
-                    onPressed: () => Navigator.pop(context)),
-                SizedBox(
-                  width: 30,
-                ),
-                Text(
-                  "My Basket",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-              ],
-            ),
+          SizedBox(
+            height: 10,
           ),
           //ToDo: Not Updating qty..
           SupplementCartItem(
@@ -45,6 +80,7 @@ class _SupplementCartState extends State<SupplementCart> {
             flavour: "Chocolate",
             price: "2099",
             seller: "HealthKart",
+            setState: () => setState(() {}),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 17.0, left: 57, right: 56),
@@ -79,51 +115,6 @@ class _SupplementCartState extends State<SupplementCart> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text("2199 Rs"),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 300.0),
-            child: GestureDetector(
-              //ToDo: Add Place Order POST req and Navigate to Order Placed
-              onTap: null,
-              child: Container(
-                height: 50,
-                width: 330,
-                decoration: BoxDecoration(
-                  color: kOrangeCol,
-                  // border: Border.all(color: Colors.black, width: 0.0),
-                  borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Final Bill",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "2199 Rs",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 20),
-                    Text(
-                      "Checkout",
-                      style: TextStyle(
-                          color: Colors.white,
-                          decoration: TextDecoration.underline),
-                    ),
                   ],
                 ),
               ),

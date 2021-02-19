@@ -19,6 +19,45 @@ class _addToCartViewState extends State<addToCartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        //ToDo: Add POST REQUEST and NAVIGATE to CART
+        elevation: 5,
+        onPressed: () => addToCart({
+          "quantity": qty,
+          "item": widget.model.itemVarients[idx].id,
+        }),
+        label: Container(
+          height: 50,
+          width: 330,
+          // decoration: BoxDecoration(
+          //   color: kOrange,
+          //   // border: Border.all(color: Colors.black, width: 0.0),
+          //   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
+          // ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.shopping_cart,
+                size: 30,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                "Add To Basket",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,7 +66,7 @@ class _addToCartViewState extends State<addToCartView> {
               Container(
                 //ToDO: Add MediaQuery height and width
                 height: 300,
-                width: 400,
+                //width: 400,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("lib/assets/burger.jpg"),
@@ -206,8 +245,9 @@ class _addToCartViewState extends State<addToCartView> {
               ],
             ),
           ),
+          Spacer(),
           Padding(
-            padding: const EdgeInsets.only(top: 120.0, left: 33, right: 40),
+            padding: const EdgeInsets.only(bottom: 70, left: 33, right: 40),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -221,46 +261,6 @@ class _addToCartViewState extends State<addToCartView> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 )
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 25),
-            child: GestureDetector(
-              //ToDo: Add POST REQUEST and NAVIGATE to CART
-              onTap: () => addToCart({
-                "quantity": qty,
-                "item": widget.model.itemVarients[idx].id,
-              }),
-              child: Container(
-                height: 50,
-                width: 330,
-                decoration: BoxDecoration(
-                  color: kOrange,
-                  // border: Border.all(color: Colors.black, width: 0.0),
-                  borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.shopping_cart,
-                      size: 30,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Add To Basket",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ),
         ],
