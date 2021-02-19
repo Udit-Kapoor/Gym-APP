@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 
+// ignore: must_be_immutable
 class SupplementCartItem extends StatelessWidget {
   SupplementCartItem({
     Key key,

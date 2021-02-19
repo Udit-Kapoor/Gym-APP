@@ -264,7 +264,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _showChangePass() {
+  Widget showChangePass() {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: GestureDetector(
@@ -403,7 +403,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _wishToChangePass() {
+  Widget wishToChangePass() {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: GestureDetector(

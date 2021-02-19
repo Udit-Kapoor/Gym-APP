@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/cafe/cafeteria_items.dart';
+import 'package:gym_app/lib.dart';
 
-const kOrange = Color(0xFFEB3223);
-
-class addToCartView extends StatefulWidget {
+class AddToCartView extends StatefulWidget {
   final CafeteriaItems model;
 
-  addToCartView({Key key, this.model}) : super(key: key);
+  AddToCartView({Key key, this.model}) : super(key: key);
 
   @override
-  _addToCartViewState createState() => _addToCartViewState();
+  _AddToCartViewState createState() => _AddToCartViewState();
 }
 
-class _addToCartViewState extends State<addToCartView> {
+class _AddToCartViewState extends State<AddToCartView> {
   int qty = 1;
-  String size = "small";
+  String size = "S";
   int price;
   int bill;
   int idx = 0;
@@ -32,11 +30,6 @@ class _addToCartViewState extends State<addToCartView> {
           label: Container(
             height: 50,
             width: 330,
-            // decoration: BoxDecoration(
-            //   color: kOrange,
-            //   // border: Border.all(color: Colors.black, width: 0.0),
-            //   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
-            // ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -119,7 +112,7 @@ class _addToCartViewState extends State<addToCartView> {
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                   ),
                   Text(
-                    price.toString() + "Rs / 1 pc",
+                    price ?? "--".toString() + " Rs / 1 pc",
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                   )
                 ],
@@ -183,7 +176,7 @@ class _addToCartViewState extends State<addToCartView> {
                           height: 25,
                           width: 25,
                           decoration: BoxDecoration(
-                              color: size == i.size ? kOrange : Colors.white,
+                              color: size == i.size ? kOrangeCol : Colors.white,
                               shape: BoxShape.circle,
                               border:
                                   Border.all(color: Colors.black, width: 1)),
@@ -215,7 +208,7 @@ class _addToCartViewState extends State<addToCartView> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Text(
-                    (bill).toString() + " Rs",
+                    bill ?? "--".toString() + " Rs",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   )
                 ],
