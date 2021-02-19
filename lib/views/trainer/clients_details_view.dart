@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
+import 'package:expandable/expandable.dart';
+
+DateTime _selectedDate;
 
 class ClientsDetailsView extends StatefulWidget {
   const ClientsDetailsView({Key key}) : super(key: key);
@@ -13,9 +16,11 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   int _currentIndex = 0;
   int _workoutIndex = 0;
   List tabs;
+
   incrementIndex() {
     setState(() {
       _workoutIndex++;
+      print(_workoutIndex);
     });
   }
 
@@ -27,16 +32,191 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
       CustomerGymSubscription(),
       if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
       if (_workoutIndex == 1)
-        Container(
-          height: 200,
-          width: 50,
-          color: Colors.amber,
+        GestureDetector(
+          onTap: incrementIndex(),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                      child: FlatButton(
+                        color: Colors.red,
+                        onPressed: () {},
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          side: BorderSide(width: 1.5, color: Colors.red),
+                        ),
+                        child: Text(
+                          'Add Custom',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      //TODO: Try to make height of container same as button
+                      height: 50.0,
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        '1 jan',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: 30,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 5.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: CheckboxListTile(
+                          controlAffinity: ListTileControlAffinity.trailing,
+                          title: Text(
+                            'Air Bike',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          subtitle: Text(
+                            'Core',
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          value: false,
+                          onChanged: (value) {},
+                        ),
+                      );
+                    }),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          side: BorderSide(width: 1.5, color: Colors.red),
+                        ),
+                        child: Text(
+                          'Cancel',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                      child: FlatButton(
+                        color: Colors.red,
+                        onPressed: () => showDialog(
+                          context: (context),
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              'Workout Name',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            content: TextField(
+                              decoration: InputDecoration(
+                                hintText: "name",
+                              ),
+                            ),
+                            actions: [
+                              FlatButton(
+                                color: Colors.red,
+                                onPressed: () {},
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 10.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20.0),
+                                  ),
+                                  side:
+                                      BorderSide(width: 1.5, color: Colors.red),
+                                ),
+                                child: Text(
+                                  'Save',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.0),
+                          ),
+                          side: BorderSide(width: 1.5, color: Colors.red),
+                        ),
+                        child: Text(
+                          'Save',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       if (_workoutIndex == 2)
-        Container(
-          height: 200,
-          width: 50,
-          color: Colors.blue,
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _workoutIndex = 1;
+            });
+          },
+          child: Container(
+            height: 200,
+            width: 50,
+            color: Colors.blue,
+          ),
         ),
       if (_workoutIndex == 3)
         Container(
@@ -229,6 +409,222 @@ class ClientsDashboard extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+Map<String, List<String>> workoutPlan = {
+  'chest': [
+    'Inclined Rod',
+    'Declined Rod',
+    'Bars',
+    'Pull Bars',
+    'Push Ups',
+    'Push Downs'
+  ],
+  'leg': [
+    'Inclined Rod',
+    'Declined Rod',
+    'Bars',
+    'Pull Bars',
+    'Push Ups',
+    'Push Downs'
+  ],
+  'triceps': [
+    'Inclined Rod',
+    'Declined Rod',
+    'Bars',
+    'Pull Bars',
+    'Push Ups',
+    'Push Downs'
+  ],
+  'biceps': [
+    'Inclined Rod',
+    'Declined Rod',
+    'Bars',
+    'Pull Bars',
+    'Push Ups',
+    'Push Downs'
+  ],
+  'tummy': [
+    'Inclined Rod',
+    'Declined Rod',
+    'Bars',
+    'Pull Bars',
+    'Push Ups',
+    'Push Downs'
+  ],
+  'brain': [
+    'Inclined Rod',
+    'Declined Rod',
+    'Bars',
+    'Pull Bars',
+    'Push Ups',
+    'Push Downs'
+  ],
+};
+
+List workoutPlanName = ['chest', 'leg', 'triceps', 'biceps', 'tummy', 'brain'];
+
+class CreateWorkout extends StatefulWidget {
+  final Function incrementCallBack;
+  const CreateWorkout({Key key, this.incrementCallBack}) : super(key: key);
+
+  @override
+  _CreateWorkoutState createState() => _CreateWorkoutState();
+}
+
+class _CreateWorkoutState extends State<CreateWorkout> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                onPressed: () {},
+              ),
+              Text(
+                '1 Jan',
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              IconButton(
+                icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+        WorkoutPlanNamesListView(incrementCallback: widget.incrementCallBack),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: FloatingActionButton.extended(
+            onPressed: () async {
+              try {
+                DateTime tDate = DateTime.now();
+                _selectedDate = await showDatePicker(
+                  context: context,
+                  initialDate: tDate,
+                  firstDate: tDate,
+                  lastDate: DateTime(tDate.year + 20),
+                );
+                print(_selectedDate);
+                Fluttertoast.showToast(msg: "Creating");
+                widget.incrementCallBack();
+              } on NoSuchMethodError {
+                Fluttertoast.showToast(msg: "No Date Selected");
+              } catch (e) {
+                return e;
+              }
+            },
+            label: Text(
+              '+ Create Workout Plan',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .copyWith(color: Colors.white),
+            ),
+            elevation: 1.0,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class WorkoutPlanNamesListView extends StatelessWidget {
+  final Function incrementCallback;
+  WorkoutPlanNamesListView({this.incrementCallback});
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+          itemCount: workoutPlanName.length,
+          itemBuilder: (BuildContext context, int i) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ExpandableNotifier(
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  elevation: 4.0,
+                  child: Expandable(
+                    collapsed: ExpandableButton(
+                      child: HeaderText(
+                        idx: i,
+                        expanded: false,
+                      ),
+                    ),
+                    expanded: Column(
+                      children: [
+                        HeaderText(
+                          idx: i,
+                          expanded: true,
+                          collapse: ExpandableButton(
+                              child: Icon(Icons.keyboard_arrow_down)),
+                          editFunction: incrementCallback,
+                        ),
+                        for (var i in [1, 2, 3, 4, 6, 8, 7, 9, 9])
+                          ListTile(
+                            title: Text(i.toString()),
+                            subtitle: Text("Core"),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+    );
+  }
+}
+
+class HeaderText extends StatelessWidget {
+  final int idx;
+  final bool expanded;
+  final Function editFunction;
+  final Widget collapse;
+  HeaderText({this.idx, this.expanded, this.editFunction, this.collapse});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            if (expanded) collapse,
+            Text(
+              workoutPlanName[idx],
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            if (expanded)
+              IconButton(icon: Icon(Icons.edit), onPressed: editFunction)
+          ],
+        ),
+      ),
     );
   }
 }
