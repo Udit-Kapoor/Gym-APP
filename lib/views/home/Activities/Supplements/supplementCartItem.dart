@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 
+// ignore: must_be_immutable
 class SupplementCartItem extends StatelessWidget {
-  const SupplementCartItem({
+  SupplementCartItem({
     Key key,
     @required this.imgPath,
     @required this.title,
@@ -20,10 +21,11 @@ class SupplementCartItem extends StatelessWidget {
   final String price;
   final String seller;
   final Function setState;
+
+  Seller s = Seller.HEALTHKART;
+  int qty = 1;
   @override
   Widget build(BuildContext context) {
-    Seller s = Seller.HEALTHKART;
-    int qty = 1;
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: Card(
@@ -126,15 +128,13 @@ class SupplementCartItem extends StatelessWidget {
                             width: 50,
                           ),
                           IconButton(
-                              icon: Icon(
-                                Icons.add_circle,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              onPressed: () => {
-                                    qty++,
-                                    setState(),
-                                  }),
+                            icon: Icon(
+                              Icons.add_circle,
+                              size: 30,
+                              color: Colors.black,
+                            ),
+                            onPressed: () => setState(() => qty++),
+                          ),
                           Text('$qty'),
                           IconButton(
                               icon: Icon(

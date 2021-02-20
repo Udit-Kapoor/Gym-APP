@@ -46,7 +46,9 @@ class CustomerGymSubscription extends StatelessWidget {
         var widget;
         if (s.connectionState == ConnectionState.waiting) {
           widget = Container(child: Center(child: CircularProgressIndicator()));
-        } else if (s.hasData && s.connectionState == ConnectionState.done) {
+        } else if (s.hasData &&
+            s.data.error &&
+            s.connectionState == ConnectionState.done) {
           var cg = customerSubscriptionModelFromJson(s.data.data);
 
           List _facList = [];

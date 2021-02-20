@@ -33,7 +33,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
       if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
       if (_workoutIndex == 1)
         GestureDetector(
-          onTap: incrementIndex(),
+          onTap: () => setState(() => _workoutIndex = 2),
           child: Column(
             children: [
               Row(
@@ -42,7 +42,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                     flex: 3,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                       child: FlatButton(
                         color: Colors.red,
                         onPressed: () {},
@@ -65,21 +65,27 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      //TODO: Try to make height of container same as button
-                      height: 50.0,
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      child: FlatButton(
                         color: Colors.red,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Text(
-                        '1 jan',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(color: Colors.white),
+                        onPressed: () {},
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          side: BorderSide(width: 1.5, color: Colors.red),
+                        ),
+                        child: Text(
+                          '1 Jan',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -301,6 +307,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
             BottomNavigationBar(
               showSelectedLabels: true,
               iconSize: 30.0,
+              elevation: 0,
               type: BottomNavigationBarType.fixed,
               currentIndex: _currentIndex,
               onTap: (int index) {
