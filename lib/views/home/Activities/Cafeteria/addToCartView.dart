@@ -16,7 +16,7 @@ class _AddToCartViewState extends State<AddToCartView> {
   String size;
   int price;
   int bill;
-  int idx = 0;
+  int idx;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -172,15 +172,16 @@ class _AddToCartViewState extends State<AddToCartView> {
                   Spacer(
                     flex: 4,
                   ),
-                  for (var i in widget.model.itemVarients)
+                  for (int i = 0; i < widget.model.itemVarients.length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 3),
                       child: GestureDetector(
                         onTap: () => {
                           setState(() {
-                            size = i.size;
-                            price = i.price;
+                            size = widget.model.itemVarients[i].size;
+                            price = widget.model.itemVarients[i].price;
                             bill = price * qty;
+                            idx = i;
                             print(size);
                           }),
                         },
@@ -188,16 +189,19 @@ class _AddToCartViewState extends State<AddToCartView> {
                           height: 25,
                           width: 25,
                           decoration: BoxDecoration(
-                              color: size == i.size ? kOrangeCol : Colors.white,
+                              color: size == widget.model.itemVarients[i].size
+                                  ? kOrangeCol
+                                  : Colors.white,
                               shape: BoxShape.circle,
                               border:
                                   Border.all(color: Colors.black, width: 1)),
                           child: Center(
                               child: Text(
-                            i.size,
+                            widget.model.itemVarients[i].size,
                             style: TextStyle(
-                              color:
-                                  size == i.size ? Colors.white : Colors.black,
+                              color: size == widget.model.itemVarients[i].size
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
                           )),
                         ),
