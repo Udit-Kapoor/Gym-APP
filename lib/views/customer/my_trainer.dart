@@ -56,6 +56,7 @@ class MyTrainer extends StatelessWidget {
         centerTitle: true,
         title: Image.asset(
           'lib/assets/logo.png',
+          height: 50,
           fit: BoxFit.fill,
         ),
       ),

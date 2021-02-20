@@ -1107,7 +1107,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         height: 50,
                         width: 330,
                         decoration: BoxDecoration(
-                          color: kOrange,
+                          color: kOrangeCol,
                           // border: Border.all(color: Colors.black, width: 0.0),
                           borderRadius:
                               new BorderRadius.all(Radius.elliptical(45, 45)),

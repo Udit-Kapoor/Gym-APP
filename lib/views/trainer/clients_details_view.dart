@@ -4,6 +4,28 @@ import 'package:gym_app/lib.dart';
 import 'package:expandable/expandable.dart';
 
 DateTime _selectedDate;
+List<String> dropDownMenuItemMuscle = [
+  'Back',
+  'Biceps',
+  'Cardio',
+  'Chest',
+  'Core',
+  'Forearms',
+  'Full body',
+  'Legs',
+  'Neck',
+  'Shoulders',
+  'Triceps',
+  'Weightlifting',
+  'Yoga',
+  'Legs',
+  'Neck',
+  'Shoulders',
+  'Triceps',
+  'Weightlifting',
+  'Yoga',
+];
+String dropDownValue = dropDownMenuItemMuscle[0];
 
 class ClientsDetailsView extends StatefulWidget {
   const ClientsDetailsView({Key key}) : super(key: key);
@@ -33,7 +55,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
       if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
       if (_workoutIndex == 1)
         GestureDetector(
-          onTap: incrementIndex(),
+          onTap: () => setState(() => _workoutIndex = 2),
           child: Column(
             children: [
               Row(
@@ -42,10 +64,10 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                     flex: 3,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                       child: FlatButton(
                         color: Colors.red,
-                        onPressed: () {},
+                        onPressed: () => setState(() => _workoutIndex = 3),
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         shape: RoundedRectangleBorder(
@@ -65,21 +87,27 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      //TODO: Try to make height of container same as button
-                      height: 50.0,
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      child: FlatButton(
                         color: Colors.red,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Text(
-                        '1 jan',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline6
-                            .copyWith(color: Colors.white),
+                        onPressed: () {},
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          side: BorderSide(width: 1.5, color: Colors.red),
+                        ),
+                        child: Text(
+                          '1 Jan',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -219,10 +247,88 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
           ),
         ),
       if (_workoutIndex == 3)
-        Container(
-          height: 200,
-          width: 50,
-          color: Colors.black,
+        Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: TextField(
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(color: Colors.black),
+                decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2.0,
+                    ),
+                  ),
+                  labelText: 'Name',
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(color: Colors.black),
+                  hintText: 'enter exercise name',
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(color: Colors.grey),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: InputDecorator(
+                expands: false,
+                decoration: InputDecoration(
+                  labelText: 'Topic',
+                  labelStyle: Theme.of(context).textTheme.headline6,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    isExpanded: true,
+                    isDense: true,
+                    value: dropDownValue,
+                    onChanged: (value) {
+                      setState(() {
+                        dropDownValue = value;
+                      });
+                    },
+                    items: dropDownMenuItemMuscle.map((item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: FloatingActionButton.extended(
+                onPressed: () {},
+                label: Text(
+                  '+ Create New Exercise',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(color: Colors.white),
+                ),
+                elevation: 1.0,
+              ),
+            )
+          ],
         ),
     ];
     return WillPopScope(
@@ -259,6 +365,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
           centerTitle: true,
           title: Image.asset(
             'lib/assets/logo.png',
+            height: 50,
             fit: BoxFit.fill,
           ),
         ),
@@ -300,6 +407,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
             BottomNavigationBar(
               showSelectedLabels: true,
               iconSize: 30.0,
+              elevation: 0,
               type: BottomNavigationBarType.fixed,
               currentIndex: _currentIndex,
               onTap: (int index) {

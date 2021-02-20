@@ -22,7 +22,7 @@ class FoodTile extends StatelessWidget {
     return GestureDetector(
       onTap: () => {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return addToCartView(
+          return AddToCartView(
             model: model,
           );
         })),
@@ -73,14 +73,14 @@ class FoodTile extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 65.0),
                 child: IconButton(
                   icon: Icon(
-                    Icons.add_shopping_cart,
+                    Custom.add_item,
                     size: 30,
                     color: kOrangeCol,
                   ),
                   onPressed: () => {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return addToCartView(
+                      return AddToCartView(
                         model: model,
                       );
                     })),

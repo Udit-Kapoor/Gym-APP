@@ -19,7 +19,7 @@ List<String> dropDownMenuItem = [
   'Website'
 ];
 
-String dropDownValue = dropDownMenuItem[0];
+String _dropDownValue = dropDownMenuItem[0];
 
 class _ComplaintFeedbackState extends State<ComplaintFeedback> {
   ChoiceMethod _method = ChoiceMethod.complaint;
@@ -114,7 +114,8 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
               ),
             if (_method == ChoiceMethod.feedback)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 10.0),
                 child: InputDecorator(
                   expands: false,
                   decoration: InputDecoration(
@@ -132,10 +133,10 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                     child: DropdownButton(
                       isExpanded: true,
                       isDense: true,
-                      value: dropDownValue,
+                      value: _dropDownValue,
                       onChanged: (value) {
                         setState(() {
-                          dropDownValue = value;
+                          _dropDownValue = value;
                         });
                       },
                       // selectedItemBuilder: (context) {return },

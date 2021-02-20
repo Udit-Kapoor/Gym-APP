@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../customer/drawer/profile_picture.dart';
 import '../customer/text_field_widget.dart';
 
 class TrainerProfileView extends StatelessWidget {
@@ -41,7 +40,7 @@ class TrainerProfileView extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-//TODO: Add profile picture
+            //TODO: Throws error on non image
             //ProfilePicture(),
             SizedBox(
               height: 10.0,

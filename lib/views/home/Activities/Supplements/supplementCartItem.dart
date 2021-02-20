@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 
-class SupplementCartItem extends StatefulWidget {
-  const SupplementCartItem({
+// ignore: must_be_immutable
+class SupplementCartItem extends StatelessWidget {
+  SupplementCartItem({
     Key key,
     @required this.imgPath,
     @required this.title,
@@ -21,15 +22,10 @@ class SupplementCartItem extends StatefulWidget {
   final String seller;
   final Function setState;
 
-  @override
-  _SupplementCartItemState createState() => _SupplementCartItemState();
-}
-
-class _SupplementCartItemState extends State<SupplementCartItem> {
+  Seller s = Seller.HEALTHKART;
+  int qty = 1;
   @override
   Widget build(BuildContext context) {
-    Seller s = Seller.HEALTHKART;
-    int qty = 1;
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: Card(
@@ -52,7 +48,7 @@ class _SupplementCartItemState extends State<SupplementCartItem> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                         image: DecorationImage(
-                          image: AssetImage(widget.imgPath),
+                          image: AssetImage(imgPath),
                         )),
                   ),
                   Column(
@@ -61,7 +57,7 @@ class _SupplementCartItemState extends State<SupplementCartItem> {
                     children: [
                       //ToDO:How to Wrap Long text without \n
                       Text(
-                        widget.title,
+                        title,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ),
@@ -69,7 +65,7 @@ class _SupplementCartItemState extends State<SupplementCartItem> {
                         height: 5,
                       ),
                       Text(
-                        widget.size + " , " + widget.flavour,
+                        size + " , " + flavour,
                         style: TextStyle(fontSize: 8),
                       ),
                       Row(
@@ -81,7 +77,7 @@ class _SupplementCartItemState extends State<SupplementCartItem> {
                                 height: 10,
                               ),
                               Text(
-                                "Rs " + widget.price,
+                                "Rs " + price,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 12),
                               ),
@@ -132,20 +128,13 @@ class _SupplementCartItemState extends State<SupplementCartItem> {
                             width: 50,
                           ),
                           IconButton(
-                              icon: Icon(
-                                Icons.add_circle,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                              onPressed: () => {
-                                    // qty++,
-
-                                    setState(() {
-                                      qty++;
-                                      print(qty);
-                                    }),
-                                    widget.setState(),
-                                  }),
+                            icon: Icon(
+                              Icons.add_circle,
+                              size: 30,
+                              color: Colors.black,
+                            ),
+                            onPressed: () => setState(() => qty++),
+                          ),
                           Text('$qty'),
                           IconButton(
                               icon: Icon(
@@ -155,8 +144,7 @@ class _SupplementCartItemState extends State<SupplementCartItem> {
                               ),
                               onPressed: () => {
                                     if (qty > 1) qty--,
-                                    widget.setState(),
-                                    setState(() {}),
+                                    setState(),
                                   }),
                         ],
                       ),
