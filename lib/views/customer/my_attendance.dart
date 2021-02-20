@@ -36,14 +36,11 @@ class MyAttendance extends StatelessWidget {
                   ),
                   onTap: () {},
                 ),
-                Text('October'),
+                Text('October', style: Theme.of(context).textTheme.headline6),
                 GestureDetector(
-                  child: RotatedBox(
-                    quarterTurns: 2,
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 20.0,
-                    ),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20.0,
                   ),
                   onTap: () {},
                 ),
@@ -98,29 +95,27 @@ class MyAttendance extends StatelessWidget {
 
 class DayWiseAttendance extends StatelessWidget {
   const DayWiseAttendance(
-      {Key key, @required this.weekDay, @required this.day, this.attend})
+      {Key key,
+      @required this.weekDay,
+      @required this.day,
+      this.attend,
+      this.columnCount = 1})
       : super(key: key);
 
   final String weekDay;
   final int day;
   final bool attend;
+  final int columnCount;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Row(children: [
-        Spacer(),
-        Text(
-          '$weekDay\n$day',
-          textAlign: TextAlign.center,
-        ),
-        Spacer(
-          flex: 2,
-        ),
-        Icon(attend ? Icons.check_circle_outline : Icons.cancel_outlined,
-            color: attend ? Colors.green : Colors.red),
-        Spacer(),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Text('$weekDay\n$day', textAlign: TextAlign.center),
+        for (var i = 0; i < columnCount; i++)
+          Icon(attend ? Icons.check_circle_outline : Icons.cancel_outlined,
+              color: attend ? Colors.green : Colors.red),
       ]),
     );
   }

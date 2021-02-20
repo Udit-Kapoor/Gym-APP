@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-class TodaysWorkoutTile extends StatelessWidget {
+class UpcomingBatchesTile extends StatelessWidget {
+  const UpcomingBatchesTile({Key key}) : super(key: key);
 
-
-  const TodaysWorkoutTile({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -27,22 +26,19 @@ class TodaysWorkoutTile extends StatelessWidget {
             ),
           ),
         ),
-        title: Text('Today\'s Workout'),
+        title: Text('Upcoming Batches'),
         subtitle: Text(
-          'Chest Day',
+          '09.30 - 10.30',
           style: Theme.of(context)
               .textTheme
               .headline6
               .copyWith(fontWeight: FontWeight.bold),
         ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.notifications,
-              color: Colors.black,
-            ),
-            Text('09.30-10.30'),
+            Text('10'),
+            Icon(Icons.person),
           ],
         ),
       ),

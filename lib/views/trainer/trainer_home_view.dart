@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/views/trainer/upcoming_batches_tile.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import 'trainer_drawer.dart';
 
@@ -108,7 +112,7 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
   final Duration duration = Duration(milliseconds: 300);
 
   final List trainerTabs = [
-    Expanded(child: Container(color: Colors.amber)), //TODO trainer dashboard
+    TrainerHomeIndex(),
     BatchWiseClientsListView(),
     Expanded(child: TeamPage()),
   ];
@@ -125,6 +129,7 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
       child: Material(
         elevation: 4.0,
         child: Container(
+          color: Colors.white,
           child: Column(
             children: [
               trainerTabs[_currentIndex],
@@ -178,6 +183,140 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TrainerHomeIndex extends StatelessWidget {
+  const TrainerHomeIndex({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView(
+        children: [
+          UpcomingBatchesTile(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CircularPercentIndicator(
+                  progressColor: Colors.blue[700],
+                  animation: true,
+                  animationDuration: 1000,
+                  radius: 70,
+                  percent: 0.75,
+                  center: Text('30'),
+                  footer: Text(
+                    'My Total\nClients',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                CircularPercentIndicator(
+                  progressColor: Colors.blue[700],
+                  animation: true,
+                  animationDuration: 1000,
+                  radius: 70.0,
+                  percent: 0.75,
+                  center: Text('25'),
+                  footer: Text(
+                    'In-Gym\nClients',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                CircularPercentIndicator(
+                  progressColor: Colors.blue[700],
+                  animation: true,
+                  animationDuration: 1000,
+                  radius: 70.0,
+                  percent: 0.75,
+                  center: Text('5'),
+                  footer: Text(
+                    'On-location\nClients',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              'My Attendance',
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 20.0,
+                ),
+                onTap: () {},
+              ),
+              Text('October', style: Theme.of(context).textTheme.headline6),
+              GestureDetector(
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20.0,
+                ),
+                onTap: () {},
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CircularPercentIndicator(
+                  progressColor: Colors.blue[700],
+                  animation: true,
+                  animationDuration: 1000,
+                  radius: 50,
+                  percent: 0.75,
+                  center: Text('10/20'),
+                  footer: Text(
+                    'Total\nAttendance',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                CircularPercentIndicator(
+                  progressColor: Colors.blue[700],
+                  animation: true,
+                  animationDuration: 1000,
+                  radius: 50.0,
+                  percent: 0.50,
+                  center: Text('50%'),
+                  footer: Text(
+                    'Attendance\nPerc.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          for (var i = 1; i <= 7; i++)
+            DayWiseAttendance(
+              columnCount: 4,
+              weekDay: 'Mon',
+              day: i,
+              attend: (Random().nextInt(10) + 1) % 3 == 0 ? false : true,
+            ),
+        ],
       ),
     );
   }
