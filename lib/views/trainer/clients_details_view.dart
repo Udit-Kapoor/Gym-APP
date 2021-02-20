@@ -259,6 +259,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
           centerTitle: true,
           title: Image.asset(
             'lib/assets/logo.png',
+            height: 50,
             fit: BoxFit.fill,
           ),
         ),
