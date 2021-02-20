@@ -18,9 +18,12 @@ class TeamPage extends StatelessWidget {
           ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 17.0, left: 75),
+              padding: const EdgeInsets.only(
+                top: 17.0,
+              ),
               child: ShowIcon(
                 isIcon: true,
                 title: "Cafeteria",
@@ -30,7 +33,9 @@ class TeamPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 139),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: ShowIcon(
                   isIcon: false,
                   title: "PoolBoard",
@@ -40,9 +45,12 @@ class TeamPage extends StatelessWidget {
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 17.0, left: 65),
+              padding: const EdgeInsets.only(
+                top: 17.0,
+              ),
               child: ShowIcon(
                 isIcon: true,
                 title: "Diet Food \n Subscription",
@@ -52,7 +60,9 @@ class TeamPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 18.0, left: 120),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: ShowIcon(
                   isIcon: true,
                   title: "Buy Gym \n Supplements",

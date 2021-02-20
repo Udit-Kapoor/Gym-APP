@@ -14,7 +14,7 @@ class addToCartView extends StatefulWidget {
 
 class _addToCartViewState extends State<addToCartView> {
   int qty = 1;
-  String size = "small";
+  String size = "S";
   int price;
   int bill;
   int idx = 0;
@@ -86,7 +86,7 @@ class _addToCartViewState extends State<addToCartView> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 25.0),
+              padding: const EdgeInsets.only(left: 25.0, top: 10),
               child: Text(
                 "Description",
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
@@ -177,6 +177,7 @@ class _addToCartViewState extends State<addToCartView> {
                             size = i.size;
                             price = i.price;
                             bill = price * qty;
+                            print(size);
                           }),
                         },
                         child: Container(
