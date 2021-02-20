@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
 
 class AddToCartView extends StatefulWidget {
@@ -23,10 +24,20 @@ class _AddToCartViewState extends State<AddToCartView> {
         floatingActionButton: FloatingActionButton.extended(
           //ToDo: Add POST REQUEST and NAVIGATE to CART
           elevation: 5,
-          onPressed: () => addToCart({
-            "quantity": qty,
-            "item": widget.model.itemVarients[idx].id,
-          }),
+          onPressed: () => {
+            if (bill != null && price != null)
+              {
+                addToCart({
+                  "quantity": qty,
+                  "item": widget.model.itemVarients[idx].id,
+                }),
+                Navigator.pushNamed(context, '/CafeteriaCart'),
+              }
+            else
+              {
+                Fluttertoast.showToast(msg: "Choose a Size First"),
+              }
+          },
           label: Container(
             height: 50,
             width: 330,
@@ -112,7 +123,7 @@ class _AddToCartViewState extends State<AddToCartView> {
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                   ),
                   Text(
-                    price ?? "--".toString() + " Rs / 1 pc",
+                    (price ?? "--").toString() + " Rs / 1 pc",
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
                   )
                 ],
@@ -209,7 +220,7 @@ class _AddToCartViewState extends State<AddToCartView> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Text(
-                    bill ?? "--".toString() + " Rs",
+                    (bill ?? "--").toString() + " Rs",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   )
                 ],
