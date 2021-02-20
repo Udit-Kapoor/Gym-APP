@@ -97,11 +97,10 @@ class CustomerGymSubscription extends StatelessWidget {
                 borderText: 'Health Issues',
                 bodyText: cg.healthIssues.isNotEmpty ? cg.healthIssues : 'none',
               ),
-              //TODO: Api Doesn't have trainer name
-              // TextFieldWidget(
-              //   borderText: 'Trainer Name',
-              //   bodyText: cg.,
-              // ),
+              TextFieldWidget(
+                borderText: 'Trainer Name',
+                bodyText: cg.trainername,
+              ),
               TextFieldWidget(
                 borderText: 'Diet',
                 bodyText: cg.dietPlan,

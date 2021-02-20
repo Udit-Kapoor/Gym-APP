@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   MyDrawer({
     Key key,
     @required this.height,
@@ -11,6 +12,21 @@ class MyDrawer extends StatelessWidget {
   }) : super(key: key);
   final double height;
   final double width;
+
+  @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  void initMyLibrary() async {
+    LicenseRegistry.addLicense(() async* {
+      yield LicenseEntryWithLineBreaks(
+        <String>['gym_app'],
+        kTerms,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +37,7 @@ class MyDrawer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-            height: height * 0.03,
+            height: widget.height * 0.03,
           ),
           ListTile(
             contentPadding: EdgeInsets.all(0),
@@ -61,49 +77,48 @@ class MyDrawer extends StatelessWidget {
                 );
               }),
           DrawerTextList(
-              label: 'Help & Support',
-              onTap: () {
-                return showDialog(
-                  context: (context),
-                  builder: (context) => AlertDialog(
-                    title: Text(
-                      'Need Assistance?',
-                      textAlign: TextAlign.center,
+            label: 'Help & Support',
+            onTap: () => showDialog(
+              context: (context),
+              builder: (context) => AlertDialog(
+                title: Text(
+                  'Need Assistance?',
+                  textAlign: TextAlign.center,
+                ),
+                actions: [
+                  IconButton(
+                    padding: EdgeInsets.only(right: 20.0),
+                    iconSize: 35.0,
+                    icon: Icon(
+                      Icons.phone,
+                      color: Colors.red,
                     ),
-                    actions: [
-                      IconButton(
-                        padding: EdgeInsets.only(right: 20.0),
-                        iconSize: 35.0,
-                        icon: Icon(
-                          Icons.phone,
-                          color: Colors.red,
-                        ),
-                        onPressed: () async {
-                          if (await canLaunch(kPhoneNumber)) {
-                            await launch(kPhoneNumber);
-                          }
-                        },
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.only(left: 20.0),
-                        iconSize: 35.0,
-                        icon: Icon(
-                          Icons.mail_outline,
-                          color: Colors.red,
-                        ),
-                        onPressed: () async {
-                          if (await canLaunch(kEmailId)) {
-                            await launch(kEmailId);
-                          }
-                        },
-                      ),
-                    ],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
+                    onPressed: () async {
+                      if (await canLaunch(kPhoneNumber)) {
+                        await launch(kPhoneNumber);
+                      }
+                    },
                   ),
-                );
-              }),
+                  IconButton(
+                    padding: EdgeInsets.only(left: 20.0),
+                    iconSize: 35.0,
+                    icon: Icon(
+                      Icons.mail_outline,
+                      color: Colors.red,
+                    ),
+                    onPressed: () async {
+                      if (await canLaunch(kEmailId)) {
+                        await launch(kEmailId);
+                      }
+                    },
+                  ),
+                ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+            ),
+          ),
           DrawerTextList(
               label: 'Change Password',
               onTap: () {
@@ -114,8 +129,28 @@ class MyDrawer extends StatelessWidget {
                   ),
                 );
               }),
-          DrawerTextList(label: 'Terms & Conditions', onTap: () {}),
-          DrawerTextList(label: 'Privacy Policy', onTap: () {}),
+          DrawerTextList(
+            label: 'Terms & Conditions',
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: AppBar(),
+                    body: SingleChildScrollView(child: Text(kPrivacy)),
+                  ),
+                )),
+          ),
+          DrawerTextList(
+            label: 'Privacy Policy',
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    appBar: AppBar(),
+                    body: SingleChildScrollView(child: Text(kTerms)),
+                  ),
+                )),
+          ),
           Text(
             'App Version 1.0.0',
             style: Theme.of(context)

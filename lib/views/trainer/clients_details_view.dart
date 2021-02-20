@@ -4,6 +4,28 @@ import 'package:gym_app/lib.dart';
 import 'package:expandable/expandable.dart';
 
 DateTime _selectedDate;
+List<String> dropDownMenuItemMuscle = [
+  'Back',
+  'Biceps',
+  'Cardio',
+  'Chest',
+  'Core',
+  'Forearms',
+  'Full body',
+  'Legs',
+  'Neck',
+  'Shoulders',
+  'Triceps',
+  'Weightlifting',
+  'Yoga',
+  'Legs',
+  'Neck',
+  'Shoulders',
+  'Triceps',
+  'Weightlifting',
+  'Yoga',
+];
+String dropDownValue = dropDownMenuItemMuscle[0];
 
 class ClientsDetailsView extends StatefulWidget {
   const ClientsDetailsView({Key key}) : super(key: key);
@@ -45,7 +67,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                           EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                       child: FlatButton(
                         color: Colors.red,
-                        onPressed: () {},
+                        onPressed: () => setState(() => _workoutIndex = 3),
                         padding: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
                         shape: RoundedRectangleBorder(
@@ -225,10 +247,88 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
           ),
         ),
       if (_workoutIndex == 3)
-        Container(
-          height: 200,
-          width: 50,
-          color: Colors.black,
+        Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: TextField(
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(color: Colors.black),
+                decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2.0,
+                    ),
+                  ),
+                  labelText: 'Name',
+                  labelStyle: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      .copyWith(color: Colors.black),
+                  hintText: 'enter exercise name',
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(color: Colors.grey),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: InputDecorator(
+                expands: false,
+                decoration: InputDecoration(
+                  labelText: 'Topic',
+                  labelStyle: Theme.of(context).textTheme.headline6,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    isExpanded: true,
+                    isDense: true,
+                    value: dropDownValue,
+                    onChanged: (value) {
+                      setState(() {
+                        dropDownValue = value;
+                      });
+                    },
+                    items: dropDownMenuItemMuscle.map((item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: FloatingActionButton.extended(
+                onPressed: () {},
+                label: Text(
+                  '+ Create New Exercise',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(color: Colors.white),
+                ),
+                elevation: 1.0,
+              ),
+            )
+          ],
         ),
     ];
     return WillPopScope(
