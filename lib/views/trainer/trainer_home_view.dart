@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
 
+import 'trainer_drawer.dart';
+
 class TrainerHome extends StatefulWidget {
   const TrainerHome({Key key}) : super(key: key);
 
@@ -75,7 +77,7 @@ class _TrainerHomeState extends State<TrainerHome>
       ),
       body: Stack(
         children: <Widget>[
-          MyDrawer(
+          TrainerDrawer(
             height: _height,
             width: _width,
           ),

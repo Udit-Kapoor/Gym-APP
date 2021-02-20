@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyDrawer extends StatefulWidget {
-  MyDrawer({
+class CustomerDrawer extends StatefulWidget {
+  CustomerDrawer({
     Key key,
     @required this.height,
     @required this.width,
@@ -14,10 +14,10 @@ class MyDrawer extends StatefulWidget {
   final double width;
 
   @override
-  _MyDrawerState createState() => _MyDrawerState();
+  _CustomerDrawerState createState() => _CustomerDrawerState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _CustomerDrawerState extends State<CustomerDrawer> {
   void initMyLibrary() async {
     LicenseRegistry.addLicense(() async* {
       yield LicenseEntryWithLineBreaks(

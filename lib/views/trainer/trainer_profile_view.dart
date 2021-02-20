@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/lib.dart';
+import 'package:gym_app/views/customer/drawer/profile_picture.dart';
 import '../customer/text_field_widget.dart';
 
 class TrainerProfileView extends StatelessWidget {
@@ -33,153 +35,182 @@ class TrainerProfileView extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 10.0,
-            ),
-            //TODO: Throws error on non image
-            //ProfilePicture(),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              'Hi! Pawan',
-              style: TextStyle(fontSize: 30.0),
-            ),
-            Expanded(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                children: [
-                  TextFieldWidget(
-                    borderText: 'T_ID',
-                    bodyText: '42069',
-                  ),
-                  TextFieldWidget(
-                    borderText: 'Full Name',
-                    bodyText: 'Pawan Kumar',
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFieldWidget(
-                          borderText: 'D.O.B',
-                          bodyText: '12-06-1998',
-                        ),
+      body: FutureBuilder(
+          future: trainerPro(),
+          builder: (c, s) {
+            var widget;
+
+            if (s.connectionState == ConnectionState.waiting) {
+              widget = Center(child: CircularProgressIndicator());
+            } else if (s.hasData &&
+                !s.data.error &&
+                s.connectionState == ConnectionState.done) {
+              var tp = trainerProfileModelFromJson(s.data.data);
+
+              String _fullName =
+                  [tp.firstName, tp.middleName ?? '', tp.lastName].join(' ');
+
+              widget = Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    ProfilePicture(
+                      imageUrl: tp.image,
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Hi! ${tp.firstName}',
+                      style: TextStyle(fontSize: 30.0),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          TextFieldWidget(
+                            borderText: 'T_ID',
+                            bodyText: tp.tid.toString(),
+                          ),
+                          TextFieldWidget(
+                            borderText: 'Full Name',
+                            // bodyText:
+                            //     '${tp.firstName} ${tp.middleName} ${tp.lastName}',
+                            bodyText: _fullName,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                //TODO: Api doesn't have DOB
+                                child: TextFieldWidget(
+                                  borderText: 'D.O.B',
+                                  bodyText: '12-06-1998',
+                                ),
+                              ),
+                              Expanded(
+                                child: TextFieldWidget(
+                                  borderText: 'Gender',
+                                  bodyText: tp.gender,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextFieldWidget(
+                                  borderText: 'Phone No.',
+                                  bodyText: tp.phone,
+                                ),
+                              ),
+                              Expanded(
+                                child: TextFieldWidget(
+                                  borderText: 'Alt.Phone No.',
+                                  bodyText: tp.altPhone,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFieldWidget(
+                            borderText: 'Email ID',
+                            bodyText: tp.email,
+                          ),
+                          TextFieldWidget(
+                            borderText: 'Address Line 1',
+                            bodyText: tp.address1,
+                          ),
+                          TextFieldWidget(
+                            borderText: 'Address Line 2',
+                            bodyText: tp.address2,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextFieldWidget(
+                                  padding: EdgeInsets.fromLTRB(
+                                      20.0, 10.0, 5.0, 10.0),
+                                  borderText: 'City',
+                                  bodyText: tp.city,
+                                ),
+                              ),
+                              Expanded(
+                                child: TextFieldWidget(
+                                  padding: EdgeInsets.fromLTRB(
+                                      5.0, 10.0, 20.0, 10.0),
+                                  borderText: 'State',
+                                  bodyText: tp.state,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextFieldWidget(
+                                  padding: EdgeInsets.fromLTRB(
+                                      20.0, 10.0, 5.0, 10.0),
+                                  borderText: 'Pin Code',
+                                  bodyText: tp.pincode.toString(),
+                                ),
+                              ),
+                              Expanded(child: Container()),
+                            ],
+                          ),
+                          //TODO: Api doesn't have landmark
+                          TextFieldWidget(
+                            borderText: 'Landmark',
+                            bodyText: 'Near J.R. Public School',
+                          ),
+                          TextFieldWidget(
+                            borderText: 'ID Proof',
+                            bodyText: tp.idProof,
+                          ),
+                          TextFieldWidget(
+                            borderText: 'Resume/CV',
+                            bodyText: tp.resume,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextFieldWidget(
+                                  borderText: 'Joining Date',
+                                  bodyText: tp.joiningDate.toString(),
+                                ),
+                              ),
+                              Expanded(child: Container()),
+                            ],
+                          ),
+                          TextFieldWidget(
+                            borderText: 'MonthlySalary',
+                            bodyText: tp.salary.toString(),
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextFieldWidget(
+                                  borderText: 'Next Salary Date',
+                                  bodyText: tp.salaryDueDate.toString(),
+                                ),
+                              ),
+                              Spacer(),
+                            ],
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: TextFieldWidget(
-                          borderText: 'Gender',
-                          bodyText: 'Male',
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFieldWidget(
-                          borderText: 'Phone No.',
-                          bodyText: '9876543210',
-                        ),
-                      ),
-                      Expanded(
-                        child: TextFieldWidget(
-                          borderText: 'Alt.Phone No.',
-                          bodyText: '9876543210',
-                        ),
-                      ),
-                    ],
-                  ),
-                  TextFieldWidget(
-                    borderText: 'Email ID',
-                    bodyText: 'abcd1234@gmail.com',
-                  ),
-                  TextFieldWidget(
-                    borderText: 'Address Line 1',
-                    bodyText: '6th avenue Becker Street',
-                  ),
-                  TextFieldWidget(
-                    borderText: 'Address Line 2',
-                    bodyText: '6th avenue Becker Street',
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFieldWidget(
-                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
-                          borderText: 'City',
-                          bodyText: 'New Delhi',
-                        ),
-                      ),
-                      Expanded(
-                        child: TextFieldWidget(
-                          padding: EdgeInsets.fromLTRB(5.0, 10.0, 20.0, 10.0),
-                          borderText: 'State',
-                          bodyText: 'New Delhi',
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFieldWidget(
-                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 5.0, 10.0),
-                          borderText: 'Pin Code',
-                          bodyText: '110069',
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                    ],
-                  ),
-                  TextFieldWidget(
-                    borderText: 'Landmark',
-                    bodyText: 'Near J.R. Public School',
-                  ),
-                  TextFieldWidget(
-                    borderText: 'ID Proof',
-                    bodyText: 'aadharcard.pdf',
-                  ),
-                  TextFieldWidget(
-                    borderText: 'Resume/CV',
-                    bodyText: 'resume.pdf',
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFieldWidget(
-                          borderText: 'Joining Date',
-                          bodyText: '12-06-2020',
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                    ],
-                  ),
-                  TextFieldWidget(
-                    borderText: 'MonthlySalary',
-                    bodyText: 'Rs 15000',
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFieldWidget(
-                          borderText: 'Next Salary Date',
-                          bodyText: '15-01-2021',
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+                    )
+                  ],
+                ),
+              );
+            } else
+              widget = Center(child: Text("OOPS! NO DATA!"));
+
+            print(s.data.data);
+            return widget;
+          }),
     );
   }
 }

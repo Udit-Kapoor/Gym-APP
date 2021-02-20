@@ -9,10 +9,13 @@ class ProfilePicture extends StatelessWidget {
   }) : super(key: key);
 
   Future<bool> checkImage() async =>
-      (await http.head(imageUrl)).statusCode == 200 ? true : false;
+      (await http.head(imageUrl)).statusCode == 200
+          ? Future<bool>.value(true)
+          : Future<bool>.value(false);
 
   @override
   Widget build(BuildContext context) {
+    // bool isGood = checkImage().then((value) => value) as bool;
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -23,6 +26,7 @@ class ProfilePicture extends StatelessWidget {
             CircleAvatar(
               radius: 70.0,
               backgroundImage: NetworkImage(imageUrl),
+              // child: isGood ? null : Icon(Icons.person),
             ),
             Align(
               alignment: Alignment.bottomRight,

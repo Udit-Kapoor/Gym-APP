@@ -1,1 +1,1 @@
-export 'trainer_profile.dart';
+export 'trainer_profile_model.dart';

@@ -74,7 +74,7 @@ class _CustomerHomeState extends State<CustomerHome>
       ),
       body: Stack(
         children: <Widget>[
-          MyDrawer(
+          CustomerDrawer(
             height: _height,
             width: _width,
           ),
