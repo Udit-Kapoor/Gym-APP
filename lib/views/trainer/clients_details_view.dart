@@ -42,7 +42,6 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   incrementIndex() {
     setState(() {
       _workoutIndex++;
-      print(_workoutIndex);
     });
   }
 
@@ -413,7 +412,6 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
               onTap: (int index) {
                 setState(() {
                   _currentIndex = index;
-                  print(_currentIndex);
                 });
               },
               items: [
@@ -628,7 +626,6 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                   firstDate: tDate,
                   lastDate: DateTime(tDate.year + 20),
                 );
-                print(_selectedDate);
                 Fluttertoast.showToast(msg: "Creating");
                 widget.incrementCallBack();
               } on NoSuchMethodError {

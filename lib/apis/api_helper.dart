@@ -115,6 +115,7 @@ class ApiHelper {
           HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
         },
       );
+
       return ApiResponse(data: getReq.body);
     } catch (e) {
       return ApiResponse(error: true, errorMessage: e.toString());

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/trainer/client_list_model.dart';
 
 class ClientsList extends StatelessWidget {
-  const ClientsList({Key key, this.batchTimings}) : super(key: key);
+  const ClientsList({Key key, this.id}) : super(key: key);
 
-  final String batchTimings;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +17,12 @@ class ClientsList extends StatelessWidget {
             Icons.navigate_before,
             color: Colors.black,
           ),
-          onPressed: () {
-            Navigator.pop(context);
+          onPressed: () async {
+            // Navigator.pop(context);
+            var d = await clientList(id);
+            print(d.data);
+            print(d.errorMessage);
+            print(d.error);
           },
         ),
         centerTitle: true,
@@ -27,70 +32,18 @@ class ClientsList extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    margin: EdgeInsets.all(2.0),
-                    color: Colors.red,
-                    child: Text(
-                      '30\nOct',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .copyWith(color: Colors.white),
-                    ),
-                  ),
-                ),
-                Spacer(),
-                IconButton(
-                  icon: Icon(Icons.arrow_back_ios),
-                  onPressed: () {},
-                ),
-                Text(
-                  batchTimings,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                RotatedBox(
-                  quarterTurns: 2,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {},
-                  ),
-                ),
-                Spacer(
-                  flex: 3,
-                ),
-              ],
+          for (var i = 0; i < 10; i++)
+            ClientsListTile(
+              name: 'Angelina Perry',
+              cId: 60942,
+              goal: 'Fat Loss',
+              onTap: () {
+                Navigator.pushNamed(context, '/ClientsDetailsView');
+              },
             ),
-          ),
-          Expanded(
-            flex: 11,
-            child: Container(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  for (var i = 0; i < 10; i++)
-                    ClientsListTile(
-                      name: 'Angelina Perry',
-                      cId: 60942,
-                      goal: 'Fat Loss',
-                      onTap: () {
-                        Navigator.pushNamed(context, '/ClientsDetailsView');
-                      },
-                    ),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );
