@@ -107,8 +107,28 @@ class Vendor {
       };
 }
 
-Future<ApiResponse> getSupplements() async {
+Future<SupplementProduct> getSupplements() async {
   ApiResponse cp = await ApiHelper()
       .getReq(endpoint: "https://p2c-gym.herokuapp.com/website/product/");
-  return cp;
+
+  var model = supplementProductFromJson(cp.data);
+  var finalModel = supplementProductFromJson(cp.data);
+
+  int i = 2;
+  print("loop started");
+  while (model.next != null) {
+    ApiResponse m = await ApiHelper().getReq(
+      endpoint: model.next,
+    );
+    var localModel = supplementProductFromJson(m.data);
+    finalModel.results =
+        finalModel.results + model.results + localModel.results;
+    i++;
+    model = localModel;
+  }
+
+  print(finalModel.results.length);
+  print("loop ended");
+
+  return finalModel;
 }
