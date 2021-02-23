@@ -54,7 +54,10 @@ class CustomerProfileView extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  ProfilePicture(imageUrl: cp.photo),
+                  //TODO: Remove this temp image
+                  ProfilePicture(
+                      imageUrl: cp.photo ??
+                          'https://avatars.githubusercontent.com/u/34944818'),
                   SizedBox(
                     height: 10.0,
                   ),

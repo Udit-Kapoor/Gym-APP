@@ -18,11 +18,12 @@ class ClientsList extends StatelessWidget {
             color: Colors.black,
           ),
           onPressed: () async {
-            // Navigator.pop(context);
-            var d = await clientList(id);
-            print(d.data);
-            print(d.errorMessage);
-            print(d.error);
+            Navigator.pop(context);
+            //!for testing only
+            // var d = await clientList(id);
+            // print(d.data);
+            // print(d.errorMessage);
+            // print(d.error);
           },
         ),
         centerTitle: true,

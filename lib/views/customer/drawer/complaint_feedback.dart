@@ -55,7 +55,6 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
               children: [
                 Expanded(
                   child: RadioListTile(
-                    toggleable: true,
                     value: ChoiceMethod.complaint,
                     groupValue: _method,
                     onChanged: (value) {
@@ -68,7 +67,6 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                 ),
                 Expanded(
                   child: RadioListTile(
-                    toggleable: true,
                     value: ChoiceMethod.feedback,
                     groupValue: _method,
                     onChanged: (value) {

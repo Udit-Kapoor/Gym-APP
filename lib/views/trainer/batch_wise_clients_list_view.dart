@@ -1,8 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gym_app/models/trainer/client_list_batchwise_model.dart';
-import 'package:gym_app/views/trainer/cleints_list_batchwise.dart';
+import 'package:gym_app/views/trainer/cleints_list.dart';
 
 class BatchWiseClientsListView extends StatefulWidget {
   BatchWiseClientsListView({Key key}) : super(key: key);
@@ -13,48 +11,7 @@ class BatchWiseClientsListView extends StatefulWidget {
 }
 
 class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
-  final List<Map<String, dynamic>> batchList = [
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-  ];
+ 
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -139,7 +96,6 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           onTap: () {
-                            print("From batchwise id: ${mb[index].id}");
                             Navigator.pushNamed(
                               context,
                               '/ClientsList',
@@ -160,7 +116,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                mb[index].limit.toString(),
+                                mb[index].cust.length.toString(),
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),

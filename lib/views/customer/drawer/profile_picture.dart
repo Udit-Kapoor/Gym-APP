@@ -16,7 +16,7 @@ class ProfilePicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // bool isGood = checkImage().then((value) => value) as bool;
-    return GestureDetector(
+    return InkWell(
       onTap: () {},
       child: Container(
         height: 120,
