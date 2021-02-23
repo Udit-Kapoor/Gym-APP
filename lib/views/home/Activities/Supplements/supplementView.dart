@@ -126,6 +126,7 @@ class _SupplementViewState extends State<SupplementView> {
           ),
           Expanded(
             child: ListView(
+              
               physics: BouncingScrollPhysics(),
               children: [
                 SupplementTile(

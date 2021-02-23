@@ -136,7 +136,7 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
                 MaterialPageRoute(
                   builder: (context) => Scaffold(
                     appBar: AppBar(),
-                    body: SingleChildScrollView(child: Text(kPrivacy)),
+                    body: SingleChildScrollView(child: Text(kTerms)),
                   ),
                 )),
           ),
@@ -147,7 +147,7 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
                 MaterialPageRoute(
                   builder: (context) => Scaffold(
                     appBar: AppBar(),
-                    body: SingleChildScrollView(child: Text(kTerms)),
+                    body: SingleChildScrollView(child: Text(kPrivacy)),
                   ),
                 )),
           ),
