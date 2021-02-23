@@ -75,7 +75,6 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                       setState(() {
                         _method = value;
                       });
-                      print(_method);
                     },
                     title: Text('Feedback'),
                   ),

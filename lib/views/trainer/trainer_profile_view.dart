@@ -17,7 +17,9 @@ class TrainerProfileView extends StatelessWidget {
             Icons.navigate_before,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         centerTitle: true,
         title: Text(
@@ -208,7 +210,6 @@ class TrainerProfileView extends StatelessWidget {
             } else
               widget = Center(child: Text("OOPS! NO DATA!"));
 
-            print(s.data.data);
             return widget;
           }),
     );
