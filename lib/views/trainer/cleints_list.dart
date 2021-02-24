@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/trainer/clients_list_model.dart';
 import 'package:gym_app/views/trainer/client_list_tile.dart';
 
@@ -53,7 +54,16 @@ class ClientsList extends StatelessWidget {
                   cId: cl.cust[i].custid,
                   goal: 'Fat Loss',
                   onTap: () {
-                    Navigator.pushNamed(context, '/ClientsDetailsView');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (c) => ClientsDetailsView(
+                          name: "${cl.cust[i].firstName} ${cl.cust[i].lastName}",
+                          cId: cl.cust[i].custid,
+                          id: cl.cust[i].id,
+                        ),
+                      ),
+                    );
                   },
                 );
               },

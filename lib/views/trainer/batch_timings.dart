@@ -70,23 +70,7 @@ class _BatchTimingsState extends State<BatchTimings> {
                       ),
                     ],
                   ),
-                  // for (var batch in batchList)
-                  //   TimeTile(
-                  //     timeText: batch['timings'],
-                  //     batchSize: batch['batchSize'],
-                  //     remote: (Random().nextInt(10) + 1) % 2 == 0
-                  //         ? false
-                  //         : true,
-                  //     onTap: () {
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //           builder: (context) =>
-                  //               ClientsList(batchTimings: batch['timings']),
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
+               
 
                   Expanded(
                     child: ListView.builder(
@@ -135,48 +119,3 @@ class _BatchTimingsState extends State<BatchTimings> {
     );
   }
 }
-
-// class TimeTile extends StatelessWidget {
-//   const TimeTile({
-//     Key key,
-//     @required this.timeText,
-//     @required this.batchSize,
-//     @required this.remote,
-//     this.onTap,
-//   }) : super(key: key);
-//   final String timeText;
-//   final int batchSize;
-//   final bool remote;
-//   final Function onTap;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: onTap,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: [
-//           Spacer(),
-//           Text(
-//             timeText,
-//             textAlign: TextAlign.center,
-//             style: Theme.of(context)
-//                 .textTheme
-//                 .headline5
-//                 .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-//           ),
-//           Spacer(flex: 3),
-//           Text(batchSize.toString()),
-//           Spacer(),
-//           Icon(Icons.person),
-//           Spacer(),
-//           Icon(
-//             Icons.location_on,
-//             color: remote ? Colors.red : Colors.transparent,
-//           ),
-//           Spacer(),
-//         ],
-//       ),
-//     );
-//   }
-// }

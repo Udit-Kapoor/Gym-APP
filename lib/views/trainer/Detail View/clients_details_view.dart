@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
 import 'package:expandable/expandable.dart';
+import 'package:gym_app/views/trainer/Detail%20View/clients_gym_sub.dart';
 
 DateTime _selectedDate;
 List<String> dropDownMenuItemMuscle = [
@@ -28,7 +29,14 @@ List<String> dropDownMenuItemMuscle = [
 String dropDownValue = dropDownMenuItemMuscle[0];
 
 class ClientsDetailsView extends StatefulWidget {
-  const ClientsDetailsView({Key key}) : super(key: key);
+  const ClientsDetailsView(
+      {Key key, @required this.name, @required this.cId, @required this.id})
+      : super(key: key);
+
+  final String name;
+  final String cId;
+  final int id;
+  //TODO: Add phone no. and profile photo
 
   @override
   _ClientsDetailsViewState createState() => _ClientsDetailsViewState();
@@ -49,8 +57,8 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   Widget build(BuildContext context) {
     tabs = [
       ClientsDashboard(),
-      ClientsProfile(),
-      CustomerGymSubscription(),
+      ClientsProfile(id: widget.id),
+      ClientsGymSubscription(id: widget.id),
       if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
       if (_workoutIndex == 1)
         GestureDetector(
@@ -379,14 +387,14 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                 ),
               ),
               title: Text(
-                'Angelina Perry',
+                widget.name,
                 style: Theme.of(context)
                     .textTheme
                     .headline6
                     .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
               ),
               subtitle: Text(
-                '#60492',
+                widget.cId,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
@@ -472,7 +480,12 @@ class ClientsDashboard extends StatelessWidget {
     return ListView(
       physics: BouncingScrollPhysics(),
       children: [
-        TodaysWorkoutTile(),
+        TodaysWorkoutTile(
+          dateNum: '30',
+          month: 'Oct',
+          batchTime: '09.30-10.30',
+          dayName: 'Chest',
+        ),
         MyGoalTile(),
         WeightChart(),
         MyAttendance(),

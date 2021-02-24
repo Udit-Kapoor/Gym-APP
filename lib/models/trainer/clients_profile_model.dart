@@ -112,7 +112,7 @@ class ClientsProfileModel {
       };
 }
 
-Future<ApiResponse> clientsGymSub(int id) async {
+Future<ApiResponse> clientsProfile(int id) async {
   ApiResponse x = await ApiHelper().postReq(
     endpoint: "http://p2c-gym.herokuapp.com/customer/trainerprofile/",
     data: {"id": id},
