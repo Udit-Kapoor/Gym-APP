@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/supplement/SupplementProduct.dart';
 
 class SupplementView extends StatefulWidget {
   @override
@@ -124,64 +125,39 @@ class _SupplementViewState extends State<SupplementView> {
               ],
             ),
           ),
-          Expanded(
-            child: ListView(
-              
-              physics: BouncingScrollPhysics(),
-              children: [
-                SupplementTile(
-                    imgPath: "lib/assets/protien.jpg",
-                    title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
-                    size: "6.6 lb",
-                    flavour: "Chocolate",
-                    price: "2099",
-                    seller: "HealthKart",
-                    protein: "12 gm protein",
-                    cal: "387 calories",
-                    vit: "27 vitamins and minerals"),
-                SupplementTile(
-                    imgPath: "lib/assets/protien.jpg",
-                    title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
-                    size: "6.6 lb",
-                    flavour: "Chocolate",
-                    price: "2099",
-                    seller: "HealthKart",
-                    protein: "12 gm protein",
-                    cal: "387 calories",
-                    vit: "27 vitamins and minerals"),
-                SupplementTile(
-                    imgPath: "lib/assets/protien.jpg",
-                    title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
-                    size: "6.6 lb",
-                    flavour: "Chocolate",
-                    price: "2099",
-                    seller: "HealthKart",
-                    protein: "12 gm protein",
-                    cal: "387 calories",
-                    vit: "27 vitamins and minerals"),
-                SupplementTile(
-                    imgPath: "lib/assets/protien.jpg",
-                    title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
-                    size: "6.6 lb",
-                    flavour: "Chocolate",
-                    price: "2099",
-                    seller: "HealthKart",
-                    protein: "12 gm protein",
-                    cal: "387 calories",
-                    vit: "27 vitamins and minerals"),
-                SupplementTile(
-                    imgPath: "lib/assets/protien.jpg",
-                    title: "MuscleBlaze Weight Gainer with\nAdded Digezyme",
-                    size: "6.6 lb",
-                    flavour: "Chocolate",
-                    price: "2099",
-                    seller: "HealthKart",
-                    protein: "12 gm protein",
-                    cal: "387 calories",
-                    vit: "27 vitamins and minerals"),
-              ],
-            ),
-          )
+          FutureBuilder(
+            future: getSupplements(),
+            builder: (c, s) {
+              if (s.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (s.hasData &&
+                  s.connectionState == ConnectionState.done) {
+                var model = supplementProductFromJson(s.data.data);
+                print(model);
+                return Expanded(
+                  child: ListView.builder(
+                      // shrinkWrap: true,
+                      itemCount: model.results.length,
+                      itemBuilder: (c, i) {
+                        return SupplementTile(
+                            imgPath: 'assets/protien.jpg',
+                            title: model.results[i].name,
+                            size: model.results[i].weight.toString(),
+                            flavour: "API mai ni hai",
+                            price: model.results[i].price.toString(),
+                            seller: model.results[i].vendor.name,
+                            protein: "api",
+                            cal: "api",
+                            vit: "api");
+                      }),
+                );
+              } else {
+                return Text("No data found");
+              }
+            },
+          ),
         ],
       ),
     );
