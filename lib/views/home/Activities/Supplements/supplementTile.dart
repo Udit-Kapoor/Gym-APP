@@ -31,6 +31,46 @@ class SupplementTile extends StatelessWidget {
   final String vit;
   final Result model;
   final String slug;
+
+  Widget showAddToCartButton(bool b) {
+    if (b) {
+      return GestureDetector(
+        onTap: () => {
+          addToSupplementCart({
+            "product_id": model.id,
+            "quantity": 1,
+          })
+        },
+        child: Container(
+          width: 70,
+          height: 26,
+          decoration: BoxDecoration(
+              color: Color(0xFFEB3223),
+              borderRadius: BorderRadius.circular(28.0)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+                size: 18,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                "ADD",
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Text("Out Of Stock");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,38 +154,7 @@ class SupplementTile extends StatelessWidget {
                             SizedBox(
                               width: 70,
                             ),
-                            GestureDetector(
-                              onTap: () => {
-                                addToSupplementCart({
-                                  "product_id": model.id,
-                                  "quantity": 1,
-                                })
-                              },
-                              child: Container(
-                                width: 70,
-                                height: 26,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFEB3223),
-                                    borderRadius: BorderRadius.circular(28.0)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.shopping_cart,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "ADD",
-                                      style: TextStyle(color: Colors.white),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
+                            showAddToCartButton(model.isStock),
                           ],
                         ),
                       ],

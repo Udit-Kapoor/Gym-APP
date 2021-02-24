@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'dart:async';
 
 class CafeCart extends StatefulWidget {
   @override
@@ -311,7 +312,9 @@ class BillItem extends StatelessWidget {
             //ToDo: How to rebuild FUTURE
             onPressed: () => {
                   delItem(id),
-                  setState(),
+                  Timer(Duration(seconds: 2), () {
+                    setState();
+                  }),
                 })
       ],
     );

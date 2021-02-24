@@ -12,9 +12,64 @@ class SupplementDetails extends StatefulWidget {
 }
 
 class _SupplementDetailsState extends State<SupplementDetails> {
-  Seller s = Seller.HEALTHKART;
-  String size = "4.4 lbs";
-  String flavour = "Chocolate";
+  //Seller s = Seller.HEALTHKART;
+  //String size = "4.4 lbs";
+  //String flavour = "Chocolate";
+
+  Widget showAddToCartButton(bool b, var model) {
+    if (b) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 22.0, right: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GestureDetector(
+              onTap: () => {
+                addToSupplementCart({
+                  "product_id": model.id,
+                  "quantity": 1,
+                })
+              },
+              child: Container(
+                width: 70,
+                height: 26,
+                decoration: BoxDecoration(
+                    color: Color(0xFFEB3223),
+                    borderRadius: BorderRadius.circular(28.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "ADD",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(top: 22.0, right: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text("Out Of Stock"),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +101,6 @@ class _SupplementDetailsState extends State<SupplementDetails> {
                 return SupplementCart();
               })),
             },
-//ToDo: Show Cart
           ),
         ],
       ),
@@ -151,29 +205,32 @@ class _SupplementDetailsState extends State<SupplementDetails> {
                                   width: 10,
                                 ),
                                 Expanded(
-                                  child: DropdownButton<String>(
-                                      value: size,
-                                      isExpanded: true,
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                      iconSize: 42,
-                                      underline: SizedBox(),
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          size = newValue;
-                                        });
-                                      },
-                                      items: <String>[
-                                        '4.4 lbs',
-                                        '2.0 lbs',
-                                        '3.5 lbs',
-                                        '4.3 lbs'
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Center(child: Text(value)),
-                                        );
-                                      }).toList()),
+                                  child: Center(
+                                      child: Text(
+                                          model.weight.toString() + " Kgs")),
+                                  // child: DropdownButton<String>(
+                                  //     value: size,
+                                  //     isExpanded: true,
+                                  //     icon: Icon(Icons.keyboard_arrow_down),
+                                  //     iconSize: 42,
+                                  //     underline: SizedBox(),
+                                  //     onChanged: (String newValue) {
+                                  //       setState(() {
+                                  //         size = newValue;
+                                  //       });
+                                  //     },
+                                  //     items: <String>[
+                                  //       '4.4 lbs',
+                                  //       '2.0 lbs',
+                                  //       '3.5 lbs',
+                                  //       '4.3 lbs'
+                                  //     ].map<DropdownMenuItem<String>>(
+                                  //         (String value) {
+                                  //       return DropdownMenuItem<String>(
+                                  //         value: value,
+                                  //         child: Center(child: Text(value)),
+                                  //       );
+                                  //     }).toList()),
                                 ),
                               ],
                             ),
@@ -181,94 +238,53 @@ class _SupplementDetailsState extends State<SupplementDetails> {
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            width: 320,
-                            height: 50,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 5),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.black, width: 1),
-                                borderRadius: BorderRadius.all(
-                                    Radius.elliptical(45, 45))),
-                            child: Row(
-                              children: [
-                                Text("Flavour"),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: DropdownButton<String>(
-                                      value: flavour,
-                                      isExpanded: true,
-                                      icon: Icon(Icons.keyboard_arrow_down),
-                                      iconSize: 42,
-                                      underline: SizedBox(),
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          flavour = newValue;
-                                        });
-                                      },
-                                      items: <String>[
-                                        'Chocolate',
-                                        'Strawberry',
-                                        'Banana',
-                                        'Almond'
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Center(child: Text(value)),
-                                        );
-                                      }).toList()),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(top: 22.0, right: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () => {
-                                    addToSupplementCart({
-                                      "product_id": model.id,
-                                      "quantity": 1,
-                                    })
-                                  },
-                                  child: Container(
-                                    width: 70,
-                                    height: 26,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xFFEB3223),
-                                        borderRadius:
-                                            BorderRadius.circular(28.0)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.shopping_cart,
-                                          color: Colors.white,
-                                          size: 18,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          "ADD",
-                                          style: TextStyle(color: Colors.white),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // Container(
+                          //   width: 320,
+                          //   height: 50,
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 10, vertical: 5),
+                          //   decoration: BoxDecoration(
+                          //       color: Colors.white,
+                          //       border:
+                          //           Border.all(color: Colors.black, width: 1),
+                          //       borderRadius: BorderRadius.all(
+                          //           Radius.elliptical(45, 45))),
+                          //   child: Row(
+                          //     children: [
+                          //       Text("Flavour"),
+                          //       SizedBox(
+                          //         width: 10,
+                          //       ),
+                          //       Expanded(
+                          //         child: DropdownButton<String>(
+                          //             value: flavour,
+                          //             isExpanded: true,
+                          //             icon: Icon(Icons.keyboard_arrow_down),
+                          //             iconSize: 42,
+                          //             underline: SizedBox(),
+                          //             onChanged: (String newValue) {
+                          //               setState(() {
+                          //                 flavour = newValue;
+                          //               });
+                          //             },
+                          //             items: <String>[
+                          //               'Chocolate',
+                          //               'Strawberry',
+                          //               'Banana',
+                          //               'Almond'
+                          //             ].map<DropdownMenuItem<String>>(
+                          //                 (String value) {
+                          //               return DropdownMenuItem<String>(
+                          //                 value: value,
+                          //                 child: Center(child: Text(value)),
+                          //               );
+                          //             }).toList()),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+
+                          showAddToCartButton(model.isStock, model),
                           SizedBox(
                             height: 30,
                           ),

@@ -76,22 +76,24 @@ class _SupplementCartState extends State<SupplementCart> {
                   ),
                 ),
                 //ToDO: Align These
-                //ToDo: Must restrict double value to 2 decimal places
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Tax",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 200,
-                    ),
-                    Text((model.amount * 0.18).toString() + " Rs"),
-                  ],
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 55),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         "Tax",
+                //         style: TextStyle(fontWeight: FontWeight.bold),
+                //       ),
+                //       // SizedBox(
+                //       //   width: 200,
+                //       // ),
+                //       Text((model.amount * 0.18).toString() + " Rs"),
+                //     ],
+                //   ),
+                // ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 26, right: 26),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -101,7 +103,7 @@ class _SupplementCartState extends State<SupplementCart> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 3, left: 32, bottom: 5, right: 30),
+                          top: 3, left: 30, bottom: 5, right: 30),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -115,24 +117,29 @@ class _SupplementCartState extends State<SupplementCart> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Final Bill",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 200,
-                    ),
-                    Text(
-                      (model.amount + (model.amount * 0.18)).toString() + " Rs",
-                    ),
-                  ],
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 55),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         "Final Bill",
+                //         style: TextStyle(
+                //           fontSize: 15,
+                //           fontWeight: FontWeight.bold,
+                //         ),
+                //       ),
+                //       // SizedBox(
+                //       //   width: 200,
+                //       // ),
+                //       Text(
+                //         (model.amount + (model.amount * 0.18))
+                //                 .toStringAsFixed(2) +
+                //             " Rs",
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 SizedBox(
                   height: 80,
                 ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/supplement/supplementCartModel.dart';
@@ -164,7 +166,9 @@ class SupplementCartItem extends StatelessWidget {
               GestureDetector(
                 onTap: () => {
                   delSupplementItem({"type": "product", "item": id}),
-                  setState(),
+                  Timer(Duration(seconds: 2), () {
+                    setState();
+                  }),
                 },
                 child: Row(
                   children: [
