@@ -142,15 +142,18 @@ class _SupplementViewState extends State<SupplementView> {
                       itemCount: model.results.length,
                       itemBuilder: (c, i) {
                         return SupplementTile(
-                            imgPath: 'lib/assets/protien.jpg',
-                            title: model.results[i].name,
-                            size: model.results[i].weight.toString(),
-                            flavour: "API mai ni hai",
-                            price: model.results[i].price.toString(),
-                            seller: model.results[i].vendor.name,
-                            protein: "api",
-                            cal: "api",
-                            vit: "api");
+                          imgPath: 'lib/assets/protien.jpg',
+                          title: model.results[i].name,
+                          size: model.results[i].weight.toString(),
+                          flavour: "API mai ni hai",
+                          price: model.results[i].price.toString(),
+                          seller: model.results[i].vendor.name,
+                          protein: "api",
+                          cal: "api",
+                          vit: "api",
+                          model: model.results[i],
+                          slug: model.results[i].slug,
+                        );
                       }),
                 );
               } else {

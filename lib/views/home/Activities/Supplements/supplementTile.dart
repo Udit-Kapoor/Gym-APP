@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/supplement/SupplementProduct.dart';
+import 'package:gym_app/models/supplement/supplementSlug.dart';
 
 import 'Supplements.dart';
 
@@ -14,6 +16,8 @@ class SupplementTile extends StatelessWidget {
     @required this.protein,
     @required this.cal,
     @required this.vit,
+    @required this.slug,
+    @required this.model,
   }) : super(key: key);
 
   final String imgPath;
@@ -25,7 +29,8 @@ class SupplementTile extends StatelessWidget {
   final String protein;
   final String cal;
   final String vit;
-
+  final Result model;
+  final String slug;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,7 +40,10 @@ class SupplementTile extends StatelessWidget {
         onTap: () => {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SupplementDetails()),
+            MaterialPageRoute(
+                builder: (context) => SupplementDetails(
+                      slug: slug,
+                    )),
           )
         },
         child: Card(
@@ -105,8 +113,12 @@ class SupplementTile extends StatelessWidget {
                               width: 70,
                             ),
                             GestureDetector(
-                              //ToDO: Add To Cart Instant?
-                              onTap: null,
+                              onTap: () => {
+                                addToSupplementCart({
+                                  "product_id": model.id,
+                                  "quantity": 1,
+                                })
+                              },
                               child: Container(
                                 width: 70,
                                 height: 26,
