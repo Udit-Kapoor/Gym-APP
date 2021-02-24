@@ -200,6 +200,5 @@ Future<ApiResponse> clientList(int id) async {
     endpoint: "http://p2c-gym.herokuapp.com/trainer/trainerbatch/customer/",
     data: {"id": id},
   );
-
   return x;
 }

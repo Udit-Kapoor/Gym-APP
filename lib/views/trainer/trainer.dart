@@ -1,11 +1,11 @@
 export 'batch_timings.dart';
 export 'cleints_details.dart';
 export 'cleints_list.dart';
-export 'clients_details_view.dart';
-export 'clients_information.dart';
-export 'clients_subscription_information.dart';
-export 'clients_todays_workout_tile.dart';
+export 'Detail View/clients_details_view.dart';
+export 'Detail View/clients_profile.dart';
+export 'Detail View/clients_subscription_information.dart';
+export 'Detail View/clients_todays_workout_tile.dart';
 export '../../splash_screen.dart';
-export 'create_workout.dart';
+export 'Detail View/create_workout.dart';
 export 'trainer_home_view.dart';
 export 'trainer_profile_view.dart';

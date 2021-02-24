@@ -55,12 +55,9 @@ class Clients extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5.copyWith(
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                RotatedBox(
-                  quarterTurns: 2,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {},
-                  ),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward_ios),
+                  onPressed: () {},
                 ),
                 Spacer(
                   flex: 3,

@@ -49,7 +49,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   Widget build(BuildContext context) {
     tabs = [
       ClientsDashboard(),
-      ClientsInformation(),
+      ClientsProfile(),
       CustomerGymSubscription(),
       if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
       if (_workoutIndex == 1)
