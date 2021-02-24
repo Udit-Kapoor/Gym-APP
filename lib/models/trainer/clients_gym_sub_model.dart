@@ -35,7 +35,7 @@ class ClientsGymSubModel {
   ExercisePlan exercisePlan;
   List<ExercisePlan> specialFacility;
   List<ExercisePlan> specialActivity;
-  Locker locker;
+  dynamic locker;
   String trainername;
   String batchTimeTo;
   String batchTimeFrom;
@@ -53,7 +53,7 @@ class ClientsGymSubModel {
             json["special_facility"].map((x) => ExercisePlan.fromJson(x))),
         specialActivity: List<ExercisePlan>.from(
             json["special_activity"].map((x) => ExercisePlan.fromJson(x))),
-        locker: Locker.fromJson(json["locker"]),
+        locker: json["locker"],
         trainername: json["trainername"],
         batchTimeTo: json["batch_time_to"],
         batchTimeFrom: json["batch_time_from"],
@@ -71,7 +71,7 @@ class ClientsGymSubModel {
             List<dynamic>.from(specialFacility.map((x) => x.toJson())),
         "special_activity":
             List<dynamic>.from(specialActivity.map((x) => x.toJson())),
-        "locker": locker.toJson(),
+        "locker": locker,
         "trainername": trainername,
         "batch_time_to": batchTimeTo,
         "batch_time_from": batchTimeFrom,
@@ -105,38 +105,6 @@ class ExercisePlan {
         "id": id,
         "name": name,
         "active": active,
-      };
-}
-
-class Locker {
-  Locker({
-    this.id,
-    this.name,
-    this.active,
-    this.permanent,
-    this.customer,
-  });
-
-  int id;
-  String name;
-  bool active;
-  bool permanent;
-  int customer;
-
-  factory Locker.fromJson(Map<String, dynamic> json) => Locker(
-        id: json["id"],
-        name: json["name"],
-        active: json["active"],
-        permanent: json["permanent"],
-        customer: json["customer"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "active": active,
-        "permanent": permanent,
-        "customer": customer,
       };
 }
 

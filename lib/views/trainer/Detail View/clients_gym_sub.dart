@@ -13,7 +13,7 @@ class ClientsGymSubscription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: clientsGymSub(56),
+      future: clientsGymSub(id),
       builder: (c, s) {
         var widget;
         if (s.connectionState == ConnectionState.waiting) {

@@ -54,11 +54,13 @@ class ClientsList extends StatelessWidget {
                   cId: cl.cust[i].custid,
                   goal: 'Fat Loss',
                   onTap: () {
+                    print(cl.cust[i].id);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (c) => ClientsDetailsView(
-                          name: "${cl.cust[i].firstName} ${cl.cust[i].lastName}",
+                          name:
+                              "${cl.cust[i].firstName} ${cl.cust[i].lastName}",
                           cId: cl.cust[i].custid,
                           id: cl.cust[i].id,
                         ),

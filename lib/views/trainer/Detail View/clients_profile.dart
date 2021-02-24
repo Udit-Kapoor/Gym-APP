@@ -9,7 +9,7 @@ class ClientsProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: clientsProfile(72),
+      future: clientsProfile(id),
       builder: (c, s) {
         var widget;
 

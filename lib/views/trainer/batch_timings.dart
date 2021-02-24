@@ -14,7 +14,7 @@ class _BatchTimingsState extends State<BatchTimings> {
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder(
-          future: clientListBatchwise(),
+          future: batchTimings(),
           builder: (c, s) {
             var widget;
 
