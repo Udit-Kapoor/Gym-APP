@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/supplement/supplementCartModel.dart';
 
 // ignore: must_be_immutable
 class SupplementCartItem extends StatelessWidget {
@@ -12,6 +13,7 @@ class SupplementCartItem extends StatelessWidget {
     @required this.price,
     @required this.seller,
     @required this.setState,
+    @required this.id,
   }) : super(key: key);
 
   final String imgPath;
@@ -21,6 +23,7 @@ class SupplementCartItem extends StatelessWidget {
   final String price;
   final String seller;
   final Function setState;
+  final int id;
 
   Seller s = Seller.HEALTHKART;
   int qty = 1;
@@ -127,6 +130,7 @@ class SupplementCartItem extends StatelessWidget {
                           SizedBox(
                             width: 50,
                           ),
+                          //TodO: Update quantity in backend
                           IconButton(
                             icon: Icon(
                               Icons.add_circle,
@@ -155,21 +159,27 @@ class SupplementCartItem extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    'Remove',
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ],
+              GestureDetector(
+                onTap: () => {
+                  delSupplementItem({"type": "product", "item": id}),
+                  setState(),
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                      size: 20,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Remove',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20,
