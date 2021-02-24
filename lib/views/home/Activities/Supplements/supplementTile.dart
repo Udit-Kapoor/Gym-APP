@@ -73,11 +73,13 @@ class SupplementTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //ToDO:How to Wrap Long text without \n
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12),
+                        Container(
+                          width: 200,
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
                         ),
                         SizedBox(
                           height: 5,

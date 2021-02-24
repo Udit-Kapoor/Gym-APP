@@ -76,6 +76,7 @@ class _SupplementCartState extends State<SupplementCart> {
                   ),
                 ),
                 //ToDO: Align These
+                //ToDo: Must restrict double value to 2 decimal places
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
