@@ -1,65 +1,20 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/trainer/client_list_batchwise_model.dart';
-import 'package:gym_app/views/trainer/cleints_list_batchwise.dart';
+import 'package:gym_app/models/trainer/batch_timings_model.dart';
+import 'package:gym_app/views/trainer/cleints_list.dart';
 
-class BatchWiseClientsListView extends StatefulWidget {
-  BatchWiseClientsListView({Key key}) : super(key: key);
+class BatchTimings extends StatefulWidget {
+  BatchTimings({Key key}) : super(key: key);
 
   @override
-  _BatchWiseClientsListViewState createState() =>
-      _BatchWiseClientsListViewState();
+  _BatchTimingsState createState() => _BatchTimingsState();
 }
 
-class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
-  final List<Map<String, dynamic>> batchList = [
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-    {
-      'timings': '10.00-11.00',
-      'batchSize': 5,
-      'remote': true,
-    },
-  ];
+class _BatchTimingsState extends State<BatchTimings> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder(
-          future: clientListBatchwise(),
+          future: batchTimings(),
           builder: (c, s) {
             var widget;
 
@@ -69,7 +24,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
             } else if (s.hasData &&
                 !s.data.error &&
                 s.connectionState == ConnectionState.done) {
-              var mb = clientListBatchwiseModelFromJson(s.data.data);
+              var mb = batchTimingsModelFromJson(s.data.data);
 
               widget = Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,23 +70,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
                       ),
                     ],
                   ),
-                  // for (var batch in batchList)
-                  //   TimeTile(
-                  //     timeText: batch['timings'],
-                  //     batchSize: batch['batchSize'],
-                  //     remote: (Random().nextInt(10) + 1) % 2 == 0
-                  //         ? false
-                  //         : true,
-                  //     onTap: () {
-                  //       Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //           builder: (context) =>
-                  //               ClientsList(batchTimings: batch['timings']),
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
+               
 
                   Expanded(
                     child: ListView.builder(
@@ -139,11 +78,11 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           onTap: () {
-                            print("From batchwise id: ${mb[index].id}");
-                            Navigator.pushNamed(
+                            Navigator.push(
                               context,
-                              '/ClientsList',
-                              arguments: mb[index].id,
+                              MaterialPageRoute(
+                                builder: (c) => ClientsList(id: mb[index].id),
+                              ),
                             );
                           },
                           leading: Text(
@@ -160,7 +99,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                mb[index].limit.toString(),
+                                mb[index].cust.length.toString(),
                                 textAlign: TextAlign.left,
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
@@ -180,48 +119,3 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
     );
   }
 }
-
-// class TimeTile extends StatelessWidget {
-//   const TimeTile({
-//     Key key,
-//     @required this.timeText,
-//     @required this.batchSize,
-//     @required this.remote,
-//     this.onTap,
-//   }) : super(key: key);
-//   final String timeText;
-//   final int batchSize;
-//   final bool remote;
-//   final Function onTap;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: onTap,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: [
-//           Spacer(),
-//           Text(
-//             timeText,
-//             textAlign: TextAlign.center,
-//             style: Theme.of(context)
-//                 .textTheme
-//                 .headline5
-//                 .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-//           ),
-//           Spacer(flex: 3),
-//           Text(batchSize.toString()),
-//           Spacer(),
-//           Icon(Icons.person),
-//           Spacer(),
-//           Icon(
-//             Icons.location_on,
-//             color: remote ? Colors.red : Colors.transparent,
-//           ),
-//           Spacer(),
-//         ],
-//       ),
-//     );
-//   }
-// }

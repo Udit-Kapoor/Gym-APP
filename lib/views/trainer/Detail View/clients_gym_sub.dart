@@ -1,55 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/customer_subscription_model.dart';
+import 'package:gym_app/models/trainer/clients_gym_sub_model.dart';
 import 'package:gym_app/views/customer/text_field_widget.dart';
 
-class CustomerGymSubscriptionView extends StatelessWidget {
-  const CustomerGymSubscriptionView({Key key}) : super(key: key);
+class ClientsGymSubscription extends StatelessWidget {
+  final int id;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.navigate_before,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          'Gym Subscription',
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
-      body: CustomerGymSubscription(),
-    );
-  }
-}
-
-class CustomerGymSubscription extends StatelessWidget {
-  const CustomerGymSubscription({
+  const ClientsGymSubscription({
     Key key,
+    this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: customerGymSub(),
+      future: clientsGymSub(id),
       builder: (c, s) {
         var widget;
         if (s.connectionState == ConnectionState.waiting) {
           widget = Container(child: Center(child: CircularProgressIndicator()));
         } else if (s.hasData &&
-          !s.data.error &&
+            !s.data.error &&
             s.connectionState == ConnectionState.done) {
-          var cg = customerSubscriptionModelFromJson(s.data.data);
+          var cg = clientsGymSubModelFromJson(s.data.data);
 
           List _facList = [];
           for (var fac in cg.specialFacility) _facList.add(fac.name);
@@ -107,8 +79,7 @@ class CustomerGymSubscription extends StatelessWidget {
               ),
               TextFieldWidget(
                 borderText: 'Exercise Plan',
-                bodyText:
-                    cg.exercisePlan.name ,
+                bodyText: cg.exercisePlan.name,
               ),
               TextFieldWidget(
                 borderText: 'Facilities Opted',

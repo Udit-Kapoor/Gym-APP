@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final clientListBatchwiseModel = clientListBatchwiseModelFromJson(jsonString);
+//     final clientListBatchwiseModel = batchTimingsModelFromJson(jsonString);
 
 import 'dart:convert';
 
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
-List<ClientListBatchwiseModel> clientListBatchwiseModelFromJson(String str) =>
-    List<ClientListBatchwiseModel>.from(
-        json.decode(str).map((x) => ClientListBatchwiseModel.fromJson(x)));
+List<BatchTimingsModel> batchTimingsModelFromJson(String str) =>
+    List<BatchTimingsModel>.from(
+        json.decode(str).map((x) => BatchTimingsModel.fromJson(x)));
 
-String clientListBatchwiseModelToJson(List<ClientListBatchwiseModel> data) =>
+String batchTimingsModelToJson(List<BatchTimingsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ClientListBatchwiseModel {
-  ClientListBatchwiseModel({
+class BatchTimingsModel {
+  BatchTimingsModel({
     this.id,
     this.trainer,
     this.batchName,
@@ -35,8 +35,8 @@ class ClientListBatchwiseModel {
   int limit;
   List<int> cust;
 
-  factory ClientListBatchwiseModel.fromJson(Map<String, dynamic> json) =>
-      ClientListBatchwiseModel(
+  factory BatchTimingsModel.fromJson(Map<String, dynamic> json) =>
+      BatchTimingsModel(
         id: json["id"],
         trainer: Trainer.fromJson(json["trainer"]),
         batchName: json["batch_name"],
@@ -84,7 +84,7 @@ class Trainer {
       };
 }
 
-Future<ApiResponse> clientListBatchwise() async {
+Future<ApiResponse> batchTimings() async {
   ApiResponse tp = await ApiHelper()
       .getReq(endpoint: "http://p2c-gym.herokuapp.com/trainer/trainerbatch/");
   

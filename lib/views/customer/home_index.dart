@@ -19,7 +19,12 @@ class HomeIndex extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: [
-          TodaysWorkoutTile(),
+          TodaysWorkoutTile(
+            dateNum: '30',
+            month: 'Oct',
+            batchTime: '09.30-10.30',
+            dayName: 'Chest',
+          ),
           MyGoalTile(),
           WeightChart(),
           SizedBox(height: 20.0),

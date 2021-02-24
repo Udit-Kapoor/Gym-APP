@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
 class TodaysWorkoutTile extends StatelessWidget {
+  final String dateNum;
+  final String month;
+  final String batchTime;
+  final String dayName;
 
-
-  const TodaysWorkoutTile({Key key}) : super(key: key);
+  const TodaysWorkoutTile(
+      {Key key,
+      @required this.dateNum,
+      @required this.month,
+      @required this.batchTime,
+      @required this.dayName})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -18,7 +27,7 @@ class TodaysWorkoutTile extends StatelessWidget {
           width: 60.0,
           child: Center(
             child: Text(
-              '30\nOct',
+              '$dateNum\n$month',
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
@@ -29,7 +38,7 @@ class TodaysWorkoutTile extends StatelessWidget {
         ),
         title: Text('Today\'s Workout'),
         subtitle: Text(
-          'Chest Day',
+          '$dayName Day',
           style: Theme.of(context)
               .textTheme
               .headline6
@@ -42,7 +51,7 @@ class TodaysWorkoutTile extends StatelessWidget {
               Icons.notifications,
               color: Colors.black,
             ),
-            Text('09.30-10.30'),
+            Text(batchTime),
           ],
         ),
       ),

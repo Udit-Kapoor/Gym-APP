@@ -36,7 +36,7 @@ class WorkoutIndex extends StatelessWidget {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.grey[50],
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 child: Row(
@@ -84,82 +84,79 @@ class WorkoutIndex extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               children: [
                 for (var muscle in muscleList)
-                  Material(
-                    elevation: 4.0,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ExercisePage(
-                              muscle: muscle[1],
-                            ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ExercisePage(
+                            muscle: muscle[1],
                           ),
-                        );
-                      },
+                        ),
+                      );
+                    },
 
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        elevation: 4.0,
+                        child: Container(
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          elevation: 4.0,
-                          child: Container(
-                            height: 80.0,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  muscle[0],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  muscle[1],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline6
-                                      .copyWith(fontWeight: FontWeight.w700),
-                                ),
-                              ],
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                muscle[0],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                muscle[1],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(fontWeight: FontWeight.w700),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      // child: Container(
-                      //   padding: EdgeInsets.all(20.0),
-                      //   margin: EdgeInsets.symmetric(
-                      //       horizontal: 20.0, vertical: 10.0),
-                      //   height: 80,
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.circular(20.0),
-                      //   ),
-                      // child: Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Text(
-                      //       muscle[0],
-                      //       style: Theme.of(context)
-                      //           .textTheme
-                      //           .headline6
-                      //           .copyWith(fontWeight: FontWeight.w400),
-                      //     ),
-                      //     Text(
-                      //       muscle[1],
-                      //       style: Theme.of(context).textTheme.headline6,
-                      //     ),
-                      //   ],
-                      // ),
-                      // ),
                     ),
+                    // child: Container(
+                    //   padding: EdgeInsets.all(20.0),
+                    //   margin: EdgeInsets.symmetric(
+                    //       horizontal: 20.0, vertical: 10.0),
+                    //   height: 80,
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.white,
+                    //     borderRadius: BorderRadius.circular(20.0),
+                    //   ),
+                    // child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       muscle[0],
+                    //       style: Theme.of(context)
+                    //           .textTheme
+                    //           .headline6
+                    //           .copyWith(fontWeight: FontWeight.w400),
+                    //     ),
+                    //     Text(
+                    //       muscle[1],
+                    //       style: Theme.of(context).textTheme.headline6,
+                    //     ),
+                    //   ],
+                    // ),
+                    // ),
                   ),
               ],
             ),

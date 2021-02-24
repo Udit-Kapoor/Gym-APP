@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/views/trainer/client_list_tile.dart';
 
 class Clients extends StatelessWidget {
   const Clients({Key key}) : super(key: key);
@@ -54,12 +55,9 @@ class Clients extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5.copyWith(
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                RotatedBox(
-                  quarterTurns: 2,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {},
-                  ),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward_ios),
+                  onPressed: () {},
                 ),
                 Spacer(
                   flex: 3,
@@ -76,7 +74,7 @@ class Clients extends StatelessWidget {
                   for (var i = 0; i < 10; i++)
                     ClientsListTile(
                       name: 'Angelina Perry',
-                      cId: 60942,
+                      cId: 60942.toString(),
                       goal: 'Fat Loss',
                     ),
                 ],
@@ -84,72 +82,6 @@ class Clients extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ClientsListTile extends StatelessWidget {
-  const ClientsListTile({
-    Key key,
-    @required this.name,
-    @required this.cId,
-    @required this.goal,
-    this.onTap,
-  }) : super(key: key);
-  final String name;
-  final int cId;
-  final String goal;
-  final Function onTap;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Card(
-          elevation: 3.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20.0),
-            ),
-          ),
-          child: ListTile(
-            leading: CircleAvatar(
-              child: Image.asset(
-                'lib/assets/clients.png',
-                fit: BoxFit.fill,
-              ),
-            ),
-            title: Text(
-              name,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-            subtitle: Row(
-              children: [
-                Text(
-                  '#$cId',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black),
-                ),
-                Spacer(flex: 2),
-                Text(
-                  goal,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black),
-                ),
-                Spacer()
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

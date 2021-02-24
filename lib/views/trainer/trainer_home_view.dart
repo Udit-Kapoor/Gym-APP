@@ -113,7 +113,7 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
 
   final List trainerTabs = [
     TrainerHomeIndex(),
-    BatchWiseClientsListView(),
+    BatchTimings(),
     Expanded(child: TeamPage()),
   ];
   int _currentIndex = 0;
