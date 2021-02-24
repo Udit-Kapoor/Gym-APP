@@ -1,4 +1,4 @@
-export 'batch_wise_clients_list_view.dart';
+export 'batch_timings.dart';
 export 'cleints_details.dart';
 export 'cleints_list.dart';
 export 'clients_details_view.dart';

@@ -9,7 +9,7 @@ class ClientsListTile extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
   final String name;
-  final int cId;
+  final String cId;
   final String goal;
   final Function onTap;
   @override
@@ -42,7 +42,7 @@ class ClientsListTile extends StatelessWidget {
             subtitle: Row(
               children: [
                 Text(
-                  '#$cId',
+                 cId,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/trainer/client_list_batchwise_model.dart';
+import 'package:gym_app/models/trainer/batch_timings_model.dart';
 import 'package:gym_app/views/trainer/cleints_list.dart';
 
-class BatchWiseClientsListView extends StatefulWidget {
-  BatchWiseClientsListView({Key key}) : super(key: key);
+class BatchTimings extends StatefulWidget {
+  BatchTimings({Key key}) : super(key: key);
 
   @override
-  _BatchWiseClientsListViewState createState() =>
-      _BatchWiseClientsListViewState();
+  _BatchTimingsState createState() => _BatchTimingsState();
 }
 
-class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
- 
+class _BatchTimingsState extends State<BatchTimings> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -26,7 +24,7 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
             } else if (s.hasData &&
                 !s.data.error &&
                 s.connectionState == ConnectionState.done) {
-              var mb = clientListBatchwiseModelFromJson(s.data.data);
+              var mb = batchTimingsModelFromJson(s.data.data);
 
               widget = Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,10 +94,11 @@ class _BatchWiseClientsListViewState extends State<BatchWiseClientsListView> {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           onTap: () {
-                            Navigator.pushNamed(
+                            Navigator.push(
                               context,
-                              '/ClientsList',
-                              arguments: mb[index].id,
+                              MaterialPageRoute(
+                                builder: (c) => ClientsList(id: mb[index].id),
+                              ),
                             );
                           },
                           leading: Text(

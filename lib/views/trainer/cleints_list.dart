@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/lib.dart';
-import 'package:gym_app/models/trainer/client_list_model.dart';
+import 'package:gym_app/models/trainer/clients_list_model.dart';
+import 'package:gym_app/views/trainer/client_list_tile.dart';
 
 class ClientsList extends StatelessWidget {
-  const ClientsList({Key key, this.id}) : super(key: key);
+  const ClientsList({Key key, @required this.id}) : super(key: key);
 
   final int id;
 
@@ -19,11 +19,6 @@ class ClientsList extends StatelessWidget {
           ),
           onPressed: () async {
             Navigator.pop(context);
-            //!for testing only
-            // var d = await clientList(id);
-            // print(d.data);
-            // print(d.errorMessage);
-            // print(d.error);
           },
         ),
         centerTitle: true,
@@ -33,19 +28,41 @@ class ClientsList extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          for (var i = 0; i < 10; i++)
-            ClientsListTile(
-              name: 'Angelina Perry',
-              cId: 60942,
-              goal: 'Fat Loss',
-              onTap: () {
-                Navigator.pushNamed(context, '/ClientsDetailsView');
+      body: FutureBuilder(
+        future: clientList(id),
+        builder: (c, s) {
+          var widget;
+
+          if (s.connectionState == ConnectionState.waiting) {
+            widget =
+                Container(child: Center(child: CircularProgressIndicator()));
+          } else if (s.hasData &&
+              !s.data.error &&
+              s.connectionState == ConnectionState.done) {
+            var _cl = clientsListModelFromJson(s.data.data);
+
+            var cl = _cl[0];
+
+            widget = ListView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: cl.cust.length,
+              itemBuilder: (c, i) {
+                //TODO: Add Profile picture
+                return ClientsListTile(
+                  name: cl.cust[i].firstName,
+                  cId: cl.cust[i].custid,
+                  goal: 'Fat Loss',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/ClientsDetailsView');
+                  },
+                );
               },
-            ),
-        ],
+            );
+          } else
+            widget = Container(child: Center(child: Text("OOPS! NO DATA!")));
+
+          return widget;
+        },
       ),
     );
   }
