@@ -134,7 +134,7 @@ class _SupplementViewState extends State<SupplementView> {
                 );
               } else if (s.hasData &&
                   s.connectionState == ConnectionState.done) {
-                var model = supplementProductFromJson(s.data.data);
+                var model = s.data;
                 print(model);
                 return Expanded(
                   child: ListView.builder(
@@ -142,7 +142,7 @@ class _SupplementViewState extends State<SupplementView> {
                       itemCount: model.results.length,
                       itemBuilder: (c, i) {
                         return SupplementTile(
-                            imgPath: 'assets/protien.jpg',
+                            imgPath: 'lib/assets/protien.jpg',
                             title: model.results[i].name,
                             size: model.results[i].weight.toString(),
                             flavour: "API mai ni hai",
