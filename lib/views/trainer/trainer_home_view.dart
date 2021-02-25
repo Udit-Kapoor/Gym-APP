@@ -1,8 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/views/common/qr_code_scanner.dart';
 import 'package:gym_app/views/trainer/upcoming_batches_tile.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -70,7 +70,10 @@ class _TrainerHomeState extends State<TrainerHome>
                 Icons.qr_code_scanner,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => QRCodeScan()));
+              },
             ),
         ],
         title: Image.asset(
@@ -195,6 +198,7 @@ class TrainerHomeIndex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           UpcomingBatchesTile(),
           Padding(
