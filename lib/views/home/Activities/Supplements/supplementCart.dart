@@ -71,6 +71,7 @@ class _SupplementCartState extends State<SupplementCart> {
                             seller: model.item[i].product.vendor.name,
                             setState: () => setState(() {}),
                             id: model.item[i].id,
+                            qty: model.item[i].quantity,
                           );
                         }),
                   ),

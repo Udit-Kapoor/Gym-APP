@@ -228,3 +228,15 @@ void delSupplementItem(Map data) async {
     Fluttertoast.showToast(msg: "Item Deleted");
   }
 }
+
+void updateSupplementCartItem(Map data) async {
+  ApiResponse cp = await ApiHelper().patchReq(
+    endpoint: "https://p2c-gym.herokuapp.com/customer/cartview/",
+    data: data,
+  );
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Error in Updating Quantity");
+  } else {
+    Fluttertoast.showToast(msg: "Quantity Updated");
+  }
+}

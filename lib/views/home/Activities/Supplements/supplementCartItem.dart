@@ -16,6 +16,7 @@ class SupplementCartItem extends StatelessWidget {
     @required this.seller,
     @required this.setState,
     @required this.id,
+    @required this.qty,
   }) : super(key: key);
 
   final String imgPath;
@@ -26,9 +27,10 @@ class SupplementCartItem extends StatelessWidget {
   final String seller;
   final Function setState;
   final int id;
+  int qty;
 
   Seller s = Seller.HEALTHKART;
-  int qty = 1;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -136,13 +138,18 @@ class SupplementCartItem extends StatelessWidget {
                           ),
                           //TodO: Update quantity in backend
                           IconButton(
-                            icon: Icon(
-                              Icons.add_circle,
-                              size: 30,
-                              color: Colors.black,
-                            ),
-                            onPressed: () => setState(() => qty++),
-                          ),
+                              icon: Icon(
+                                Icons.add_circle,
+                                size: 30,
+                                color: Colors.black,
+                              ),
+                              onPressed: () => {
+                                    updateSupplementCartItem(
+                                        {"item": id, "todo": "add"}),
+                                    Timer(Duration(seconds: 1), () {
+                                      setState();
+                                    }),
+                                  }),
                           Text('$qty'),
                           IconButton(
                               icon: Icon(
@@ -151,8 +158,11 @@ class SupplementCartItem extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               onPressed: () => {
-                                    if (qty > 1) qty--,
-                                    setState(),
+                                    updateSupplementCartItem(
+                                        {"item": id, "todo": "remove"}),
+                                    Timer(Duration(seconds: 1), () {
+                                      setState();
+                                    }),
                                   }),
                         ],
                       ),
