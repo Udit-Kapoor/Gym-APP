@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'dart:async';
 
 class CafeCart extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class CafeCart extends StatefulWidget {
 }
 
 class _CafeCartState extends State<CafeCart> {
-  CafeteriaCart localModel;
+  CafeteriaCart localModel = new CafeteriaCart();
 
   @override
   Widget build(BuildContext context) {
@@ -29,34 +30,12 @@ class _CafeCartState extends State<CafeCart> {
           //   // border: Border.all(color: Colors.black, width: 0.0),
           //   borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
           // ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Final Bill",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    (localModel == null ? 0 : localModel.totalBill).toString() +
-                        " Rs",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              SizedBox(width: 20),
-              Text(
-                "Checkout",
-                style: TextStyle(
-                    color: Colors.white, decoration: TextDecoration.underline),
-              ),
-            ],
+          child: Center(
+            child: Text(
+              "Checkout",
+              style: TextStyle(
+                  color: Colors.white, decoration: TextDecoration.underline),
+            ),
           ),
         ),
       ),
@@ -77,88 +56,87 @@ class _CafeCartState extends State<CafeCart> {
         //centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 26.0, right: 26),
-            child: Container(
-              height: 500,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0xFFDADADA),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Column(
+      body: FutureBuilder(
+        future: getCart(),
+        builder: (c, s) {
+          if (s.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (s.hasData && s.connectionState == ConnectionState.done) {
+            var model = cafeteriaCartFromJson(s.data.data);
+            print(model);
+            if (model[0].active) {
+              localModel = model[0];
+              return Column(
                 children: [
                   SizedBox(
-                    height: 7,
+                    height: 30,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: 5,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 26.0, right: 26),
+                    child: Container(
+                      height: 470,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color(0xFFDADADA),
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
-                      Text(
-                        "Item",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      SizedBox(
-                        width: 60,
-                      ),
-                      Text(
-                        "Size",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Qty",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Bill",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Remove",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  FutureBuilder(
-                    future: getCart(),
-                    builder: (c, s) {
-                      if (s.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (s.hasData &&
-                          s.connectionState == ConnectionState.done) {
-                        var model = cafeteriaCartFromJson(s.data.data);
-                        print(model);
-                        if (model[0].active) {
-                          localModel = model[0];
-                          return Expanded(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 7,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Item",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              SizedBox(
+                                width: 60,
+                              ),
+                              Text(
+                                "Size",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Qty",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Bill",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Remove",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Expanded(
                             child: ListView.builder(
                                 itemCount: model[0].order.length,
                                 itemBuilder: (c, i) {
@@ -173,69 +151,98 @@ class _CafeCartState extends State<CafeCart> {
                                     setState: () => setState(() {}),
                                   );
                                 }),
-                          );
-                        } else {
-                          return Center(
-                            child: Text("Nothing in Cart"),
-                          );
-                        }
-                      } else {
-                        return Text("No data found");
-                      }
-                    },
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    height: 30,
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 17.0, left: 57, right: 56),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Tax",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text((model[0].totalBill - model[0].totalCost)
+                                .toString() +
+                            " Rs"),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 8.0, left: 26, right: 26),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color(0xFFDADADA),
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 3, left: 32, bottom: 5, right: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total Bill",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text((model[0].totalCost).toString() + " Rs"),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 8.0, left: 26, right: 26),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color(0xFFDADADA),
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 3, left: 32, bottom: 5, right: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Final Bill",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              (model[0].totalBill).toString() + " Rs",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 17.0, left: 57, right: 56),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Tax",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text((localModel == null
-                            ? 0
-                            : localModel.totalBill - localModel.totalCost)
-                        .toString() +
-                    " Rs"),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 26, right: 26),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0xFFDADADA),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 3, left: 32, bottom: 5, right: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Total Bill",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text((localModel == null ? 0 : localModel.totalCost)
-                            .toString() +
-                        " Rs"),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+              );
+            } else {
+              return Center(
+                child: Text("Nothing in Cart"),
+              );
+            }
+          } else {
+            return Text("No data found");
+          }
+        },
       ),
     );
   }
@@ -302,10 +309,12 @@ class BillItem extends StatelessWidget {
               color: Colors.black,
               size: 20,
             ),
-            //ToDo: Add Remove from Cart POST req
+            //ToDo: How to rebuild FUTURE
             onPressed: () => {
                   delItem(id),
-                  setState(),
+                  Timer(Duration(seconds: 2), () {
+                    setState();
+                  }),
                 })
       ],
     );

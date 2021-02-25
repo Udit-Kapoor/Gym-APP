@@ -23,7 +23,7 @@ class _OnboardingViewsState extends State<OnboardingViews> {
                 });
               },
               height: getScreenHeight,
-              autoPlay: false,
+              autoPlay: true,
               autoPlayAnimationDuration: Duration(seconds: 1),
               viewportFraction: 1.0),
           items: [

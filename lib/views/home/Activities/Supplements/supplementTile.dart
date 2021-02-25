@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/supplement/SupplementProduct.dart';
+import 'package:gym_app/models/supplement/supplementSlug.dart';
 
 import 'Supplements.dart';
 
@@ -14,6 +16,8 @@ class SupplementTile extends StatelessWidget {
     @required this.protein,
     @required this.cal,
     @required this.vit,
+    @required this.slug,
+    @required this.model,
   }) : super(key: key);
 
   final String imgPath;
@@ -25,6 +29,47 @@ class SupplementTile extends StatelessWidget {
   final String protein;
   final String cal;
   final String vit;
+  final Result model;
+  final String slug;
+
+  Widget showAddToCartButton(bool b) {
+    if (b) {
+      return GestureDetector(
+        onTap: () => {
+          addToSupplementCart({
+            "product_id": model.id,
+            "quantity": 1,
+          })
+        },
+        child: Container(
+          width: 70,
+          height: 26,
+          decoration: BoxDecoration(
+              color: Color(0xFFEB3223),
+              borderRadius: BorderRadius.circular(28.0)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+                size: 18,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                "ADD",
+                style: TextStyle(color: Colors.white),
+              )
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Text("Out Of Stock");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +80,10 @@ class SupplementTile extends StatelessWidget {
         onTap: () => {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SupplementDetails()),
+            MaterialPageRoute(
+                builder: (context) => SupplementDetails(
+                      slug: slug,
+                    )),
           )
         },
         child: Card(
@@ -65,11 +113,13 @@ class SupplementTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //ToDO:How to Wrap Long text without \n
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12),
+                        Container(
+                          width: 200,
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 12),
+                          ),
                         ),
                         SizedBox(
                           height: 5,
@@ -104,34 +154,7 @@ class SupplementTile extends StatelessWidget {
                             SizedBox(
                               width: 70,
                             ),
-                            GestureDetector(
-                              //ToDO: Add To Cart Instant?
-                              onTap: null,
-                              child: Container(
-                                width: 70,
-                                height: 26,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFEB3223),
-                                    borderRadius: BorderRadius.circular(28.0)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.shopping_cart,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "ADD",
-                                      style: TextStyle(color: Colors.white),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
+                            showAddToCartButton(model.isStock),
                           ],
                         ),
                       ],

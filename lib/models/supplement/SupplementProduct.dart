@@ -113,6 +113,7 @@ Future<SupplementProduct> getSupplements() async {
 
   var model = supplementProductFromJson(cp.data);
   var finalModel = supplementProductFromJson(cp.data);
+  finalModel.results.clear();
 
   int i = 2;
   print("loop started");
