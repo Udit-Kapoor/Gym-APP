@@ -104,6 +104,31 @@ class ApiHelper {
     }
   }
 
+  Future<ApiResponse> patchReq(
+      {String endpoint, Map data, String query = ""}) async {
+    final String url = endpoint + query;
+    final _sp = await s;
+    try {
+      Response postReq = await patch(
+        url,
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
+        },
+        body: jsonEncode(data),
+      );
+      return postReq.statusCode >= 200 && postReq.statusCode <= 205
+          ? ApiResponse(data: postReq.body)
+          : ApiResponse(error: true);
+    } on SocketException {
+      return ApiResponse(error: true, errorMessage: "NO INTERNET");
+    } on HttpException {
+      return ApiResponse(error: true, errorMessage: "HTTP Error");
+    } catch (e) {
+      return ApiResponse(error: true, errorMessage: e.toString());
+    }
+  }
+
   Future<ApiResponse> getReq({String endpoint, String query = ""}) async {
     final String url = endpoint + query;
     SharedPreferences _sp = await s;
