@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final cafeteriaCart = cafeteriaCartFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';

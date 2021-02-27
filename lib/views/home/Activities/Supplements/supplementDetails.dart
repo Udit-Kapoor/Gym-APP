@@ -18,46 +18,58 @@ class _SupplementDetailsState extends State<SupplementDetails> {
 
   Widget showAddToCartButton(bool b, var model) {
     if (b) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 22.0, right: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            GestureDetector(
-              onTap: () => {
-                addToSupplementCart({
-                  "product_id": model.id,
-                  "quantity": 1,
-                })
-              },
-              child: Container(
-                width: 70,
-                height: 26,
-                decoration: BoxDecoration(
-                    color: Color(0xFFEB3223),
-                    borderRadius: BorderRadius.circular(28.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.shopping_cart,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "ADD",
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
+      if (!model.productExits) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 22.0, right: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () => {
+                  addToSupplementCart({
+                    "product_id": model.id,
+                    "quantity": 1,
+                  })
+                },
+                child: Container(
+                  width: 70,
+                  height: 26,
+                  decoration: BoxDecoration(
+                      color: Color(0xFFEB3223),
+                      borderRadius: BorderRadius.circular(28.0)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "ADD",
+                        style: TextStyle(color: Colors.white),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
+            ],
+          ),
+        );
+      } else {
+        return Padding(
+          padding: const EdgeInsets.only(top: 22.0, right: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text("Item Already in Cart"),
+            ],
+          ),
+        );
+      }
     } else {
       return Padding(
         padding: const EdgeInsets.only(top: 22.0, right: 15),

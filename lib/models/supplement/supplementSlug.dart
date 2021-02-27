@@ -15,6 +15,7 @@ String supplementSlugToJson(SupplementSlug data) => json.encode(data.toJson());
 
 class SupplementSlug {
   SupplementSlug({
+    this.productExits,
     this.id,
     this.vendor,
     this.name,
@@ -31,6 +32,7 @@ class SupplementSlug {
     this.date,
   });
 
+  bool productExits;
   int id;
   Vendor vendor;
   String name;
@@ -47,6 +49,7 @@ class SupplementSlug {
   DateTime date;
 
   factory SupplementSlug.fromJson(Map<String, dynamic> json) => SupplementSlug(
+        productExits: json["product_exits"],
         id: json["id"],
         vendor: Vendor.fromJson(json["vendor"]),
         name: json["name"],
@@ -64,6 +67,7 @@ class SupplementSlug {
       );
 
   Map<String, dynamic> toJson() => {
+        "product_exits": productExits,
         "id": id,
         "vendor": vendor.toJson(),
         "name": name,
