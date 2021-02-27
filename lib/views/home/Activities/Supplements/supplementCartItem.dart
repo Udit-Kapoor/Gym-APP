@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/supplement/supplementCartModel.dart';
 
@@ -158,11 +159,19 @@ class SupplementCartItem extends StatelessWidget {
                                 color: Colors.black,
                               ),
                               onPressed: () => {
-                                    updateSupplementCartItem(
-                                        {"item": id, "todo": "remove"}),
-                                    Timer(Duration(seconds: 1), () {
-                                      setState();
-                                    }),
+                                    if (qty > 1)
+                                      {
+                                        updateSupplementCartItem(
+                                            {"item": id, "todo": "remove"}),
+                                        Timer(Duration(seconds: 1), () {
+                                          setState();
+                                        }),
+                                      }
+                                    else
+                                      {
+                                        Fluttertoast.showToast(
+                                            msg: "Use Remove Button"),
+                                      }
                                   }),
                         ],
                       ),
