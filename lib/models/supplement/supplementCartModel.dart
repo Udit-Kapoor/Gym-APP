@@ -240,3 +240,15 @@ void updateSupplementCartItem(Map data) async {
     Fluttertoast.showToast(msg: "Quantity Updated");
   }
 }
+
+void placeSupplementCart(Map data) async {
+  ApiResponse cp = await ApiHelper().postReq(
+    endpoint: "https://p2c-gym.herokuapp.com/website/confirmpayment/",
+    data: data,
+  );
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Can not Place Order");
+  } else {
+    Fluttertoast.showToast(msg: "Order Placed");
+  }
+}

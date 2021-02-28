@@ -1,12 +1,12 @@
-// To parse this JSON data, do
-//
-//     final cafeteriaCart = cafeteriaCartFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
+
+// To parse this JSON data, do
+//
+//     final cafeteriaCart = cafeteriaCartFromJson(jsonString);
 
 List<CafeteriaCart> cafeteriaCartFromJson(String str) =>
     List<CafeteriaCart>.from(
@@ -21,6 +21,8 @@ class CafeteriaCart {
     this.orderedDate,
     this.paymentMethod,
     this.totalBill,
+    this.name,
+    this.phone,
     this.totalCost,
     this.tax,
     this.active,
@@ -36,6 +38,7 @@ class CafeteriaCart {
     this.createdAt,
     this.customer,
     this.trainer,
+    this.employee,
     this.order,
   });
 
@@ -43,6 +46,8 @@ class CafeteriaCart {
   DateTime orderedDate;
   dynamic paymentMethod;
   int totalBill;
+  dynamic name;
+  dynamic phone;
   int totalCost;
   int tax;
   bool active;
@@ -58,6 +63,7 @@ class CafeteriaCart {
   DateTime createdAt;
   CafeteriaCartCustomer customer;
   dynamic trainer;
+  dynamic employee;
   List<Order> order;
 
   factory CafeteriaCart.fromJson(Map<String, dynamic> json) => CafeteriaCart(
@@ -65,6 +71,8 @@ class CafeteriaCart {
         orderedDate: DateTime.parse(json["ordered_date"]),
         paymentMethod: json["payment_method"],
         totalBill: json["total_bill"],
+        name: json["name"],
+        phone: json["phone"],
         totalCost: json["total_cost"],
         tax: json["tax"],
         active: json["active"],
@@ -80,6 +88,7 @@ class CafeteriaCart {
         createdAt: DateTime.parse(json["created_at"]),
         customer: CafeteriaCartCustomer.fromJson(json["customer"]),
         trainer: json["trainer"],
+        employee: json["employee"],
         order: List<Order>.from(json["order"].map((x) => Order.fromJson(x))),
       );
 
@@ -88,6 +97,8 @@ class CafeteriaCart {
         "ordered_date": orderedDate.toIso8601String(),
         "payment_method": paymentMethod,
         "total_bill": totalBill,
+        "name": name,
+        "phone": phone,
         "total_cost": totalCost,
         "tax": tax,
         "active": active,
@@ -103,6 +114,7 @@ class CafeteriaCart {
         "created_at": createdAt.toIso8601String(),
         "customer": customer.toJson(),
         "trainer": trainer,
+        "employee": employee,
         "order": List<dynamic>.from(order.map((x) => x.toJson())),
       };
 }
@@ -126,6 +138,7 @@ class CafeteriaCartCustomer {
     this.photo,
     this.idProof,
     this.idProofImage,
+    this.idProofImage1,
     this.active,
     this.dateAdded,
     this.user,
@@ -146,9 +159,10 @@ class CafeteriaCartCustomer {
   String city;
   String state;
   int pincode;
-  String photo;
+  dynamic photo;
   String idProof;
-  String idProofImage;
+  dynamic idProofImage;
+  dynamic idProofImage1;
   bool active;
   DateTime dateAdded;
   User user;
@@ -173,6 +187,7 @@ class CafeteriaCartCustomer {
         photo: json["photo"],
         idProof: json["id_proof"],
         idProofImage: json["id_proof_image"],
+        idProofImage1: json["id_proof_image1"],
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
         user: User.fromJson(json["user"]),
@@ -198,6 +213,7 @@ class CafeteriaCartCustomer {
         "photo": photo,
         "id_proof": idProof,
         "id_proof_image": idProofImage,
+        "id_proof_image1": idProofImage1,
         "active": active,
         "date_added":
             "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
@@ -274,6 +290,7 @@ class Cust {
     this.photo,
     this.idProof,
     this.idProofImage,
+    this.idProofImage1,
     this.active,
     this.dateAdded,
     this.user,
@@ -297,6 +314,7 @@ class Cust {
   String photo;
   String idProof;
   String idProofImage;
+  dynamic idProofImage1;
   bool active;
   DateTime dateAdded;
   int user;
@@ -307,7 +325,9 @@ class Cust {
         firstName: json["first_name"],
         middleName: json["middle_name"],
         lastName: json["last_name"],
-        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"] == null
+            ? null
+            : DateTime.parse(json["date_of_birth"]),
         gender: json["gender"],
         phone: json["phone"],
         alternatePhone: json["alternate_phone"],
@@ -316,10 +336,12 @@ class Cust {
         address2: json["address2"],
         city: json["city"],
         state: json["state"],
-        pincode: json["pincode"],
-        photo: json["photo"],
+        pincode: json["pincode"] == null ? null : json["pincode"],
+        photo: json["photo"] == null ? null : json["photo"],
         idProof: json["id_proof"],
-        idProofImage: json["id_proof_image"],
+        idProofImage:
+            json["id_proof_image"] == null ? null : json["id_proof_image"],
+        idProofImage1: json["id_proof_image1"],
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
         user: json["user"],
@@ -331,8 +353,9 @@ class Cust {
         "first_name": firstName,
         "middle_name": middleName,
         "last_name": lastName,
-        "date_of_birth":
-            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "date_of_birth": dateOfBirth == null
+            ? null
+            : "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
         "gender": gender,
         "phone": phone,
         "alternate_phone": alternatePhone,
@@ -341,10 +364,11 @@ class Cust {
         "address2": address2,
         "city": city,
         "state": state,
-        "pincode": pincode,
-        "photo": photo,
+        "pincode": pincode == null ? null : pincode,
+        "photo": photo == null ? null : photo,
         "id_proof": idProof,
-        "id_proof_image": idProofImage,
+        "id_proof_image": idProofImage == null ? null : idProofImage,
+        "id_proof_image1": idProofImage1,
         "active": active,
         "date_added":
             "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
@@ -372,6 +396,7 @@ class Trainer {
     this.image,
     this.idProof,
     this.idProofImage,
+    this.idProofImage1,
     this.resume,
     this.joiningDate,
     this.salary,
@@ -400,6 +425,7 @@ class Trainer {
   String image;
   String idProof;
   String idProofImage;
+  dynamic idProofImage1;
   String resume;
   DateTime joiningDate;
   int salary;
@@ -428,6 +454,7 @@ class Trainer {
         image: json["image"],
         idProof: json["id_proof"],
         idProofImage: json["id_proof_image"],
+        idProofImage1: json["id_proof_image1"],
         resume: json["resume"],
         joiningDate: DateTime.parse(json["joining_date"]),
         salary: json["salary"],
@@ -458,6 +485,7 @@ class Trainer {
         "image": image,
         "id_proof": idProof,
         "id_proof_image": idProofImage,
+        "id_proof_image1": idProofImage1,
         "resume": resume,
         "joining_date":
             "${joiningDate.year.toString().padLeft(4, '0')}-${joiningDate.month.toString().padLeft(2, '0')}-${joiningDate.day.toString().padLeft(2, '0')}",
@@ -561,6 +589,8 @@ class User {
 class Order {
   Order({
     this.id,
+    this.name,
+    this.phone,
     this.quantity,
     this.orderCancel,
     this.price,
@@ -568,9 +598,12 @@ class Order {
     this.customer,
     this.trainer,
     this.item,
+    this.employee,
   });
 
   int id;
+  dynamic name;
+  dynamic phone;
   int quantity;
   bool orderCancel;
   int price;
@@ -578,9 +611,12 @@ class Order {
   OrderCustomer customer;
   dynamic trainer;
   OrderItem item;
+  dynamic employee;
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
         id: json["id"],
+        name: json["name"],
+        phone: json["phone"],
         quantity: json["quantity"],
         orderCancel: json["order_cancel"],
         price: json["price"],
@@ -588,10 +624,13 @@ class Order {
         customer: OrderCustomer.fromJson(json["customer"]),
         trainer: json["trainer"],
         item: OrderItem.fromJson(json["item"]),
+        employee: json["employee"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "name": name,
+        "phone": phone,
         "quantity": quantity,
         "order_cancel": orderCancel,
         "price": price,
@@ -599,6 +638,7 @@ class Order {
         "customer": customer.toJson(),
         "trainer": trainer,
         "item": item.toJson(),
+        "employee": employee,
       };
 }
 
@@ -621,6 +661,7 @@ class OrderCustomer {
     this.photo,
     this.idProof,
     this.idProofImage,
+    this.idProofImage1,
     this.active,
     this.dateAdded,
     this.user,
@@ -641,9 +682,10 @@ class OrderCustomer {
   String city;
   String state;
   int pincode;
-  String photo;
+  dynamic photo;
   String idProof;
-  String idProofImage;
+  dynamic idProofImage;
+  dynamic idProofImage1;
   bool active;
   DateTime dateAdded;
   User user;
@@ -667,6 +709,7 @@ class OrderCustomer {
         photo: json["photo"],
         idProof: json["id_proof"],
         idProofImage: json["id_proof_image"],
+        idProofImage1: json["id_proof_image1"],
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
         user: User.fromJson(json["user"]),
@@ -692,6 +735,7 @@ class OrderCustomer {
         "photo": photo,
         "id_proof": idProof,
         "id_proof_image": idProofImage,
+        "id_proof_image1": idProofImage1,
         "active": active,
         "date_added":
             "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
