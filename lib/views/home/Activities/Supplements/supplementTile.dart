@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/constants/colors.dart';
 import 'package:gym_app/models/supplement/SupplementProduct.dart';
 import 'package:gym_app/models/supplement/supplementSlug.dart';
 
@@ -34,37 +35,41 @@ class SupplementTile extends StatelessWidget {
 
   Widget showAddToCartButton(bool b) {
     if (b) {
-      return GestureDetector(
-        onTap: () => {
-          addToSupplementCart({
-            "product_id": model.id,
-            "quantity": 1,
-          })
-        },
-        child: Container(
-          width: 70,
-          height: 26,
-          decoration: BoxDecoration(
-              color: Color(0xFFEB3223),
-              borderRadius: BorderRadius.circular(28.0)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-                size: 18,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                "ADD",
-                style: TextStyle(color: Colors.white),
-              )
-            ],
-          ),
-        ),
+      // return GestureDetector(
+      //   onTap: () => {
+      //     addToSupplementCart({
+      //       "product_id": model.id,
+      //       "quantity": 1,
+      //     })
+      //   },
+      //   child: Container(
+      //     width: 70,
+      //     height: 26,
+      //     decoration: BoxDecoration(
+      //         color: Color(0xFFEB3223),
+      //         borderRadius: BorderRadius.circular(28.0)),
+      //     child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Icon(
+      //           Icons.shopping_cart,
+      //           color: Colors.white,
+      //           size: 18,
+      //         ),
+      //         SizedBox(
+      //           width: 5,
+      //         ),
+      //         Text(
+      //           "ADD",
+      //           style: TextStyle(color: Colors.white),
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // );
+      return Text(
+        "In Stock",
+        style: TextStyle(color: kOrangeCol),
       );
     } else {
       return Text("Out Of Stock");
