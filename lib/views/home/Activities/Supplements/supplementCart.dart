@@ -74,13 +74,14 @@ class _SupplementCartState extends State<SupplementCart> {
               child: CircularProgressIndicator(),
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
-            var check = jsonDecode(s.data.data);
+            var check = jsonDecode(s.data[1].data);
             if (check.runtimeType == String) {
               return Center(
                 child: Text("Cart is Empty"),
               );
             } else {
-              var model = supplementCartModelFromJson(s.data.data);
+              var model = supplementCartModelFromJson(
+                  s.data[1].data, s.data[0] == "CUSTOMER");
               local = model;
               print(model);
               return Column(
