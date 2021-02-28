@@ -34,7 +34,7 @@ class _SupplementCartState extends State<SupplementCart> {
       floatingActionButton: FloatingActionButton.extended(
         //ToDo: Works only for Customer
         onPressed: () => {
-          if (local.item.isEmpty)
+          if (local.item==null)
             {
               Fluttertoast.showToast(msg: "Nothing in the Cart"),
             }
@@ -64,8 +64,6 @@ class _SupplementCartState extends State<SupplementCart> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-      //TODO: Add If CArt is Empty Check
       body: FutureBuilder(
         future: getSupplementCart(),
         builder: (c, s) {
