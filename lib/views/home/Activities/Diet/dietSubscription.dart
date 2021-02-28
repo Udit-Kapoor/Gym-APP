@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/DietEnquiry/DietEnquiry.dart';
 
 class DietSubscription extends StatefulWidget {
   @override
@@ -11,23 +12,24 @@ class _DietSubscriptionState extends State<DietSubscription> {
   String planProvider = "BluFit";
   String fitnessGoal = "Weight Loss";
   String dietPref = "Keto";
-  String name;
-  String number;
-  String email;
+  TextEditingController name = new TextEditingController();
+  // String name;
+  TextEditingController number = new TextEditingController();
+  TextEditingController email = new TextEditingController();
   String gender = "Male";
-  String age;
-  String weight;
-  String height;
+  TextEditingController age = new TextEditingController();
+  TextEditingController weight = new TextEditingController();
+  TextEditingController height = new TextEditingController();
   String physicalAct = "No Physical Activity";
   String food = "Chicken";
-  String specialInstruction;
+  TextEditingController specialInstruction = new TextEditingController();
   String plan = "Meal Subscription";
   String typeOfMeal = "Lunch";
   String duration = "3 Days";
-  String add;
-  String state;
-  String city;
-  String pin;
+  TextEditingController add = new TextEditingController();
+  TextEditingController state = new TextEditingController();
+  TextEditingController city = new TextEditingController();
+  TextEditingController pin = new TextEditingController();
   String paymentmode = "Online";
   String selectedCity;
   String selectedState = "Delhi";
@@ -413,14 +415,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: name,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              name = value,
-                            },
+                            // onChanged: (value) => {
+                            //   name = value,
+                            // },
                           ),
                         ),
                       ],
@@ -447,14 +450,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: number,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              number = value,
-                            },
+                            // onChanged: (value) => {
+                            //   number = value,
+                            // },
                           ),
                         ),
                       ],
@@ -481,14 +485,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: email,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              email = value,
-                            },
+                            // onChanged: (value) => {
+                            //   email = value,
+                            // },
                           ),
                         ),
                       ],
@@ -559,14 +564,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: age,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              age = value,
-                            },
+                            // onChanged: (value) => {
+                            //   age = value,
+                            // },
                           ),
                         ),
                       ],
@@ -593,14 +599,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: weight,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              weight = value,
-                            },
+                            // onChanged: (value) => {
+                            //   weight = value,
+                            // },
                           ),
                         ),
                       ],
@@ -627,14 +634,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: height,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              height = value,
-                            },
+                            // onChanged: (value) => {
+                            //   height = value,
+                            // },
                           ),
                         ),
                       ],
@@ -755,15 +763,16 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: specialInstruction,
                             maxLines: 5,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              specialInstruction = value,
-                            },
+                            // onChanged: (value) => {
+                            //   specialInstruction = value,
+                            // },
                           ),
                         ),
                       ],
@@ -921,20 +930,20 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: add,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              add = value,
-                            },
+                            // onChanged: (value) => {
+                            //   add = value,
+                            // },
                           ),
                         ),
                       ],
                     ),
                   ),
-                  //ToDo: Add State and City
                   SizedBox(
                     height: 15,
                   ),
@@ -1039,14 +1048,15 @@ class _DietSubscriptionState extends State<DietSubscription> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller: pin,
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
                               border: InputBorder.none,
                             ),
-                            onChanged: (value) => {
-                              pin = value,
-                            },
+                            // onChanged: (value) => {
+                            //   pin = value,
+                            // },
                           ),
                         ),
                       ],
@@ -1097,12 +1107,34 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ],
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: GestureDetector(
-                      //ToDo: Add POST REQUEST to FOOD DIEt
-                      onTap: null,
+                      onTap: () => {
+                        submitDietEnquiry({
+                          "partner": planProvider,
+                          "fitness_goal": fitnessGoal,
+                          "diet_preference": dietPref,
+                          "name": name.text,
+                          "mobile_number": number.text,
+                          "email": email.text,
+                          "gender": gender,
+                          "age": int.parse(age.text),
+                          "weight": int.parse(weight.text),
+                          "height": int.parse(height.text),
+                          "physical_activity": physicalAct,
+                          "food_preference": food,
+                          "special_instruction": specialInstruction.text,
+                          "plan": plan,
+                          "type_of_meal": typeOfMeal,
+                          "duration": duration,
+                          "address": add.text,
+                          "city": selectedCity,
+                          "state": selectedState,
+                          "pincode": int.parse(pin.text),
+                          "payment_mode": paymentmode
+                        })
+                      },
                       child: Container(
                         height: 50,
                         width: 330,

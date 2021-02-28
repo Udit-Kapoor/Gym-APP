@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
@@ -38,10 +40,7 @@ class _SupplementCartState extends State<SupplementCart> {
             }
           else
             {
-              placeSupplementCart({
-                "MOP": "app",
-                "mode": "Pay at Gym",
-              }),
+              placeSupplementCart({"MOP": "app", "mode": "Pay at Gym"}),
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -75,7 +74,8 @@ class _SupplementCartState extends State<SupplementCart> {
               child: CircularProgressIndicator(),
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
-            if (s.data.data == "Cart is Empty") {
+            var check = jsonDecode(s.data.data);
+            if (check.runtimeType == String) {
               return Center(
                 child: Text("Cart is Empty"),
               );
