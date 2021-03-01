@@ -29,7 +29,8 @@ class _SupplementDetailsState extends State<SupplementDetails> {
                   addToSupplementCart({
                     "product_id": model.id,
                     "quantity": 1,
-                  })
+                  }),
+                  setState(() {}),
                 },
                 child: Container(
                   width: 70,
