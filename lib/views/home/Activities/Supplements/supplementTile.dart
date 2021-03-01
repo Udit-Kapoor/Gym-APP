@@ -67,7 +67,7 @@ class SupplementTile extends StatelessWidget {
       //     ),
       //   ),
       // );
-      return Text(
+      return  Text(
         "In Stock",
         style: TextStyle(color: kOrangeCol),
       );

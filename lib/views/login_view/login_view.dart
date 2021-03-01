@@ -7,6 +7,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  bool showPass = false;
   bool isCustomer = true;
   String number, pass;
   // Widget _userType(bool ut, String label) => GestureDetector(
@@ -126,59 +127,59 @@ class _LoginViewState extends State<LoginView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w700, fontSize: 15),
                             ),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.only(top: 28.0, left: 25),
+                            //   child: Row(
+                            //     children: [
+                            //       Container(
+                            //         height: 12,
+                            //         width: 12,
+                            //         decoration: BoxDecoration(
+                            //             shape: BoxShape.circle,
+                            //             border: Border.all(
+                            //                 color: Colors.black, width: 1.0)),
+                            //       ),
+                            //       SizedBox(
+                            //         width: 15,
+                            //       ),
+                            //       Text(
+                            //         "Phone",
+                            //         style: TextStyle(
+                            //             fontWeight: FontWeight.w400,
+                            //             fontSize: 15),
+                            //       ),
+                            //       SizedBox(
+                            //         width: 20,
+                            //       ),
+                            //       Container(
+                            //         height: 30,
+                            //         width: 150,
+                            //         child: TextField(
+                            //           keyboardType: TextInputType.number,
+                            //           decoration: InputDecoration(
+                            //             contentPadding: EdgeInsets.fromLTRB(
+                            //                 5.0, 15.0, 20.0, 10.0),
+                            //             hintText: "91-",
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(top: 28.0, left: 25),
+                                  const EdgeInsets.only(left: 26.0, top: 20),
                               child: Row(
                                 children: [
-                                  Container(
-                                    height: 12,
-                                    width: 12,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: Colors.black, width: 1.0)),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "Phone",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    width: 150,
-                                    child: TextField(
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.fromLTRB(
-                                            5.0, 15.0, 20.0, 10.0),
-                                        hintText: "91-",
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 26.0, top: 15.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 12,
-                                    width: 12,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: Colors.black, width: 1.0)),
-                                  ),
+                                  // Container(
+                                  //   height: 12,
+                                  //   width: 12,
+                                  //   decoration: BoxDecoration(
+                                  //       shape: BoxShape.circle,
+                                  //       border: Border.all(
+                                  //           color: Colors.black, width: 1.0)),
+                                  // ),
                                   SizedBox(
                                     width: 15,
                                   ),
@@ -208,7 +209,7 @@ class _LoginViewState extends State<LoginView> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 20.0, top: 20.0, right: 20.0),
+                                  left: 20.0, top: 40.0, right: 20.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -530,12 +531,16 @@ class _LoginViewState extends State<LoginView> {
                       onChanged: (value) => number = value,
                     ),
                     TextField(
-                      obscureText: true,
+                      obscureText: !showPass,
                       decoration: InputDecoration(
-                        border: UnderlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock_outline),
-                        hintText: loginPasswordHeader,
-                      ),
+                          border: UnderlineInputBorder(),
+                          prefixIcon: Icon(Icons.lock_outline),
+                          hintText: loginPasswordHeader,
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.remove_red_eye),
+                            onPressed: () =>
+                                setState(() => showPass = !showPass),
+                          )),
                       onChanged: (value) => pass = value,
                     ),
                     SizedBox(
