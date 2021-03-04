@@ -51,26 +51,7 @@ class _BatchTimingsState extends State<BatchTimings> {
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
-                        onPressed: () {},
-                      ),
-                      Text(
-                        'Today',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline5.copyWith(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.arrow_forward_ios),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-               
+                 
 
                   Expanded(
                     child: ListView.builder(

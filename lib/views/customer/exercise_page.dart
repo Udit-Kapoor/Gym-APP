@@ -47,29 +47,7 @@ class ExercisePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Spacer(),
-              IconButton(
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {},
-              ),
-              Text(
-                'Today',
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward_ios),
-                onPressed: () {},
-              ),
-              Spacer(),
-            ],
-          ),
+          
           Expanded(
             child: ListView(
               physics: BouncingScrollPhysics(),

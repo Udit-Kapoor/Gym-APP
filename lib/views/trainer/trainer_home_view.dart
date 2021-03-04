@@ -259,26 +259,7 @@ class TrainerHomeIndex extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  size: 20.0,
-                ),
-                onTap: () {},
-              ),
-              Text('October', style: Theme.of(context).textTheme.headline6),
-              GestureDetector(
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20.0,
-                ),
-                onTap: () {},
-              ),
-            ],
-          ),
+        
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Row(
@@ -316,8 +297,7 @@ class TrainerHomeIndex extends StatelessWidget {
           for (var i = 1; i <= 7; i++)
             DayWiseAttendance(
               columnCount: 4,
-              weekDay: 'Mon',
-              day: i,
+              date: i.toString(),
               attend: (Random().nextInt(10) + 1) % 3 == 0 ? false : true,
             ),
         ],
