@@ -158,7 +158,33 @@ class TeamPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: 30.0),
           child: Center(
             child: Text(
-              "Dieticians",
+              "Diet Partners",
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
+              child: TeamImage(name: "Lorem", img: "lib/assets/profile.png"),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
+              child: TeamImage(name: "Ipsum", img: "lib/assets/profile.png"),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: Center(
+            child: Text(
+              "Supplement Partners",
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
           ),
@@ -210,6 +236,25 @@ class TeamPage extends StatelessWidget {
           child: Center(
             child: Text(
               "Behind The Scenes",
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+            ),
+          ),
+        ),
+        Container(
+          width: 400,
+          height: 160,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/assets/story2.jpg"),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 30.0),
+          child: Center(
+            child: Text(
+              "Group Activities",
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
           ),

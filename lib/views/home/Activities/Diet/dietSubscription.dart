@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/DietEnquiry/DietEnquiry.dart';
 
 class DietSubscription extends StatefulWidget {
   @override
@@ -8,26 +9,29 @@ class DietSubscription extends StatefulWidget {
 
 //ToDo: Add Validators...
 class _DietSubscriptionState extends State<DietSubscription> {
-  String planProvider = "BluFit";
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String planProvider = "Blufit";
   String fitnessGoal = "Weight Loss";
   String dietPref = "Keto";
-  String name;
-  String number;
-  String email;
+  TextEditingController name = new TextEditingController();
+
+  // String name;
+  TextEditingController number = new TextEditingController();
+  TextEditingController email = new TextEditingController();
   String gender = "Male";
-  String age;
-  String weight;
-  String height;
+  TextEditingController age = new TextEditingController();
+  TextEditingController weight = new TextEditingController();
+  TextEditingController height = new TextEditingController();
   String physicalAct = "No Physical Activity";
   String food = "Chicken";
-  String specialInstruction;
+  TextEditingController specialInstruction = new TextEditingController();
   String plan = "Meal Subscription";
   String typeOfMeal = "Lunch";
   String duration = "3 Days";
-  String add;
-  String state;
-  String city;
-  String pin;
+  TextEditingController add = new TextEditingController();
+  TextEditingController state = new TextEditingController();
+  TextEditingController city = new TextEditingController();
+  TextEditingController pin = new TextEditingController();
   String paymentmode = "Online";
   String selectedCity;
   String selectedState = "Delhi";
@@ -258,874 +262,1021 @@ class _DietSubscriptionState extends State<DietSubscription> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 25.0, right: 25),
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                children: [
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Plan Provider"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: planProvider,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  planProvider = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'BluFit',
-                                'Parafit',
-                                'Both',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Fitness Goal"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: fitnessGoal,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  fitnessGoal = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Weight Loss',
-                                'Muscle Gain',
-                                'Weight Maintenance',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Diet Preference"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: dietPref,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  dietPref = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Consult To Nutritionist',
-                                'Keto',
-                                'Low Carb',
-                                'High Protien',
-                                'Balanced',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Name"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              name = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Mobile number"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              number = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Email"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              email = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Gender"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: gender,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  gender = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Male',
-                                'Female',
-                                'Other',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Age"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              age = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Weight(Kg)"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              weight = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Height(cm)"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              height = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Physical Activity"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: physicalAct,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  physicalAct = newValue;
-                                });
-                              },
-                              isExpanded: true,
-                              items: <String>[
-                                'No Physical Activity',
-                                'Slightly Active (1-3 times a week)',
-                                'Moderately Active (3-5 times a week)',
-                                'Strongly Active (5-7 times a week)',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(
-                                      child: Text(
-                                    value,
-                                  )),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Food Preference"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: food,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              isExpanded: true,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  food = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Chicken',
-                                'Egg',
-                                'Fish',
-                                'Prawn',
-                                'Mutton',
-                                'None Of The Above (Vegetarian)',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 100,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(25))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Special Instruction"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              specialInstruction = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Plan"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: plan,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  plan = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Meal Subscription',
-                                'Coaching (30 Days)',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Type Of Meal"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: typeOfMeal,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  typeOfMeal = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Lunch',
-                                'Dinner',
-                                'Borh Lunch and Dinner',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Duration"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: duration,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  duration = newValue;
-                                });
-                              },
-                              items: <String>[
-                                '3 Days',
-                                '15 Days',
-                                '30 Days',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("Address"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              add = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //ToDo: Add State and City
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("State"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: selectedState,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  selectedState = newValue;
-                                });
-                              },
-                              items: stateArray.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("City"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: selectedCity,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  selectedCity = newValue;
-                                });
-                              },
-                              items: getCities(selectedState)
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("PinCode"),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
-                              border: InputBorder.none,
-                            ),
-                            onChanged: (value) => {
-                              pin = value,
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  showPayment(),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: 320,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius:
-                            BorderRadius.all(Radius.elliptical(45, 45))),
-                    child: Row(
-                      children: [
-                        Text("Fitness Goal"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: DropdownButton<String>(
-                              value: fitnessGoal,
-                              isExpanded: true,
-                              icon: Icon(Icons.keyboard_arrow_down),
-                              iconSize: 42,
-                              underline: SizedBox(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  fitnessGoal = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Weight Loss',
-                                'Muscle Gain',
-                                'Weight Maintenance',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Center(child: Text(value)),
-                                );
-                              }).toList()),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: GestureDetector(
-                      //ToDo: Add POST REQUEST to FOOD DIEt
-                      onTap: null,
-                      child: Container(
+              child: Form(
+                key: formKey,
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    // physics: BouncingScrollPhysics(),
+                    children: [
+                      Container(
+                        width: 320,
                         height: 50,
-                        width: 330,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
-                          color: kOrangeCol,
-                          // border: Border.all(color: Colors.black, width: 0.0),
-                          borderRadius:
-                              new BorderRadius.all(Radius.elliptical(45, 45)),
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Plan Provider"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: planProvider,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      planProvider = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Blufit',
+                                    'Parafit',
+                                    'Both',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
                         ),
-                        child: Center(
-                          child: Text(
-                            "SUBMIT",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Fitness Goal"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: fitnessGoal,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      fitnessGoal = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Weight Loss',
+                                    'Muscle Gain',
+                                    'Weight Maintenance',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Diet Preference"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: dietPref,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dietPref = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Consult To Nutritionist',
+                                    'Keto',
+                                    'Low Carb',
+                                    'High Protien',
+                                    'Balanced',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Name"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Name can't be empty";
+                                  }
+                                  return null;
+                                },
+                                controller: name,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   name = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Mobile number"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Number can't be empty";
+                                  }
+                                  if (value.length != 10) {
+                                    return "10 digits required";
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                                controller: number,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   number = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Email"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Email can't be empty";
+                                  }
+                                  //ToDO: Add EMail regex
+                                  return null;
+                                },
+                                controller: email,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   email = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Gender"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: gender,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      gender = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Male',
+                                    'Female',
+                                    'Other',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Age"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Age can't be empty";
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                                controller: age,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   age = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Weight(Kg)"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Weight can't be empty";
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                                controller: weight,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   weight = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Height(cm)"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Name can't be empty";
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                                controller: height,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   height = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Physical Activity"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: physicalAct,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      physicalAct = newValue;
+                                    });
+                                  },
+                                  isExpanded: true,
+                                  items: <String>[
+                                    'No Physical Activity',
+                                    'Slightly Active (1-3 times a week)',
+                                    'Moderately Active (3-5 times a week)',
+                                    'Strongly Active (5-7 times a week)',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                          child: Text(
+                                        value,
+                                      )),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Food Preference"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: food,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  isExpanded: true,
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      food = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Chicken',
+                                    'Egg',
+                                    'Fish',
+                                    'Prawn',
+                                    'Mutton',
+                                    'None Of The Above (Vegetarian)',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 100,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Special Instruction"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                controller: specialInstruction,
+                                maxLines: 5,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   specialInstruction = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Plan"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: plan,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      plan = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Meal Subscription',
+                                    'Coaching (30 Days)',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Type Of Meal"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: typeOfMeal,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      typeOfMeal = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Lunch',
+                                    'Dinner',
+                                    'Borh Lunch and Dinner',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Duration"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: duration,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      duration = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    '3 Days',
+                                    '15 Days',
+                                    '30 Days',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Address"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Address can't be empty";
+                                  }
+                                  return null;
+                                },
+                                controller: add,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   add = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("State"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: selectedState,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      selectedState = newValue;
+                                    });
+                                  },
+                                  items: stateArray
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("City"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: selectedCity,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      selectedCity = newValue;
+                                    });
+                                  },
+                                  items: getCities(selectedState)
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("PinCode"),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value == "") {
+                                    return "Pin can't be empty";
+                                  }
+                                  if (value.length != 6) {
+                                    return "Add a valid pin";
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                                controller: pin,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(5.0, 15.0, 5.0, 15.0),
+                                  border: InputBorder.none,
+                                ),
+                                // onChanged: (value) => {
+                                //   pin = value,
+                                // },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      showPayment(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: 320,
+                        height: 50,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius:
+                                BorderRadius.all(Radius.elliptical(45, 45))),
+                        child: Row(
+                          children: [
+                            Text("Fitness Goal"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: DropdownButton<String>(
+                                  value: fitnessGoal,
+                                  isExpanded: true,
+                                  icon: Icon(Icons.keyboard_arrow_down),
+                                  iconSize: 42,
+                                  underline: SizedBox(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      fitnessGoal = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Weight Loss',
+                                    'Muscle Gain',
+                                    'Weight Maintenance',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(child: Text(value)),
+                                    );
+                                  }).toList()),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            if (!formKey.currentState.validate()) {
+                              return;
+                            } else {
+                              submitDietEnquiry({
+                                "partner": planProvider,
+                                "fitness_goal": fitnessGoal,
+                                "diet_preference": dietPref,
+                                "name": name.text,
+                                "mobile_number": number.text,
+                                "email": email.text,
+                                "gender": gender,
+                                "age": int.parse(age.text).abs(),
+                                "weight": int.parse(weight.text).abs(),
+                                "height": int.parse(height.text).abs(),
+                                "physical_activity": physicalAct,
+                                "food_preference": food,
+                                "special_instruction": specialInstruction.text,
+                                "plan": plan,
+                                "type_of_meal": typeOfMeal,
+                                "duration": duration,
+                                "address": add.text,
+                                "city": selectedCity,
+                                "state": selectedState,
+                                "pincode": int.parse(pin.text).abs(),
+                                "payment_mode": paymentmode
+                              });
+                            }
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 330,
+                            decoration: BoxDecoration(
+                              color: kOrangeCol,
+                              // border: Border.all(color: Colors.black, width: 0.0),
+                              borderRadius: new BorderRadius.all(
+                                  Radius.elliptical(45, 45)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "SUBMIT",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           )

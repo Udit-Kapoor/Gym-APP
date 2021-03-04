@@ -7,9 +7,15 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-SupplementCartModel supplementCartModelFromJson(String str) =>
-    SupplementCartModel.fromJson(json.decode(str));
+SupplementCartModel supplementCartModelFromJson(String str, bool isCustomer) {
+  if (isCustomer) {
+    return SupplementCartModel.fromJsonCustomer(json.decode(str));
+  } else {
+    return SupplementCartModel.fromJsonTrainer(json.decode(str));
+  }
+}
 
 String supplementCartModelToJson(SupplementCartModel data) =>
     json.encode(data.toJson());
@@ -47,7 +53,7 @@ class SupplementCartModel {
   dynamic paymentId;
   bool singleProduct;
 
-  factory SupplementCartModel.fromJson(Map<String, dynamic> json) =>
+  factory SupplementCartModel.fromJsonCustomer(Map<String, dynamic> json) =>
       SupplementCartModel(
         id: json["id"],
         orderId: json["order_id"],
@@ -56,7 +62,23 @@ class SupplementCartModel {
         trainer: json["trainer"],
         status: json["status"],
         cust: Cust.fromJson(json["cust"]),
-        gymtrainer: json["gymtrainer"],
+        amount: json["amount"],
+        promocode: json["promocode"],
+        orderid: json["orderid"],
+        ordered: json["ordered"],
+        paymentId: json["payment_id"],
+        singleProduct: json["single_product"],
+      );
+
+  factory SupplementCartModel.fromJsonTrainer(Map<String, dynamic> json) =>
+      SupplementCartModel(
+        id: json["id"],
+        orderId: json["order_id"],
+        item: List<Item>.from(json["item"].map((x) => Item.fromJson(x))),
+        customer: json["customer"],
+        trainer: json["trainer"],
+        status: json["status"],
+        gymtrainer: GymTrainer.fromJson(json["gymtrainer"]),
         amount: json["amount"],
         promocode: json["promocode"],
         orderid: json["orderid"],
@@ -211,10 +233,44 @@ class Vendor {
       };
 }
 
-Future<ApiResponse> getSupplementCart() async {
+class GymTrainer {
+  GymTrainer({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.phone,
+    this.email,
+  });
+
+  int id;
+  String firstName;
+  String lastName;
+  String phone;
+  String email;
+
+  factory GymTrainer.fromJson(Map<String, dynamic> json) => GymTrainer(
+        id: json["id"],
+        firstName: json["first_Name"],
+        lastName: json["last_Name"],
+        phone: json["phone"],
+        email: json["email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "first_Name": firstName,
+        "last_Name": lastName,
+        "phone": phone,
+        "email": email,
+      };
+}
+
+Future<List> getSupplementCart() async {
   ApiResponse cp = await ApiHelper()
       .getReq(endpoint: "https://p2c-gym.herokuapp.com/customer/cartview/");
-  return cp;
+  SharedPreferences sp = await SharedPreferences.getInstance();
+
+  return [sp.getString("USER_TYPE"), cp];
 }
 
 void delSupplementItem(Map data) async {

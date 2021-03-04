@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
@@ -32,16 +34,13 @@ class _SupplementCartState extends State<SupplementCart> {
       floatingActionButton: FloatingActionButton.extended(
         //ToDo: Works only for Customer
         onPressed: () => {
-          if (local.item.isEmpty)
+          if (local.item==null)
             {
               Fluttertoast.showToast(msg: "Nothing in the Cart"),
             }
           else
             {
-              placeSupplementCart({
-                "MOP": "app",
-                "mode": "Pay at Gym",
-              }),
+              placeSupplementCart({"MOP": "app", "mode": "Pay at Gym"}),
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -65,8 +64,6 @@ class _SupplementCartState extends State<SupplementCart> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-      //TODO: Add If CArt is Empty Check
       body: FutureBuilder(
         future: getSupplementCart(),
         builder: (c, s) {
@@ -75,12 +72,14 @@ class _SupplementCartState extends State<SupplementCart> {
               child: CircularProgressIndicator(),
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
-            if (s.data.data == "Cart is Empty") {
+            var check = jsonDecode(s.data[1].data);
+            if (check.runtimeType == String) {
               return Center(
                 child: Text("Cart is Empty"),
               );
             } else {
-              var model = supplementCartModelFromJson(s.data.data);
+              var model = supplementCartModelFromJson(
+                  s.data[1].data, s.data[0] == "CUSTOMER");
               local = model;
               print(model);
               return Column(

@@ -4,6 +4,10 @@
 
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';
+
 DietEnquiry dietEnquiryFromJson(String str) =>
     DietEnquiry.fromJson(json.decode(str));
 
@@ -103,4 +107,16 @@ class DietEnquiry {
         "pincode": pincode,
         "payment_mode": paymentMode,
       };
+}
+
+void submitDietEnquiry(Map data) async {
+  ApiResponse cp = await ApiHelper().postReq(
+    endpoint: "https://p2c-gym.herokuapp.com/website/dietenquiry/",
+    data: data,
+  );
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Error in Submitting Request");
+  } else {
+    Fluttertoast.showToast(msg: "Request Submitted");
+  }
 }
