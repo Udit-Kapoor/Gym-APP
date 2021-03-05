@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cached_network_image: ^2.5.0
   carousel_slider: ^3.0.0
   charts_flutter: ^0.9.0
   cupertino_icons: ^1.0.0
@@ -25,9 +26,9 @@ dependencies:
   url_launcher: ^5.7.10
 
 dev_dependencies:
-  lint: ^1.5.2
   flutter_test:
     sdk: flutter
+  lint: ^1.5.2
 
 flutter:
   uses-material-design: true

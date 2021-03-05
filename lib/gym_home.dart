@@ -16,7 +16,7 @@ class GymHomeView extends StatelessWidget {
             s.connectionState == ConnectionState.done) {
           switch (s.data[1]) {
             case "CUSTOMER":
-              widget = CustomerHome();
+              widget = CustomerHome();  
               break;
             case "TRAINER":
               widget = TrainerHome();

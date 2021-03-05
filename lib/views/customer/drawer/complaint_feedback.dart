@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/apis/apis.dart';
 
 class ComplaintFeedback extends StatefulWidget {
-  const ComplaintFeedback({Key key}) : super(key: key);
+  const ComplaintFeedback({Key key, @required this.id}) : super(key: key);
+
+  final int id;
 
   @override
   _ComplaintFeedbackState createState() => _ComplaintFeedbackState();
@@ -19,10 +22,14 @@ List<String> dropDownMenuItem = [
   'Website'
 ];
 
-String _dropDownValue = dropDownMenuItem[0];
-
 class _ComplaintFeedbackState extends State<ComplaintFeedback> {
+  String _dropDownValue = dropDownMenuItem[0];
+
   ChoiceMethod _method = ChoiceMethod.complaint;
+
+  TextEditingController _decriptionController = TextEditingController();
+  TextEditingController _topicController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +90,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 child: TextField(
+                  controller: _topicController,
                   style: Theme.of(context)
                       .textTheme
                       .headline5
@@ -150,6 +158,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: TextField(
+                controller: _decriptionController,
                 style: Theme.of(context)
                     .textTheme
                     .headline6
@@ -180,7 +189,24 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: FlatButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await ApiHelper().postReq(
+                    endpoint:
+                        'https://p2c-gym.herokuapp.com/customer/complaint/',
+                    data: {
+                      //TODO: Add Name to shared preference
+                      "name": "Aman Nanda",
+                      "topic": _method == ChoiceMethod.complaint
+                          ? _topicController.text
+                          : _dropDownValue,
+                      "complaint": _decriptionController.text,
+                      "resolve": false,
+                      "source": 'App',
+                      //TODO: Add user user id
+                      "user": 34
+                    },
+                  );
+                },
                 padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(

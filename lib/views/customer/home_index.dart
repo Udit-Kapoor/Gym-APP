@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_app/models/customer%20model/transformation_image_model.dart';
 import 'package:gym_app/views/customer/my_attendance.dart';
@@ -7,12 +8,6 @@ import 'package:gym_app/views/customer/weight_chart.dart';
 
 class HomeIndex extends StatelessWidget {
   HomeIndex({Key key}) : super(key: key);
-
-  final List<String> _images = List.generate(
-    8,
-    (index) =>
-        'https://images.unsplash.com/photo-1559949557-7d0ac3e655f2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=770&q=80',
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +46,50 @@ class HomeIndex extends StatelessWidget {
               } else if (s.hasData &&
                   s.connectionState == ConnectionState.done) {
                 var ti = transformaionImageModelFromJson(s.data.data);
+                print(ti);
+                print(ti.length);
 
                 widget = Wrap(
                   alignment: WrapAlignment.center,
                   spacing: 5.0,
                   children: [
                     for (var img in ti)
-                      Container(
-                        padding: EdgeInsets.only(bottom: 5.0),
-                        height: 100,
-                        width: 100,
-                        // child: Image.network(img.image, fit: BoxFit.cover,),
-                        child: FadeInImage.assetNetwork(
-                          //TODO: Add transparent image
-                          placeholder: 'lib/assets/profile.png',
-                          image: img.image,
-                          imageErrorBuilder: (_,__,___)=>Icon(Icons.error),
+                      InkWell(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SafeArea(
+                              child: Scaffold(
+                                appBar:
+                                    AppBar(backgroundColor: Colors.transparent),
+                                backgroundColor: Colors.transparent,
+                                body: Center(
+                                  child: Image.network(
+                                    img.image,
+                                    loadingBuilder:
+                                        (_, child, loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      }
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.only(bottom: 5.0),
+                          height: 100,
+                          width: 100,
+                          child: CachedNetworkImage(
+                            imageUrl: img.image,
+                            placeholder: (_, __) =>
+                                Center(child: CircularProgressIndicator()),
+                          ),
                         ),
                       ),
                     Container(

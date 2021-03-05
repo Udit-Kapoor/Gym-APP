@@ -47,10 +47,6 @@ class CustomerAttendanceModel {
 Future<ApiResponse> customerAttendance() async {
   ApiResponse cp = await ApiHelper()
       .getReq(endpoint: "https://p2c-gym.herokuapp.com/customer/myattendance/");
-  print(cp.data);
-  print(cp.error);
-  print(cp.errorMessage);
-  
-  
+
   return cp;
 }
