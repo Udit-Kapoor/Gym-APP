@@ -107,9 +107,9 @@ class Vendor {
       };
 }
 
-Future<SupplementProduct> getSupplements() async {
-  ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/website/product/");
+Future<SupplementProduct> getSupplements(String query) async {
+  ApiResponse cp = await ApiHelper().getReq(
+      endpoint: "https://p2c-gym.herokuapp.com/website/product/", query: query);
 
   var model = supplementProductFromJson(cp.data);
   var finalModel = supplementProductFromJson(cp.data);

@@ -9,6 +9,7 @@ class SupplementView extends StatefulWidget {
 
 class _SupplementViewState extends State<SupplementView> {
   String supplementType = 'All';
+  String query = "";
 
   Widget sort() {
     return IconButton(
@@ -126,7 +127,7 @@ class _SupplementViewState extends State<SupplementView> {
             ),
           ),
           FutureBuilder(
-            future: getSupplements(),
+            future: getSupplements(query),
             builder: (c, s) {
               if (s.connectionState == ConnectionState.waiting) {
                 return Center(

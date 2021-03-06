@@ -67,7 +67,7 @@ class SupplementTile extends StatelessWidget {
       //     ),
       //   ),
       // );
-      return  Text(
+      return Text(
         "In Stock",
         style: TextStyle(color: kOrangeCol),
       );
@@ -81,7 +81,6 @@ class SupplementTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: GestureDetector(
-        //ToDO: Navigate to ItemDetails...
         onTap: () => {
           Navigator.push(
             context,
@@ -134,6 +133,7 @@ class SupplementTile extends StatelessWidget {
                           style: TextStyle(fontSize: 8),
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,9 +156,9 @@ class SupplementTile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              width: 70,
-                            ),
+                            // SizedBox(
+                            //   width: 70,
+                            // ),
                             showAddToCartButton(model.isStock),
                           ],
                         ),
