@@ -1,3 +1,4 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gym_app/models/customer%20model/transformation_image_model.dart';
@@ -37,76 +38,100 @@ class HomeIndex extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
             ),
           ),
-          FutureBuilder(
-            future: customerTransformation(),
-            builder: (c, s) {
-              var widget;
-              if (s.connectionState == ConnectionState.waiting) {
-                widget = Center(child: CircularProgressIndicator());
-              } else if (s.hasData &&
-                  s.connectionState == ConnectionState.done) {
-                var ti = transformaionImageModelFromJson(s.data.data);
-         
-                widget = Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 5.0,
-                  children: [
-                    for (var img in ti)
-                      InkWell(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => SafeArea(
-                              child: Scaffold(
-                                appBar:
-                                    AppBar(backgroundColor: Colors.transparent),
-                                backgroundColor: Colors.transparent,
-                                body: Center(
-                                  child: Image.network(
-                                    img.image,
-                                    loadingBuilder:
-                                        (_, child, loadingProgress) {
-                                      if (loadingProgress == null) {
-                                        return child;
-                                      }
-                                      return Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
+          CustomerTransformationWidget()
+        ],
+      ),
+    );
+  }
+}
+
+class CustomerTransformationWidget extends StatefulWidget {
+  const CustomerTransformationWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _CustomerTransformationWidgetState createState() =>
+      _CustomerTransformationWidgetState();
+}
+
+class _CustomerTransformationWidgetState
+    extends State<CustomerTransformationWidget> {
+  PickedFile _image;
+  final _picker = ImagePicker();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: customerTransformation(),
+      builder: (c, s) {
+        var widget;
+        if (s.connectionState == ConnectionState.waiting) {
+          widget = Center(child: CircularProgressIndicator());
+        } else if (s.hasData && s.connectionState == ConnectionState.done) {
+          var ti = transformaionImageModelFromJson(s.data.data);
+
+          widget = Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 5.0,
+            children: [
+              for (var img in ti)
+                InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => SafeArea(
+                        child: Scaffold(
+                          appBar: AppBar(backgroundColor: Colors.transparent),
+                          backgroundColor: Colors.transparent,
+                          body: Center(
+                            child: Image.network(
+                              img.image,
+                              loadingBuilder: (_, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
                             ),
                           ),
                         ),
-                        child: Container(
-                          padding: EdgeInsets.only(bottom: 5.0),
-                          height: 100,
-                          width: 100,
-                          child: CachedNetworkImage(
-                            imageUrl: img.image,
-                            placeholder: (_, __) =>
-                                Center(child: CircularProgressIndicator()),
-                          ),
-                        ),
-                      ),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      child: IconButton(
-                        icon: Icon(Icons.add_a_photo),
-                        onPressed: () {},
                       ),
                     ),
-                  ],
-                );
-              } else
-                widget = Center(child: Text("OOPS! NO DATA!"));
-              return widget;
-            },
-          )
-        ],
-      ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    height: 100,
+                    width: 100,
+                    child: CachedNetworkImage(
+                      imageUrl: img.image,
+                      placeholder: (_, __) =>
+                          Center(child: CircularProgressIndicator()),
+                    ),
+                  ),
+                ),
+              Container(
+                height: 100,
+                width: 100,
+                child: IconButton(
+                  icon: Icon(Icons.add_a_photo),
+                  onPressed: () async {
+                    PickedFile image =
+                        await _picker.getImage(source: ImageSource.gallery);
+
+
+
+                  },
+                ),
+              ),
+            ],
+          );
+        } else
+          widget = Center(child: Text("OOPS! NO DATA!"));
+        return widget;
+      },
     );
   }
 }
