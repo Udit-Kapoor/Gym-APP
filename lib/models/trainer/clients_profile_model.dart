@@ -114,7 +114,7 @@ class ClientsProfileModel {
 
 Future<ApiResponse> clientsProfile(int id) async {
   ApiResponse x = await ApiHelper().postReq(
-    endpoint: "http://p2c-gym.herokuapp.com/customer/trainerprofile/",
+    endpoint: "https://p2c-gym.herokuapp.com/customer/trainerprofile/",
     data: {"id": id},
   );
   return x;

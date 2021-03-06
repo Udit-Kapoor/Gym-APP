@@ -41,12 +41,11 @@ class MyAttendance extends StatelessWidget {
                         Expanded(
                           child: Wrap(
                             children: [
-                              for (var i = 0; i < 5; i++)
-                                for (var att in ca.list)
-                                  DayWiseAttendance(
-                                    date: att[0],
-                                    attend: att[1] == 'True' ? true : false,
-                                  )
+                              for (var att in ca.list)
+                                DayWiseAttendance(
+                                  date: att[0],
+                                  attend: att[1] == 'True' ? true : false,
+                                )
                             ],
                           ),
                         ),
@@ -74,7 +73,8 @@ class MyAttendance extends StatelessWidget {
                                 animationDuration: 1000,
                                 radius: 70,
                                 percent: ca.percentage / 100,
-                                center: Text("${ca.percentage.round().toString()}%"),
+                                center: Text(
+                                    "${ca.percentage.round().toString()}%"),
                                 footer: Text(
                                   'Attendance\nPerc.',
                                   textAlign: TextAlign.center,

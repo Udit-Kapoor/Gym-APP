@@ -1,9 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/trainer/trainer_attendance_model.dart';
 import 'package:gym_app/views/common/qr_code_scanner.dart';
 import 'package:gym_app/views/trainer/upcoming_batches_tile.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import 'trainer_drawer.dart';
@@ -248,60 +249,86 @@ class TrainerHomeIndex extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Text(
-              'My Attendance',
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-          ),
-        
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CircularPercentIndicator(
-                  progressColor: Colors.blue[700],
-                  animation: true,
-                  animationDuration: 1000,
-                  radius: 50,
-                  percent: 0.75,
-                  center: Text('10/20'),
-                  footer: Text(
-                    'Total\nAttendance',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-                CircularPercentIndicator(
-                  progressColor: Colors.blue[700],
-                  animation: true,
-                  animationDuration: 1000,
-                  radius: 50.0,
-                  percent: 0.50,
-                  center: Text('50%'),
-                  footer: Text(
-                    'Attendance\nPerc.',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          for (var i = 1; i <= 7; i++)
-            DayWiseAttendance(
-              columnCount: 4,
-              date: i.toString(),
-              attend: (Random().nextInt(10) + 1) % 3 == 0 ? false : true,
-            ),
+          TrainerMyAttendance(),
         ],
       ),
     );
+  }
+}
+
+class TrainerMyAttendance extends StatelessWidget {
+  const TrainerMyAttendance({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        //TODO: Get trainers and pass as argument
+        future: trainerAttendance(4),
+        builder: (c, s) {
+          var widget;
+          if (s.connectionState == ConnectionState.waiting) {
+            widget = Center(child: CircularProgressIndicator());
+          } else if (s.hasData && s.connectionState == ConnectionState.done) {
+            var ca = trainerAttendanceModelFromJson(s.data.data);
+
+            widget = Material(
+              elevation: 4.0,
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Text(
+                        'My Attendance',
+                        style: Theme.of(context).textTheme.headline5.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: Wrap(
+                            children: [
+                              for (var att in ca.list)
+                                DayWiseAttendance(
+                                  date: DateFormat.MMMd()
+                                      .format(DateTime.parse(att[0])),
+                                  attend: att[1] == 'True' ? true : false,
+                                )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: CircularPercentIndicator(
+                            progressColor: Colors.blue[700],
+                            animation: true,
+                            animationDuration: 1000,
+                            radius: 70,
+                            percent: ca.percentage / 100,
+                            center:
+                                Text("${ca.percentage.round().toString()}%"),
+                            footer: Text(
+                              'Attendance\nPerc.',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          } else
+            widget = Center(child: Text("OOPS! NO DATA!"));
+
+          return widget;
+        });
   }
 }

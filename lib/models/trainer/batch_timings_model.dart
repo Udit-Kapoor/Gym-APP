@@ -86,7 +86,8 @@ class Trainer {
 
 Future<ApiResponse> batchTimings() async {
   ApiResponse tp = await ApiHelper()
-      .getReq(endpoint: "http://p2c-gym.herokuapp.com/trainer/trainerbatch/");
-  
+      .getReq(endpoint: "https://p2c-gym.herokuapp.com/trainer/trainerbatch/");
+
+
   return tp;
 }

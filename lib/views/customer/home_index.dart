@@ -46,9 +46,7 @@ class HomeIndex extends StatelessWidget {
               } else if (s.hasData &&
                   s.connectionState == ConnectionState.done) {
                 var ti = transformaionImageModelFromJson(s.data.data);
-                print(ti);
-                print(ti.length);
-
+         
                 widget = Wrap(
                   alignment: WrapAlignment.center,
                   spacing: 5.0,
