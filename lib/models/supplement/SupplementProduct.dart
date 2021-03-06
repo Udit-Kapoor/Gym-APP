@@ -113,7 +113,7 @@ Future<SupplementProduct> getSupplements(String query) async {
 
   var model = supplementProductFromJson(cp.data);
   var finalModel = supplementProductFromJson(cp.data);
-  finalModel.results.clear();
+  if (model.next != null) finalModel.results.clear();
 
   int i = 2;
   print("loop started");

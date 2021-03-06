@@ -133,7 +133,7 @@ class SupplementTile extends StatelessWidget {
                           style: TextStyle(fontSize: 8),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
