@@ -13,7 +13,7 @@ class MyGoalTile extends StatelessWidget {
         builder: (c, s) {
           var widget;
           if (s.connectionState == ConnectionState.waiting) {
-            widget = Center(child: CircularProgressIndicator());
+            widget = Center(child: LinearProgressIndicator());
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var ca = customerBmiModelFromJson(s.data.data);
 

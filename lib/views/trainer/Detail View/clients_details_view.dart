@@ -481,11 +481,11 @@ class ClientsDashboard extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       children: [
         TodaysWorkoutTile(
-          dateNum: '30',
-          month: 'Oct',
-          batchTime: '09.30-10.30',
-          dayName: 'Chest',
-        ),
+            // dateNum: '30',
+            // month: 'Oct',
+            // batchTime: '09.30-10.30',
+            // dayName: 'Chest',
+            ),
         MyGoalTile(),
         WeightChart(),
         MyAttendance(),
