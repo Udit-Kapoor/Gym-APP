@@ -1,17 +1,16 @@
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';
 // To parse this JSON data, do
 //
-//     final clientsGymSubModel = clientsGymSubModelFromJson(jsonString);
+//     final clientsGymSubModel = clientsGymSubModelFromMap(jsonString);
 
 import 'dart:convert';
 
-import 'package:gym_app/apis/api_helper.dart';
-import 'package:gym_app/apis/api_response.dart';
+ClientsGymSubModel clientsGymSubModelFromMap(String str) =>
+    ClientsGymSubModel.fromMap(json.decode(str));
 
-ClientsGymSubModel clientsGymSubModelFromJson(String str) =>
-    ClientsGymSubModel.fromJson(json.decode(str));
-
-String clientsGymSubModelToJson(ClientsGymSubModel data) =>
-    json.encode(data.toJson());
+String clientsGymSubModelToMap(ClientsGymSubModel data) =>
+    json.encode(data.toMap());
 
 class ClientsGymSubModel {
   ClientsGymSubModel({
@@ -35,7 +34,7 @@ class ClientsGymSubModel {
   ExercisePlan exercisePlan;
   List<ExercisePlan> specialFacility;
   List<ExercisePlan> specialActivity;
-  dynamic locker;
+  Locker locker;
   String trainername;
   String batchTimeTo;
   String batchTimeFrom;
@@ -44,38 +43,38 @@ class ClientsGymSubModel {
   DateTime endDate;
   String motive;
 
-  factory ClientsGymSubModel.fromJson(Map<String, dynamic> json) =>
+  factory ClientsGymSubModel.fromMap(Map<String, dynamic> json) =>
       ClientsGymSubModel(
         healthIssues: json["health_issues"],
         dietPlan: json["diet_plan"],
-        exercisePlan: ExercisePlan.fromJson(json["exercise_plan"]),
+        exercisePlan: ExercisePlan.fromMap(json["exercise_plan"]),
         specialFacility: List<ExercisePlan>.from(
-            json["special_facility"].map((x) => ExercisePlan.fromJson(x))),
+            json["special_facility"].map((x) => ExercisePlan.fromMap(x))),
         specialActivity: List<ExercisePlan>.from(
-            json["special_activity"].map((x) => ExercisePlan.fromJson(x))),
-        locker: json["locker"],
+            json["special_activity"].map((x) => ExercisePlan.fromMap(x))),
+        locker: Locker.fromMap(json["locker"]),
         trainername: json["trainername"],
         batchTimeTo: json["batch_time_to"],
         batchTimeFrom: json["batch_time_from"],
-        plan: Plan.fromJson(json["plan"]),
+        plan: Plan.fromMap(json["plan"]),
         startDate: DateTime.parse(json["start_date"]),
         endDate: DateTime.parse(json["end_date"]),
         motive: json["motive"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "health_issues": healthIssues,
         "diet_plan": dietPlan,
-        "exercise_plan": exercisePlan.toJson(),
+        "exercise_plan": exercisePlan.toMap(),
         "special_facility":
-            List<dynamic>.from(specialFacility.map((x) => x.toJson())),
+            List<dynamic>.from(specialFacility.map((x) => x.toMap())),
         "special_activity":
-            List<dynamic>.from(specialActivity.map((x) => x.toJson())),
-        "locker": locker,
+            List<dynamic>.from(specialActivity.map((x) => x.toMap())),
+        "locker": locker.toMap(),
         "trainername": trainername,
         "batch_time_to": batchTimeTo,
         "batch_time_from": batchTimeFrom,
-        "plan": plan.toJson(),
+        "plan": plan.toMap(),
         "start_date":
             "${startDate.year.toString().padLeft(4, '0')}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}",
         "end_date":
@@ -95,16 +94,48 @@ class ExercisePlan {
   String name;
   bool active;
 
-  factory ExercisePlan.fromJson(Map<String, dynamic> json) => ExercisePlan(
+  factory ExercisePlan.fromMap(Map<String, dynamic> json) => ExercisePlan(
         id: json["id"],
         name: json["name"],
         active: json["active"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "id": id,
         "name": name,
         "active": active,
+      };
+}
+
+class Locker {
+  Locker({
+    this.id,
+    this.name,
+    this.active,
+    this.permanent,
+    this.customer,
+  });
+
+  int id;
+  String name;
+  bool active;
+  bool permanent;
+  int customer;
+
+  factory Locker.fromMap(Map<String, dynamic> json) => Locker(
+        id: json["id"],
+        name: json["name"],
+        active: json["active"],
+        permanent: json["permanent"],
+        customer: json["customer"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "name": name,
+        "active": active,
+        "permanent": permanent,
+        "customer": customer,
       };
 }
 
@@ -125,7 +156,7 @@ class Plan {
   bool active;
   String details;
 
-  factory Plan.fromJson(Map<String, dynamic> json) => Plan(
+  factory Plan.fromMap(Map<String, dynamic> json) => Plan(
         id: json["id"],
         name: json["name"],
         months: json["months"],
@@ -134,7 +165,7 @@ class Plan {
         details: json["details"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "id": id,
         "name": name,
         "months": months,
@@ -146,8 +177,11 @@ class Plan {
 
 Future<ApiResponse> clientsGymSub(int id) async {
   ApiResponse x = await ApiHelper().postReq(
-    endpoint: "http://p2c-gym.herokuapp.com/customer/trainerprofileadd/",
+    endpoint: "https://p2c-gym.herokuapp.com/customer/trainerprofileadd/",
     data: {"id": id},
   );
+  print(x.errorMessage);
+
+  print(x.data);
   return x;
 }

@@ -21,7 +21,7 @@ class ClientsGymSubscription extends StatelessWidget {
         } else if (s.hasData &&
             !s.data.error &&
             s.connectionState == ConnectionState.done) {
-          var cg = clientsGymSubModelFromJson(s.data.data);
+          var cg = clientsGymSubModelFromMap(s.data.data);
 
           List _facList = [];
           for (var fac in cg.specialFacility) _facList.add(fac.name);

@@ -29,30 +29,13 @@ class _BatchTimingsState extends State<BatchTimings> {
               widget = Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          'My Batches',
-                          textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.headline5.copyWith(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: IconButton(
-                          alignment: Alignment.centerRight,
-                          icon: Icon(Icons.search),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
+                  SizedBox(height: 10),
+                  Text(
+                    'My Batches',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headline5.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.black),
                   ),
-                 
-
                   Expanded(
                     child: ListView.builder(
                       itemCount: mb.length,
