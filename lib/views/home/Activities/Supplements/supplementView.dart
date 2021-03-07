@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/supplement/SupplementProduct.dart';
@@ -8,7 +10,25 @@ class SupplementView extends StatefulWidget {
 }
 
 class _SupplementViewState extends State<SupplementView> {
-  String supplementType = 'All';
+  String vendor = 'All';
+  String search = "";
+  String price = "";
+
+  highToLow() {
+    Timer(Duration(milliseconds: 100), () {
+      setState(() {
+        price = "ordering=-price";
+      });
+    });
+  }
+
+  lowToHigh() {
+    Timer(Duration(milliseconds: 100), () {
+      setState(() {
+        price = "ordering=price";
+      });
+    });
+  }
 
   Widget sort() {
     return IconButton(
@@ -21,7 +41,10 @@ class _SupplementViewState extends State<SupplementView> {
         showDialog(
             context: context,
             builder: (_) {
-              return ShowSortSupplements();
+              return ShowSortSupplements(
+                LowToHigh: lowToHigh,
+                HighToLow: highToLow,
+              );
             });
       },
     );
@@ -74,6 +97,11 @@ class _SupplementViewState extends State<SupplementView> {
               borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
             ),
             child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  search = "search=" + value;
+                });
+              },
               decoration: InputDecoration(
                   suffixIcon: Icon(
                     Icons.search,
@@ -95,7 +123,8 @@ class _SupplementViewState extends State<SupplementView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DropdownButton<String>(
-                  value: supplementType,
+                  hint: Text("Select Vendor"),
+                  value: vendor,
                   icon: Icon(
                     Icons.keyboard_arrow_down,
                     color: Colors.black,
@@ -104,16 +133,14 @@ class _SupplementViewState extends State<SupplementView> {
                   elevation: 16,
                   onChanged: (String newValue) {
                     setState(() {
-                      supplementType = newValue;
+                      vendor = newValue;
                     });
                   },
                   items: <String>[
                     'All',
-                    'Protiens',
-                    'Gainers',
-                    'Pre/Post Workout',
-                    'Vitamins',
-                    'Minerals'
+                    'MyNutraMart',
+                    'HealthKart',
+                    'New Partner'
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -126,7 +153,11 @@ class _SupplementViewState extends State<SupplementView> {
             ),
           ),
           FutureBuilder(
-            future: getSupplements(),
+            future: getSupplements("?" +
+                search +
+                "&" +
+                price +
+                (vendor == "All" ? "" : "&vendor__name=" + vendor)),
             builder: (c, s) {
               if (s.connectionState == ConnectionState.waiting) {
                 return Center(
@@ -139,6 +170,7 @@ class _SupplementViewState extends State<SupplementView> {
                 return Expanded(
                   child: ListView.builder(
                       // shrinkWrap: true,
+
                       itemCount: model.results.length,
                       itemBuilder: (c, i) {
                         return SupplementTile(
