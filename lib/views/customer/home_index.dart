@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/transformation_image_model.dart';
+import 'package:gym_app/models/customer/transformation_image_model.dart';
 import 'package:gym_app/views/customer/my_attendance.dart';
 import 'package:gym_app/views/customer/my_goal_title.dart';
 import 'package:gym_app/views/customer/todays_workout_tile.dart';
@@ -175,7 +175,6 @@ class _CustomerTransformationWidgetState
                         print("voila!");
                         Fluttertoast.showToast(msg: "Image added");
                       } else
-                        
                         Fluttertoast.showToast(msg: "Failed to add image");
                     }
                   },

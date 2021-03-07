@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/models/trainer/clients_profile_model.dart';
-import 'package:gym_app/views/customer/text_field_widget.dart';
+import 'package:gym_app/views/customer/workout/text_field_widget.dart';
 
 class ClientsProfile extends StatelessWidget {
   final int id;

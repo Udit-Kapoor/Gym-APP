@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/views/customer/drawer/profile_picture.dart';
-import '../customer/text_field_widget.dart';
+import '../customer/workout/text_field_widget.dart';
 
 class TrainerProfileView extends StatelessWidget {
   const TrainerProfileView({Key key}) : super(key: key);

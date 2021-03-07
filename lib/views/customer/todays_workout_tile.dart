@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/today_workout_model.dart';
+import 'package:gym_app/models/customer/today_workout_model.dart';
 import 'package:intl/intl.dart';
 
 class TodaysWorkoutTile extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/customer_bmi_model.dart';
+import 'package:gym_app/models/customer/customer_bmi_model.dart';
 
 class MyGoalTile extends StatelessWidget {
   const MyGoalTile({

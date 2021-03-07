@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/customer_attendance_model.dart';
+import 'package:gym_app/models/customer/customer_attendance_model.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class MyAttendance extends StatelessWidget {

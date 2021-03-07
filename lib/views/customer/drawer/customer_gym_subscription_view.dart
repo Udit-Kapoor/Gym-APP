@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/customer_subscription_model.dart';
-import 'package:gym_app/views/customer/text_field_widget.dart';
+import 'package:gym_app/models/customer/customer_subscription_model.dart';
+import 'package:gym_app/views/customer/workout/text_field_widget.dart';
 
 class CustomerGymSubscriptionView extends StatelessWidget {
   const CustomerGymSubscriptionView({Key key}) : super(key: key);

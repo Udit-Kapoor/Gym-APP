@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer%20model/customer_profile_model.dart';
+import 'package:gym_app/models/customer/customer_profile_model.dart';
 
 import 'profile_picture.dart';
-import '../text_field_widget.dart';
+import '../workout/text_field_widget.dart';
 
 class CustomerProfileView extends StatelessWidget {
   const CustomerProfileView({Key key}) : super(key: key);
