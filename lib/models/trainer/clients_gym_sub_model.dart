@@ -180,8 +180,6 @@ Future<ApiResponse> clientsGymSub(int id) async {
     endpoint: "https://p2c-gym.herokuapp.com/customer/trainerprofileadd/",
     data: {"id": id},
   );
-  print(x.errorMessage);
 
-  print(x.data);
   return x;
 }

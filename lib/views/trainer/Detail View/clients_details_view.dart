@@ -133,6 +133,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                         ),
                         child: CheckboxListTile(
                           controlAffinity: ListTileControlAffinity.trailing,
+                          
                           title: Text(
                             'Air Bike',
                             style: Theme.of(context).textTheme.headline6,
@@ -147,6 +148,8 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                       );
                     }),
               ),
+             
+             
               Row(
                 children: [
                   Expanded(

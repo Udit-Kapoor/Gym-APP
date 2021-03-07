@@ -25,7 +25,6 @@ class _HomeIndexState extends State<HomeIndex>
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
-        // addAutomaticKeepAlives: false,
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: [
@@ -174,10 +173,10 @@ class _CustomerTransformationWidgetState
                       if (kuchBhi.statusCode >= 200 &&
                           kuchBhi.statusCode <= 205) {
                         print("voila!");
+                        Fluttertoast.showToast(msg: "Image added");
                       } else
-                        print('Just die');
-
-                      print(kuchBhi.body.toString());
+                        
+                        Fluttertoast.showToast(msg: "Failed to add image");
                     }
                   },
                 ),

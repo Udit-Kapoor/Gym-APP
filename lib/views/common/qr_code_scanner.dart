@@ -45,7 +45,6 @@ class _QRCodeScanState extends State<QRCodeScan> {
                 result = scanData;
                 showProgress = true;
               });
-              print(result.code);
               controller.stopCamera();
 
               Navigator.pushReplacementNamed(context, "/TrainerHome");
@@ -65,7 +64,6 @@ class _QRCodeScanState extends State<QRCodeScan> {
 
   @override
   void dispose() {
-    print("#### I am Dead #####");
     controller?.dispose();
     super.dispose();
   }
