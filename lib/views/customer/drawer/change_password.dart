@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/apis/apis.dart';
 
-class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key key}) : super(key: key);
+class ChangePassword extends StatelessWidget {
+  const ChangePassword({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +140,21 @@ class ForgotPassword extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (newPassword.text != confirmNewPassword.text) {
+                        Fluttertoast.showToast(msg: "New password don't match");
+                      } else {
+                        ApiResponse kuchBhi = await ApiHelper().changePassword(
+                            currentPassword.text,
+                            newPassword.text,
+                            confirmNewPassword.text);
+
+                        print(kuchBhi.data);
+                        
+                        print(kuchBhi.error);
+                        print(kuchBhi.errorMessage);
+                      }
+                    },
                     padding:
                         EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
                     shape: RoundedRectangleBorder(

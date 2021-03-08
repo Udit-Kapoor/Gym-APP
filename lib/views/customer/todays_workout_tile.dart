@@ -17,10 +17,7 @@ class TodaysWorkoutTile extends StatelessWidget {
                   s.connectionState == ConnectionState.done) {
                 var ca = todayWorkoutModelFromJson(s.data.data);
 
-                var date = DateFormat.MMMd().format(ca.date);
-
-                var dateSplit = date.split(' ');
-                print(dateSplit);
+                var dateSplit = DateFormat.MMMd().format(ca.date).split(' ');
 
                 widget = ListTile(
                   contentPadding:

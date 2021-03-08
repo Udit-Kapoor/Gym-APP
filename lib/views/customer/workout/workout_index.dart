@@ -93,6 +93,7 @@ class WorkoutIndex extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ExercisePage(
+                                    muscle: exc.name,
                                     workout: exc.workouts,
                                   ),
                                 ),
@@ -107,13 +108,15 @@ class WorkoutIndex extends StatelessWidget {
                                 elevation: 4.0,
                                 child: Container(
                                   height: 80.0,
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20.0),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         DateFormat.MMMd().format(exc.date),

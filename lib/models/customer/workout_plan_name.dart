@@ -176,8 +176,9 @@ class Workout {
 }
 
 Future<ApiResponse> workoutPlanFoo(int id) async {
-  ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "https://p2c-gym.herokuapp.com/customer/myworkout/$id/");
+  ApiResponse x = await ApiHelper().getReq(
+      endpoint: "https://p2c-gym.herokuapp.com/customer/workoutplan/$id/list/");
 
-  return cp;
+
+  return x;
 }

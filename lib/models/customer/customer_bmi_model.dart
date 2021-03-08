@@ -16,7 +16,7 @@ String customerBmiModelToJson(CustomerBmiModel data) =>
 class CustomerBmiModel {
   CustomerBmiModel({
     this.id,
-    this.weight,
+    this.weight,  
     this.height,
     this.motive,
     this.healthIssue,

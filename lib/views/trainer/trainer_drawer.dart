@@ -117,7 +117,7 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ForgotPassword(),
+                    builder: (context) => ChangePassword(),
                   ),
                 );
               }),

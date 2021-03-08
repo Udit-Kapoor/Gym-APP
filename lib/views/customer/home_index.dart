@@ -28,12 +28,7 @@ class _HomeIndexState extends State<HomeIndex>
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: [
-          TodaysWorkoutTile(
-              // dateNum: '30',
-              // month: 'Oct',
-              // batchTime: '09.30-10.30',
-              // dayName: 'Chest',
-              ),
+          TodaysWorkoutTile(),
           MyGoalTile(),
           WeightChart(),
           SizedBox(height: 20.0),
@@ -82,6 +77,8 @@ class _CustomerTransformationWidgetState
         if (s.connectionState == ConnectionState.waiting) {
           widget = Center(child: CircularProgressIndicator());
         } else if (s.hasData && s.connectionState == ConnectionState.done) {
+
+        
           var ti = transformaionImageModelFromJson(s.data.data);
 
           widget = Wrap(
@@ -172,7 +169,6 @@ class _CustomerTransformationWidgetState
 
                       if (kuchBhi.statusCode >= 200 &&
                           kuchBhi.statusCode <= 205) {
-                        print("voila!");
                         Fluttertoast.showToast(msg: "Image added");
                       } else
                         Fluttertoast.showToast(msg: "Failed to add image");

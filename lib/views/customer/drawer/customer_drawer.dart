@@ -125,7 +125,7 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ForgotPassword(),
+                    builder: (context) => ChangePassword(),
                   ),
                 );
               }),
