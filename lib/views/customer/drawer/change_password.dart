@@ -141,19 +141,11 @@ class ChangePassword extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: FlatButton(
                     onPressed: () async {
-                      if (newPassword.text != confirmNewPassword.text) {
-                        Fluttertoast.showToast(msg: "New password don't match");
-                      } else {
-                        ApiResponse kuchBhi = await ApiHelper().changePassword(
-                            currentPassword.text,
-                            newPassword.text,
-                            confirmNewPassword.text);
-
-                        print(kuchBhi.data);
-                        
-                        print(kuchBhi.error);
-                        print(kuchBhi.errorMessage);
-                      }
+                      await ApiHelper().changePassword({
+                        "old_password": currentPassword.text,
+                        "new_password1": newPassword.text,
+                        "new_password2": confirmNewPassword.text
+                      });
                     },
                     padding:
                         EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),

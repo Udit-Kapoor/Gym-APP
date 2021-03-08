@@ -40,26 +40,24 @@ class ApiHelper {
     }
   }
 
-  Future changePassword(String pass, String nPass, String nnPass) async {
+  Future changePassword(Map data) async {
+    final _sp = await s;
     try {
       Response cp = await post(
         'https://p2c-gym.herokuapp.com/rest-auth/password/change/',
-        headers: {HttpHeaders.contentTypeHeader: "application/json"},
-        body: jsonEncode({
-          "old_password": pass,
-          "new_password1": nPass,
-          "new_password2": nnPass
-        }),
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
+        },
+        body: jsonEncode(data),
       );
-      return cp.statusCode >= 200 && cp.statusCode <= 205
-          ? ApiResponse(data: RestAuthLogin.fromJson(jsonDecode(cp.body)))
-          : ApiResponse(error: true);
-    } on SocketException {
-      return ApiResponse(error: true, errorMessage: "NO INTERNET");
-    } on HttpException {
-      return ApiResponse(error: true, errorMessage: "HTTP ERROR");
+      if (cp.statusCode >= 200 && cp.statusCode <= 205) {
+        Fluttertoast.showToast(msg: "Password Changed");
+      } else {
+        Fluttertoast.showToast(msg: "Wrong Old Password");
+      }
     } catch (e) {
-      return ApiResponse(error: true, errorMessage: e.toString());
+      print(e.toString());
     }
   }
 
