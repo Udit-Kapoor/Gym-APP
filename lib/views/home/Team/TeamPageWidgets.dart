@@ -54,7 +54,6 @@ class ShowIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //ToDo: Navigate to respective screens using PARAMETER
       onTap: () => {Navigator.pushNamed(context, route)},
       child: Column(
         children: [

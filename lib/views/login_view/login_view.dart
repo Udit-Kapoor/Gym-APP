@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
 
 class LoginView extends StatefulWidget {
@@ -236,11 +237,17 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    //ToDo: Send password reset link
                                     onTap: () {
-                                      postForgotPass({
-                                        "email": email,
-                                      });
+                                      if (!RegExp(
+                                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                          .hasMatch(email)) {
+                                        Fluttertoast.showToast(
+                                            msg: "Enter a Valid Email");
+                                      } else {
+                                        postForgotPass({
+                                          "email": email,
+                                        });
+                                      }
                                     },
                                     child: Container(
                                       width: 80,

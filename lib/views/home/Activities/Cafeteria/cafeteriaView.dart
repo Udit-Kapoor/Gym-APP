@@ -56,7 +56,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return CafeCart();
               })),
-            }, //ToDo: Show Cart
+            },
           ),
         ],
         backgroundColor: Colors.white,

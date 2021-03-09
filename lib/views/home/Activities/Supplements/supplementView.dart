@@ -79,7 +79,6 @@ class _SupplementViewState extends State<SupplementView> {
                 return SupplementCart();
               })),
             },
-            //ToDo: Show Cart
           ),
         ],
         backgroundColor: Colors.white,

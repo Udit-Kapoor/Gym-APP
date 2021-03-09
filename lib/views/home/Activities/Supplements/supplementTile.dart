@@ -129,7 +129,7 @@ class SupplementTile extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          size + " , " + flavour,
+                          size + " Kgs" + flavour,
                           style: TextStyle(fontSize: 8),
                         ),
                         Row(
