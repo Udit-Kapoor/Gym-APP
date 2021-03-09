@@ -37,6 +37,8 @@ flutter:
 
   assets:
     - lib/assets/
+    - lib/assets/team/
+    - lib/assets/review/
 
   fonts:
     - family: Custom

@@ -1,3 +1,7 @@
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';
+
 class RestAuthLogin {
   String key;
   int user;
@@ -54,5 +58,17 @@ class UserType {
     data['is_customer'] = this.isCustomer;
     data['is_webuser'] = this.isWebuser;
     return data;
+  }
+}
+
+void postForgotPass(Map data) async {
+  ApiResponse cp = await ApiHelper().postReq(
+      endpoint: "https://p2c-gym.herokuapp.com/rest-auth/password/reset/",
+      data: data);
+
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Unable To Send Link");
+  } else {
+    Fluttertoast.showToast(msg: "Email Sent Successfully");
   }
 }

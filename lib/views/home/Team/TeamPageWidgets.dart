@@ -148,7 +148,7 @@ class ReviewCard extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 25),
+            padding: const EdgeInsets.only(top: 20.0, left: 25, right: 10),
             child: Text(story),
           ),
         ],

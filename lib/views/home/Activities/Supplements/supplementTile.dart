@@ -110,7 +110,7 @@ class SupplementTile extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
                           image: DecorationImage(
-                            image: AssetImage(imgPath),
+                            image: NetworkImage(imgPath),
                           )),
                     ),
                     Column(
@@ -156,9 +156,9 @@ class SupplementTile extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            // SizedBox(
-                            //   width: 70,
-                            // ),
+                            SizedBox(
+                              width: 70,
+                            ),
                             showAddToCartButton(model.isStock),
                           ],
                         ),

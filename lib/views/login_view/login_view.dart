@@ -105,6 +105,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _showForgotPass() {
+    String email;
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: GestureDetector(
@@ -196,7 +197,9 @@ class _LoginViewState extends State<LoginView> {
                                     height: 30,
                                     width: 150,
                                     child: TextField(
-                                      keyboardType: TextInputType.number,
+                                      onChanged: (value) {
+                                        email = value;
+                                      },
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.fromLTRB(
                                             5.0, 15.0, 20.0, 10.0),
@@ -234,7 +237,11 @@ class _LoginViewState extends State<LoginView> {
                                   ),
                                   GestureDetector(
                                     //ToDo: Send password reset link
-                                    onTap: null,
+                                    onTap: () {
+                                      postForgotPass({
+                                        "email": email,
+                                      });
+                                    },
                                     child: Container(
                                       width: 80,
                                       height: 33,
