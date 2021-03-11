@@ -185,19 +185,23 @@ class _LoginViewState extends State<LoginView> {
                                   SizedBox(
                                     width: 15,
                                   ),
-                                  Text(
-                                    "Email",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12.0),
+                                    child: Text(
+                                      "Email",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 20,
                                   ),
                                   Container(
-                                    height: 30,
+                                    height: 40,
                                     width: 150,
                                     child: TextField(
+                                      maxLines: 1,
                                       onChanged: (value) {
                                         email = value;
                                       },
@@ -244,9 +248,7 @@ class _LoginViewState extends State<LoginView> {
                                         Fluttertoast.showToast(
                                             msg: "Enter a Valid Email");
                                       } else {
-                                        postForgotPass({
-                                          "email": email,
-                                        });
+                                        postForgotPass({"email": email});
                                       }
                                     },
                                     child: Container(
