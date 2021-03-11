@@ -39,6 +39,8 @@ flutter:
     - lib/assets/
     - lib/assets/team/
     - lib/assets/review/
+    - lib/assets/slider/
+    - lib/assets/partners/
 
   fonts:
     - family: Custom

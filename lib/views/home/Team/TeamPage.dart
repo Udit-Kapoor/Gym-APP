@@ -8,15 +8,34 @@ class TeamPage extends StatelessWidget {
     return ListView(
       physics: BouncingScrollPhysics(),
       children: [
-        Container(
-          height: 165,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/assets/team1.jpg'),
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
+        CarouselSlider(
+            options: CarouselOptions(
+                height: 200,
+                autoPlay: true,
+                autoPlayAnimationDuration: Duration(seconds: 1),
+                viewportFraction: 1.0),
+            items: [
+              Image.asset("lib/assets/slider/slider1.jpg"),
+              Image.asset("lib/assets/slider/slider2.jpg"),
+              Image.asset("lib/assets/slider/slider3.jpg"),
+              Image.asset("lib/assets/slider/slider4.jpg"),
+              Image.asset("lib/assets/slider/slider5.jpg"),
+              Image.asset("lib/assets/slider/slider6.jpg"),
+              Image.asset("lib/assets/slider/slider7.jpg"),
+              Image.asset("lib/assets/slider/slider9.jpg"),
+              Image.asset("lib/assets/slider/slider10.jpg"),
+              Image.asset("lib/assets/slider/slider11.jpg"),
+              Image.asset("lib/assets/slider/slider12.jpg"),
+            ]),
+        // Container(
+        //   height: 165,
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage('lib/assets/team1.jpg'),
+        //       fit: BoxFit.fill,
+        //     ),
+        //   ),
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -175,13 +194,15 @@ class TeamPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                 top: 18.0,
               ),
-              child: TeamImage(name: "Lorem", img: "lib/assets/profile.png"),
+              child: TeamImage(
+                  name: "Blufit", img: "lib/assets/partners/Blufit.png"),
             ),
             Padding(
               padding: const EdgeInsets.only(
                 top: 18.0,
               ),
-              child: TeamImage(name: "Ipsum", img: "lib/assets/profile.png"),
+              child: TeamImage(
+                  name: "Parafit", img: "lib/assets/partners/parafit.png"),
             ),
           ],
         ),
@@ -201,13 +222,16 @@ class TeamPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                 top: 18.0,
               ),
-              child: TeamImage(name: "Lorem", img: "lib/assets/profile.png"),
+              child: TeamImage(
+                  name: "HealthKart",
+                  img: "lib/assets/partners/healthkart.png"),
             ),
             Padding(
               padding: const EdgeInsets.only(
                 top: 18.0,
               ),
-              child: TeamImage(name: "Ipsum", img: "lib/assets/profile.png"),
+              child: TeamImage(
+                  name: "My Nutra Mart", img: "lib/assets/profile.png"),
             ),
           ],
         ),
