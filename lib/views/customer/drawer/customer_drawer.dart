@@ -214,7 +214,8 @@ class DrawerTextList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      splashColor: Colors.red,
       child: Text(
         label,
       ),
