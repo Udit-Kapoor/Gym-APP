@@ -26,6 +26,7 @@ dependencies:
   qr_code_scanner: ^0.3.5
   shared_preferences: ^0.5.12+4
   url_launcher: ^5.7.10
+  youtube_player_flutter: ^7.0.0+7
 
 dev_dependencies:
   flutter_test:
@@ -41,6 +42,8 @@ flutter:
     - lib/assets/review/
     - lib/assets/slider/
     - lib/assets/partners/
+    - lib/assets/transformation/
+    - lib/assets/onboarding/
 
   fonts:
     - family: Custom

@@ -2,8 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TeamPage extends StatelessWidget {
+  YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: YoutubePlayer.convertUrlToId(
+        "https://www.youtube.com/watch?v=o2vYBbYJ8as"),
+    flags: YoutubePlayerFlags(
+      autoPlay: false,
+      mute: false,
+      disableDragSeek: false,
+      loop: false,
+      isLive: false,
+      forceHD: false,
+    ),
+  );
   Widget build(BuildContext context) {
     return ListView(
       physics: BouncingScrollPhysics(),
@@ -226,13 +239,13 @@ class TeamPage extends StatelessWidget {
                   name: "HealthKart",
                   img: "lib/assets/partners/healthkart.png"),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 18.0,
-              ),
-              child: TeamImage(
-                  name: "My Nutra Mart", img: "lib/assets/profile.png"),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     top: 18.0,
+            //   ),
+            //   child: TeamImage(
+            //       name: "My Nutra Mart", img: "lib/assets/profile.png"),
+            // ),
           ],
         ),
         Padding(
@@ -244,41 +257,56 @@ class TeamPage extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: Image.asset(
-                'lib/assets/story1.jpeg',
-                fit: BoxFit.fill,
-              ),
-            ),
-            Expanded(
-              child: Image.asset(
-                'lib/assets/story2.jpg',
-                fit: BoxFit.fill,
-              ),
-            ),
-          ],
+        SizedBox(
+          height: 20,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 30.0),
-          child: Center(
-            child: Text(
-              "Behind The Scenes",
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-            ),
-          ),
-        ),
-        Container(
-          width: 400,
-          height: 160,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("lib/assets/story2.jpg"),
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
+        CarouselSlider(
+            options: CarouselOptions(
+                height: 200,
+                autoPlay: true,
+                autoPlayAnimationDuration: Duration(seconds: 1),
+                viewportFraction: 1.0),
+            items: [
+              Image.asset("lib/assets/transformation/1.png"),
+              Image.asset("lib/assets/transformation/2.png"),
+              Image.asset("lib/assets/transformation/3.png"),
+              Image.asset("lib/assets/transformation/4.png"),
+            ]),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: Image.asset(
+        //         'lib/assets/story1.jpeg',
+        //         fit: BoxFit.fill,
+        //       ),
+        //     ),
+        //     Expanded(
+        //       child: Image.asset(
+        //         'lib/assets/story2.jpg',
+        //         fit: BoxFit.fill,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 30.0),
+        //   child: Center(
+        //     child: Text(
+        //       "Behind The Scenes",
+        //       style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+        //     ),
+        //   ),
+        // ),
+        // Container(
+        //   width: 400,
+        //   height: 160,
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage("lib/assets/story2.jpg"),
+        //       fit: BoxFit.fill,
+        //     ),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Center(
@@ -288,16 +316,23 @@ class TeamPage extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          width: 400,
-          height: 160,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("lib/assets/story2.jpg"),
-              fit: BoxFit.fill,
-            ),
-          ),
+        SizedBox(
+          height: 10,
         ),
+        YoutubePlayer(
+          controller: _controller,
+          liveUIColor: Colors.amber,
+        ),
+        // Container(
+        //   width: 400,
+        //   height: 160,
+        //   decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage("lib/assets/story2.jpg"),
+        //       fit: BoxFit.fill,
+        //     ),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: Center(
