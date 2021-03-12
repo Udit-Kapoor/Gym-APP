@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/DietEnquiry/DietEnquiry.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DietSubscription extends StatefulWidget {
   @override
   _DietSubscriptionState createState() => _DietSubscriptionState();
 }
 
-//ToDo: Add Validators...
 class _DietSubscriptionState extends State<DietSubscription> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String planProvider = "Blufit";
@@ -158,7 +158,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
         padding: const EdgeInsets.only(top: 10.0),
         child: Container(
           width: 320,
-          height: 50,
+          height: 60,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -203,34 +203,25 @@ class _DietSubscriptionState extends State<DietSubscription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(
+              Icons.chevron_left,
+              size: 40,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context)),
+        title: Text(
+          "Diet Food Subscription",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.w700, fontSize: 20, color: Colors.black),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Row(
-              children: [
-                IconButton(
-                    icon: Icon(
-                      Icons.chevron_left,
-                      size: 40,
-                      color: Colors.black,
-                    ),
-                    onPressed: () => Navigator.pop(context)),
-                Spacer(),
-                Text(
-                  "Diet Food Subscription",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-                Spacer(
-                  flex: 2,
-                ),
-              ],
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: Column(
@@ -239,19 +230,24 @@ class _DietSubscriptionState extends State<DietSubscription> {
                   height: 35,
                 ),
                 Text(
-                  "Based on your details provided by you at the time of registration, we have considered the following diet best for you: ",
+                  "Take a look at the different Diet Plans that we provide and then fill up the form below:",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
                 ),
                 SizedBox(
                   height: 15,
                 ),
-                Text(
-                  "Weight Loss Pure Veg Diet Food",
-                  style: TextStyle(
-                      color: kOrangeCol,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: () {
+                    launch("https://www.health2offer.com/diet-subscription");
+                  },
+                  child: Text(
+                    "Click Here",
+                    style: TextStyle(
+                        color: kOrangeCol,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SizedBox(
                   height: 15,
@@ -271,7 +267,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                     children: [
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -317,7 +313,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -363,7 +359,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -411,7 +407,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -455,7 +451,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -501,7 +497,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -524,7 +520,11 @@ class _DietSubscriptionState extends State<DietSubscription> {
                                   if (value == "") {
                                     return "Email can't be empty";
                                   }
-                                  //ToDO: Add EMail regex
+                                  if (!RegExp(
+                                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                      .hasMatch(value)) {
+                                    return "Enter a Valid Email";
+                                  }
                                   return null;
                                 },
                                 controller: email,
@@ -546,7 +546,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -592,7 +592,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -637,7 +637,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -682,7 +682,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -727,7 +727,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -777,7 +777,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -863,7 +863,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -908,7 +908,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -954,7 +954,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -1000,7 +1000,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -1044,7 +1044,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -1087,7 +1087,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -1130,7 +1130,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -1179,7 +1179,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                       ),
                       Container(
                         width: 320,
-                        height: 50,
+                        height: 60,
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
@@ -1253,7 +1253,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                             }
                           },
                           child: Container(
-                            height: 50,
+                            height: 60,
                             width: 330,
                             decoration: BoxDecoration(
                               color: kOrangeCol,

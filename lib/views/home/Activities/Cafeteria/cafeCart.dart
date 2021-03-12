@@ -309,7 +309,6 @@ class BillItem extends StatelessWidget {
               color: Colors.black,
               size: 20,
             ),
-            //ToDo: How to rebuild FUTURE
             onPressed: () => {
                   delItem(id),
                   Timer(Duration(seconds: 2), () {

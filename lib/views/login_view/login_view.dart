@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
 
 class LoginView extends StatefulWidget {
@@ -105,6 +106,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _showForgotPass() {
+    String email;
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: GestureDetector(
@@ -183,20 +185,26 @@ class _LoginViewState extends State<LoginView> {
                                   SizedBox(
                                     width: 15,
                                   ),
-                                  Text(
-                                    "Email",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 15),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12.0),
+                                    child: Text(
+                                      "Email",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 20,
                                   ),
                                   Container(
-                                    height: 30,
+                                    height: 40,
                                     width: 150,
                                     child: TextField(
-                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      onChanged: (value) {
+                                        email = value;
+                                      },
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.fromLTRB(
                                             5.0, 15.0, 20.0, 10.0),
@@ -233,8 +241,16 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    //ToDo: Send password reset link
-                                    onTap: null,
+                                    onTap: () {
+                                      if (!RegExp(
+                                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                          .hasMatch(email)) {
+                                        Fluttertoast.showToast(
+                                            msg: "Enter a Valid Email");
+                                      } else {
+                                        postForgotPass({"email": email});
+                                      }
+                                    },
                                     child: Container(
                                       width: 80,
                                       height: 33,

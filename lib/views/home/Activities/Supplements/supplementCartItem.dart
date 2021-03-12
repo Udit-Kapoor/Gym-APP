@@ -137,7 +137,6 @@ class SupplementCartItem extends StatelessWidget {
                           SizedBox(
                             width: 50,
                           ),
-                          //TodO: Update quantity in backend
                           IconButton(
                               icon: Icon(
                                 Icons.add_circle,

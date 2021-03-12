@@ -54,7 +54,6 @@ class ShowIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //ToDo: Navigate to respective screens using PARAMETER
       onTap: () => {Navigator.pushNamed(context, route)},
       child: Column(
         children: [
@@ -148,7 +147,7 @@ class ReviewCard extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 25),
+            padding: const EdgeInsets.only(top: 20.0, left: 25, right: 10),
             child: Text(story),
           ),
         ],

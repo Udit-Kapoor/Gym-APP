@@ -22,7 +22,6 @@ class _AddToCartViewState extends State<AddToCartView> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton.extended(
-          //ToDo: Add POST REQUEST and NAVIGATE to CART
           elevation: 5,
           onPressed: () => {
             if (bill != null && price != null)
@@ -69,7 +68,6 @@ class _AddToCartViewState extends State<AddToCartView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              //ToDO: Add MediaQuery height and width
               height: 300,
               //width: 400,
               decoration: BoxDecoration(
