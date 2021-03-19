@@ -191,8 +191,9 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
               child: FlatButton(
                 onPressed: () async {
                   await ApiHelper().postReq(
-                    endpoint:
-                        'https://p2c-gym.herokuapp.com/customer/complaint/',
+                    endpoint:_method == ChoiceMethod.complaint
+                          ?
+                        'https://p2c-gym.herokuapp.com/customer/complaint/':'https://p2c-gym.herokuapp.com/customer/feedback/',
                     data: {
                       //TODO: Add Name to shared preference
                       "name": "Aman Nanda",

@@ -13,14 +13,11 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding == null
-          ? EdgeInsets.symmetric(horizontal: 20.0, vertical: 10)
-          : padding,
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
       child: TextField(
         autofocus: true,
         enabled: false,
         enableInteractiveSelection: false,
-       
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           border: OutlineInputBorder(
