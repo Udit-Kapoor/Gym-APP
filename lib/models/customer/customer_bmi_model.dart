@@ -16,7 +16,7 @@ String customerBmiModelToJson(CustomerBmiModel data) =>
 class CustomerBmiModel {
   CustomerBmiModel({
     this.id,
-    this.weight,  
+    this.weight,
     this.height,
     this.motive,
     this.healthIssue,
@@ -56,7 +56,7 @@ class CustomerBmiModel {
 
 Future<ApiResponse> customerBmi() async {
   ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/customer/bmi/");
+      .getReq(endpoint: "https://api.health2offer.com/customer/bmi/");
 
   return cp;
 }

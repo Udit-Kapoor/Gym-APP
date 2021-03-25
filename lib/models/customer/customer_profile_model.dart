@@ -110,6 +110,6 @@ class CustomerProfileModel {
 
 Future<ApiResponse> customerPro() async {
   ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/customer/profile/");
+      .getReq(endpoint: "https://api.health2offer.com/customer/profile/");
   return cp;
 }

@@ -44,7 +44,7 @@ class ApiHelper {
     final _sp = await s;
     try {
       Response cp = await post(
-        'https://p2c-gym.herokuapp.com/rest-auth/password/change/',
+        'https://api.health2offer.com/rest-auth/password/change/',
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",
           HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
@@ -64,7 +64,7 @@ class ApiHelper {
   Future<void> submit(BuildContext ctx, String number, String pass) async {
     final sp = await SharedPreferences.getInstance();
     ApiResponse login = await ApiHelper().login(
-      url: "https://p2c-gym.herokuapp.com/rest-auth/login/",
+      url: "https://api.health2offer.com/rest-auth/login/",
       data: {"username": number, "password": pass},
     );
     if (!login.error) {
@@ -84,7 +84,7 @@ class ApiHelper {
 
   Future logout(context) async {
     final _sp = await s;
-    await post("https://p2c-gym.herokuapp.com/rest-auth/logout/")
+    await post("https://api.health2offer.com/rest-auth/logout/")
         .then((value) => {
               if (value.statusCode >= 200 && value.statusCode <= 205)
                 {

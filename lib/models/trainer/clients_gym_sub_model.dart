@@ -177,7 +177,7 @@ class Plan {
 
 Future<ApiResponse> clientsGymSub(int id) async {
   ApiResponse x = await ApiHelper().postReq(
-    endpoint: "https://p2c-gym.herokuapp.com/customer/trainerprofileadd/",
+    endpoint: "https://api.health2offer.com/customer/trainerprofileadd/",
     data: {"id": id},
   );
 

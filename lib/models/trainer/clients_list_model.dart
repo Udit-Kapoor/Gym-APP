@@ -197,7 +197,7 @@ class Trainer {
 
 Future<ApiResponse> clientList(int id) async {
   ApiResponse x = await ApiHelper().postReq(
-    endpoint: "https://p2c-gym.herokuapp.com/trainer/trainerbatch/customer/",
+    endpoint: "https://api.health2offer.com/trainer/trainerbatch/customer/",
     data: {"id": id},
   );
   return x;

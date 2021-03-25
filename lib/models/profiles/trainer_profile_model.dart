@@ -136,7 +136,7 @@ class TrainerProfileModel {
 
 Future<ApiResponse> trainerPro() async {
   ApiResponse tp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/trainer/myprofile/");
+      .getReq(endpoint: "https://api.health2offer.com/trainer/myprofile/");
 
   return tp;
 }

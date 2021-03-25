@@ -875,14 +875,13 @@ class ItemItem {
 
 Future<ApiResponse> getCart() async {
   ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "https://p2c-gym.herokuapp.com/facilities/cafeteria_cart/");
+      endpoint: "https://api.health2offer.com/facilities/cafeteria_cart/");
   return cp;
 }
 
 void delItem(int id) async {
   ApiResponse cp = await ApiHelper().deleteReq(
-      endpoint:
-          "https://p2c-gym.herokuapp.com/facilities/cafeteria_order/$id/");
+      endpoint: "https://api.health2offer.com/facilities/cafeteria_order/$id/");
   if (cp.error) {
     Fluttertoast.showToast(msg: "Error in Deleting Item");
   } else {
@@ -892,7 +891,7 @@ void delItem(int id) async {
 
 void placeOrder(Map data) async {
   ApiResponse cp = await ApiHelper().postReq(
-      endpoint: "https://p2c-gym.herokuapp.com/facilities/ordered_cart/",
+      endpoint: "https://api.health2offer.com/facilities/ordered_cart/",
       data: data);
   // return cp.error;
 }

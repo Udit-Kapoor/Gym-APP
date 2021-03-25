@@ -177,8 +177,7 @@ class Workout {
 
 Future<ApiResponse> workoutPlanFoo(int id) async {
   ApiResponse x = await ApiHelper().getReq(
-      endpoint: "https://p2c-gym.herokuapp.com/customer/workoutplan/$id/list/");
-
+      endpoint: "https://api.health2offer.com/customer/workoutplan/$id/list/");
 
   return x;
 }

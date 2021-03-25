@@ -267,7 +267,7 @@ class GymTrainer {
 
 Future<List> getSupplementCart() async {
   ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/customer/cartview/");
+      .getReq(endpoint: "https://api.health2offer.com/customer/cartview/");
   SharedPreferences sp = await SharedPreferences.getInstance();
 
   return [sp.getString("USER_TYPE"), cp];
@@ -275,7 +275,7 @@ Future<List> getSupplementCart() async {
 
 void delSupplementItem(Map data) async {
   ApiResponse cp = await ApiHelper().postReq(
-    endpoint: "https://p2c-gym.herokuapp.com/customer/removecart/",
+    endpoint: "https://api.health2offer.com/customer/removecart/",
     data: data,
   );
   if (cp.error) {
@@ -287,7 +287,7 @@ void delSupplementItem(Map data) async {
 
 void updateSupplementCartItem(Map data) async {
   ApiResponse cp = await ApiHelper().patchReq(
-    endpoint: "https://p2c-gym.herokuapp.com/customer/cartview/",
+    endpoint: "https://api.health2offer.com/customer/cartview/",
     data: data,
   );
   if (cp.error) {
@@ -299,7 +299,7 @@ void updateSupplementCartItem(Map data) async {
 
 void placeSupplementCart(Map data) async {
   ApiResponse cp = await ApiHelper().postReq(
-    endpoint: "https://p2c-gym.herokuapp.com/website/confirmpayment/",
+    endpoint: "https://api.health2offer.com/website/confirmpayment/",
     data: data,
   );
   if (cp.error) {

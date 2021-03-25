@@ -77,8 +77,6 @@ class _CustomerTransformationWidgetState
         if (s.connectionState == ConnectionState.waiting) {
           widget = Center(child: CircularProgressIndicator());
         } else if (s.hasData && s.connectionState == ConnectionState.done) {
-
-        
           var ti = transformaionImageModelFromJson(s.data.data);
 
           widget = Wrap(
@@ -141,7 +139,7 @@ class _CustomerTransformationWidgetState
                       MultipartRequest postImage = MultipartRequest(
                         "POST",
                         Uri.parse(
-                            'https://p2c-gym.herokuapp.com/customer/transformation/'),
+                            'https://api.health2offer.com/customer/transformation/'),
                       );
 
                       postImage.headers.addAll(

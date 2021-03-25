@@ -178,6 +178,6 @@ class Plan {
 
 Future<ApiResponse> customerGymSub() async {
   ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/customer/profileadd/");
+      .getReq(endpoint: "https://api.health2offer.com/customer/profileadd/");
   return cp;
 }

@@ -123,13 +123,13 @@ class ItemVarient {
 
 Future<ApiResponse> getCafeItems() async {
   ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/facilities/item/");
+      .getReq(endpoint: "https://api.health2offer.com/facilities/item/");
   return cp;
 }
 
 void addToCart(Map data) async {
   ApiResponse add = await ApiHelper().postReq(
-      endpoint: "https://p2c-gym.herokuapp.com/facilities/cafeteria_order/",
+      endpoint: "https://api.health2offer.com/facilities/cafeteria_order/",
       data: data);
 
   if (add.error) {

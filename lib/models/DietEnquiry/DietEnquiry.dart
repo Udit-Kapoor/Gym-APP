@@ -111,7 +111,7 @@ class DietEnquiry {
 
 void submitDietEnquiry(Map data) async {
   ApiResponse cp = await ApiHelper().postReq(
-    endpoint: "https://p2c-gym.herokuapp.com/website/dietenquiry/",
+    endpoint: "https://api.health2offer.com/website/dietenquiry/",
     data: data,
   );
   if (cp.error) {

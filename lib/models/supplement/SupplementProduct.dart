@@ -109,7 +109,7 @@ class Vendor {
 
 Future<SupplementProduct> getSupplements(String query) async {
   ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "https://p2c-gym.herokuapp.com/website/product/", query: query);
+      endpoint: "https://api.health2offer.com/website/product/", query: query);
 
   var model = supplementProductFromJson(cp.data);
   var finalModel = supplementProductFromJson(cp.data);

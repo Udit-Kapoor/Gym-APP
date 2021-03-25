@@ -70,7 +70,7 @@ void postForgotPass(Map data) async {
   Response postReq;
   try {
     postReq = await post(
-      "https://p2c-gym.herokuapp.com/core/rest-auth/password_reset/",
+      "https://api.health2offer.com/core/rest-auth/password_reset/",
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       },

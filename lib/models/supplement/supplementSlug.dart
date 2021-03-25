@@ -104,14 +104,13 @@ class Vendor {
 
 Future<ApiResponse> getSlugDetails(String slug) async {
   ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://p2c-gym.herokuapp.com/website/product/$slug");
+      .getReq(endpoint: "https://api.health2offer.com/website/product/$slug");
   return cp;
 }
 
 void addToSupplementCart(Map data) async {
   ApiResponse add = await ApiHelper().postReq(
-      endpoint: "https://p2c-gym.herokuapp.com/customer/addtocart/",
-      data: data);
+      endpoint: "https://api.health2offer.com/customer/addtocart/", data: data);
 
   if (add.error) {
     Fluttertoast.showToast(msg: "Item Cannot Be added Please try later");

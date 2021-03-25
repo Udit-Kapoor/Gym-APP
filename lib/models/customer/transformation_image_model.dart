@@ -41,7 +41,7 @@ class TransformaionImageModel {
 
 Future<ApiResponse> customerTransformation() async {
   ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "https://p2c-gym.herokuapp.com/customer/transformation/");
+      endpoint: "https://api.health2offer.com/customer/transformation/");
 
   return cp;
 }
