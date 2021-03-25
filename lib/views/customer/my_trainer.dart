@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/models/customer/my_trainer_model.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyTrainer extends StatelessWidget {
   const MyTrainer({Key key}) : super(key: key);
@@ -38,7 +41,7 @@ class MyTrainer extends StatelessWidget {
       },
     ];
 
-    final int _ratings = 3;
+    // final int _ratings = 3;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -63,56 +66,73 @@ class MyTrainer extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 20.0),
-                child: CircleAvatar(
-                  radius: 40.0,
-                  child: Image.asset('lib/assets/profile.png'),
-                ),
-              ),
-              Expanded(
-                child: ListTile(
-                  title: Text(
-                    'Pawan Pandit',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  subtitle: Text(
-                    '25, Male\nModel town, Delhi',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                  trailing: CircleAvatar(
-                    backgroundColor: Colors.green,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.phone,
-                        color: Colors.white,
+          FutureBuilder(
+              future: myTrainer(),
+              builder: (c, s) {
+                if (s.connectionState == ConnectionState.waiting)
+                  return CircularProgressIndicator();
+                else if (s.connectionState == ConnectionState.done) {
+                  var mt = myTrainerModelFromJson(s.data.data);
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: CircleAvatar(
+                              radius: 40.0,
+                              child: Image.asset('lib/assets/profile.png'),
+                            ),
+                          ),
+                          Expanded(
+                            child: ListTile(
+                              title: Text(
+                                mt.firstName + ' ' + mt.lastName,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              subtitle: Text(
+                                '${DateTime.now().year - mt.dob.year}, ${mt.gender}\n ${mt.address1}',
+                                style: Theme.of(context).textTheme.bodyText2,
+                              ),
+                              trailing: CircleAvatar(
+                                backgroundColor: Colors.green,
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.phone,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () async {
+                                    await launch('tel:${mt.phone}');
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 30.0, right: 20.0, top: 15.0, bottom: 5.0),
-            child: Text('Avg. Rating'),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                left: 20.0, right: 20.0, top: 5.0, bottom: 15.0),
-            child: Row(
-              children: [
-                for (var i = 1; i <= _ratings; i++)
-                  Icon(Icons.star, color: Colors.yellow),
-                for (var i = 1; i <= 5 - _ratings; i++)
-                  Icon(Icons.star_border, color: Colors.grey),
-              ],
-            ),
-          ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 30.0, right: 20.0, top: 15.0, bottom: 5.0),
+                        child: Text('Avg. Rating'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20.0, top: 5.0, bottom: 15.0),
+                       
+
+                        child: SmoothStarRating(
+                          isReadOnly: true,
+                          rating: mt.averageRating.toDouble(),
+                        ),
+                      ),
+                    ],
+                  );
+                } else
+                  return Center(child: Text('Something went wrong'));
+              }),
           GestureDetector(
             onTap: () {
               return showDialog(
