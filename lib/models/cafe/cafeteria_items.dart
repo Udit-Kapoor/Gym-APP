@@ -123,9 +123,9 @@ class ItemVarient {
       };
 }
 
-Future<ApiResponse> getCafeItems() async {
-  ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://api.health2offer.com/facilities/item/");
+Future<ApiResponse> getCafeItems(String query) async {
+  ApiResponse cp = await ApiHelper().getReq(
+      endpoint: "https://api.health2offer.com/facilities/item/", query: query);
   return cp;
 }
 

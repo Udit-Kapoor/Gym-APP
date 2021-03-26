@@ -40,7 +40,7 @@ class FoodTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage(imgPath),
+                      image: NetworkImage(imgPath),
                     ),
                   ),
                 ),

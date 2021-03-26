@@ -10,6 +10,7 @@ class CafeteriaView extends StatefulWidget {
 
 class _CafeteriaViewState extends State<CafeteriaView> {
   String foodValue = 'All';
+  String search = "";
 
   Widget sort() {
     return IconButton(
@@ -74,6 +75,11 @@ class _CafeteriaViewState extends State<CafeteriaView> {
               borderRadius: new BorderRadius.all(Radius.elliptical(45, 45)),
             ),
             child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  search = "search=" + value;
+                });
+              },
               decoration: InputDecoration(
                   suffixIcon: Icon(
                     Icons.search,
@@ -143,7 +149,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
             ),
           ),
           FutureBuilder(
-            future: getCafeItems(),
+            future: getCafeItems("?" + search),
             builder: (c, s) {
               if (s.connectionState == ConnectionState.waiting) {
                 return Center(
@@ -159,7 +165,8 @@ class _CafeteriaViewState extends State<CafeteriaView> {
                       itemBuilder: (c, i) {
                         return FoodTile(
                           //TODO: add model img
-                          imgPath: 'lib/assets/burger.jpg',
+                          imgPath:
+                              "http://api.health2offer.com/" + model[i].photo,
                           name: model[i].name,
                           desc: model[i].ingredients,
                           rate: model[i].itemVarients[0].price.toString(),
