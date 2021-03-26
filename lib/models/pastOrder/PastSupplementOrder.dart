@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
@@ -105,6 +106,11 @@ class Product {
 
 Future<ApiResponse> getPastSupplementOrder() async {
   ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "http://api.health2offer.com/customer/Customer/pastorder/");
-  return cp;
+      endpoint: "https://api.health2offer.com/customer/Customer/pastorder/");
+
+  if (cp.error) {
+    Fluttertoast.showToast(msg: "Unable to Fetch Details");
+  } else {
+    return cp;
+  }
 }

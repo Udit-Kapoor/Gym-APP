@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OrderHistoryCafeTile extends StatelessWidget {
-  const OrderHistoryCafeTile({
+class OrderHistorySupplementTile extends StatelessWidget {
+  const OrderHistorySupplementTile({
     Key key,
     @required this.imgPath,
     @required this.title,
