@@ -63,7 +63,7 @@ class ApiHelper {
 
   Future<void> submit(BuildContext ctx, String number, String pass) async {
     final sp = await SharedPreferences.getInstance();
-    CircularProgressIndicator()
+    CircularProgressIndicator();
     ApiResponse login = await ApiHelper().login(
       url: "https://api.health2offer.com/rest-auth/login/",
       data: {"username": number, "password": pass},
