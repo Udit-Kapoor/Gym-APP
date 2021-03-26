@@ -8,6 +8,8 @@ import 'package:gym_app/apis/api_response.dart';
 //
 //     final cafeteriaItems = cafeteriaItemsFromJson(jsonString);
 
+import 'dart:convert';
+
 List<CafeteriaItems> cafeteriaItemsFromJson(String str) =>
     List<CafeteriaItems>.from(
         json.decode(str).map((x) => CafeteriaItems.fromJson(x)));

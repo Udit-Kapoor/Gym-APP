@@ -1,12 +1,12 @@
+// To parse this JSON data, do
+//
+//     final cafeteriaCart = cafeteriaCartFromJson(jsonString);
+
 import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
-
-// To parse this JSON data, do
-//
-//     final cafeteriaCart = cafeteriaCartFromJson(jsonString);
 
 List<CafeteriaCart> cafeteriaCartFromJson(String str) =>
     List<CafeteriaCart>.from(
@@ -44,9 +44,9 @@ class CafeteriaCart {
 
   int id;
   DateTime orderedDate;
-  dynamic paymentMethod;
+  String paymentMethod;
   int totalBill;
-  dynamic name;
+  String name;
   dynamic phone;
   int totalCost;
   int tax;
@@ -147,12 +147,12 @@ class CafeteriaCartCustomer {
 
   int id;
   String firstName;
-  String middleName;
+  dynamic middleName;
   String lastName;
   DateTime dateOfBirth;
   String gender;
   String phone;
-  String alternatePhone;
+  dynamic alternatePhone;
   String email;
   String address1;
   String address2;
@@ -165,7 +165,7 @@ class CafeteriaCartCustomer {
   dynamic idProofImage1;
   bool active;
   DateTime dateAdded;
-  User user;
+  PurpleUser user;
   PurpleBatchId batchId;
 
   factory CafeteriaCartCustomer.fromJson(Map<String, dynamic> json) =>
@@ -190,7 +190,7 @@ class CafeteriaCartCustomer {
         idProofImage1: json["id_proof_image1"],
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
-        user: User.fromJson(json["user"]),
+        user: PurpleUser.fromJson(json["user"]),
         batchId: PurpleBatchId.fromJson(json["batch_id"]),
       );
 
@@ -301,7 +301,7 @@ class Cust {
   String firstName;
   String middleName;
   String lastName;
-  DateTime dateOfBirth;
+  dynamic dateOfBirth;
   String gender;
   String phone;
   String alternatePhone;
@@ -311,9 +311,9 @@ class Cust {
   String city;
   String state;
   int pincode;
-  String photo;
+  dynamic photo;
   String idProof;
-  String idProofImage;
+  dynamic idProofImage;
   dynamic idProofImage1;
   bool active;
   DateTime dateAdded;
@@ -325,9 +325,7 @@ class Cust {
         firstName: json["first_name"],
         middleName: json["middle_name"],
         lastName: json["last_name"],
-        dateOfBirth: json["date_of_birth"] == null
-            ? null
-            : DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"],
         gender: json["gender"],
         phone: json["phone"],
         alternatePhone: json["alternate_phone"],
@@ -336,11 +334,10 @@ class Cust {
         address2: json["address2"],
         city: json["city"],
         state: json["state"],
-        pincode: json["pincode"] == null ? null : json["pincode"],
-        photo: json["photo"] == null ? null : json["photo"],
+        pincode: json["pincode"],
+        photo: json["photo"],
         idProof: json["id_proof"],
-        idProofImage:
-            json["id_proof_image"] == null ? null : json["id_proof_image"],
+        idProofImage: json["id_proof_image"],
         idProofImage1: json["id_proof_image1"],
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
@@ -353,9 +350,7 @@ class Cust {
         "first_name": firstName,
         "middle_name": middleName,
         "last_name": lastName,
-        "date_of_birth": dateOfBirth == null
-            ? null
-            : "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "date_of_birth": dateOfBirth,
         "gender": gender,
         "phone": phone,
         "alternate_phone": alternatePhone,
@@ -364,10 +359,10 @@ class Cust {
         "address2": address2,
         "city": city,
         "state": state,
-        "pincode": pincode == null ? null : pincode,
-        "photo": photo == null ? null : photo,
+        "pincode": pincode,
+        "photo": photo,
         "id_proof": idProof,
-        "id_proof_image": idProofImage == null ? null : idProofImage,
+        "id_proof_image": idProofImage,
         "id_proof_image1": idProofImage1,
         "active": active,
         "date_added":
@@ -433,7 +428,7 @@ class Trainer {
   dynamic releasingDate;
   bool active;
   DateTime dateAdded;
-  dynamic tid;
+  String tid;
   int user;
 
   factory Trainer.fromJson(Map<String, dynamic> json) => Trainer(
@@ -501,8 +496,8 @@ class Trainer {
       };
 }
 
-class User {
-  User({
+class PurpleUser {
+  PurpleUser({
     this.id,
     this.password,
     this.lastLogin,
@@ -540,9 +535,9 @@ class User {
   bool isCustomer;
   bool isWebuser;
   List<dynamic> groups;
-  List<dynamic> userPermissions;
+  List<UserPermission> userPermissions;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory PurpleUser.fromJson(Map<String, dynamic> json) => PurpleUser(
         id: json["id"],
         password: json["password"],
         lastLogin: DateTime.parse(json["last_login"]),
@@ -560,8 +555,8 @@ class User {
         isCustomer: json["is_customer"],
         isWebuser: json["is_webuser"],
         groups: List<dynamic>.from(json["groups"].map((x) => x)),
-        userPermissions:
-            List<dynamic>.from(json["user_permissions"].map((x) => x)),
+        userPermissions: List<UserPermission>.from(
+            json["user_permissions"].map((x) => UserPermission.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -582,7 +577,36 @@ class User {
         "is_customer": isCustomer,
         "is_webuser": isWebuser,
         "groups": List<dynamic>.from(groups.map((x) => x)),
-        "user_permissions": List<dynamic>.from(userPermissions.map((x) => x)),
+        "user_permissions":
+            List<dynamic>.from(userPermissions.map((x) => x.toJson())),
+      };
+}
+
+class UserPermission {
+  UserPermission({
+    this.id,
+    this.name,
+    this.codename,
+    this.contentType,
+  });
+
+  int id;
+  String name;
+  String codename;
+  int contentType;
+
+  factory UserPermission.fromJson(Map<String, dynamic> json) => UserPermission(
+        id: json["id"],
+        name: json["name"],
+        codename: json["codename"],
+        contentType: json["content_type"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "codename": codename,
+        "content_type": contentType,
       };
 }
 
@@ -670,12 +694,12 @@ class OrderCustomer {
 
   int id;
   String firstName;
-  String middleName;
+  dynamic middleName;
   String lastName;
   DateTime dateOfBirth;
   String gender;
   String phone;
-  String alternatePhone;
+  dynamic alternatePhone;
   String email;
   String address1;
   String address2;
@@ -688,7 +712,7 @@ class OrderCustomer {
   dynamic idProofImage1;
   bool active;
   DateTime dateAdded;
-  User user;
+  FluffyUser user;
   FluffyBatchId batchId;
 
   factory OrderCustomer.fromJson(Map<String, dynamic> json) => OrderCustomer(
@@ -712,7 +736,7 @@ class OrderCustomer {
         idProofImage1: json["id_proof_image1"],
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
-        user: User.fromJson(json["user"]),
+        user: FluffyUser.fromJson(json["user"]),
         batchId: FluffyBatchId.fromJson(json["batch_id"]),
       );
 
@@ -793,6 +817,90 @@ class FluffyBatchId {
       };
 }
 
+class FluffyUser {
+  FluffyUser({
+    this.id,
+    this.password,
+    this.lastLogin,
+    this.isSuperuser,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.isStaff,
+    this.isActive,
+    this.dateJoined,
+    this.isAdmin,
+    this.isEmployee,
+    this.isTrainer,
+    this.isCustomer,
+    this.isWebuser,
+    this.groups,
+    this.userPermissions,
+  });
+
+  int id;
+  String password;
+  DateTime lastLogin;
+  bool isSuperuser;
+  String username;
+  String firstName;
+  String lastName;
+  String email;
+  bool isStaff;
+  bool isActive;
+  DateTime dateJoined;
+  bool isAdmin;
+  bool isEmployee;
+  bool isTrainer;
+  bool isCustomer;
+  bool isWebuser;
+  List<dynamic> groups;
+  List<int> userPermissions;
+
+  factory FluffyUser.fromJson(Map<String, dynamic> json) => FluffyUser(
+        id: json["id"],
+        password: json["password"],
+        lastLogin: DateTime.parse(json["last_login"]),
+        isSuperuser: json["is_superuser"],
+        username: json["username"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        email: json["email"],
+        isStaff: json["is_staff"],
+        isActive: json["is_active"],
+        dateJoined: DateTime.parse(json["date_joined"]),
+        isAdmin: json["is_admin"],
+        isEmployee: json["is_employee"],
+        isTrainer: json["is_trainer"],
+        isCustomer: json["is_customer"],
+        isWebuser: json["is_webuser"],
+        groups: List<dynamic>.from(json["groups"].map((x) => x)),
+        userPermissions: List<int>.from(json["user_permissions"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "password": password,
+        "last_login": lastLogin.toIso8601String(),
+        "is_superuser": isSuperuser,
+        "username": username,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "is_staff": isStaff,
+        "is_active": isActive,
+        "date_joined": dateJoined.toIso8601String(),
+        "is_admin": isAdmin,
+        "is_employee": isEmployee,
+        "is_trainer": isTrainer,
+        "is_customer": isCustomer,
+        "is_webuser": isWebuser,
+        "groups": List<dynamic>.from(groups.map((x) => x)),
+        "user_permissions": List<dynamic>.from(userPermissions.map((x) => x)),
+      };
+}
+
 class OrderItem {
   OrderItem({
     this.id,
@@ -845,7 +953,7 @@ class ItemItem {
   String name;
   String ingredients;
   String photo;
-  String type;
+  dynamic type;
   bool active;
   int category;
   List<int> itemVarients;

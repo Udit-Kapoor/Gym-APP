@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/pastOrder/PastSupplementOrder.dart';
 
 import 'OrderHistoryCafeTile.dart';
 
@@ -103,18 +104,35 @@ class _OrderHistoryState extends State<OrderHistory> {
             SizedBox(
               height: 50,
             ),
-            Expanded(
-                //TODO: Add future builder
-                child: ListView(
-              children: [
-                OrderHistoryCafeTile(
-                  imgPath: "",
-                  title: "TRIAL",
-                  size: "1",
-                  price: "23",
-                )
-              ],
-            ))
+            FutureBuilder(
+              future: getPastSupplementOrder(),
+              builder: (c, s) {
+                if (s.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (s.hasData &&
+                    s.connectionState == ConnectionState.done) {
+                  var model = pastSupplementOrderFromJson(s.data.data);
+                  print(model);
+                  return Expanded(
+                    //TODO: Add future builder
+                    child: ListView.builder(
+                        itemCount: model.length,
+                        itemBuilder: (c, i) {
+                          return OrderHistoryCafeTile(
+                            imgPath: "",
+                            title: model[i].cart.item[0].product.name,
+                            size: model[i].cart.item[0].product.brand,
+                            price: model[i].amount.toString(),
+                          );
+                        }),
+                  );
+                } else {
+                  return Text("No data found");
+                }
+              },
+            ),
           ],
         ),
       ),

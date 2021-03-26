@@ -18,7 +18,7 @@ class _SupplementDetailsState extends State<SupplementDetails> {
 
   Widget showAddToCartButton(bool b, var model) {
     if (b) {
-      if (!model.productExits) {
+      if (true) {
         return Padding(
           padding: const EdgeInsets.only(top: 22.0, right: 15),
           child: Row(
