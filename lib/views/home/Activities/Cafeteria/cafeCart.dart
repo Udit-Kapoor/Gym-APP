@@ -17,10 +17,15 @@ class _CafeCartState extends State<CafeCart> {
         elevation: 5,
         onPressed: () => {
           //ToDo: TEST ORDER PLACING
-          placeOrder({"cart": localModel.id}),
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return CafeOrderPlacedView();
-          })),
+          placeOrder({
+            "customer": localModel.order[0].customer.id,
+            "cart": localModel.id
+          }),
+          Timer(Duration(seconds: 1), () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return CafeOrderPlacedView();
+            }));
+          }),
         },
         label: Container(
           height: 50,
