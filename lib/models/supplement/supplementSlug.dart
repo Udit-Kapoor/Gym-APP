@@ -7,6 +7,9 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
+// To parse this JSON data, do
+//
+//     final supplementSlug = supplementSlugFromJson(jsonString);
 
 SupplementSlug supplementSlugFromJson(String str) =>
     SupplementSlug.fromJson(json.decode(str));
@@ -15,7 +18,6 @@ String supplementSlugToJson(SupplementSlug data) => json.encode(data.toJson());
 
 class SupplementSlug {
   SupplementSlug({
-    this.productExits,
     this.id,
     this.vendor,
     this.name,
@@ -32,16 +34,15 @@ class SupplementSlug {
     this.date,
   });
 
-  bool productExits;
   int id;
   Vendor vendor;
   String name;
   String desc;
-  double price;
+  int price;
   bool isStock;
   String image1;
   String image2;
-  double weight;
+  int weight;
   String slug;
   String productType;
   String nutrition;
@@ -49,7 +50,6 @@ class SupplementSlug {
   DateTime date;
 
   factory SupplementSlug.fromJson(Map<String, dynamic> json) => SupplementSlug(
-        productExits: json["product_exits"],
         id: json["id"],
         vendor: Vendor.fromJson(json["vendor"]),
         name: json["name"],
@@ -67,7 +67,6 @@ class SupplementSlug {
       );
 
   Map<String, dynamic> toJson() => {
-        "product_exits": productExits,
         "id": id,
         "vendor": vendor.toJson(),
         "name": name,

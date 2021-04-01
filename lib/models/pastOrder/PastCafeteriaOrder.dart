@@ -1,116 +1,49 @@
-import 'dart:convert';
-
 // To parse this JSON data, do
 //
-//     final cafeteriaCart = cafeteriaCartFromJson(jsonString);
+//     final cafeteriaPastOder = cafeteriaPastOderFromJson(jsonString);
+
+import 'dart:convert';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
-List<CafeteriaCart> cafeteriaCartFromJson(String str) =>
-    List<CafeteriaCart>.from(
-        json.decode(str).map((x) => CafeteriaCart.fromJson(x)));
+List<CafeteriaPastOder> cafeteriaPastOderFromJson(String str) =>
+    List<CafeteriaPastOder>.from(
+        json.decode(str).map((x) => CafeteriaPastOder.fromJson(x)));
 
-String cafeteriaCartToJson(List<CafeteriaCart> data) =>
+String cafeteriaPastOderToJson(List<CafeteriaPastOder> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CafeteriaCart {
-  CafeteriaCart({
-    this.id,
-    this.orderedDate,
-    this.paymentMethod,
-    this.totalBill,
-    this.name,
-    this.phone,
-    this.totalCost,
-    this.tax,
-    this.active,
-    this.invoice,
-    this.paymentid,
-    this.orderid,
-    this.paid,
-    this.ordered,
-    this.orderAccepted,
-    this.reorder,
-    this.orderReady,
-    this.orderReceived,
-    this.createdAt,
-    this.trainer,
-    this.employee,
+class CafeteriaPastOder {
+  CafeteriaPastOder({
+    this.cart,
+  });
+
+  Cart cart;
+
+  factory CafeteriaPastOder.fromJson(Map<String, dynamic> json) =>
+      CafeteriaPastOder(
+        cart: Cart.fromJson(json["cart"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "cart": cart.toJson(),
+      };
+}
+
+class Cart {
+  Cart({
     this.order,
   });
 
-  int id;
-  DateTime orderedDate;
-  String paymentMethod;
-  int totalBill;
-  String name;
-  dynamic phone;
-  int totalCost;
-  int tax;
-  bool active;
-  dynamic invoice;
-  dynamic paymentid;
-  dynamic orderid;
-  bool paid;
-  bool ordered;
-  bool orderAccepted;
-  bool reorder;
-  bool orderReady;
-  bool orderReceived;
-  DateTime createdAt;
-  dynamic trainer;
-  dynamic employee;
   List<Order> order;
 
-  factory CafeteriaCart.fromJson(Map<String, dynamic> json) => CafeteriaCart(
-        id: json["id"],
-        orderedDate: DateTime.parse(json["ordered_date"]),
-        paymentMethod: json["payment_method"],
-        totalBill: json["total_bill"],
-        name: json["name"],
-        phone: json["phone"],
-        totalCost: json["total_cost"],
-        tax: json["tax"],
-        active: json["active"],
-        invoice: json["invoice"],
-        paymentid: json["paymentid"],
-        orderid: json["orderid"],
-        paid: json["paid"],
-        ordered: json["ordered"],
-        orderAccepted: json["order_accepted"],
-        reorder: json["reorder"],
-        orderReady: json["order_ready"],
-        orderReceived: json["order_received"],
-        createdAt: DateTime.parse(json["created_at"]),
-        trainer: json["trainer"],
-        employee: json["employee"],
+  factory Cart.fromJson(Map<String, dynamic> json) => Cart(
         order: List<Order>.from(json["order"].map((x) => Order.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "ordered_date": orderedDate.toIso8601String(),
-        "payment_method": paymentMethod,
-        "total_bill": totalBill,
-        "name": name,
-        "phone": phone,
-        "total_cost": totalCost,
-        "tax": tax,
-        "active": active,
-        "invoice": invoice,
-        "paymentid": paymentid,
-        "orderid": orderid,
-        "paid": paid,
-        "ordered": ordered,
-        "order_accepted": orderAccepted,
-        "reorder": reorder,
-        "order_ready": orderReady,
-        "order_received": orderReceived,
-        "created_at": createdAt.toIso8601String(),
-        "trainer": trainer,
-        "employee": employee,
         "order": List<dynamic>.from(order.map((x) => x.toJson())),
       };
 }
@@ -131,7 +64,7 @@ class Order {
   });
 
   int id;
-  dynamic name;
+  String name;
   dynamic phone;
   int quantity;
   bool orderCancel;
@@ -198,21 +131,21 @@ class Customer {
   });
 
   int id;
-  String firstName;
+  FirstNameEnum firstName;
   dynamic middleName;
-  String lastName;
+  CustomerLastName lastName;
   DateTime dateOfBirth;
-  String gender;
+  Gender gender;
   String phone;
   dynamic alternatePhone;
-  String email;
+  Email email;
   String address1;
   String address2;
-  String city;
-  String state;
+  City city;
+  City state;
   int pincode;
   dynamic photo;
-  String idProof;
+  IdProof idProof;
   dynamic idProofImage;
   dynamic idProofImage1;
   bool active;
@@ -222,21 +155,21 @@ class Customer {
 
   factory Customer.fromJson(Map<String, dynamic> json) => Customer(
         id: json["id"],
-        firstName: json["first_name"],
+        firstName: firstNameEnumValues.map[json["first_name"]],
         middleName: json["middle_name"],
-        lastName: json["last_name"],
+        lastName: customerLastNameValues.map[json["last_name"]],
         dateOfBirth: DateTime.parse(json["date_of_birth"]),
-        gender: json["gender"],
+        gender: genderValues.map[json["gender"]],
         phone: json["phone"],
         alternatePhone: json["alternate_phone"],
-        email: json["email"],
+        email: emailValues.map[json["email"]],
         address1: json["address1"],
         address2: json["address2"],
-        city: json["city"],
-        state: json["state"],
+        city: cityValues.map[json["city"]],
+        state: cityValues.map[json["state"]],
         pincode: json["pincode"],
         photo: json["photo"],
-        idProof: json["id_proof"],
+        idProof: idProofValues.map[json["id_proof"]],
         idProofImage: json["id_proof_image"],
         idProofImage1: json["id_proof_image1"],
         active: json["active"],
@@ -247,22 +180,22 @@ class Customer {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "first_name": firstName,
+        "first_name": firstNameEnumValues.reverse[firstName],
         "middle_name": middleName,
-        "last_name": lastName,
+        "last_name": customerLastNameValues.reverse[lastName],
         "date_of_birth":
             "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
-        "gender": gender,
+        "gender": genderValues.reverse[gender],
         "phone": phone,
         "alternate_phone": alternatePhone,
-        "email": email,
+        "email": emailValues.reverse[email],
         "address1": address1,
         "address2": address2,
-        "city": city,
-        "state": state,
+        "city": cityValues.reverse[city],
+        "state": cityValues.reverse[state],
         "pincode": pincode,
         "photo": photo,
-        "id_proof": idProof,
+        "id_proof": idProofValues.reverse[idProof],
         "id_proof_image": idProofImage,
         "id_proof_image1": idProofImage1,
         "active": active,
@@ -287,7 +220,7 @@ class BatchId {
   });
 
   int id;
-  String batchName;
+  BatchName batchName;
   DateTime startdate;
   String batchTimeTo;
   String batchTimeFrom;
@@ -298,7 +231,7 @@ class BatchId {
 
   factory BatchId.fromJson(Map<String, dynamic> json) => BatchId(
         id: json["id"],
-        batchName: json["batch_name"],
+        batchName: batchNameValues.map[json["batch_name"]],
         startdate: DateTime.parse(json["startdate"]),
         batchTimeTo: json["batch_time_to"],
         batchTimeFrom: json["batch_time_from"],
@@ -310,7 +243,7 @@ class BatchId {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "batch_name": batchName,
+        "batch_name": batchNameValues.reverse[batchName],
         "startdate":
             "${startdate.year.toString().padLeft(4, '0')}-${startdate.month.toString().padLeft(2, '0')}-${startdate.day.toString().padLeft(2, '0')}",
         "batch_time_to": batchTimeTo,
@@ -321,6 +254,35 @@ class BatchId {
         "cust": List<dynamic>.from(cust.map((x) => x)),
       };
 }
+
+enum BatchName { PAWAN_EVENING_510_PM }
+
+final batchNameValues =
+    EnumValues({"Pawan Evening 5-10 pm": BatchName.PAWAN_EVENING_510_PM});
+
+enum City { DELHI }
+
+final cityValues = EnumValues({"delhi": City.DELHI});
+
+enum Email { TEST_GMAIL_COM }
+
+final emailValues = EnumValues({"test@gmail.com": Email.TEST_GMAIL_COM});
+
+enum FirstNameEnum { TEST }
+
+final firstNameEnumValues = EnumValues({"test": FirstNameEnum.TEST});
+
+enum Gender { MALE }
+
+final genderValues = EnumValues({"Male": Gender.MALE});
+
+enum IdProof { PAN_CARD }
+
+final idProofValues = EnumValues({"Pan Card": IdProof.PAN_CARD});
+
+enum CustomerLastName { KUMAR }
+
+final customerLastNameValues = EnumValues({"kumar": CustomerLastName.KUMAR});
 
 class User {
   User({
@@ -348,10 +310,10 @@ class User {
   String password;
   DateTime lastLogin;
   bool isSuperuser;
-  String username;
-  String firstName;
-  String lastName;
-  String email;
+  FirstNameEnum username;
+  FirstName firstName;
+  UserLastName lastName;
+  Email email;
   bool isStaff;
   bool isActive;
   DateTime dateJoined;
@@ -368,10 +330,10 @@ class User {
         password: json["password"],
         lastLogin: DateTime.parse(json["last_login"]),
         isSuperuser: json["is_superuser"],
-        username: json["username"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        email: json["email"],
+        username: firstNameEnumValues.map[json["username"]],
+        firstName: firstNameValues.map[json["first_name"]],
+        lastName: userLastNameValues.map[json["last_name"]],
+        email: emailValues.map[json["email"]],
         isStaff: json["is_staff"],
         isActive: json["is_active"],
         dateJoined: DateTime.parse(json["date_joined"]),
@@ -389,10 +351,10 @@ class User {
         "password": password,
         "last_login": lastLogin.toIso8601String(),
         "is_superuser": isSuperuser,
-        "username": username,
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": email,
+        "username": firstNameEnumValues.reverse[username],
+        "first_name": firstNameValues.reverse[firstName],
+        "last_name": userLastNameValues.reverse[lastName],
+        "email": emailValues.reverse[email],
         "is_staff": isStaff,
         "is_active": isActive,
         "date_joined": dateJoined.toIso8601String(),
@@ -406,6 +368,14 @@ class User {
       };
 }
 
+enum FirstName { UDIT }
+
+final firstNameValues = EnumValues({"Udit": FirstName.UDIT});
+
+enum UserLastName { TESTING }
+
+final userLastNameValues = EnumValues({"testing": UserLastName.TESTING});
+
 class OrderItem {
   OrderItem({
     this.id,
@@ -417,7 +387,7 @@ class OrderItem {
   });
 
   int id;
-  String size;
+  Size size;
   int price;
   String preparationTime;
   bool active;
@@ -425,7 +395,7 @@ class OrderItem {
 
   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
         id: json["id"],
-        size: json["size"],
+        size: sizeValues.map[json["size"]],
         price: json["price"],
         preparationTime: json["preparation_time"],
         active: json["active"],
@@ -434,7 +404,7 @@ class OrderItem {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "size": size,
+        "size": sizeValues.reverse[size],
         "price": price,
         "preparation_time": preparationTime,
         "active": active,
@@ -476,8 +446,8 @@ class ItemItem {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
-        "ingredients": ingredients,
+        "name": nameEnumValues.reverse[name],
+        "ingredients": ingredientsValues.reverse[ingredients],
         "photo": photo,
         "type": type,
         "active": active,
@@ -486,31 +456,40 @@ class ItemItem {
       };
 }
 
-Future<ApiResponse> getCart() async {
+enum Ingredients { ELAYACHI }
+
+final ingredientsValues = EnumValues({"elayachi": Ingredients.ELAYACHI});
+
+enum NameEnum { COFFE }
+
+final nameEnumValues = EnumValues({"coffe": NameEnum.COFFE});
+
+enum Size { M, S }
+
+final sizeValues = EnumValues({"M": Size.M, "S": Size.S});
+
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    if (reverseMap == null) {
+      reverseMap = map.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
+}
+
+Future<ApiResponse> getPastCafeOrder() async {
   ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "https://api.health2offer.com/facilities/cafeteria_cart/");
-  return cp;
-}
-
-void delItem(int id) async {
-  ApiResponse cp = await ApiHelper().deleteReq(
-      endpoint: "https://api.health2offer.com/facilities/cafeteria_order/$id/");
-  if (cp.error) {
-    Fluttertoast.showToast(msg: "Error in Deleting Item");
-  } else {
-    Fluttertoast.showToast(msg: "Item Deleted");
-  }
-}
-
-Future<bool> placeOrder(Map data) async {
-  ApiResponse cp = await ApiHelper().postReq(
-      endpoint: "https://api.health2offer.com/facilities/ordered_cart/",
-      data: data);
+      endpoint:
+          "http://api.health2offer.com/customer/CustomerPastOrderedView/");
 
   if (cp.error) {
-    Fluttertoast.showToast(msg: "Order Not Placed");
+    Fluttertoast.showToast(msg: "Unable to Fetch Details");
   } else {
-    Fluttertoast.showToast(msg: "Order Placed");
+    return cp;
   }
-  return Future<bool>.value(cp.error);
 }

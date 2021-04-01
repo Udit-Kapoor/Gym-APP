@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
@@ -30,7 +32,9 @@ class _AddToCartViewState extends State<AddToCartView> {
                   "quantity": qty,
                   "item": widget.model.itemVarients[idx].id,
                 }),
-                Navigator.pushNamed(context, '/CafeteriaCart'),
+                Timer(Duration(seconds: 1), () {
+                  Navigator.pushNamed(context, '/CafeteriaCart');
+                }),
               }
             else
               {
@@ -73,7 +77,8 @@ class _AddToCartViewState extends State<AddToCartView> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("lib/assets/burger.jpg"),
+                  image: NetworkImage(
+                      "http://api.health2offer.com/" + widget.model.photo),
                 ),
               ),
               child: Align(

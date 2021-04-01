@@ -8,6 +8,8 @@ import 'package:gym_app/apis/api_response.dart';
 //
 //     final cafeteriaItems = cafeteriaItemsFromJson(jsonString);
 
+import 'dart:convert';
+
 List<CafeteriaItems> cafeteriaItemsFromJson(String str) =>
     List<CafeteriaItems>.from(
         json.decode(str).map((x) => CafeteriaItems.fromJson(x)));
@@ -121,9 +123,9 @@ class ItemVarient {
       };
 }
 
-Future<ApiResponse> getCafeItems() async {
-  ApiResponse cp = await ApiHelper()
-      .getReq(endpoint: "https://api.health2offer.com/facilities/item/");
+Future<ApiResponse> getCafeItems(String query) async {
+  ApiResponse cp = await ApiHelper().getReq(
+      endpoint: "https://api.health2offer.com/facilities/item/", query: query);
   return cp;
 }
 
