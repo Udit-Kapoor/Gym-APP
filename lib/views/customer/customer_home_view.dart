@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/views/common/qr_code_scanner.dart';
 
 class CustomerHome extends StatefulWidget {
   const CustomerHome({Key key}) : super(key: key);
@@ -63,7 +64,9 @@ class _CustomerHomeState extends State<CustomerHome>
                 Icons.qr_code_scanner,
                 color: Colors.black,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_)=>QRCodeScan()));
+              },
             ),
         ],
         title: Image.asset(

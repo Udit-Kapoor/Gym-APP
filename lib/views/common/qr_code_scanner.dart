@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gym_app/apis/apis.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRCodeScan extends StatefulWidget {
@@ -35,22 +36,30 @@ class _QRCodeScanState extends State<QRCodeScan> {
       appBar: AppBar(),
       body: SafeArea(
         child: QRView(
+
           key: qrKey,
           onQRViewCreated: (QRViewController controller) {
             setState(() {
               this.controller = controller;
             });
-            controller.scannedDataStream.listen((scanData) {
+            controller.scannedDataStream.listen((scanData) async {
+              
               setState(() {
                 result = scanData;
-                showProgress = true;
+                // showProgress = true;
+                print('################' + scanData.code + '################');
               });
               controller.stopCamera();
+              ApiResponse res = await ApiHelper().attendance(scanData.code);
+              print(res.data);
+              print(res.error);
+              print(res.errorMessage);
 
-              Navigator.pushReplacementNamed(context, "/TrainerHome");
+              Navigator.pop(context);
             });
           },
           overlay: QrScannerOverlayShape(
+            
             borderColor: Colors.red,
             borderRadius: 10,
             borderLength: 30,

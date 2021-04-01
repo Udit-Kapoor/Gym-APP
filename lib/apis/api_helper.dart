@@ -140,6 +140,32 @@ class ApiHelper {
     }
   }
 
+  Future<ApiResponse> attendance(String key) async {
+    final _sp = await s;
+
+    int id = await ApiHelper().getUserObjectID();
+
+    try {
+      Response att = await post(
+        'https://api.health2offer.com/core/QRCodeCustomer/$id/',
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
+        },
+        body: jsonEncode({key: "secret_key"}),
+      );
+      return att.statusCode >= 200 && att.statusCode <= 205
+          ? ApiResponse(data: att.body)
+          : ApiResponse(error: true, data: att.statusCode);
+    } on SocketException {
+      return ApiResponse(error: true, errorMessage: "NO INTERNET");
+    } on HttpException {
+      return ApiResponse(error: true, errorMessage: "HTTP Error");
+    } catch (e) {
+      return ApiResponse(error: true, errorMessage: e.toString());
+    }
+  }
+
   Future<ApiResponse> patchReq(
       {String endpoint, Map data, String query = ""}) async {
     final String url = endpoint + query;
