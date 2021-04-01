@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';
+
 SupplementPastOrderDetail supplementPastOrderDetailFromJson(String str) =>
     SupplementPastOrderDetail.fromJson(json.decode(str));
 
@@ -213,4 +216,11 @@ class Vendor {
   Map<String, dynamic> toJson() => {
         "name": name,
       };
+}
+
+Future<ApiResponse> getOrderDetails(int id) async {
+  String i = id.toString();
+  ApiResponse cp = await ApiHelper().getReq(
+      endpoint: "http://api.health2offer.com/customer/Customer/pastorder/$i/");
+  return cp;
 }

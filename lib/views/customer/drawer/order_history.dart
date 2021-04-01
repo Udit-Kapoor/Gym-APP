@@ -63,6 +63,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                   itemCount: model.length,
                   itemBuilder: (c, i) {
                     return OrderHistorySupplementTile(
+                      id: model[i].id,
                       imgPath: model[i].cart.item[0].product.image1,
                       title: model[i].cart.item[0].product.name,
                       size: model[i].cart.item[0].product.brand,
