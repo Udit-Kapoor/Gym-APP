@@ -36,7 +36,9 @@ class _OrderHistoryState extends State<OrderHistory> {
                         name: model[i].cart.order[0].item.item.name.toString(),
                         orderDate: model[i].cart.order[0].createdAt,
                         quantity: model[i].cart.order[0].quantity.toString(),
-                        price: model[i].cart.order[0].price.toString());
+                        price: (model[i].cart.order[0].price *
+                                model[i].cart.order[0].quantity)
+                            .toString());
                   }),
             );
           } else {
@@ -61,7 +63,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                   itemCount: model.length,
                   itemBuilder: (c, i) {
                     return OrderHistorySupplementTile(
-                      imgPath: "",
+                      imgPath: model[i].cart.item[0].product.image1,
                       title: model[i].cart.item[0].product.name,
                       size: model[i].cart.item[0].product.brand,
                       price: model[i].amount.toString(),

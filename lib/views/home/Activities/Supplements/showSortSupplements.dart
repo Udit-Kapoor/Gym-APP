@@ -19,7 +19,7 @@ class _ShowSortSupplementsState extends State<ShowSortSupplements> {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        height: 180,
+        height: 50,
         width: 100,
         child: Padding(
           padding: const EdgeInsets.all(12.0),

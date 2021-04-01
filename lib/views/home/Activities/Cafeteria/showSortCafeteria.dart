@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 
 class ShowSortCafeteria extends StatefulWidget {
+  const ShowSortCafeteria(
+      {this.veg, this.nonVeg, this.categoryLow, this.categoryHigh});
+
+  final Function veg;
+  final Function nonVeg;
+  final Function categoryLow;
+  final Function categoryHigh;
+
   @override
   _ShowSortCafeteriaState createState() => _ShowSortCafeteriaState();
 }
 
 class _ShowSortCafeteriaState extends State<ShowSortCafeteria> {
-  FoodType f = FoodType.VEG;
-  Price p = Price.LOWTOHIGH;
+  FoodType f;
+  Price p;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -34,6 +42,7 @@ class _ShowSortCafeteriaState extends State<ShowSortCafeteria> {
                         setState(() {
                           f = value;
                         });
+                        widget.veg();
                       }),
                 ],
               ),
@@ -48,38 +57,41 @@ class _ShowSortCafeteriaState extends State<ShowSortCafeteria> {
                         setState(() {
                           f = value;
                         });
+                        widget.nonVeg();
                       }),
                 ],
               ),
-              Text("Price"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("Low To High"),
-                  Radio(
-                      value: Price.LOWTOHIGH,
-                      groupValue: p,
-                      onChanged: (Price value) {
-                        setState(() {
-                          p = value;
-                        });
-                      }),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("High To Low"),
-                  Radio(
-                      value: Price.HIGHTOLOW,
-                      groupValue: p,
-                      onChanged: (Price value) {
-                        setState(() {
-                          p = value;
-                        });
-                      }),
-                ],
-              ),
+              // Text("Price"),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Text("Low To High"),
+              //     Radio(
+              //         value: Price.LOWTOHIGH,
+              //         groupValue: p,
+              //         onChanged: (Price value) {
+              //           setState(() {
+              //             p = value;
+              //           });
+              //           widget.categoryLow();
+              //         }),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Text("High To Low"),
+              //     Radio(
+              //         value: Price.HIGHTOLOW,
+              //         groupValue: p,
+              //         onChanged: (Price value) {
+              //           setState(() {
+              //             p = value;
+              //           });
+              //           widget.categoryHigh();
+              //         }),
+              //   ],
+              // ),
             ],
           ),
         ),

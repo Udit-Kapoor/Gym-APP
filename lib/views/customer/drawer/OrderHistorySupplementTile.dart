@@ -68,7 +68,7 @@ class OrderHistorySupplementTile extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "Rs " + price,
+                          "Rs " + price + " Per Unit",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),

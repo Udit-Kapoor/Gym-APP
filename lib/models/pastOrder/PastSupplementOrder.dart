@@ -8,6 +8,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
+// To parse this JSON data, do
+//
+//     final pastSupplementOrder = pastSupplementOrderFromJson(jsonString);
+
+import 'dart:convert';
+
 List<PastSupplementOrder> pastSupplementOrderFromJson(String str) =>
     List<PastSupplementOrder>.from(
         json.decode(str).map((x) => PastSupplementOrder.fromJson(x)));
@@ -88,19 +94,27 @@ class Product {
   Product({
     this.name,
     this.brand,
+    this.image1,
+    this.image2,
   });
 
   String name;
   String brand;
+  String image1;
+  String image2;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         name: json["name"],
         brand: json["brand"],
+        image1: json["image1"],
+        image2: json["image2"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "brand": brand,
+        "image1": image1,
+        "image2": image2,
       };
 }
 
