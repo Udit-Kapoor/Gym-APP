@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-class OrderHistoryCafeTile extends StatelessWidget {
-  const OrderHistoryCafeTile({
+class OrderHistorySupplementTile extends StatelessWidget {
+  const OrderHistorySupplementTile({
     Key key,
     @required this.imgPath,
-    @required this.name,
-    @required this.orderDate,
-    @required this.quantity,
+    @required this.title,
+    @required this.size,
     @required this.price,
   }) : super(key: key);
 
   final String imgPath;
-  final String name;
-  final DateTime orderDate;
-  final String quantity;
+  final String title;
+  final String size;
   final String price;
 
   @override
   Widget build(BuildContext context) {
-    DateFormat formatter = DateFormat('dd-MM-yyyy');
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: GestureDetector(
@@ -57,24 +53,16 @@ class OrderHistoryCafeTile extends StatelessWidget {
                       children: [
                         //ToDO:How to Wrap Long text without \n
                         Text(
-                          name,
+                          title,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         Text(
-                          "Order Date : " + formatter.format(orderDate),
+                          size,
                           style: TextStyle(fontSize: 8),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Quantity: " + quantity,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12),
                         ),
                         SizedBox(
                           height: 10,

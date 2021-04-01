@@ -45,8 +45,11 @@ class OrderHistoryTrainerTile extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(12.0)),
                           image: DecorationImage(
-                            image: AssetImage(imgPath),
+                            image: NetworkImage(imgPath),
                           )),
+                    ),
+                    SizedBox(
+                      width: 10,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
