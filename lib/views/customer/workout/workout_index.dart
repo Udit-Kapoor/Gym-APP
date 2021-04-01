@@ -74,7 +74,7 @@ class WorkoutIndex extends StatelessWidget {
           Expanded(
             child: FutureBuilder(
                 //TODO: Send customers' object id
-                future: workoutPlanFoo(34),
+                future: workoutPlanFoo(),
                 builder: (c, s) {
                   var widget;
                   if (s.connectionState == ConnectionState.waiting) {

@@ -2,9 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gym_app/apis/api_helper.dart';
-import 'package:gym_app/apis/api_response.dart';
 import 'package:http/http.dart';
+
+RestAuthLogin restAuthLoginModelFromJson(String str) =>
+    RestAuthLogin.fromJson(json.decode(str));
+
+String restAuthLoginModelToJson(RestAuthLogin data) =>
+    json.encode(data.toJson());
 
 class RestAuthLogin {
   String key;

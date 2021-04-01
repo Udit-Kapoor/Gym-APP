@@ -21,16 +21,31 @@ class ApiHelper {
     return [b];
   }
 
+  Future<int> getUserObjectID() async {
+    SharedPreferences sp = await s;
+    return sp.getInt("USER_OBJECT_ID");
+  }
+
   Future login({String url, Map data}) async {
+    SharedPreferences sp = await s;
     try {
       Response login = await post(
-        url,
+        "https://api.health2offer.com/rest-auth/login/",
+
         headers: {HttpHeaders.contentTypeHeader: "application/json"},
         body: jsonEncode(data),
+        // body: data,
       );
-      return login.statusCode >= 200 && login.statusCode <= 205
-          ? ApiResponse(data: RestAuthLogin.fromJson(jsonDecode(login.body)))
-          : ApiResponse(error: true);
+      if (login.statusCode >= 200 && login.statusCode <= 205) {
+        var rA = restAuthLoginModelFromJson(login.body);
+        sp.setString("AUTH_KEY", rA.key);
+        ApiResponse userProfile = await customerPro();
+        var cp = customerProfileModelFromJson(userProfile.data);
+
+        sp.setInt("USER_OBJECT_ID", cp.id);
+        return ApiResponse(data: rA);
+      } else
+        return ApiResponse(error: true);
     } on SocketException {
       return ApiResponse(error: true, errorMessage: "NO INTERNET");
     } on HttpException {
@@ -62,13 +77,12 @@ class ApiHelper {
   }
 
   Future<void> submit(BuildContext ctx, String number, String pass) async {
-    final sp = await SharedPreferences.getInstance();
+    final sp = await s;
+    CircularProgressIndicator();
     ApiResponse login = await ApiHelper().login(
-      url: "https://api.health2offer.com/rest-auth/login/",
       data: {"username": number, "password": pass},
     );
     if (!login.error) {
-      sp.setString("AUTH_KEY", login.data.key);
       var ut = login.data.userType;
       if (ut.isCustomer) {
         sp.setString("USER_TYPE", "CUSTOMER");
@@ -78,6 +92,7 @@ class ApiHelper {
         Navigator.pushReplacementNamed(ctx, '/TrainerHome');
       }
     } else {
+      print('##########' + login.errorMessage);
       Fluttertoast.showToast(msg: "Authentication failed");
     }
   }

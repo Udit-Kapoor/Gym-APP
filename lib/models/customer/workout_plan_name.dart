@@ -175,9 +175,9 @@ class Workout {
       };
 }
 
-Future<ApiResponse> workoutPlanFoo(int id) async {
+Future<ApiResponse> workoutPlanFoo() async {
+  int id = await ApiHelper().getUserObjectID();
   ApiResponse x = await ApiHelper().getReq(
       endpoint: "https://api.health2offer.com/customer/workoutplan/$id/list/");
-
   return x;
 }
