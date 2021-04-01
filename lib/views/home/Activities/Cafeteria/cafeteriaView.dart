@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 
@@ -11,6 +13,39 @@ class CafeteriaView extends StatefulWidget {
 class _CafeteriaViewState extends State<CafeteriaView> {
   String foodValue = 'All';
   String search = "";
+  String ordering = "";
+
+  veg() {
+    Timer(Duration(milliseconds: 100), () {
+      setState(() {
+        ordering = "ordering=-type";
+      });
+    });
+  }
+
+  nonVeg() {
+    Timer(Duration(milliseconds: 100), () {
+      setState(() {
+        ordering = "ordering=type";
+      });
+    });
+  }
+
+  categoryLow() {
+    Timer(Duration(milliseconds: 100), () {
+      setState(() {
+        ordering = "ordering=category";
+      });
+    });
+  }
+
+  categoryHigh() {
+    Timer(Duration(milliseconds: 100), () {
+      setState(() {
+        ordering = "ordering=-category";
+      });
+    });
+  }
 
   Widget sort() {
     return IconButton(
@@ -23,7 +58,12 @@ class _CafeteriaViewState extends State<CafeteriaView> {
         showDialog(
             context: context,
             builder: (_) {
-              return ShowSortCafeteria();
+              return ShowSortCafeteria(
+                veg: veg,
+                nonVeg: nonVeg,
+                categoryLow: categoryLow,
+                categoryHigh: categoryHigh,
+              );
             });
       },
     );
@@ -115,11 +155,11 @@ class _CafeteriaViewState extends State<CafeteriaView> {
                   },
                   items: <String>[
                     'All',
-                    'Fruit Shakes',
-                    'Meals',
-                    'Burgers',
-                    'Beverages',
-                    'Deserts'
+                    // 'Fruit Shakes',
+                    // 'Meals',
+                    // 'Burgers',
+                    // 'Beverages',
+                    // 'Deserts'
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -149,7 +189,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
             ),
           ),
           FutureBuilder(
-            future: getCafeItems("?" + search),
+            future: getCafeItems("?" + search + "&" + ordering),
             builder: (c, s) {
               if (s.connectionState == ConnectionState.waiting) {
                 return Center(
@@ -164,7 +204,6 @@ class _CafeteriaViewState extends State<CafeteriaView> {
                       itemCount: model.length,
                       itemBuilder: (c, i) {
                         return FoodTile(
-                          //TODO: add model img
                           imgPath:
                               "http://api.health2offer.com/" + model[i].photo,
                           name: model[i].name,

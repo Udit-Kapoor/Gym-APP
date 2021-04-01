@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/views/customer/drawer/OrderHistorySupplementDetail.dart';
 
 class OrderHistorySupplementTile extends StatelessWidget {
   const OrderHistorySupplementTile({
     Key key,
+    @required this.id,
     @required this.imgPath,
     @required this.title,
     @required this.size,
     @required this.price,
   }) : super(key: key);
 
+  final int id;
   final String imgPath;
   final String title;
   final String size;
@@ -20,7 +23,15 @@ class OrderHistorySupplementTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: GestureDetector(
         //ToDO: Navigate to ItemDetails...
-        onTap: null,
+        onTap: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OrderHistorySupplementDetails(
+                      id: id,
+                    )),
+          )
+        },
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14.0),
@@ -68,7 +79,7 @@ class OrderHistorySupplementTile extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "Rs " + price,
+                          "Rs " + price + " /Per Unit",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),
