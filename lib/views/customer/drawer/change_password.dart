@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/apis.dart';
 
 class ChangePassword extends StatelessWidget {

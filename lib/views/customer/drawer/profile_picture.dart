@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/apis/api_endpoints.dart';
-import 'package:http/http.dart' as http;
 
 class ProfilePicture extends StatelessWidget {
   final String imageUrl;

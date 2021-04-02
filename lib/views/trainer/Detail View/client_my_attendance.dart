@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/models/customer/customer_attendance_model.dart';
 import 'package:gym_app/models/trainer/cust_attendance_trainer.dart';
 import 'package:gym_app/views/customer/my_attendance.dart';
 import 'package:percent_indicator/percent_indicator.dart';

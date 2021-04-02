@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/models/supplement/supplementSlug.dart';
-
-import '../../../../constants/constants.dart';
 import 'Supplements.dart';
 
 class SupplementDetails extends StatefulWidget {

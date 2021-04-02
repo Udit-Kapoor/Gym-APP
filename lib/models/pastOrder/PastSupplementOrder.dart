@@ -8,11 +8,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
-// To parse this JSON data, do
-//
-//     final pastSupplementOrder = pastSupplementOrderFromJson(jsonString);
-
-import 'dart:convert';
 
 List<PastSupplementOrder> pastSupplementOrderFromJson(String str) =>
     List<PastSupplementOrder>.from(

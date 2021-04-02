@@ -46,7 +46,6 @@ class ClientsList extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               itemCount: cl.cust.length,
               itemBuilder: (c, i) {
-                //TODO: Add Profile picture
                 return ClientsListTile(
                   name: cl.cust[i].firstName,
                   cId: cl.cust[i].custid ?? '696969',
