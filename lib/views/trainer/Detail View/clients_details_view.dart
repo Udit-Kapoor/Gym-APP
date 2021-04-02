@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
 import 'package:expandable/expandable.dart';
+import 'package:gym_app/models/trainer/clients_gym_sub_model.dart';
+import 'package:gym_app/models/trainer/clients_profile_model.dart';
 import 'package:gym_app/views/trainer/Detail%20View/clients_gym_sub.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../my_goal_tile_trainer.dart';
 import 'client_my_attendance.dart';
@@ -383,39 +386,57 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
         ),
         body: Column(
           children: [
-            ListTile(
-              leading: CircleAvatar(
-                radius: 50.0,
-                child: Image.asset(
-                  'lib/assets/clients.png',
-                  fit: BoxFit.fill,
-                ),
-              ),
-              title: Text(
-                widget.name,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              subtitle: Text(
-                widget.cId,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.black),
-              ),
-              trailing: CircleAvatar(
-                backgroundColor: Colors.green,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.phone,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ),
+            FutureBuilder(
+                future: clientsProfile(widget.id),
+                builder: (c, s) {
+                  if (s.connectionState == ConnectionState.waiting)
+                    return Center(
+                      child: LinearProgressIndicator(),
+                    );
+                  else if (s.connectionState == ConnectionState.done) {
+                    var cp = clientsProfileModelFromJson(s.data.data);
+
+                    return ListTile(
+                      leading: CircleAvatar(
+                        radius: 50.0,
+                        // child: Image.asset(
+                        //   'lib/assets/clients.png',
+                        //   fit: BoxFit.fill,
+                        // ),
+                        backgroundImage: NetworkImage(baseURL + cp.photo ??
+                            '/media/customer/photo/badge.png'),
+                      ),
+                      title: Text(
+                        cp.firstName + ' ' + cp.lastName,
+                        style: Theme.of(context).textTheme.headline6.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                      subtitle: Text(
+                        cp.cid,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(color: Colors.black),
+                      ),
+                      trailing: CircleAvatar(
+                        backgroundColor: Colors.green,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.phone,
+                            color: Colors.white,
+                          ),
+                          onPressed: () async {
+                            await launch('tel:${cp.phone}');
+                          },
+                        ),
+                      ),
+                    );
+                  }
+
+                  return Center(
+                    child: const Text('Oops no data found'),
+                  );
+                }),
             BottomNavigationBar(
               showSelectedLabels: true,
               iconSize: 30.0,

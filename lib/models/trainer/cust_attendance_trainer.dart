@@ -40,6 +40,5 @@ Future<ApiResponse> clientAttendance(int id) async {
   ApiResponse cp = await ApiHelper().getReq(
       endpoint:
           "https://api.health2offer.com/customer/attendancecustomer/$id/");
-  print('###################' + cp.data + '###################');
   return cp;
 }
