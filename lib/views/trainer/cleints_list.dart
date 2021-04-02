@@ -40,9 +40,7 @@ class ClientsList extends StatelessWidget {
           } else if (s.hasData &&
               !s.data.error &&
               s.connectionState == ConnectionState.done) {
-            var _cl = clientsListModelFromJson(s.data.data);
-
-            var cl = _cl[0];
+            var cl = clientsListModelFromJson(s.data.data);
 
             widget = ListView.builder(
               physics: BouncingScrollPhysics(),
@@ -51,7 +49,7 @@ class ClientsList extends StatelessWidget {
                 //TODO: Add Profile picture
                 return ClientsListTile(
                   name: cl.cust[i].firstName,
-                  cId: cl.cust[i].custid,
+                  cId: cl.cust[i].custid ?? '696969',
                   goal: 'Fat Loss',
                   onTap: () {
                     Navigator.push(
@@ -59,8 +57,8 @@ class ClientsList extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (c) => ClientsDetailsView(
                           name:
-                              "${cl.cust[i].firstName} ${cl.cust[i].lastName}",
-                          cId: cl.cust[i].custid,
+                              "${cl.cust[i].firstName} ${cl.cust[i].lastName ?? ''}",
+                          cId: cl.cust[i].custid ?? '696969',
                           id: cl.cust[i].id,
                         ),
                       ),

@@ -8,23 +8,23 @@ class GymHomeView extends StatelessWidget {
       initialData: [false],
       future: ApiHelper().autoLogin(),
       builder: (c, s) {
-        var widget;
+        // var widget;
         if (s.connectionState == ConnectionState.waiting) {
-          widget = Scaffold(body: Center(child: CircularProgressIndicator()));
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
         } else if (s.data != null &&
             s.data[0] &&
             s.connectionState == ConnectionState.done) {
           switch (s.data[1]) {
             case "CUSTOMER":
-              widget = CustomerHome();  
+              return CustomerHome();  
               break;
             case "TRAINER":
-              widget = TrainerHome();
+              return TrainerHome();
               break;
           }
-        } else
-          widget = OnboardingViews();
-        return widget;
+        } 
+      return OnboardingViews();
+        // return widget;
       },
     );
   }

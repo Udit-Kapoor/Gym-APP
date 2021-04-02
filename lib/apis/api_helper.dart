@@ -21,9 +21,20 @@ class ApiHelper {
     return [b];
   }
 
+  Future<String> getUserName() async {
+    SharedPreferences sp = await s;
+    return sp.getString("USER_NAME");
+  }
+
   Future<int> getUserObjectID() async {
     SharedPreferences sp = await s;
     return sp.getInt("USER_OBJECT_ID");
+  }
+
+  Future<String> getImageURL() async {
+    SharedPreferences sp = await s;
+    String yeReturn = sp.getString("CUSTOMER_PROFILE");
+    return yeReturn;
   }
 
   Future login({String url, Map data}) async {
@@ -39,10 +50,14 @@ class ApiHelper {
       if (login.statusCode >= 200 && login.statusCode <= 205) {
         var rA = restAuthLoginModelFromJson(login.body);
         sp.setString("AUTH_KEY", rA.key);
-        ApiResponse userProfile = await customerPro();
-        var cp = customerProfileModelFromJson(userProfile.data);
+        
+        // ApiResponse userProfile = await customerPro();
+        // var cp = customerProfileModelFromJson(userProfile.data);
+        // sp.setString("USER_GYM_ID", cp.cid);
+        // sp.setString("USER_NAME", cp.firstName);
+        // sp.setString("CUSTOMER_PROFILE", cp.photo);
 
-        sp.setInt("USER_OBJECT_ID", cp.id);
+        // sp.setInt("USER_OBJECT_ID", cp.id);
         return ApiResponse(data: rA);
       } else
         return ApiResponse(error: true);
@@ -152,7 +167,7 @@ class ApiHelper {
           HttpHeaders.contentTypeHeader: "application/json",
           HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
         },
-        body: jsonEncode({"secret_key":key }),
+        body: jsonEncode({"secret_key": key}),
       );
       return att.statusCode >= 200 && att.statusCode <= 205
           ? ApiResponse(data: att.body)

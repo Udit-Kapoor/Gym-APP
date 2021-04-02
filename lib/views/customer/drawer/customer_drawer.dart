@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/views/customer/drawer/order_history.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDrawer extends StatefulWidget {
@@ -42,12 +43,12 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
           ),
           ListTile(
             contentPadding: EdgeInsets.all(0),
-            leading: Image.asset(
-              'lib/assets/profile.png',
+            leading: Image.network(
+              baseURL + ApiHelper().getImageURL().toString(),
               alignment: Alignment.topLeft,
             ),
-            title: Text('Hi! Pawan'),
-            subtitle: Text('#42069'),
+            title: Text('Hi! ${ApiHelper().getUserName()}'),
+            // subtitle: Text('#42069'),
           ),
           DrawerTextList(
               label: 'Profile',
@@ -81,7 +82,7 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ComplaintFeedback()),
+                  MaterialPageRoute(builder: (_) => ComplaintFeedback()),
                 );
               }),
           DrawerTextList(

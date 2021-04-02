@@ -7,12 +7,11 @@ import 'dart:convert';
 import 'package:gym_app/apis/api_helper.dart';
 import 'package:gym_app/apis/api_response.dart';
 
-List<ClientsListModel> clientsListModelFromJson(String str) =>
-    List<ClientsListModel>.from(
-        json.decode(str).map((x) => ClientsListModel.fromJson(x)));
+ClientsListModel clientsListModelFromJson(String str) =>
+    ClientsListModel.fromJson(json.decode(str));
 
-String clientsListModelToJson(List<ClientsListModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String clientsListModelToJson(ClientsListModel data) =>
+    json.encode(data.toJson());
 
 class ClientsListModel {
   ClientsListModel({
@@ -64,8 +63,6 @@ class Cust {
   Cust({
     this.id,
     this.custid,
-    this.batchTimeTo,
-    this.batchTimeFrom,
     this.firstName,
     this.middleName,
     this.lastName,
@@ -83,6 +80,7 @@ class Cust {
     this.idProof,
     this.idProofImage,
     this.idProofImage1,
+    this.active,
     this.dateAdded,
     this.user,
     this.batchId,
@@ -90,8 +88,6 @@ class Cust {
 
   int id;
   String custid;
-  String batchTimeTo;
-  String batchTimeFrom;
   String firstName;
   String middleName;
   String lastName;
@@ -107,35 +103,37 @@ class Cust {
   int pincode;
   String photo;
   String idProof;
-  String idProofImage;
+  dynamic idProofImage;
   dynamic idProofImage1;
+  bool active;
   DateTime dateAdded;
   int user;
   int batchId;
 
   factory Cust.fromJson(Map<String, dynamic> json) => Cust(
         id: json["id"],
-        custid: json["custid"],
-        batchTimeTo: json["batch_time_to"],
-        batchTimeFrom: json["batch_time_from"],
+        custid: json["custid"] == null ? null : json["custid"],
         firstName: json["first_name"],
-        middleName: json["middle_name"],
+        middleName: json["middle_name"] == null ? null : json["middle_name"],
         lastName: json["last_name"],
-        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        dateOfBirth: json["date_of_birth"] == null
+            ? null
+            : DateTime.parse(json["date_of_birth"]),
         gender: json["gender"],
         phone: json["phone"],
-        alternatePhone: json["alternate_phone"],
+        alternatePhone:
+            json["alternate_phone"] == null ? null : json["alternate_phone"],
         email: json["email"],
         address1: json["address1"],
         address2: json["address2"],
         city: json["city"],
         state: json["state"],
-        pincode: json["pincode"],
+        pincode: json["pincode"] == null ? null : json["pincode"],
         photo: json["photo"] == null ? null : json["photo"],
         idProof: json["id_proof"],
-        idProofImage:
-            json["id_proof_image"] == null ? null : json["id_proof_image"],
+        idProofImage: json["id_proof_image"],
         idProofImage1: json["id_proof_image1"],
+        active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
         user: json["user"],
         batchId: json["batch_id"],
@@ -143,27 +141,27 @@ class Cust {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "custid": custid,
-        "batch_time_to": batchTimeTo,
-        "batch_time_from": batchTimeFrom,
+        "custid": custid == null ? null : custid,
         "first_name": firstName,
-        "middle_name": middleName,
+        "middle_name": middleName == null ? null : middleName,
         "last_name": lastName,
-        "date_of_birth":
-            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "date_of_birth": dateOfBirth == null
+            ? null
+            : "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
         "gender": gender,
         "phone": phone,
-        "alternate_phone": alternatePhone,
+        "alternate_phone": alternatePhone == null ? null : alternatePhone,
         "email": email,
         "address1": address1,
         "address2": address2,
         "city": city,
         "state": state,
-        "pincode": pincode,
+        "pincode": pincode == null ? null : pincode,
         "photo": photo == null ? null : photo,
         "id_proof": idProof,
-        "id_proof_image": idProofImage == null ? null : idProofImage,
+        "id_proof_image": idProofImage,
         "id_proof_image1": idProofImage1,
+        "active": active,
         "date_added":
             "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
         "user": user,
@@ -196,9 +194,9 @@ class Trainer {
 }
 
 Future<ApiResponse> clientList(int id) async {
-  ApiResponse x = await ApiHelper().postReq(
-    endpoint: "https://api.health2offer.com/trainer/trainerbatch/customer/",
-    data: {"id": id},
+  ApiResponse x = await ApiHelper().getReq(
+    endpoint: "https://api.health2offer.com/trainer/batchdetail/$id/",
+    // data: {"id": id},
   );
   return x;
 }
