@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const korangeCol = Color(0xFFEB3223);
 
@@ -71,6 +72,9 @@ class _CafeteriaViewState extends State<CafeteriaView> {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences sp;
+    String s;
+    bool isCustomer;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -93,9 +97,23 @@ class _CafeteriaViewState extends State<CafeteriaView> {
               size: 30,
               color: Colors.black,
             ),
-            onPressed: () => {
+            onPressed: () async => {
+              // customerSetter() async {
+              sp = await SharedPreferences.getInstance(),
+              s = sp.get("USER_TYPE"),
+              if (s == "CUSTOMER")
+                {
+                  isCustomer = true,
+                }
+              else
+                {
+                  isCustomer = false,
+                },
+              // }
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CafeCart();
+                return CafeCart(
+                  isCustomer: isCustomer,
+                );
               })),
             },
           ),
