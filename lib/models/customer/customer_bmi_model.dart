@@ -60,3 +60,11 @@ Future<ApiResponse> customerBmi() async {
 
   return cp;
 }
+
+Future<ApiResponse> customerTrainerBmi(int id) async {
+  ApiResponse cp = await ApiHelper().postReq(
+      endpoint: "https://api.health2offer.com/customer/trainerbmi/",
+      data: {"id": id});
+
+  return cp;
+}

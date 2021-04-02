@@ -7,8 +7,10 @@ class ClientsListTile extends StatelessWidget {
     @required this.cId,
     @required this.goal,
     this.onTap,
+    this.imageURL,
   }) : super(key: key);
   final String name;
+  final String imageURL;
   final String cId;
   final String goal;
   final Function onTap;
@@ -27,9 +29,9 @@ class ClientsListTile extends StatelessWidget {
           ),
           child: ListTile(
             leading: CircleAvatar(
-              child: Image.asset(
-                'lib/assets/clients.png',
-                fit: BoxFit.fill,
+              backgroundImage: NetworkImage(
+                imageURL ??
+                    'https://api.health2offer.com/media/customer/photo/badge.png',
               ),
             ),
             title: Text(
@@ -42,7 +44,7 @@ class ClientsListTile extends StatelessWidget {
             subtitle: Row(
               children: [
                 Text(
-                 cId,
+                  cId,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1

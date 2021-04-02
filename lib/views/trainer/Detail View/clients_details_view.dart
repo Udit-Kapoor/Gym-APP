@@ -4,6 +4,9 @@ import 'package:gym_app/lib.dart';
 import 'package:expandable/expandable.dart';
 import 'package:gym_app/views/trainer/Detail%20View/clients_gym_sub.dart';
 
+import '../my_goal_tile_trainer.dart';
+import 'client_my_attendance.dart';
+
 DateTime _selectedDate;
 List<String> dropDownMenuItemMuscle = [
   'Back',
@@ -56,7 +59,9 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   @override
   Widget build(BuildContext context) {
     tabs = [
-      ClientsDashboard(),
+      ClientsDashboard(
+        id: widget.id,
+      ),
       ClientsProfile(id: widget.id),
       ClientsGymSubscription(id: widget.id),
       if (_workoutIndex == 0) CreateWorkout(incrementCallBack: incrementIndex),
@@ -133,7 +138,6 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                         ),
                         child: CheckboxListTile(
                           controlAffinity: ListTileControlAffinity.trailing,
-                          
                           title: Text(
                             'Air Bike',
                             style: Theme.of(context).textTheme.headline6,
@@ -148,8 +152,6 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                       );
                     }),
               ),
-             
-             
               Row(
                 children: [
                   Expanded(
@@ -472,7 +474,8 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
 }
 
 class ClientsDashboard extends StatelessWidget {
-  ClientsDashboard({Key key}) : super(key: key);
+  final int id;
+  ClientsDashboard({Key key, @required this.id}) : super(key: key);
   final List _images = List.generate(
       8,
       (index) =>
@@ -483,15 +486,15 @@ class ClientsDashboard extends StatelessWidget {
     return ListView(
       physics: BouncingScrollPhysics(),
       children: [
-        TodaysWorkoutTile(
-            // dateNum: '30',
-            // month: 'Oct',
-            // batchTime: '09.30-10.30',
-            // dayName: 'Chest',
-            ),
-        MyGoalTile(),
+        // TodaysWorkoutTile(
+        //     // dateNum: '30',
+        //     // month: 'Oct',
+        //     // batchTime: '09.30-10.30',
+        //     // dayName: 'Chest',
+        //     ),
+        MyGoalTileTrainer(id: id),
         WeightChart(),
-        MyAttendance(),
+        ClientMyAttendance(id: id),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: Text(
