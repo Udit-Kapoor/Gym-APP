@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/views/customer/drawer/order_history.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TrainerDrawer extends StatefulWidget {
@@ -58,8 +59,14 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
                   ),
                 );
               }),
-        
-          DrawerTextList(label: 'Order History', onTap: () {}),
+          DrawerTextList(
+              label: 'Order History',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrderHistory()),
+                );
+              }),
           DrawerTextList(
               label: 'Complaint/Feedback',
               onTap: () {
@@ -193,5 +200,3 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
     );
   }
 }
-
-
