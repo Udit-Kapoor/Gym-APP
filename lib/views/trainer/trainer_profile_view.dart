@@ -33,7 +33,11 @@ class TrainerProfileView extends StatelessWidget {
               Icons.qr_code_scanner,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+
+
+              
+            },
           ),
         ],
       ),
@@ -60,7 +64,8 @@ class TrainerProfileView extends StatelessWidget {
                       height: 10.0,
                     ),
                     ProfilePicture(
-                      imageUrl: tp.image,
+                      imageUrl: tp.image ??
+                          baseURL + '/media/customer/photo/badge.png',
                     ),
                     SizedBox(
                       height: 10.0,
@@ -87,7 +92,6 @@ class TrainerProfileView extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                //TODO: Api doesn't have DOB
                                 child: TextFieldWidget(
                                   borderText: 'D.O.B',
                                   bodyText: '12-06-1998',

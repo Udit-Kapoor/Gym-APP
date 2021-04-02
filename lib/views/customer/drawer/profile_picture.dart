@@ -8,12 +8,10 @@ class ProfilePicture extends StatelessWidget {
     @required this.imageUrl,
   }) : super(key: key);
 
-  
-
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      backgroundImage: NetworkImage(baseURL + imageUrl),
+      backgroundImage: NetworkImage(imageUrl),
 
       radius: 70.0,
       // child: FadeInImage.assetNetwork(

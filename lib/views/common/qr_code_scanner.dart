@@ -35,38 +35,37 @@ class _QRCodeScanState extends State<QRCodeScan> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: QRView(
-
-          key: qrKey,
-          onQRViewCreated: (QRViewController controller) {
-            setState(() {
-              this.controller = controller;
-            });
-            controller.scannedDataStream.listen((scanData) async {
-              
-              setState(() {
-                result = scanData;
-                // showProgress = true;
-                print('################' + scanData.code + '################');
-              });
-              controller.stopCamera();
-              ApiResponse res = await ApiHelper().attendance(scanData.code);
-              print(res.data);
-              print(res.error);
-              print(res.errorMessage);
-
-              Navigator.pop(context);
-            });
-          },
-          overlay: QrScannerOverlayShape(
-            
-            borderColor: Colors.red,
-            borderRadius: 10,
-            borderLength: 30,
-            borderWidth: 10,
-            cutOutSize: scanArea,
-          ),
-        ),
+        child: showProgress
+            ? Center(child: CircularProgressIndicator())
+            : QRView(
+                key: qrKey,
+                onQRViewCreated: (QRViewController controller) {
+                  setState(() {
+                    this.controller = controller;
+                  });
+                  controller.scannedDataStream.listen((scanData) async {
+                    setState(() {
+                      result = scanData;
+                      showProgress = true;
+                      controller.stopCamera();
+                    });
+                    ApiResponse res =
+                        await ApiHelper().attendance(scanData.code);
+                    print(res.data);
+                    print(res.error);
+                    print(res.errorMessage);
+                    // controller.dispose();
+                    Navigator.of(context, rootNavigator: true).pop();
+                  });
+                },
+                overlay: QrScannerOverlayShape(
+                  borderColor: Colors.red,
+                  borderRadius: 10,
+                  borderLength: 30,
+                  borderWidth: 10,
+                  cutOutSize: scanArea,
+                ),
+              ),
       ),
     );
   }

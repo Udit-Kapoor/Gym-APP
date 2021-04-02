@@ -41,15 +41,16 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
           SizedBox(
             height: widget.height * 0.03,
           ),
-          ListTile(
-            contentPadding: EdgeInsets.all(0),
-            leading: Image.network(
-              baseURL + ApiHelper().getImageURL().toString(),
-              alignment: Alignment.topLeft,
-            ),
-            title: Text('Hi! ${ApiHelper().getUserName()}'),
-            // subtitle: Text('#42069'),
-          ),
+          //TODO: Add FutureBuilder
+          // ListTile(
+          //   contentPadding: EdgeInsets.all(0),
+          //   leading: Image.network(
+          //     baseURL + ApiHelper().getImageURL().toString(),
+          //     alignment: Alignment.topLeft,
+          //   ),
+          //   title: Text('Hi! ${ApiHelper().getUserName()}'),
+          //   // subtitle: Text('#42069'),
+          // ),
           DrawerTextList(
               label: 'Profile',
               onTap: () {

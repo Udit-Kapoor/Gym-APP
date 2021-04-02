@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/apis/apis.dart';
 import 'package:gym_app/models/customer/customer_profile_model.dart';
 
 import 'profile_picture.dart';
@@ -55,7 +56,7 @@ class CustomerProfileView extends StatelessWidget {
                     height: 10.0,
                   ),
                   ProfilePicture(
-                      imageUrl: cp.photo ?? '/media/customer/photo/badge.png'),
+                      imageUrl: cp.photo ??baseURL+ '/media/customer/photo/badge.png'),
                   SizedBox(
                     height: 10.0,
                   ),

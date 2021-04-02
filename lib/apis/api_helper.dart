@@ -21,20 +21,18 @@ class ApiHelper {
     return [b];
   }
 
-  Future<String> getUserName() async {
-    SharedPreferences sp = await s;
-    return sp.getString("USER_NAME");
-  }
-
   Future<int> getUserObjectID() async {
     SharedPreferences sp = await s;
     return sp.getInt("USER_OBJECT_ID");
   }
 
-  Future<String> getImageURL() async {
+  Future<bool> getIsTrainer() async {
     SharedPreferences sp = await s;
-    String yeReturn = sp.getString("CUSTOMER_PROFILE");
-    return yeReturn;
+    String userType = sp.getString("USER_TYPE");
+
+    if (userType == 'CUSTOMER') return false;
+
+    return true;
   }
 
   Future login({String url, Map data}) async {
@@ -50,14 +48,7 @@ class ApiHelper {
       if (login.statusCode >= 200 && login.statusCode <= 205) {
         var rA = restAuthLoginModelFromJson(login.body);
         sp.setString("AUTH_KEY", rA.key);
-        
-        // ApiResponse userProfile = await customerPro();
-        // var cp = customerProfileModelFromJson(userProfile.data);
-        // sp.setString("USER_GYM_ID", cp.cid);
-        // sp.setString("USER_NAME", cp.firstName);
-        // sp.setString("CUSTOMER_PROFILE", cp.photo);
 
-        // sp.setInt("USER_OBJECT_ID", cp.id);
         return ApiResponse(data: rA);
       } else
         return ApiResponse(error: true);
@@ -106,8 +97,20 @@ class ApiHelper {
         sp.setString("USER_TYPE", "TRAINER");
         Navigator.pushReplacementNamed(ctx, '/TrainerHome');
       }
+
+      bool isTrainer = await ApiHelper().getIsTrainer();
+
+      ApiResponse userProfile =
+          isTrainer ? await trainerPro() : await customerPro();
+
+      if (isTrainer) {
+        var cp = trainerProfileModelFromJson(userProfile.data);
+        sp.setInt("USER_OBJECT_ID", cp.id);
+      } else {
+        var cp = customerProfileModelFromJson(userProfile.data);
+        sp.setInt("USER_OBJECT_ID", cp.id);
+      }
     } else {
-      print('##########' + login.errorMessage);
       Fluttertoast.showToast(msg: "Authentication failed");
     }
   }
@@ -157,12 +160,17 @@ class ApiHelper {
 
   Future<ApiResponse> attendance(String key) async {
     final _sp = await s;
+    bool isTrainer = await ApiHelper().getIsTrainer();
+
 
     int id = await ApiHelper().getUserObjectID();
 
+
+    String query = isTrainer ? 'QRCodetrainer' : 'QRCodeCustomer';
+
     try {
       Response att = await post(
-        'https://api.health2offer.com/core/QRCodeCustomer/$id/',
+        'https://api.health2offer.com/core/$query/$id/',
         headers: {
           HttpHeaders.contentTypeHeader: "application/json",
           HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
