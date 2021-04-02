@@ -1,13 +1,13 @@
-const String _baseURL = 'https:/p2c-gym.heerokuapp.com';
+const String baseURL = 'https://api.health2offer.com';
 //TODO add forgot password url once backend completes this
 const String forgot_password = '';
 
-const String rest_auth = '$_baseURL/rest-auth';
+const String rest_auth = '$baseURL/rest-auth';
 
 const String loginURL = '$rest_auth/login/';
 const String logoutURL = '$rest_auth/logout/';
 
-const String core = '$_baseURL/core';
+const String core = '$baseURL/core';
 //CORE-Enquiry
 const String enquiry = '$core/enquiry/';
 const String enquiry_post = '$core/enquiry/post/';

@@ -152,7 +152,7 @@ class ApiHelper {
           HttpHeaders.contentTypeHeader: "application/json",
           HttpHeaders.authorizationHeader: "TOKEN ${_sp.getString("AUTH_KEY")}"
         },
-        body: jsonEncode({key: "secret_key"}),
+        body: jsonEncode({"secret_key":key }),
       );
       return att.statusCode >= 200 && att.statusCode <= 205
           ? ApiResponse(data: att.body)

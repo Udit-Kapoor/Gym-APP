@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/apis/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 
 class ProfilePicture extends StatelessWidget {
@@ -8,17 +9,16 @@ class ProfilePicture extends StatelessWidget {
     @required this.imageUrl,
   }) : super(key: key);
 
-  Future<bool> checkImage() async =>
-      (await http.head(imageUrl)).statusCode == 200
-          ? Future<bool>.value(true)
-          : Future<bool>.value(false);
+  
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      backgroundImage: NetworkImage(baseURL + imageUrl),
+
       radius: 70.0,
-      child: FadeInImage.assetNetwork(
-          placeholder: 'lib/assets/profile.png', image: imageUrl),
+      // child: FadeInImage.assetNetwork(
+      //     placeholder: 'lib/assets/profile.png', image: baseURL+ imageUrl),
     );
   }
 }

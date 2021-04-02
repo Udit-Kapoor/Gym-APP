@@ -54,10 +54,8 @@ class CustomerProfileView extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  //TODO: Remove this temp image
                   ProfilePicture(
-                      imageUrl: cp.photo ??
-                          'https://avatars.githubusercontent.com/u/34944818'),
+                      imageUrl: cp.photo ?? '/media/customer/photo/badge.png'),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -103,7 +101,7 @@ class CustomerProfileView extends StatelessWidget {
                           borderText: 'Phone No.',
                           bodyText: cp.phone,
                         ),
-                        if (cp.alternatePhone.isNotEmpty)
+                        if (cp.alternatePhone != null)
                           TextFieldWidget(
                             borderText: 'Alt.Phone No.',
                             bodyText: cp.alternatePhone,
