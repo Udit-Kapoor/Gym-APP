@@ -34,13 +34,14 @@ class _SupplementCartState extends State<SupplementCart> {
       floatingActionButton: FloatingActionButton.extended(
         //ToDo: Works only for Customer
         onPressed: () => {
-          if (local.item==null)
+          if (local.item == null)
             {
               Fluttertoast.showToast(msg: "Nothing in the Cart"),
             }
           else
             {
               placeSupplementCart({"MOP": "app", "mode": "Pay at Gym"}),
+              //ToDo: Add if else of error
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -96,7 +97,7 @@ class _SupplementCartState extends State<SupplementCart> {
                               imgPath: "lib/assets/protien.jpg",
                               title: model.item[i].product.name,
                               size: model.item[i].product.weight.toString(),
-                              flavour: "API SAD",
+                              flavour: "",
                               price: model.item[i].product.price.toString(),
                               seller: model.item[i].product.vendor.name,
                               setState: () => setState(() {}),

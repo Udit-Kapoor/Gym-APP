@@ -223,7 +223,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
                       itemBuilder: (c, i) {
                         return FoodTile(
                           imgPath:
-                              "http://api.health2offer.com/" + model[i].photo,
+                              "https://api.health2offer.com/" + model[i].photo,
                           name: model[i].name,
                           desc: model[i].ingredients,
                           rate: model[i].itemVarients[0].price.toString(),

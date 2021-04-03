@@ -78,7 +78,7 @@ class _AddToCartViewState extends State<AddToCartView> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                      "http://api.health2offer.com/" + widget.model.photo),
+                      "https://api.health2offer.com/" + widget.model.photo),
                 ),
               ),
               child: Align(

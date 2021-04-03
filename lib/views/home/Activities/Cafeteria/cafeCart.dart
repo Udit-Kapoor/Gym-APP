@@ -421,7 +421,7 @@ class _CafeCartState extends State<CafeCart> {
             else
               {
                 placeOrder({
-                  "customer": localModel.order[0].trainer.id,
+                  "trainer": localModel.order[0].trainer.id,
                   "cart": localModel.id
                 }),
               },
