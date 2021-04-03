@@ -40,23 +40,23 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
           SizedBox(
             height: widget.height * 0.03,
           ),
-        
           FutureBuilder(
               future: customerPro(),
               builder: (c, s) {
                 if (s.connectionState == ConnectionState.waiting)
-                  return CircularProgressIndicator();
-                else if(s.connectionState == ConnectionState.done){
-
+                  return LinearProgressIndicator();
+                else if (s.connectionState == ConnectionState.done) {
                   var cp = customerProfileModelFromJson(s.data.data);
                   return ListTile(
                     contentPadding: EdgeInsets.all(0),
-                    leading: Image.network(
-                      baseURL + cp.photo??"/media/customer/photo/badge.png",
-                      alignment: Alignment.topLeft,
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                        baseURL + cp.photo ?? "/media/customer/photo/badge.png",
+                      ),
                     ),
                     title: Text('Hi! ${cp.firstName}'),
-                    subtitle: Text('#'+ cp.cid),
+                    subtitle: Text('#' + cp.cid),
                   );
                 }
                 return Center(child: Text('Oops no data found'));

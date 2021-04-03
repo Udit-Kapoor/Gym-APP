@@ -49,10 +49,12 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
                   var tp = trainerProfileModelFromJson(s.data.data);
                   return ListTile(
                     contentPadding: EdgeInsets.all(0),
-                    leading: Image.network(
-                      tp.image ??
-                          "http://api.health2offer.com/media/trainer/photo/profile_image.jpeg",
-                      alignment: Alignment.topLeft,
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                        tp.image ??
+                            "http://api.health2offer.com/media/trainer/photo/profile_image.jpeg",
+                      ),
                     ),
                     title: Text('Hi! ${tp.firstName}'),
                     subtitle: Text('#' + tp.tid),

@@ -36,7 +36,8 @@ class TrainerAttendanceModel {
       };
 }
 
-Future<ApiResponse> trainerAttendance(int id) async {
+Future<ApiResponse> trainerAttendance() async {
+  int id = await ApiHelper().getUserObjectID();
   ApiResponse cp = await ApiHelper().getReq(
       endpoint: "https://api.health2offer.com/trainer/attendancetrainer/$id/");
 

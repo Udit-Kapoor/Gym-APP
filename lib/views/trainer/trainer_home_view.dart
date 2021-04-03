@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/trainer/clients_count.dart';
 import 'package:gym_app/models/trainer/trainer_attendance_model.dart';
 import 'package:gym_app/views/common/qr_code_scanner.dart';
 import 'package:gym_app/views/trainer/upcoming_batches_tile.dart';
@@ -204,50 +205,29 @@ class TrainerHomeIndex extends StatelessWidget {
           UpcomingBatchesTile(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CircularPercentIndicator(
-                  progressColor: Colors.blue[700],
-                  animation: true,
-                  animationDuration: 1000,
-                  radius: 70,
-                  percent: 0.75,
-                  center: Text('30'),
-                  footer: Text(
-                    'My Total\nClients',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-                CircularPercentIndicator(
-                  progressColor: Colors.blue[700],
-                  animation: true,
-                  animationDuration: 1000,
-                  radius: 70.0,
-                  percent: 0.75,
-                  center: Text('25'),
-                  footer: Text(
-                    'In-Gym\nClients',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-                CircularPercentIndicator(
-                  progressColor: Colors.blue[700],
-                  animation: true,
-                  animationDuration: 1000,
-                  radius: 70.0,
-                  percent: 0.75,
-                  center: Text('5'),
-                  footer: Text(
-                    'On-location\nClients',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-              ],
-            ),
+            child: FutureBuilder(
+                future: clientCount(),
+                builder: (c, s) {
+                  if (s.connectionState == ConnectionState.waiting)
+                    return Center(child: CircularProgressIndicator());
+                  else if (s.connectionState == ConnectionState.done) {
+                    var cc = clientCountModelFromJson(s.data.data);
+                    return CircularPercentIndicator(
+                      progressColor: Colors.blue[700],
+                      animation: true,
+                      animationDuration: 1000,
+                      radius: 70,
+                      percent: 0.75,
+                      center: Text(cc.count.toString()),
+                      footer: Text(
+                        'My Total\nClients',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    );
+                  }
+                  return Center(child: Text("opps no data found"));
+                }),
           ),
           TrainerMyAttendance(),
         ],
@@ -262,8 +242,7 @@ class TrainerMyAttendance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        //TODO: Get trainers and pass as argument
-        future: trainerAttendance(4),
+        future: trainerAttendance(),
         builder: (c, s) {
           var widget;
           if (s.connectionState == ConnectionState.waiting) {
