@@ -486,7 +486,7 @@ class EnumValues<T> {
 Future<ApiResponse> getPastCafeOrder() async {
   ApiResponse cp = await ApiHelper().getReq(
       endpoint:
-          "http://api.health2offer.com/customer/CustomerPastOrderedView/");
+          "https://api.health2offer.com/customer/CustomerPastOrderedView/");
 
   if (cp.error) {
     Fluttertoast.showToast(msg: "Unable to Fetch Details");

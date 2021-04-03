@@ -51,7 +51,7 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
                     contentPadding: EdgeInsets.all(0),
                     leading: Image.network(
                       tp.image ??
-                          "http://api.health2offer.com/media/trainer/photo/profile_image.jpeg",
+                          "https://api.health2offer.com/media/trainer/photo/profile_image.jpeg",
                       alignment: Alignment.topLeft,
                     ),
                     title: Text('Hi! ${tp.firstName}'),

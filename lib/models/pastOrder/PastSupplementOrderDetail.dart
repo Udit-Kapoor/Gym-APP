@@ -221,6 +221,6 @@ class Vendor {
 Future<ApiResponse> getOrderDetails(int id) async {
   String i = id.toString();
   ApiResponse cp = await ApiHelper().getReq(
-      endpoint: "http://api.health2offer.com/customer/Customer/pastorder/$i/");
+      endpoint: "https://api.health2offer.com/customer/Customer/pastorder/$i/");
   return cp;
 }
