@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../../../../constants/constants.dart';
 
 class ShowSortSupplements extends StatefulWidget {
-  const ShowSortSupplements({this.LowToHigh, this.HighToLow});
+  const ShowSortSupplements({this.lowToHigh, this.highToLow});
 
-  final Function LowToHigh;
-  final Function HighToLow;
+  final Function lowToHigh;
+  final Function highToLow;
 
   @override
   _ShowSortSupplementsState createState() => _ShowSortSupplementsState();
@@ -67,7 +67,7 @@ class _ShowSortSupplementsState extends State<ShowSortSupplements> {
                         setState(() {
                           p = value;
                         });
-                        widget.LowToHigh();
+                        widget.lowToHigh();
                       }),
                 ],
               ),
@@ -82,7 +82,7 @@ class _ShowSortSupplementsState extends State<ShowSortSupplements> {
                         setState(() {
                           p = value;
                         });
-                        widget.HighToLow();
+                        widget.highToLow();
                       }),
                 ],
               ),

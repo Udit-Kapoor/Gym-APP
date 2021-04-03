@@ -73,7 +73,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
     'West Bengal'
   ];
 
-  var citiesArray = new List(36);
+  var citiesArray = new List<dynamic>.filled(36, '');
 
   List<String> getCities(String selectedState) {
     int state = stateArray.indexOf(selectedState);

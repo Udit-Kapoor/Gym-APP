@@ -42,8 +42,8 @@ class _SupplementViewState extends State<SupplementView> {
             context: context,
             builder: (_) {
               return ShowSortSupplements(
-                LowToHigh: lowToHigh,
-                HighToLow: highToLow,
+                lowToHigh: lowToHigh,
+                highToLow: highToLow,
               );
             });
       },

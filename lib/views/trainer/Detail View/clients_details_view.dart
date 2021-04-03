@@ -624,34 +624,34 @@ class _CreateWorkoutState extends State<CreateWorkout> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                onPressed: () {},
-              ),
-              Text(
-                '1 Jan',
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ),
+        // Container(
+        //   decoration: BoxDecoration(
+        //     color: Colors.red,
+        //     borderRadius: BorderRadius.circular(5),
+        //   ),
+        //   child: Row(
+        //     mainAxisSize: MainAxisSize.min,
+        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //     children: [
+        //       IconButton(
+        //         icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+        //         onPressed: () {},
+        //       ),
+        //       Text(
+        //         '1 Jan',
+        //         textAlign: TextAlign.center,
+        //         style: Theme.of(context)
+        //             .textTheme
+        //             .headline6
+        //             .copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+        //       ),
+        //       IconButton(
+        //         icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
+        //         onPressed: () {},
+        //       ),
+        //     ],
+        //   ),
+        // ),
         WorkoutPlanNamesListView(incrementCallback: widget.incrementCallBack),
         Padding(
           padding: const EdgeInsets.only(bottom: 20.0),

@@ -482,6 +482,7 @@ class EnumValues<T> {
   }
 }
 
+// ignore: missing_return
 Future<ApiResponse> getPastCafeOrder() async {
   ApiResponse cp = await ApiHelper().getReq(
       endpoint:

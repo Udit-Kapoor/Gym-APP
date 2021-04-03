@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/views/customer/drawer/order_history.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDrawer extends StatefulWidget {
@@ -41,16 +40,8 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
           SizedBox(
             height: widget.height * 0.03,
           ),
-          //TODO: Add FutureBuilder
-          // ListTile(
-          //   contentPadding: EdgeInsets.all(0),
-          //   leading: Image.network(
-          //     baseURL + ApiHelper().getImageURL().toString(),
-          //     alignment: Alignment.topLeft,
-          //   ),
-          //   title: Text('Hi! ${ApiHelper().getUserName()}'),
-          //   // subtitle: Text('#42069'),
-          // ),
+        
+         
           DrawerTextList(
               label: 'Profile',
               onTap: () {

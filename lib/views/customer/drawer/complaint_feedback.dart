@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/apis/apis.dart';
 
 class ComplaintFeedback extends StatefulWidget {
-  const ComplaintFeedback({Key key, @required this.id}) : super(key: key);
+  const ComplaintFeedback({Key key}) : super(key: key);
 
-  final int id;
+
 
   @override
   _ComplaintFeedbackState createState() => _ComplaintFeedbackState();
@@ -204,7 +204,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                       "resolve": false,
                       "source": 'App',
                       //TODO: Add user user id
-                      "user": 34
+                      "user":await ApiHelper().getUserObjectID(),
                     },
                   );
                 },

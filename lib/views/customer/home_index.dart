@@ -22,6 +22,8 @@ class _HomeIndexState extends State<HomeIndex>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Expanded(
       child: ListView(
         physics: BouncingScrollPhysics(),
@@ -148,10 +150,8 @@ class _CustomerTransformationWidgetState
                         },
                       );
 
-                      postImage.fields.addAll({
-                        //TODO: add customer's id
-                        "customer": "34"
-                      });
+                      postImage.fields.addAll(
+                          {"customer": sp.getInt("USER_OBJECT_ID").toString()});
 
                       postImage.files.add(
                         MultipartFile.fromBytes(

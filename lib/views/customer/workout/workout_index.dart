@@ -73,7 +73,7 @@ class WorkoutIndex extends StatelessWidget {
           ),
           Expanded(
             child: FutureBuilder(
-                //TODO: Send customers' object id
+                
                 future: workoutPlanFoo(),
                 builder: (c, s) {
                   var widget;

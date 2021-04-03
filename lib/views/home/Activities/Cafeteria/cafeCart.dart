@@ -3,8 +3,6 @@ import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/cafe/cafeCartTrainer.dart';
 import 'dart:async';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class CafeCart extends StatefulWidget {
   @override
   _CafeCartState createState() => _CafeCartState();
@@ -15,8 +13,6 @@ class CafeCart extends StatefulWidget {
 class _CafeCartState extends State<CafeCart> {
   CafeteriaCartTrainer localModel = new CafeteriaCartTrainer();
   CafeteriaCart localModel1 = new CafeteriaCart();
-  @override
-
   // customerSetter() async {
   //   SharedPreferences sp = await SharedPreferences.getInstance();
   //   String s = sp.get("USER_TYPE");

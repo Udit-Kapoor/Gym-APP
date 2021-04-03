@@ -44,7 +44,7 @@ class _SupplementCartState extends State<SupplementCart> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => supplementOrderPlacedView(
+                  builder: (context) => SupplementOrderPlacedView(
                     orderId: local.orderid,
                   ),
                 ),

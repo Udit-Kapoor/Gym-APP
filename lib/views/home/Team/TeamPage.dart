@@ -4,7 +4,12 @@ import 'TeamPageWidgets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class TeamPage extends StatelessWidget {
+class TeamPage extends StatefulWidget {
+  @override
+  _TeamPageState createState() => _TeamPageState();
+}
+
+class _TeamPageState extends State<TeamPage> {
   YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: YoutubePlayer.convertUrlToId(
         "https://www.youtube.com/watch?v=o2vYBbYJ8as"),
@@ -17,6 +22,7 @@ class TeamPage extends StatelessWidget {
       forceHD: false,
     ),
   );
+
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),

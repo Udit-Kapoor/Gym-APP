@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class supplementOrderPlacedView extends StatelessWidget {
+class SupplementOrderPlacedView extends StatelessWidget {
   final String orderId;
-  const supplementOrderPlacedView({@required this.orderId});
+  const SupplementOrderPlacedView({@required this.orderId});
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
