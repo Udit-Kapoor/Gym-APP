@@ -40,15 +40,26 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
           SizedBox(
             height: widget.height * 0.03,
           ),
-          ListTile(
-            contentPadding: EdgeInsets.all(0),
-            leading: Image.asset(
-              'lib/assets/profile.png',
-              alignment: Alignment.topLeft,
-            ),
-            title: Text('Hi! Pawan'),
-            subtitle: Text('#42069'),
-          ),
+          FutureBuilder(
+              future: trainerPro(),
+              builder: (c, s) {
+                if (s.connectionState == ConnectionState.waiting)
+                  return CircularProgressIndicator();
+                else if (s.connectionState == ConnectionState.done) {
+                  var tp = trainerProfileModelFromJson(s.data.data);
+                  return ListTile(
+                    contentPadding: EdgeInsets.all(0),
+                    leading: Image.network(
+                      tp.image ??
+                          "http://api.health2offer.com/media/trainer/photo/profile_image.jpeg",
+                      alignment: Alignment.topLeft,
+                    ),
+                    title: Text('Hi! ${tp.firstName}'),
+                    subtitle: Text('#' + tp.tid),
+                  );
+                }
+                return Center(child: Text('Oops no data found'));
+              }),
           DrawerTextList(
               label: 'Profile',
               onTap: () {
