@@ -60,7 +60,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
       ),
       ClientsProfile(id: widget.id),
       ClientsGymSubscription(id: widget.id),
-      CreateWorkout(),
+      CreateWorkout(id: widget.id),
       ];
     return Scaffold(
       appBar: AppBar(
