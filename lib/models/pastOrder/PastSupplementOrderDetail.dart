@@ -37,10 +37,10 @@ class SupplementPastOrderDetail {
     this.gymtrainer,
   });
 
-  int id;
+  dynamic id;
   Cart cart;
   String status;
-  int amount;
+  dynamic amount;
   DateTime date;
   bool paid;
   String mop;
@@ -49,13 +49,13 @@ class SupplementPastOrderDetail {
   String landmark;
   String city;
   String state;
-  int pincode;
+  dynamic pincode;
   String mode;
   String receivedBy;
   dynamic deliveryTime;
   dynamic deliveryDate;
   dynamic customer;
-  int cust;
+  dynamic cust;
   dynamic gymtrainer;
 
   factory SupplementPastOrderDetail.fromJson(Map<String, dynamic> json) =>
@@ -117,7 +117,7 @@ class Cart {
   List<Item> item;
   dynamic paymentId;
   String orderid;
-  int id;
+  dynamic id;
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
         item: List<Item>.from(json["item"].map((x) => Item.fromJson(x))),
@@ -141,7 +141,7 @@ class Item {
   });
 
   Product product;
-  int quantity;
+  dynamic quantity;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         product: Product.fromJson(json["product"]),
@@ -170,11 +170,11 @@ class Product {
   Vendor vendor;
   String name;
   String image1;
-  int price;
+  dynamic price;
   bool isStock;
   String slug;
-  int id;
-  int weight;
+  dynamic id;
+  dynamic weight;
   String brand;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(

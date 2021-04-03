@@ -28,7 +28,7 @@ class OrderHistorySupplementTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => OrderHistorySupplementDetails(
-                      id: id,
+                      id: id.toInt(),
                     )),
           )
         },

@@ -97,7 +97,7 @@ class _SupplementCartState extends State<SupplementCart> {
                               imgPath: "lib/assets/protien.jpg",
                               title: model.item[i].product.name,
                               size: model.item[i].product.weight.toString(),
-                              flavour: "API SAD",
+                              flavour: "",
                               price: model.item[i].product.price.toString(),
                               seller: model.item[i].product.vendor.name,
                               setState: () => setState(() {}),

@@ -38,11 +38,11 @@ class SupplementSlug {
   Vendor vendor;
   String name;
   String desc;
-  int price;
+  double price;
   bool isStock;
   String image1;
   String image2;
-  int weight;
+  double weight;
   String slug;
   String productType;
   String nutrition;
