@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/apis/api_endpoints.dart';
 
 class ProfilePicture extends StatelessWidget {
   final String imageUrl;
@@ -14,8 +13,6 @@ class ProfilePicture extends StatelessWidget {
       backgroundImage: NetworkImage(imageUrl),
 
       radius: 70.0,
-      // child: FadeInImage.assetNetwork(
-      //     placeholder: 'lib/assets/profile.png', image: baseURL+ imageUrl),
     );
   }
 }

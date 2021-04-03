@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
-import 'package:expandable/expandable.dart';
 import 'package:gym_app/models/trainer/clients_profile_model.dart';
 import 'package:gym_app/views/trainer/Detail%20View/clients_gym_sub.dart';
 import 'package:url_launcher/url_launcher.dart';

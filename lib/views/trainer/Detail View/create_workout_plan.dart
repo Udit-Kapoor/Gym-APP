@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/models/customer/workout_plan_name.dart';
 import 'package:gym_app/models/trainer/workout_plan_list_model.dart';
+import 'package:intl/intl.dart';
 
 import 'add_custom_workout.dart';
 
 class CreateWorkoutPlan extends StatelessWidget {
   final DateTime dateTime;
 
-  const CreateWorkoutPlan({Key key,@required this.dateTime}) : super(key: key);
+  const CreateWorkoutPlan({Key key, @required this.dateTime}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var dateSplit = DateFormat.MMMd().format(dateTime).split(' ');
+
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -63,7 +66,7 @@ class CreateWorkoutPlan extends StatelessWidget {
                       side: BorderSide(width: 1.5, color: Colors.red),
                     ),
                     child: Text(
-                      '1 Jan',
+                      dateSplit[1] + ' ' + dateSplit[0],
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
