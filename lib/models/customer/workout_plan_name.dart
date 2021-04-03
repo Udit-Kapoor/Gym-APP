@@ -181,3 +181,13 @@ Future<ApiResponse> workoutPlanFoo() async {
       endpoint: "https://api.health2offer.com/customer/workoutplan/$id/list/");
   return x;
 }
+
+
+
+Future<ApiResponse> workoutPlanListClient(int id) async {
+ 
+  ApiResponse x = await ApiHelper().getReq(
+      endpoint: "https://api.health2offer.com/customer/workoutplan/$id/list/");
+  return x;
+}
+
