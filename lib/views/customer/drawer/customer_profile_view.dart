@@ -29,15 +29,6 @@ class CustomerProfileView extends StatelessWidget {
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline6,
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.qr_code_scanner,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: FutureBuilder(
         future: customerPro(),
@@ -56,7 +47,8 @@ class CustomerProfileView extends StatelessWidget {
                     height: 10.0,
                   ),
                   ProfilePicture(
-                      imageUrl: cp.photo ??baseURL+ '/media/customer/photo/badge.png'),
+                      imageUrl: baseURL + cp.photo ??
+                          '/media/customer/photo/noimage.jpg'),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -75,8 +67,7 @@ class CustomerProfileView extends StatelessWidget {
                         ),
                         TextFieldWidget(
                           borderText: 'Full Name',
-                          bodyText:
-                              '${cp.firstName} ${cp.middleName} ${cp.lastName} ',
+                          bodyText: '${cp.firstName} ${cp.lastName} ',
                         ),
                         Row(
                           children: [

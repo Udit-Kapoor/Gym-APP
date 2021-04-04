@@ -203,7 +203,6 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                       "complaint": _decriptionController.text,
                       "resolve": false,
                       "source": 'App',
-                      //TODO: Add user user id
                       "user":await ApiHelper().getUserObjectID(),
                     },
                   );

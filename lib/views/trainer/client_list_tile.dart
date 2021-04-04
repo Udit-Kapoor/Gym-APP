@@ -9,6 +9,7 @@ class ClientsListTile extends StatelessWidget {
     this.onTap,
     this.imageURL,
   }) : super(key: key);
+  
   final String name;
   final String imageURL;
   final String cId;
@@ -31,7 +32,7 @@ class ClientsListTile extends StatelessWidget {
             leading: CircleAvatar(
               backgroundImage: NetworkImage(
                 imageURL ??
-                    'https://api.health2offer.com/media/customer/photo/badge.png',
+                    'https://api.health2offer.com/media/customer/photo/noimage.jpg',
               ),
             ),
             title: Text(

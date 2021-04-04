@@ -52,7 +52,8 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
                     leading: CircleAvatar(
                       radius: 30,
                       backgroundImage: NetworkImage(
-                        baseURL + cp.photo ?? "/media/customer/photo/badge.png",
+                        baseURL + cp.photo ??
+                            "/media/customer/photo/noimage.jpg",
                       ),
                     ),
                     title: Text('Hi! ${cp.firstName}'),

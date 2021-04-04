@@ -53,7 +53,7 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
                       radius: 30,
                       backgroundImage: NetworkImage(
                         tp.image ??
-                            "http://api.health2offer.com/media/trainer/photo/profile_image.jpeg",
+                            "http://api.health2offer.com/media/customer/photo/noimage.jpg",
                       ),
                     ),
                     title: Text('Hi! ${tp.firstName}'),

@@ -33,11 +33,7 @@ class TrainerProfileView extends StatelessWidget {
               Icons.qr_code_scanner,
               color: Colors.black,
             ),
-            onPressed: () {
-
-
-              
-            },
+            onPressed: () {},
           ),
         ],
       ),
@@ -65,7 +61,7 @@ class TrainerProfileView extends StatelessWidget {
                     ),
                     ProfilePicture(
                       imageUrl: tp.image ??
-                          baseURL + '/media/customer/photo/badge.png',
+                          baseURL + '/media/customer/photo/noimage.jpg',
                     ),
                     SizedBox(
                       height: 10.0,

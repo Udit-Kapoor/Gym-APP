@@ -48,8 +48,6 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   int _currentIndex = 0;
   List tabs;
 
-  
-
   @override
   Widget build(BuildContext context) {
     tabs = [
@@ -59,7 +57,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
       ClientsProfile(id: widget.id),
       ClientsGymSubscription(id: widget.id),
       CreateWorkout(id: widget.id),
-      ];
+    ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -95,12 +93,8 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                   return ListTile(
                     leading: CircleAvatar(
                       radius: 50.0,
-                      // child: Image.asset(
-                      //   'lib/assets/clients.png',
-                      //   fit: BoxFit.fill,
-                      // ),
                       backgroundImage: NetworkImage(baseURL + cp.photo ??
-                          '/media/customer/photo/badge.png'),
+                          '/media/customer/photo/noimage.jpg'),
                     ),
                     title: Text(
                       cp.firstName + ' ' + cp.lastName,
@@ -192,58 +186,15 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
 class ClientsDashboard extends StatelessWidget {
   final int id;
   ClientsDashboard({Key key, @required this.id}) : super(key: key);
-  final List _images = List.generate(
-      8,
-      (index) =>
-          'https://images.unsplash.com/photo-1559949557-7d0ac3e655f2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=770&q=80');
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       physics: BouncingScrollPhysics(),
       children: [
-      
         MyGoalTileTrainer(id: id),
         WeightChart(),
         ClientMyAttendance(id: id),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: Text(
-            'Transformation',
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 5.0,
-          children: [
-            for (var i = 0; i < 8; i++)
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.only(bottom: 5.0),
-                  height: 100,
-                  width: 100,
-                  child: Image.network(
-                    '${_images[i]}',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            Container(
-              height: 100,
-              width: 100,
-              child: IconButton(
-                icon: Icon(Icons.add_a_photo),
-                onPressed: () {},
-              ),
-            ),
-          ],
-        ),
       ],
     );
   }

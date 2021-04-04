@@ -24,6 +24,7 @@ class WorkoutIndex extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => MyTrainer()),
                 );
               },
+              //TODO: Add future builder
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[50],
