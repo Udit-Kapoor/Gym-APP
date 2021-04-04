@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/lib.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddToCartView extends StatefulWidget {
   final CafeteriaItems model;
@@ -19,21 +20,40 @@ class _AddToCartViewState extends State<AddToCartView> {
   int price;
   int bill;
   int idx;
+  SharedPreferences sp;
+  String s;
+  bool isCustomer;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton.extended(
           elevation: 5,
-          onPressed: () => {
+          onPressed: () async => {
             if (bill != null && price != null)
               {
                 addToCart({
                   "quantity": qty,
                   "item": widget.model.itemVarients[idx].id,
                 }),
+                sp = await SharedPreferences.getInstance(),
+                s = sp.get("USER_TYPE"),
+                if (s == "CUSTOMER")
+                  {
+                    isCustomer = true,
+                  }
+                else
+                  {
+                    isCustomer = false,
+                  },
+                // }
+
                 Timer(Duration(seconds: 1), () {
-                  Navigator.pushNamed(context, '/CafeteriaCart');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CafeCart(
+                      isCustomer: isCustomer,
+                    );
+                  }));
                 }),
               }
             else

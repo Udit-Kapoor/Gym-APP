@@ -11,8 +11,8 @@ class TeamPage extends StatefulWidget {
 
 class _TeamPageState extends State<TeamPage> {
   YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: YoutubePlayer.convertUrlToId(
-        "https://www.youtube.com/watch?v=o2vYBbYJ8as"),
+    initialVideoId:
+        YoutubePlayer.convertUrlToId("https://youtu.be/Y1bYgOmkqHk"),
     flags: YoutubePlayerFlags(
       autoPlay: false,
       mute: false,

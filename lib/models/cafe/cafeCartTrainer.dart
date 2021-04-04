@@ -39,7 +39,7 @@ class CafeteriaCartTrainer {
 
   int id;
   DateTime orderedDate;
-  dynamic paymentMethod;
+  String paymentMethod;
   int totalBill;
   dynamic name;
   dynamic phone;
@@ -64,7 +64,8 @@ class CafeteriaCartTrainer {
       CafeteriaCartTrainer(
         id: json["id"],
         orderedDate: DateTime.parse(json["ordered_date"]),
-        paymentMethod: json["payment_method"],
+        paymentMethod:
+            json["payment_method"] == null ? null : json["payment_method"],
         totalBill: json["total_bill"],
         name: json["name"],
         phone: json["phone"],
@@ -89,7 +90,7 @@ class CafeteriaCartTrainer {
   Map<String, dynamic> toJson() => {
         "id": id,
         "ordered_date": orderedDate.toIso8601String(),
-        "payment_method": paymentMethod,
+        "payment_method": paymentMethod == null ? null : paymentMethod,
         "total_bill": totalBill,
         "name": name,
         "phone": phone,
@@ -134,7 +135,7 @@ class Order {
   bool orderCancel;
   int price;
   DateTime createdAt;
-  dynamic customer;
+  Customer customer;
   Trainer trainer;
   OrderItem item;
   dynamic employee;
@@ -147,8 +148,11 @@ class Order {
         orderCancel: json["order_cancel"],
         price: json["price"],
         createdAt: DateTime.parse(json["created_at"]),
-        customer: json["customer"],
-        trainer: Trainer.fromJson(json["trainer"]),
+        customer: json["customer"] == null
+            ? null
+            : Customer.fromJson(json["customer"]),
+        trainer:
+            json["trainer"] == null ? null : Trainer.fromJson(json["trainer"]),
         item: OrderItem.fromJson(json["item"]),
         employee: json["employee"],
       );
@@ -161,10 +165,245 @@ class Order {
         "order_cancel": orderCancel,
         "price": price,
         "created_at": createdAt.toIso8601String(),
-        "customer": customer,
-        "trainer": trainer.toJson(),
+        "customer": customer == null ? null : customer.toJson(),
+        "trainer": trainer == null ? null : trainer.toJson(),
         "item": item.toJson(),
         "employee": employee,
+      };
+}
+
+class Customer {
+  Customer({
+    this.id,
+    this.firstName,
+    this.middleName,
+    this.lastName,
+    this.dateOfBirth,
+    this.gender,
+    this.phone,
+    this.alternatePhone,
+    this.email,
+    this.address1,
+    this.address2,
+    this.city,
+    this.state,
+    this.pincode,
+    this.photo,
+    this.idProof,
+    this.idProofImage,
+    this.idProofImage1,
+    this.active,
+    this.dateAdded,
+    this.user,
+    this.batchId,
+  });
+
+  int id;
+  String firstName;
+  dynamic middleName;
+  String lastName;
+  DateTime dateOfBirth;
+  String gender;
+  String phone;
+  dynamic alternatePhone;
+  String email;
+  String address1;
+  String address2;
+  String city;
+  String state;
+  int pincode;
+  String photo;
+  String idProof;
+  dynamic idProofImage;
+  dynamic idProofImage1;
+  bool active;
+  DateTime dateAdded;
+  User user;
+  BatchId batchId;
+
+  factory Customer.fromJson(Map<String, dynamic> json) => Customer(
+        id: json["id"],
+        firstName: json["first_name"],
+        middleName: json["middle_name"],
+        lastName: json["last_name"],
+        dateOfBirth: DateTime.parse(json["date_of_birth"]),
+        gender: json["gender"],
+        phone: json["phone"],
+        alternatePhone: json["alternate_phone"],
+        email: json["email"],
+        address1: json["address1"],
+        address2: json["address2"],
+        city: json["city"],
+        state: json["state"],
+        pincode: json["pincode"],
+        photo: json["photo"],
+        idProof: json["id_proof"],
+        idProofImage: json["id_proof_image"],
+        idProofImage1: json["id_proof_image1"],
+        active: json["active"],
+        dateAdded: DateTime.parse(json["date_added"]),
+        user: User.fromJson(json["user"]),
+        batchId: BatchId.fromJson(json["batch_id"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "first_name": firstName,
+        "middle_name": middleName,
+        "last_name": lastName,
+        "date_of_birth":
+            "${dateOfBirth.year.toString().padLeft(4, '0')}-${dateOfBirth.month.toString().padLeft(2, '0')}-${dateOfBirth.day.toString().padLeft(2, '0')}",
+        "gender": gender,
+        "phone": phone,
+        "alternate_phone": alternatePhone,
+        "email": email,
+        "address1": address1,
+        "address2": address2,
+        "city": city,
+        "state": state,
+        "pincode": pincode,
+        "photo": photo,
+        "id_proof": idProof,
+        "id_proof_image": idProofImage,
+        "id_proof_image1": idProofImage1,
+        "active": active,
+        "date_added":
+            "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
+        "user": user.toJson(),
+        "batch_id": batchId.toJson(),
+      };
+}
+
+class BatchId {
+  BatchId({
+    this.id,
+    this.batchName,
+    this.startdate,
+    this.batchTimeTo,
+    this.batchTimeFrom,
+    this.limit,
+    this.active,
+    this.trainer,
+    this.cust,
+  });
+
+  int id;
+  String batchName;
+  DateTime startdate;
+  String batchTimeTo;
+  String batchTimeFrom;
+  int limit;
+  bool active;
+  int trainer;
+  List<int> cust;
+
+  factory BatchId.fromJson(Map<String, dynamic> json) => BatchId(
+        id: json["id"],
+        batchName: json["batch_name"],
+        startdate: DateTime.parse(json["startdate"]),
+        batchTimeTo: json["batch_time_to"],
+        batchTimeFrom: json["batch_time_from"],
+        limit: json["limit"],
+        active: json["active"],
+        trainer: json["trainer"],
+        cust: List<int>.from(json["cust"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "batch_name": batchName,
+        "startdate":
+            "${startdate.year.toString().padLeft(4, '0')}-${startdate.month.toString().padLeft(2, '0')}-${startdate.day.toString().padLeft(2, '0')}",
+        "batch_time_to": batchTimeTo,
+        "batch_time_from": batchTimeFrom,
+        "limit": limit,
+        "active": active,
+        "trainer": trainer,
+        "cust": List<dynamic>.from(cust.map((x) => x)),
+      };
+}
+
+class User {
+  User({
+    this.id,
+    this.password,
+    this.lastLogin,
+    this.isSuperuser,
+    this.username,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.isStaff,
+    this.isActive,
+    this.dateJoined,
+    this.isAdmin,
+    this.isEmployee,
+    this.isTrainer,
+    this.isCustomer,
+    this.isWebuser,
+    this.groups,
+    this.userPermissions,
+  });
+
+  int id;
+  String password;
+  DateTime lastLogin;
+  bool isSuperuser;
+  String username;
+  String firstName;
+  String lastName;
+  String email;
+  bool isStaff;
+  bool isActive;
+  DateTime dateJoined;
+  bool isAdmin;
+  bool isEmployee;
+  bool isTrainer;
+  bool isCustomer;
+  bool isWebuser;
+  List<dynamic> groups;
+  List<int> userPermissions;
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        password: json["password"],
+        lastLogin: DateTime.parse(json["last_login"]),
+        isSuperuser: json["is_superuser"],
+        username: json["username"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        email: json["email"],
+        isStaff: json["is_staff"],
+        isActive: json["is_active"],
+        dateJoined: DateTime.parse(json["date_joined"]),
+        isAdmin: json["is_admin"],
+        isEmployee: json["is_employee"],
+        isTrainer: json["is_trainer"],
+        isCustomer: json["is_customer"],
+        isWebuser: json["is_webuser"],
+        groups: List<dynamic>.from(json["groups"].map((x) => x)),
+        userPermissions: List<int>.from(json["user_permissions"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "password": password,
+        "last_login": lastLogin.toIso8601String(),
+        "is_superuser": isSuperuser,
+        "username": username,
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "is_staff": isStaff,
+        "is_active": isActive,
+        "date_joined": dateJoined.toIso8601String(),
+        "is_admin": isAdmin,
+        "is_employee": isEmployee,
+        "is_trainer": isTrainer,
+        "is_customer": isCustomer,
+        "is_webuser": isWebuser,
+        "groups": List<dynamic>.from(groups.map((x) => x)),
+        "user_permissions": List<dynamic>.from(userPermissions.map((x) => x)),
       };
 }
 
@@ -293,7 +532,7 @@ class Trainer {
   String city;
   String state;
   int pincode;
-  dynamic image;
+  String image;
   String idProof;
   dynamic idProofImage;
   dynamic idProofImage1;
@@ -301,7 +540,7 @@ class Trainer {
   DateTime joiningDate;
   int salary;
   DateTime salaryDueDate;
-  dynamic releasingDate;
+  DateTime releasingDate;
   bool active;
   DateTime dateAdded;
   String tid;
@@ -330,7 +569,7 @@ class Trainer {
         joiningDate: DateTime.parse(json["joining_date"]),
         salary: json["salary"],
         salaryDueDate: DateTime.parse(json["salary_due_date"]),
-        releasingDate: json["releasing_date"],
+        releasingDate: DateTime.parse(json["releasing_date"]),
         active: json["active"],
         dateAdded: DateTime.parse(json["date_added"]),
         tid: json["tid"],
@@ -363,96 +602,12 @@ class Trainer {
         "salary": salary,
         "salary_due_date":
             "${salaryDueDate.year.toString().padLeft(4, '0')}-${salaryDueDate.month.toString().padLeft(2, '0')}-${salaryDueDate.day.toString().padLeft(2, '0')}",
-        "releasing_date": releasingDate,
+        "releasing_date":
+            "${releasingDate.year.toString().padLeft(4, '0')}-${releasingDate.month.toString().padLeft(2, '0')}-${releasingDate.day.toString().padLeft(2, '0')}",
         "active": active,
         "date_added":
             "${dateAdded.year.toString().padLeft(4, '0')}-${dateAdded.month.toString().padLeft(2, '0')}-${dateAdded.day.toString().padLeft(2, '0')}",
         "tid": tid,
         "user": user.toJson(),
-      };
-}
-
-class User {
-  User({
-    this.id,
-    this.password,
-    this.lastLogin,
-    this.isSuperuser,
-    this.username,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.isStaff,
-    this.isActive,
-    this.dateJoined,
-    this.isAdmin,
-    this.isEmployee,
-    this.isTrainer,
-    this.isCustomer,
-    this.isWebuser,
-    this.groups,
-    this.userPermissions,
-  });
-
-  int id;
-  String password;
-  DateTime lastLogin;
-  bool isSuperuser;
-  String username;
-  String firstName;
-  String lastName;
-  String email;
-  bool isStaff;
-  bool isActive;
-  DateTime dateJoined;
-  bool isAdmin;
-  bool isEmployee;
-  bool isTrainer;
-  bool isCustomer;
-  bool isWebuser;
-  List<dynamic> groups;
-  List<dynamic> userPermissions;
-
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        password: json["password"],
-        lastLogin: DateTime.parse(json["last_login"]),
-        isSuperuser: json["is_superuser"],
-        username: json["username"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        email: json["email"],
-        isStaff: json["is_staff"],
-        isActive: json["is_active"],
-        dateJoined: DateTime.parse(json["date_joined"]),
-        isAdmin: json["is_admin"],
-        isEmployee: json["is_employee"],
-        isTrainer: json["is_trainer"],
-        isCustomer: json["is_customer"],
-        isWebuser: json["is_webuser"],
-        groups: List<dynamic>.from(json["groups"].map((x) => x)),
-        userPermissions:
-            List<dynamic>.from(json["user_permissions"].map((x) => x)),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "password": password,
-        "last_login": lastLogin.toIso8601String(),
-        "is_superuser": isSuperuser,
-        "username": username,
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": email,
-        "is_staff": isStaff,
-        "is_active": isActive,
-        "date_joined": dateJoined.toIso8601String(),
-        "is_admin": isAdmin,
-        "is_employee": isEmployee,
-        "is_trainer": isTrainer,
-        "is_customer": isCustomer,
-        "is_webuser": isWebuser,
-        "groups": List<dynamic>.from(groups.map((x) => x)),
-        "user_permissions": List<dynamic>.from(userPermissions.map((x) => x)),
       };
 }

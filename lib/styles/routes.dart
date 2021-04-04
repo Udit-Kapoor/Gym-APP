@@ -11,5 +11,5 @@ Map<String, Widget Function(BuildContext)> routesMap() => {
       '/CafeteriaView': (context) => CafeteriaView(),
       '/SupplementView': (context) => SupplementView(),
       '/DietView': (context) => DietSubscription(),
-      '/CafeteriaCart': (context) => CafeCart(),
+      // '/CafeteriaCart': (context) => CafeCart(),
     };

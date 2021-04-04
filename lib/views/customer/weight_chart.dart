@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
-
-
 class WeightChart extends StatefulWidget {
   @override
   _WeightChartState createState() => _WeightChartState();
 }
 
 class _WeightChartState extends State<WeightChart> {
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -29,18 +26,15 @@ class _WeightChartState extends State<WeightChart> {
                     ),
               ),
             ),
-           
-charts.TimeSeriesChart(
-
-
-),
+            //ToDo:Fix
+            // charts.TimeSeriesChart(),
 
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child:  ChartIndicaters(
-                    dotColor: Color.fromRGBO(166, 206, 227, 1),
-                    label: 'This Month',
-                  ),
+              child: ChartIndicaters(
+                dotColor: Color.fromRGBO(166, 206, 227, 1),
+                label: 'This Month',
+              ),
             ),
           ],
         ),
@@ -75,9 +69,6 @@ class ChartIndicaters extends StatelessWidget {
   }
 }
 
-
-
-
 // class WeightData {
-//   final 
+//   final
 // }
