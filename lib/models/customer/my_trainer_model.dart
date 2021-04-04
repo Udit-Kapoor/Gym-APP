@@ -1,11 +1,9 @@
-// To parse this JSON data, do
+import 'package:gym_app/apis/api_helper.dart';
+import 'package:gym_app/apis/api_response.dart';// To parse this JSON data, do
 //
 //     final myTrainerModel = myTrainerModelFromJson(jsonString);
 
 import 'dart:convert';
-
-import 'package:gym_app/apis/api_helper.dart';
-import 'package:gym_app/apis/api_response.dart';
 
 MyTrainerModel myTrainerModelFromJson(String str) => MyTrainerModel.fromJson(json.decode(str));
 
@@ -15,6 +13,7 @@ class MyTrainerModel {
     MyTrainerModel({
         this.firstName,
         this.lastName,
+        this.image,
         this.dob,
         this.gender,
         this.address1,
@@ -24,6 +23,7 @@ class MyTrainerModel {
 
     String firstName;
     String lastName;
+    String image;
     DateTime dob;
     String gender;
     String address1;
@@ -33,6 +33,7 @@ class MyTrainerModel {
     factory MyTrainerModel.fromJson(Map<String, dynamic> json) => MyTrainerModel(
         firstName: json["first_Name"],
         lastName: json["last_Name"],
+        image: json["image"],
         dob: DateTime.parse(json["DOB"]),
         gender: json["gender"],
         address1: json["Address1"],
@@ -43,6 +44,7 @@ class MyTrainerModel {
     Map<String, dynamic> toJson() => {
         "first_Name": firstName,
         "last_Name": lastName,
+        "image": image,
         "DOB": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
         "gender": gender,
         "Address1": address1,
@@ -50,6 +52,7 @@ class MyTrainerModel {
         "phone": phone,
     };
 }
+
 
 
 Future<ApiResponse> myTrainer() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
+import 'package:gym_app/models/customer/my_trainer_model.dart';
 import 'package:gym_app/models/customer/workout_plan_name.dart';
 import 'package:gym_app/views/customer/workout/exercise_page.dart';
 import 'package:gym_app/views/customer/my_trainer.dart';
@@ -30,51 +31,58 @@ class WorkoutIndex extends StatelessWidget {
                   color: Colors.grey[50],
                   borderRadius: BorderRadius.circular(50.0),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        radius: 30.0,
-                        child: Image.asset(
-                          //TODO: add trainers profile image
-
-                          'lib/assets/profile.png',
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
+                child: FutureBuilder(
+                  future: myTrainer(),
+                  builder: (c, s) {
+                    if (s.connectionState == ConnectionState.waiting)
+                      return LinearProgressIndicator();
+                    else if (s.connectionState == ConnectionState.done) {
+                      var mt = myTrainerModelFromJson(s.data.data);
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          TextSpan(
-                            text: trainersName,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(color: Colors.black),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                                radius: 30.0,
+                                backgroundImage: NetworkImage(
+                                  baseURL + mt.image ??
+                                      '/media/customer/photo/noimage.jpg',
+                                )),
                           ),
-                          TextSpan(
-                            text: '(My Trainer)',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline6
-                                .copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: mt.firstName,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(color: Colors.black),
+                                ),
+                                TextSpan(
+                                  text: '(My Trainer)',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                    ),
-                  ],
+                      );
+                    }
+                    return Center(child: Text('Oops no data found'));
+                  },
                 ),
               ),
             ),
           ),
           Expanded(
             child: FutureBuilder(
-                
                 future: workoutPlanFoo(),
                 builder: (c, s) {
                   var widget;

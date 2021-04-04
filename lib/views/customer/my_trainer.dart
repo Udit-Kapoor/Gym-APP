@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/apis/apis.dart';
 import 'package:gym_app/models/customer/my_trainer_model.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -84,7 +85,10 @@ class MyTrainer extends StatelessWidget {
                             padding: EdgeInsets.only(left: 20.0),
                             child: CircleAvatar(
                               radius: 40.0,
-                              child: Image.asset('lib/assets/profile.png'),
+                              backgroundImage: NetworkImage(
+                                baseURL + mt.image ??
+                                    '/media/customer/photo/noimage.jpg',
+                              ),
                             ),
                           ),
                           Expanded(
@@ -121,8 +125,6 @@ class MyTrainer extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 20.0, right: 20.0, top: 5.0, bottom: 15.0),
-                       
-
                         child: SmoothStarRating(
                           isReadOnly: true,
                           rating: mt.averageRating.toDouble(),
