@@ -148,7 +148,7 @@ class ApiHelper {
       );
       return postReq.statusCode >= 200 && postReq.statusCode <= 205
           ? ApiResponse(data: postReq.body)
-          : ApiResponse(error: true);
+          : ApiResponse(error: true, errorMessage:  postReq.statusCode.toString() + '\n'+ postReq.body);
     } on SocketException {
       return ApiResponse(error: true, errorMessage: "NO INTERNET");
     } on HttpException {

@@ -5,18 +5,19 @@ import 'package:gym_app/models/customer/workout_plan_name.dart';
 
 import 'create_workout_plan.dart';
 
-
-
 class CreateWorkout extends StatefulWidget {
   final int id;
-  const CreateWorkout({Key key, @required this.id}) : super(key: key);
+  final String kuchBhi;
+
+  const CreateWorkout({Key key, @required this.id, this.kuchBhi})
+      : super(key: key);
 
   @override
   _CreateWorkoutState createState() => _CreateWorkoutState();
 }
 
 class _CreateWorkoutState extends State<CreateWorkout> {
-DateTime selectedDate;
+  DateTime selectedDate;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,10 +35,19 @@ DateTime selectedDate;
                   firstDate: tDate,
                   lastDate: DateTime(tDate.year + 20),
                 );
-                Fluttertoast.showToast(msg: "Creating");
+                if (selectedDate != null) {
+                  Fluttertoast.showToast(msg: "Creating");
 
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>CreateWorkoutPlan(dateTime: selectedDate)));
-              } on NoSuchMethodError {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => CreateWorkoutPlan(
+                                setState: () => setState(() {}),
+                                dateTime: selectedDate,
+                                id: widget.id,
+                              )));
+                }
+              } on NoSuchMethodError catch (e) {
                 Fluttertoast.showToast(msg: "No Date Selected");
               } catch (e) {
                 return e;

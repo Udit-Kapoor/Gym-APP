@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/models/customer/workout_plan_name.dart';
+import 'package:gym_app/models/trainer/create_new_workout_model.dart';
 import 'package:gym_app/models/trainer/workout_plan_list_model.dart';
 import 'package:intl/intl.dart';
 
@@ -7,13 +9,19 @@ import 'add_custom_workout.dart';
 
 class CreateWorkoutPlan extends StatelessWidget {
   final DateTime dateTime;
+  final int id;
 
-  const CreateWorkoutPlan({Key key, @required this.dateTime}) : super(key: key);
+  final Function setState;
 
+  CreateWorkoutPlan(
+      {Key key, @required this.dateTime, @required this.id, this.setState})
+      : super(key: key);
+
+  final TextEditingController workoutNameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var dateSplit = DateFormat.MMMd().format(dateTime).split(' ');
-
+    List<int> selectedWorkout = [];
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -85,6 +93,10 @@ class CreateWorkoutPlan extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 else if (s.connectionState == ConnectionState.done) {
                   var cp = workoutsPlanListModelFromJson(s.data.data);
+
+                  List<Map<int, bool>> idBool = List.generate(
+                      cp.length, (index) => {cp[index].id: false});
+
                   return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: cp.length,
@@ -95,19 +107,34 @@ class CreateWorkoutPlan extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: CheckboxListTile(
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            title: Text(
-                              cp[i].name,
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            subtitle: Text(
-                              cp[i].muscle,
-                              style: Theme.of(context).textTheme.bodyText2,
-                            ),
-                            value: false,
-                            onChanged: (value) {},
-                          ),
+                          child: StatefulBuilder(builder:
+                              (BuildContext context, StateSetter setState) {
+                            return CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              title: Text(
+                                cp[i].name,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              subtitle: Text(
+                                cp[i].muscle,
+                                style: Theme.of(context).textTheme.bodyText2,
+                              ),
+                              value: idBool[i][cp[i].id],
+                              onChanged: (value) {
+                                setState(() {
+                                  idBool[i][cp[i].id] = value;
+                                });
+                                // isChecked = !isChecked;
+                                if (value) {
+                                  selectedWorkout.add(cp[i].id);
+                                } else {
+                                  if (selectedWorkout.contains(cp[i].id)) {
+                                    selectedWorkout.remove(cp[i].id);
+                                  }
+                                }
+                              },
+                            );
+                          }),
                         );
                       });
                 }
@@ -149,12 +176,13 @@ class CreateWorkoutPlan extends StatelessWidget {
                     color: Colors.red,
                     onPressed: () => showDialog(
                       context: (context),
-                      builder: (context) => AlertDialog(
+                      builder: (_) => AlertDialog(
                         title: Text(
                           'Workout Name',
                           style: Theme.of(context).textTheme.headline6,
                         ),
                         content: TextField(
+                          controller: workoutNameController,
                           decoration: InputDecoration(
                             hintText: "name",
                           ),
@@ -162,7 +190,22 @@ class CreateWorkoutPlan extends StatelessWidget {
                         actions: [
                           FlatButton(
                             color: Colors.red,
-                            onPressed: () {},
+                            onPressed: () {
+                              if (workoutNameController.text.isNotEmpty) {
+                                createNewWorkout(
+                                    dateTime: dateTime,
+                                    wId: selectedWorkout,
+                                    name: workoutNameController.text.trim(),
+                                    id: id);
+
+                                Future.delayed(Duration(seconds: 1));
+                                Navigator.pop(_);
+                                Navigator.pop(context);
+                                setState();
+                                // Navigator.pus
+                              } else
+                                Fluttertoast.showToast(msg: 'No name found');
+                            },
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20.0, vertical: 10.0),
                             shape: RoundedRectangleBorder(
