@@ -8,7 +8,6 @@ import 'package:gym_app/apis/api_response.dart';
 //
 //     final cafeteriaItems = cafeteriaItemsFromJson(jsonString);
 
-
 List<CafeteriaItems> cafeteriaItemsFromJson(String str) =>
     List<CafeteriaItems>.from(
         json.decode(str).map((x) => CafeteriaItems.fromJson(x)));
@@ -128,7 +127,7 @@ Future<ApiResponse> getCafeItems(String query) async {
   return cp;
 }
 
-void addToCart(Map data) async {
+Future<bool> addToCart(Map data) async {
   ApiResponse add = await ApiHelper().postReq(
       endpoint: "https://api.health2offer.com/facilities/cafeteria_order/",
       data: data);
@@ -138,4 +137,5 @@ void addToCart(Map data) async {
   } else {
     Fluttertoast.showToast(msg: "Item added to Cart");
   }
+  return add.error;
 }

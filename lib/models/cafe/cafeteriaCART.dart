@@ -512,5 +512,5 @@ Future<bool> placeOrder(Map data) async {
   } else {
     Fluttertoast.showToast(msg: "Order Placed");
   }
-  return Future<bool>.value(cp.error);
+  return cp.error;
 }

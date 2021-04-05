@@ -137,9 +137,7 @@ class _CafeCartState extends State<CafeCart> {
                           "Tax",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text((model[0].totalBill - model[0].totalCost)
-                                .toString() +
-                            " Rs"),
+                        Text(model[0].tax.toString() + " Rs"),
                       ],
                     ),
                   ),
@@ -406,30 +404,34 @@ class _CafeCartState extends State<CafeCart> {
 
   @override
   Widget build(BuildContext context) {
+    bool b;
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
           elevation: 5,
-          onPressed: () => {
+          onPressed: () async => {
             //ToDo: TEST ORDER PLACING
             if (widget.isCustomer)
               {
-                placeOrder({
+                b = await placeOrder({
                   "customer": localModel1.order[0].customer.id,
                   "cart": localModel1.id
                 }),
               }
             else
               {
-                placeOrder({
+                b = await placeOrder({
                   "trainer": localModel.order[0].trainer.id,
                   "cart": localModel.id
                 }),
               },
-            Timer(Duration(seconds: 1), () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return CafeOrderPlacedView();
-              }));
-            }),
+            if (!b)
+              {
+                Timer(Duration(seconds: 1), () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CafeOrderPlacedView();
+                  }));
+                }),
+              }
           },
           label: Container(
             height: 50,

@@ -297,7 +297,7 @@ void updateSupplementCartItem(Map data) async {
   }
 }
 
-void placeSupplementCart(Map data) async {
+Future<bool> placeSupplementCart(Map data) async {
   ApiResponse cp = await ApiHelper().postReq(
     endpoint: "https://api.health2offer.com/website/confirmpayment/",
     data: data,
@@ -307,4 +307,5 @@ void placeSupplementCart(Map data) async {
   } else {
     Fluttertoast.showToast(msg: "Order Placed");
   }
+  return cp.error;
 }

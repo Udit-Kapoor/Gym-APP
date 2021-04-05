@@ -23,6 +23,7 @@ class _AddToCartViewState extends State<AddToCartView> {
   SharedPreferences sp;
   String s;
   bool isCustomer;
+  bool b;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,29 +33,33 @@ class _AddToCartViewState extends State<AddToCartView> {
           onPressed: () async => {
             if (bill != null && price != null)
               {
-                addToCart({
+                b = await addToCart({
                   "quantity": qty,
                   "item": widget.model.itemVarients[idx].id,
                 }),
-                sp = await SharedPreferences.getInstance(),
-                s = sp.get("USER_TYPE"),
-                if (s == "CUSTOMER")
+                if (!b)
                   {
-                    isCustomer = true,
-                  }
-                else
-                  {
-                    isCustomer = false,
-                  },
-                // }
+                    sp = await SharedPreferences.getInstance(),
+                    s = sp.get("USER_TYPE"),
+                    if (s == "CUSTOMER")
+                      {
+                        isCustomer = true,
+                      }
+                    else
+                      {
+                        isCustomer = false,
+                      },
+                    // }
 
-                Timer(Duration(seconds: 1), () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CafeCart(
-                      isCustomer: isCustomer,
-                    );
-                  }));
-                }),
+                    Timer(Duration(seconds: 1), () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return CafeCart(
+                          isCustomer: isCustomer,
+                        );
+                      }));
+                    }),
+                  }
               }
             else
               {

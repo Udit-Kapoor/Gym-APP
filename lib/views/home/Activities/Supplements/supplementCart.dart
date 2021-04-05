@@ -13,6 +13,7 @@ class SupplementCart extends StatefulWidget {
 
 class _SupplementCartState extends State<SupplementCart> {
   SupplementCartModel local;
+  bool b;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,23 +34,29 @@ class _SupplementCartState extends State<SupplementCart> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         //ToDo: Works only for Customer
-        onPressed: () => {
+        onPressed: () async => {
           if (local.item == null)
             {
               Fluttertoast.showToast(msg: "Nothing in the Cart"),
             }
           else
             {
-              placeSupplementCart({"MOP": "app", "mode": "Pay at Gym"}),
+              b = await placeSupplementCart(
+                  {"MOP": "app", "mode": "Pay at Gym"}),
               //ToDo: Add if else of error
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SupplementOrderPlacedView(
-                    orderId: local.orderid,
+              if (b)
+                {}
+              else
+                {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SupplementOrderPlacedView(
+                        orderId: local.orderid,
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                }
             }
         },
         label: Container(

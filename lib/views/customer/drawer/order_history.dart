@@ -26,6 +26,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = cafeteriaPastOderFromJson(s.data.data);
+            model = List.from(model.reversed);
             print(model);
             return Expanded(
               child: ListView.builder(
@@ -56,6 +57,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = pastSupplementOrderFromJson(s.data.data);
+            model = List.from(model.reversed);
             print(model);
             return Expanded(
               //TODO: Add future builder
@@ -86,6 +88,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = pastTrainerOrderFromJson(s.data.data);
+            model = List.from(model.reversed);
             print(model);
             return Expanded(
               //TODO: Add future builder
