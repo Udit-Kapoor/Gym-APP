@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/pastOrder/PastCafeteriaOrder.dart';
+import 'package:gym_app/models/pastOrder/PastCafeteriaOrderTrainer.dart';
 import 'package:gym_app/models/pastOrder/PastSupplementOrder.dart';
 import 'package:gym_app/models/pastOrder/PastTrainerOrder.dart';
 import 'package:gym_app/views/customer/drawer/OrderHistoryCafeTile.dart';
 import 'package:gym_app/views/customer/drawer/OrderHistoryTrainerTile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'OrderHistorySupplementTile.dart';
 
 class OrderHistory extends StatefulWidget {
+  const OrderHistory({this.isCustomer});
+  final bool isCustomer;
   @override
   _OrderHistoryState createState() => _OrderHistoryState();
 }
@@ -17,36 +21,71 @@ class _OrderHistoryState extends State<OrderHistory> {
 
   Widget showDynamicBody(int idx) {
     if (idx == 0) {
-      return FutureBuilder(
-        future: getPastCafeOrder(),
-        builder: (c, s) {
-          if (s.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (s.hasData && s.connectionState == ConnectionState.done) {
-            var model = cafeteriaPastOderFromJson(s.data.data);
-            model = List.from(model.reversed);
-            print(model);
-            return Expanded(
-              child: ListView.builder(
-                  itemCount: model.length,
-                  itemBuilder: (c, i) {
-                    return OrderHistoryCafeTile(
-                        imgPath: model[i].cart.order[0].item.item.photo,
-                        name: model[i].cart.order[0].item.item.name.toString(),
-                        orderDate: model[i].cart.order[0].createdAt,
-                        quantity: model[i].cart.order[0].quantity.toString(),
-                        price: (model[i].cart.order[0].price *
-                                model[i].cart.order[0].quantity)
-                            .toString());
-                  }),
-            );
-          } else {
-            return Text("No data found");
-          }
-        },
-      );
+      if (widget.isCustomer) {
+        return FutureBuilder(
+          future: getPastCafeOrder(),
+          builder: (c, s) {
+            if (s.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (s.hasData && s.connectionState == ConnectionState.done) {
+              var model = cafeteriaPastOderFromJson(s.data.data);
+              model = List.from(model.reversed);
+              print(model);
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: model.length,
+                    itemBuilder: (c, i) {
+                      return OrderHistoryCafeTile(
+                          imgPath: model[i].cart.order[0].item.item.photo,
+                          name:
+                              model[i].cart.order[0].item.item.name.toString(),
+                          orderDate: model[i].cart.order[0].createdAt,
+                          quantity: model[i].cart.order[0].quantity.toString(),
+                          price: (model[i].cart.order[0].price *
+                                  model[i].cart.order[0].quantity)
+                              .toString());
+                    }),
+              );
+            } else {
+              return Text("No data found");
+            }
+          },
+        );
+      } else {
+        return FutureBuilder(
+          future: getPastCafeOrder(),
+          builder: (c, s) {
+            if (s.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (s.hasData && s.connectionState == ConnectionState.done) {
+              var model = cafeteriaPastOrderTrainerFromJson(s.data.data);
+              model = List.from(model.reversed);
+              print(model);
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: model.length,
+                    itemBuilder: (c, i) {
+                      return OrderHistoryCafeTile(
+                          imgPath: model[i].cart.order[0].item.item.photo,
+                          name:
+                              model[i].cart.order[0].item.item.name.toString(),
+                          orderDate: model[i].cart.order[0].createdAt,
+                          quantity: model[i].cart.order[0].quantity.toString(),
+                          price: (model[i].cart.order[0].price *
+                                  model[i].cart.order[0].quantity)
+                              .toString());
+                    }),
+              );
+            } else {
+              return Text("No data found");
+            }
+          },
+        );
+      }
     } else if (idx == 1) {
       return FutureBuilder(
         future: getPastSupplementOrder(),

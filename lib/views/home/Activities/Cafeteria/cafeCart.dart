@@ -221,7 +221,8 @@ class _CafeCartState extends State<CafeCart> {
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = cafeteriaCartFromJson(s.data.data);
             print(model);
-            if (model[0].active) {
+
+            if (model.length != 0 && model[0].active) {
               localModel1 = model[0];
               return Column(
                 children: [

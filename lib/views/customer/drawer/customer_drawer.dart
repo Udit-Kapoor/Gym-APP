@@ -86,7 +86,10 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrderHistory()),
+                  MaterialPageRoute(
+                      builder: (context) => OrderHistory(
+                            isCustomer: true,
+                          )),
                 );
               }),
           DrawerTextList(

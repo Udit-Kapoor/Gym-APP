@@ -77,7 +77,10 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OrderHistory()),
+                  MaterialPageRoute(
+                      builder: (context) => OrderHistory(
+                            isCustomer: false,
+                          )),
                 );
               }),
           DrawerTextList(
