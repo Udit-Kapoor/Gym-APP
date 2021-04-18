@@ -69,7 +69,7 @@ Future<ApiResponse> customerTrainerBmi(int id) async {
   return cp;
 }
 
-Future<ApiResponse> postWeight(int id, double weight) async {
+Future<ApiResponse> postWeight(int id, String weight) async {
   ApiResponse cp = await ApiHelper().postReq(
       endpoint: "https://api.health2offer.com/customer/weightgraph/",
       data: {
