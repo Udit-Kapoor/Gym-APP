@@ -23,7 +23,7 @@ class WeightGraphModel {
 
   int id;
   DateTime date;
-  int weight;
+  double weight;
   int customer;
 
   factory WeightGraphModel.fromJson(Map<String, dynamic> json) =>

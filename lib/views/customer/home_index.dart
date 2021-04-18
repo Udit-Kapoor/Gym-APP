@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gym_app/models/weight_graph_model.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -34,7 +35,15 @@ class _HomeIndexState extends State<HomeIndex>
         children: [
           TodaysWorkoutTile(),
           MyGoalTile(),
-          WeightChart(),
+          FutureBuilder(
+              future: customerWeightGraph(),
+              builder: (context, s) {
+                if (s.connectionState == ConnectionState.done)
+                  return WeightChart(res: s.data);
+                else if (s.connectionState == ConnectionState.waiting)
+                  return LinearProgressIndicator();
+                return Container();
+              }),
           SizedBox(height: 20.0),
           MyAttendance(),
           Padding(

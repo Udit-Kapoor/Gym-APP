@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/lib.dart';
 import 'package:gym_app/models/trainer/clients_profile_model.dart';
+import 'package:gym_app/models/weight_graph_model.dart';
 import 'package:gym_app/views/trainer/Detail%20View/clients_gym_sub.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -193,7 +194,15 @@ class ClientsDashboard extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       children: [
         MyGoalTileTrainer(id: id),
-        WeightChart(),
+        FutureBuilder(
+            future: trainerWeightGraph(id),
+            builder: (context, s) {
+              if (s.connectionState == ConnectionState.done)
+                return WeightChart(res: s.data);
+              else if (s.connectionState == ConnectionState.waiting)
+                return LinearProgressIndicator();
+              return Container();
+            }),
         ClientMyAttendance(id: id),
       ],
     );
