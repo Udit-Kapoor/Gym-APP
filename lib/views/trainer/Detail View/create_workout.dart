@@ -47,7 +47,7 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                                 id: widget.id,
                               )));
                 }
-              } on NoSuchMethodError catch (e) {
+              } on NoSuchMethodError  {
                 Fluttertoast.showToast(msg: "No Date Selected");
               } catch (e) {
                 return e;

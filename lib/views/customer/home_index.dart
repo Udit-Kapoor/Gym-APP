@@ -26,6 +26,9 @@ class _HomeIndexState extends State<HomeIndex>
 
     return Expanded(
       child: ListView(
+        // addAutomaticKeepAlives: false,
+        cacheExtent: 999,
+
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: [

@@ -4,11 +4,13 @@ import 'package:gym_app/models/customer/customer_bmi_model.dart';
 class MyGoalTileTrainer extends StatelessWidget {
   final int id;
   const MyGoalTileTrainer({
-    Key key,@required this.id,
+    Key key,
+    @required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isEnabled = false;
     return FutureBuilder(
         future: customerTrainerBmi(id),
         builder: (c, s) {
@@ -49,11 +51,62 @@ class MyGoalTileTrainer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       //crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        MyGoalElement(
-                          // top: 'overweight',
-                          mid: '${ca.weight.toStringAsFixed(1)} kg',
-                          bottom: 'Current Weight',
-                        ),
+                        StatefulBuilder(
+                            builder: (context, StateSetter setState) {
+                          if (isEnabled) {
+                            return  TextField(
+                  // controller: _topicController,
+                  // style: Theme.of(context)
+                  //     .textTheme
+                  //     .headline5
+                  //     .copyWith(color: Colors.black),
+                  decoration: InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    //   borderSide: BorderSide(
+                    //     color: Colors.black,
+                    //     width: 2.0,
+                    //   ),
+                    // ),
+                   hintText: 'weight'
+                  
+                  ),
+                );
+                          } else {
+                            return InkWell(
+                              onTap: () {
+                                isEnabled = true;
+                              },
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          '\n${ca.weight.toStringAsFixed(1)} kg',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    TextSpan(
+                                      text: '\nCurrent Weight',
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+                        }),
+
+                        // MyGoalElement(
+                        //   // top: 'overweight',
+                        //   mid: '${ca.weight.toStringAsFixed(1)} kg',
+                        //   bottom: 'Current Weight',
+                        // ),
                         Container(
                           width: 1,
                           height: 50,

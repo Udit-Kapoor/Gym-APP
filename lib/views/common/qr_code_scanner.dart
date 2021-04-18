@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/apis.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -54,6 +54,12 @@ class _QRCodeScanState extends State<QRCodeScan> {
                     print(res.data);
                     print(res.error);
                     print(res.errorMessage);
+                    if (res.error) {
+                      Fluttertoast.showToast(msg: 'Not Marked');
+                    } else {
+                      Fluttertoast.showToast(msg: 'Marked Present');
+                    }
+
                     // controller.dispose();
                     Navigator.of(context, rootNavigator: true).pop();
                   });
