@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/apis.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
@@ -155,6 +156,23 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                   ),
                 ),
               ),
+            if (_method == ChoiceMethod.feedback)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                child: SmoothStarRating(
+                  allowHalfRating: false,
+                  onRated: (double v) {
+                    rating = v.toInt();
+                  },
+                  starCount: 5,
+                  rating: 2,
+                  size: 40.0,
+                  isReadOnly: false,
+                  color: Colors.amber,
+                  borderColor: Colors.yellow,
+                  spacing: 0.0,
+                ),
+              ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: TextField(
@@ -186,28 +204,11 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                 ),
               ),
             ),
-            if (_method == ChoiceMethod.feedback)
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: SmoothStarRating(
-                  allowHalfRating: false,
-                  onRated: (double v) {
-                    rating = v.toInt();
-                  },
-                  starCount: 5,
-                  rating: 2,
-                  size: 40.0,
-                  isReadOnly: false,
-                  color: Colors.amber,
-                  borderColor: Colors.yellow,
-                  spacing: 0.0,
-                ),
-              ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: FlatButton(
                 onPressed: () async {
-                  await ApiHelper().postReq(
+                  ApiResponse res = await ApiHelper().postReq(
                     endpoint: _method == ChoiceMethod.complaint
                         ? 'https://api.health2offer.com/customer/complaint/'
                         : 'https://api.health2offer.com/customer/feedback/',
@@ -216,12 +217,17 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                       "topic": _method == ChoiceMethod.complaint
                           ? _topicController.text
                           : _dropDownValue,
-                      "complaint": _decriptionController.text,
-                      "rating": rating,
+                      "complaint": _decriptionController.text.trim(),
+                      "rating": rating.toString(),
                       "source": 'App',
                       "user": await ApiHelper().getUserObjectID(),
                     },
                   );
+                  if (res.error) {
+                    Fluttertoast.showToast(msg: 'Something went wrong...');
+                  } else {
+                    Fluttertoast.showToast(msg: 'Success');
+                  }
                 },
                 padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
                 shape: RoundedRectangleBorder(
