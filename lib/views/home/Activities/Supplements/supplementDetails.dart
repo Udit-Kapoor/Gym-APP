@@ -124,7 +124,6 @@ class _SupplementDetailsState extends State<SupplementDetails> {
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = supplementSlugFromJson(s.data.data);
-            print(model);
             return Column(
               children: [
                 Expanded(

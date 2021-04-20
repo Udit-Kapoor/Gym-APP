@@ -210,7 +210,6 @@ class _AddToCartViewState extends State<AddToCartView> {
                             price = widget.model.itemVarients[i].price;
                             bill = price * qty;
                             idx = i;
-                            print(size);
                           }),
                         },
                         child: Container(

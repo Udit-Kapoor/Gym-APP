@@ -42,7 +42,7 @@ class _OrderHistorySupplementDetailsState
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = supplementPastOrderDetailFromJson(s.data.data);
-            print(model);
+
             return Column(
               children: [
                 Expanded(

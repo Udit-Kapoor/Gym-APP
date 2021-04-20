@@ -165,7 +165,7 @@ class _SupplementViewState extends State<SupplementView> {
               } else if (s.hasData &&
                   s.connectionState == ConnectionState.done) {
                 var model = s.data;
-                print(model);
+
                 return Expanded(
                   child: ListView.builder(
                       // shrinkWrap: true,

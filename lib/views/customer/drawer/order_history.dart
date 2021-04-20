@@ -31,7 +31,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             } else if (s.hasData && s.connectionState == ConnectionState.done) {
               var model = cafeteriaPastOderFromJson(s.data.data);
               model = List.from(model.reversed);
-              print(model);
+
               return Expanded(
                 child: ListView.builder(
                     itemCount: model.length,
@@ -63,7 +63,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             } else if (s.hasData && s.connectionState == ConnectionState.done) {
               var model = cafeteriaPastOrderTrainerFromJson(s.data.data);
               model = List.from(model.reversed);
-              print(model);
+
               return Expanded(
                 child: ListView.builder(
                     itemCount: model.length,
@@ -96,9 +96,7 @@ class _OrderHistoryState extends State<OrderHistory> {
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = pastSupplementOrderFromJson(s.data.data);
             model = List.from(model.reversed);
-            print(model);
             return Expanded(
-              //TODO: Add future builder
               child: ListView.builder(
                   itemCount: model.length,
                   itemBuilder: (c, i) {
@@ -117,36 +115,38 @@ class _OrderHistoryState extends State<OrderHistory> {
         },
       );
     } else if (idx == 2) {
-      return FutureBuilder(
-        future: getPastTrainerOrder(),
-        builder: (c, s) {
-          if (s.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (s.hasData && s.connectionState == ConnectionState.done) {
-            var model = pastTrainerOrderFromJson(s.data.data);
-            model = List.from(model.reversed);
-            print(model);
-            return Expanded(
-              //TODO: Add future builder
-              child: ListView.builder(
-                  itemCount: model.length,
-                  itemBuilder: (c, i) {
-                    return OrderHistoryTrainerTile(
-                        imgPath: "",
-                        name: model[i].slot.trainer.firstName +
-                            model[i].slot.trainer.lastName,
-                        startDate: model[i].startDate,
-                        endDate: model[i].endDate,
-                        price: model[i].amount.toString());
-                  }),
-            );
-          } else {
-            return Text("No data found");
-          }
-        },
-      );
+      if (widget.isCustomer) {
+        return FutureBuilder(
+          future: getPastTrainerOrder(),
+          builder: (c, s) {
+            if (s.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (s.hasData && s.connectionState == ConnectionState.done) {
+              var model = pastTrainerOrderFromJson(s.data.data);
+              model = List.from(model.reversed);
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: model.length,
+                    itemBuilder: (c, i) {
+                      return OrderHistoryTrainerTile(
+                          imgPath: "",
+                          name: model[i].slot.trainer.firstName +
+                              model[i].slot.trainer.lastName,
+                          startDate: model[i].startDate,
+                          endDate: model[i].endDate,
+                          price: model[i].amount.toString());
+                    }),
+              );
+            } else {
+              return Text("No data found");
+            }
+          },
+        );
+      } else {
+        return Text("This Area is For Customers Only");
+      }
     } else {
       return Text("No data Found");
     }
@@ -167,7 +167,6 @@ class _OrderHistoryState extends State<OrderHistory> {
             ),
             Container(
               height: 50,
-              //TODO: Add a function which changes future builder
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [

@@ -43,7 +43,6 @@ class _SupplementCartState extends State<SupplementCart> {
             {
               b = await placeSupplementCart(
                   {"MOP": "app", "mode": "Pay at Gym"}),
-              //ToDo: Add if else of error
               if (b)
                 {}
               else
@@ -89,7 +88,6 @@ class _SupplementCartState extends State<SupplementCart> {
               var model = supplementCartModelFromJson(
                   s.data[1].data, s.data[0] == "CUSTOMER");
               local = model;
-              print(model);
               return Column(
                 children: [
                   SizedBox(

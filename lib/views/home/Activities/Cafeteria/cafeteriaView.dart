@@ -216,7 +216,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
               } else if (s.hasData &&
                   s.connectionState == ConnectionState.done) {
                 var model = cafeteriaItemsFromJson(s.data.data);
-                print(model);
+
                 return Expanded(
                   child: ListView.builder(
                       itemCount: model.length,

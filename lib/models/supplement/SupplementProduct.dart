@@ -116,7 +116,7 @@ Future<SupplementProduct> getSupplements(String query) async {
   if (model.next != null) finalModel.results.clear();
 
   int i = 2;
-  print("loop started");
+
   while (model.next != null) {
     ApiResponse m = await ApiHelper().getReq(
       endpoint: model.next,
@@ -127,9 +127,6 @@ Future<SupplementProduct> getSupplements(String query) async {
     i++;
     model = localModel;
   }
-
-  print(finalModel.results.length);
-  print("loop ended");
 
   return finalModel;
 }

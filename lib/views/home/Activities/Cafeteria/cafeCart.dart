@@ -33,7 +33,7 @@ class _CafeCartState extends State<CafeCart> {
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = cafeteriaCartTrainerFromJson(s.data.data);
-            print(model);
+
             if (model[0].active) {
               localModel = model[0];
               return Column(
@@ -220,7 +220,6 @@ class _CafeCartState extends State<CafeCart> {
             );
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var model = cafeteriaCartFromJson(s.data.data);
-            print(model);
 
             if (model.length != 0 && model[0].active) {
               localModel1 = model[0];
@@ -410,7 +409,6 @@ class _CafeCartState extends State<CafeCart> {
         floatingActionButton: FloatingActionButton.extended(
           elevation: 5,
           onPressed: () async => {
-            //ToDo: TEST ORDER PLACING
             if (widget.isCustomer)
               {
                 b = await placeOrder({

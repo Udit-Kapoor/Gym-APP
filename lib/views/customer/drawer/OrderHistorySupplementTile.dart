@@ -22,7 +22,6 @@ class OrderHistorySupplementTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0),
       child: GestureDetector(
-        //ToDO: Navigate to ItemDetails...
         onTap: () => {
           Navigator.push(
             context,
@@ -62,7 +61,6 @@ class OrderHistorySupplementTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //ToDO:How to Wrap Long text without \n
                         Text(
                           title,
                           style: TextStyle(

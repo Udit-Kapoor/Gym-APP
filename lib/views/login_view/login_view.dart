@@ -388,7 +388,6 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    //ToDo: Send password reset link
                                     onTap: null,
                                     child: Container(
                                       width: 80,
@@ -470,7 +469,6 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    //ToDo: Open Change Password Dialog
                                     onTap: null,
                                     child: Container(
                                       width: 80,
