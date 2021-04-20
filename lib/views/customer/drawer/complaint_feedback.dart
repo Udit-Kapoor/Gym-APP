@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym_app/apis/apis.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class ComplaintFeedback extends StatefulWidget {
   const ComplaintFeedback({Key key}) : super(key: key);
-
-
 
   @override
   _ComplaintFeedbackState createState() => _ComplaintFeedbackState();
@@ -29,6 +28,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
 
   TextEditingController _decriptionController = TextEditingController();
   TextEditingController _topicController = TextEditingController();
+  int rating = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +178,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                       .textTheme
                       .headline6
                       .copyWith(color: Colors.black),
-                  hintText: 'Write you complain here...',
+                  hintText: 'Write here...',
                   hintStyle: Theme.of(context)
                       .textTheme
                       .headline6
@@ -186,6 +186,23 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                 ),
               ),
             ),
+            if (_method == ChoiceMethod.feedback)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                child: SmoothStarRating(
+                  allowHalfRating: false,
+                  onRated: (double v) {
+                    rating = v.toInt();
+                  },
+                  starCount: 5,
+                  rating: 2,
+                  size: 40.0,
+                  isReadOnly: false,
+                  color: Colors.amber,
+                  borderColor: Colors.yellow,
+                  spacing: 0.0,
+                ),
+              ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: FlatButton(
@@ -195,15 +212,14 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
                         ? 'https://api.health2offer.com/customer/complaint/'
                         : 'https://api.health2offer.com/customer/feedback/',
                     data: {
-                      //TODO: Add Name to shared preference
-                      "name": "Aman Nanda",
+                      "name": "default",
                       "topic": _method == ChoiceMethod.complaint
                           ? _topicController.text
                           : _dropDownValue,
                       "complaint": _decriptionController.text,
-                      "resolve": false,
+                      "rating": rating,
                       "source": 'App',
-                      "user":await ApiHelper().getUserObjectID(),
+                      "user": await ApiHelper().getUserObjectID(),
                     },
                   );
                 },

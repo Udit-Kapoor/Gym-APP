@@ -51,9 +51,7 @@ class _QRCodeScanState extends State<QRCodeScan> {
                     });
                     ApiResponse res =
                         await ApiHelper().attendance(scanData.code);
-                    print(res.data);
-                    print(res.error);
-                    print(res.errorMessage);
+                   
                     if (res.error) {
                       Fluttertoast.showToast(msg: 'Not Marked');
                     } else {

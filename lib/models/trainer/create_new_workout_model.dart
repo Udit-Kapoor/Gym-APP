@@ -59,7 +59,6 @@ void createNewWorkout(
     endpoint: "https://api.health2offer.com/customer/workoutplan/$id/",
     data: {"date": formatedDate, "name": name, "workouts": wId},
   );
-  print(cp.errorMessage);
   if (cp.error) {
     Fluttertoast.showToast(msg: "Error in Submitting Request");
   } else {

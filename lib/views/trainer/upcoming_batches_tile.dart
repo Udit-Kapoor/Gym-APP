@@ -37,7 +37,7 @@ class UpcomingBatchesTile extends StatelessWidget {
             });
 
             for (var v in upTimingList) {
-              print(TimeOfDay.fromDateTime(v['time']['from']));
+              // print(TimeOfDay.fromDateTime(v['time']['from']));
             }
 
             var dateSplit = DateFormat.MMMd().format(DateTime.now()).split(' ');

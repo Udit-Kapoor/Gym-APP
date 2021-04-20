@@ -22,7 +22,6 @@ class _WeightChartState extends State<WeightChart> {
 
   @override
   Widget build(BuildContext context) {
-    print(this._series1.toString());
     return Material(
       elevation: 4.0,
       child: Container(

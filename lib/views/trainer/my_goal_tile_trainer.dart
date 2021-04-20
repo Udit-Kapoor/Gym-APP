@@ -74,7 +74,7 @@ class MyGoalTileTrainer extends StatelessWidget {
                                       setState(() {
                                         isEnabled = false;
                                       });
-                                      print(res.data);
+                                      // print(res.data);
                                       if (res.error) {
                                         Fluttertoast.showToast(
                                             msg: 'something went wrong');
