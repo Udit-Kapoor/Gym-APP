@@ -6,7 +6,6 @@ import 'package:gym_app/models/pastOrder/PastSupplementOrder.dart';
 import 'package:gym_app/models/pastOrder/PastTrainerOrder.dart';
 import 'package:gym_app/views/customer/drawer/OrderHistoryCafeTile.dart';
 import 'package:gym_app/views/customer/drawer/OrderHistoryTrainerTile.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'OrderHistorySupplementTile.dart';
 
 class OrderHistory extends StatefulWidget {

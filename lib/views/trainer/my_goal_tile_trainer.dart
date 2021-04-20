@@ -81,6 +81,9 @@ class MyGoalTileTrainer extends StatelessWidget {
                                       } else {
                                         Fluttertoast.showToast(
                                             msg: 'added weight');
+                                            
+                          
+                                        _weightController.dispose();
                                       }
                                     }
                                   },
@@ -110,8 +113,6 @@ class MyGoalTileTrainer extends StatelessWidget {
                               );
                           
                           
-                          
-                                        _weightController.dispose();
                             } else {
                               return InkWell(
                                 onTap: () {

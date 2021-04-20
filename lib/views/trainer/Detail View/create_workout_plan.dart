@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gym_app/models/customer/workout_plan_name.dart';
 import 'package:gym_app/models/trainer/create_new_workout_model.dart';
 import 'package:gym_app/models/trainer/workout_plan_list_model.dart';
 import 'package:intl/intl.dart';

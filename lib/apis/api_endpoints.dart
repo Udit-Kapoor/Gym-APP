@@ -1,6 +1,4 @@
 const String baseURL = 'https://api.health2offer.com';
-//TODO add forgot password url once backend completes this
-const String forgot_password = '';
 
 const String rest_auth = '$baseURL/rest-auth';
 

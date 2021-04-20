@@ -39,7 +39,6 @@ class ClientsDetailsView extends StatefulWidget {
   final String name;
   final String cId;
   final int id;
-  //TODO: Add phone no. and profile photo
 
   @override
   _ClientsDetailsViewState createState() => _ClientsDetailsViewState();

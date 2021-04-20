@@ -162,11 +162,7 @@ class TrainerProfileView extends StatelessWidget {
                               Expanded(child: Container()),
                             ],
                           ),
-                          //TODO: Api doesn't have landmark
-                          // TextFieldWidget(
-                          //   borderText: 'Landmark',
-                          //   bodyText: 'Near J.R. Public School',
-                          // ),
+                        
                           TextFieldWidget(
                             borderText: 'ID Proof',
                             bodyText: tp.idProof,
