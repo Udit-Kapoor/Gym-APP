@@ -31,6 +31,7 @@ class FoodTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 25.0),
