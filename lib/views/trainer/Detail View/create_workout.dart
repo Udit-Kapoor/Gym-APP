@@ -2,6 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/models/customer/workout_plan_name.dart';
+import 'package:intl/intl.dart';
 
 import 'create_workout_plan.dart';
 
@@ -42,12 +43,12 @@ class _CreateWorkoutState extends State<CreateWorkout> {
                       context,
                       MaterialPageRoute(
                           builder: (_) => CreateWorkoutPlan(
-                                setState: () => setState(() {}),
+                                setState1: () => setState(() {}),
                                 dateTime: selectedDate,
                                 id: widget.id,
                               )));
                 }
-              } on NoSuchMethodError  {
+              } on NoSuchMethodError {
                 Fluttertoast.showToast(msg: "No Date Selected");
               } catch (e) {
                 return e;
@@ -95,6 +96,7 @@ class WorkoutPlanNamesListView extends StatelessWidget {
                             child: Expandable(
                               collapsed: ExpandableButton(
                                 child: HeaderText(
+                                  date: DateFormat.MMMd().format(cp[i].date),
                                   workoutPlanName: cp[i].name,
                                   expanded: false,
                                 ),
@@ -103,6 +105,8 @@ class WorkoutPlanNamesListView extends StatelessWidget {
                                 children: [
                                   ExpandableButton(
                                     child: HeaderText(
+                                      date:
+                                          DateFormat.MMMd().format(cp[i].date),
                                       workoutPlanName: cp[i].name,
                                       expanded: true,
                                       // collapse: ExpandableButton(
@@ -132,7 +136,12 @@ class HeaderText extends StatelessWidget {
   final bool expanded;
   final Widget collapse;
   final String workoutPlanName;
-  HeaderText({this.expanded, this.collapse, @required this.workoutPlanName});
+  final String date;
+  HeaderText(
+      {this.expanded,
+      this.collapse,
+      @required this.workoutPlanName,
+      this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -142,13 +151,26 @@ class HeaderText extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.0),
       ),
-      child: Center(
-        child: Text(
-          workoutPlanName,
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              .copyWith(fontWeight: FontWeight.w400),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              date,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            Text(
+              workoutPlanName,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+          ],
         ),
       ),
     );

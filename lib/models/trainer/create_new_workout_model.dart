@@ -39,7 +39,7 @@ class CreateNewWorkoutModel {
       };
 }
 
-void createNewExercise(String name, String muscle) async {
+Future<void> createNewExercise(String name, String muscle) async {
   ApiResponse cp = await ApiHelper().postReq(
     endpoint: "https://api.health2offer.com/customer/workout/create/",
     data: {"name": name.trim(), "muscle": muscle},
@@ -51,7 +51,7 @@ void createNewExercise(String name, String muscle) async {
   }
 }
 
-void createNewWorkout(
+Future<void> createNewWorkout(
     {int id, String name, List<int> wId, DateTime dateTime}) async {
   String formatedDate = '${dateTime.year}-${dateTime.month}-${dateTime.day}';
 

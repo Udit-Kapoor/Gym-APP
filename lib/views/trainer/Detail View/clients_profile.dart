@@ -21,6 +21,7 @@ class ClientsProfile extends StatelessWidget {
           var cp = clientsProfileModelFromJson(s.data.data);
 
           widget = ListView(
+            
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             children: [

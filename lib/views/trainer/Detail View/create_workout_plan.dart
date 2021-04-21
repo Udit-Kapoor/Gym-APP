@@ -6,20 +6,26 @@ import 'package:intl/intl.dart';
 
 import 'add_custom_workout.dart';
 
-class CreateWorkoutPlan extends StatelessWidget {
+class CreateWorkoutPlan extends StatefulWidget {
   final DateTime dateTime;
   final int id;
 
-  final Function setState;
+  final Function setState1;
 
   CreateWorkoutPlan(
-      {Key key, @required this.dateTime, @required this.id, this.setState})
+      {Key key, @required this.dateTime, @required this.id, this.setState1})
       : super(key: key);
 
+  @override
+  _CreateWorkoutPlanState createState() => _CreateWorkoutPlanState();
+}
+
+class _CreateWorkoutPlanState extends State<CreateWorkoutPlan> {
   final TextEditingController workoutNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    var dateSplit = DateFormat.MMMd().format(dateTime).split(' ');
+    var dateSplit = DateFormat.MMMd().format(widget.dateTime).split(' ');
     List<int> selectedWorkout = [];
     return Scaffold(
       appBar: AppBar(),
@@ -35,7 +41,11 @@ class CreateWorkoutPlan extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => AddCustomWorkout()),
+                        MaterialPageRoute(
+                          builder: (_) => AddCustomWorkout(
+                            setState2: () => setState(() {}),
+                          ),
+                        ),
                       );
                     },
                     color: Colors.red,
@@ -189,19 +199,17 @@ class CreateWorkoutPlan extends StatelessWidget {
                         actions: [
                           FlatButton(
                             color: Colors.red,
-                            onPressed: () {
+                            onPressed: () async {
                               if (workoutNameController.text.isNotEmpty) {
-                                createNewWorkout(
-                                    dateTime: dateTime,
+                                await createNewWorkout(
+                                    dateTime: widget.dateTime,
                                     wId: selectedWorkout,
                                     name: workoutNameController.text.trim(),
-                                    id: id);
+                                    id: widget.id);
 
-                                Future.delayed(Duration(seconds: 1));
                                 Navigator.pop(_);
                                 Navigator.pop(context);
-                                setState();
-                                // Navigator.pus
+                                widget.setState1();
                               } else
                                 Fluttertoast.showToast(msg: 'No name found');
                             },

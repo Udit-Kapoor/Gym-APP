@@ -5,11 +5,11 @@ class ClientsListTile extends StatelessWidget {
     Key key,
     @required this.name,
     @required this.cId,
-    @required this.goal,
+    this.goal,
     this.onTap,
     this.imageURL,
   }) : super(key: key);
-  
+
   final String name;
   final String imageURL;
   final String cId;
@@ -52,13 +52,13 @@ class ClientsListTile extends StatelessWidget {
                       .copyWith(color: Colors.black),
                 ),
                 Spacer(flex: 2),
-                Text(
-                  goal,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.black),
-                ),
+                // Text(
+                //   goal??,
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .bodyText1
+                //       .copyWith(color: Colors.black),
+                // ),
                 Spacer()
               ],
             ),

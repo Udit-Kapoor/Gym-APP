@@ -49,7 +49,7 @@ class ClientsList extends StatelessWidget {
                 return ClientsListTile(
                   name: cl.cust[i].firstName,
                   cId: cl.cust[i].custid ?? '696969',
-                  goal: 'Fat Loss',
+                  // goal: 'Fat Loss',
                   imageURL: cl.cust[i].photo,
                   onTap: () {
                     Navigator.push(

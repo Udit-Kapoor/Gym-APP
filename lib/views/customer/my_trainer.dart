@@ -1,8 +1,15 @@
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/apis.dart';
 import 'package:gym_app/models/customer/my_trainer_model.dart';
+import 'package:gym_app/models/customer/trainer_review_model.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:timeago/timeago.dart' as ta;
+
+//TODO: Ask brijesh for trainerID
+int trainerID = 9;
 
 class MyTrainer extends StatelessWidget {
   const MyTrainer({Key key}) : super(key: key);
@@ -10,37 +17,6 @@ class MyTrainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController reviewController = TextEditingController();
-    final List<Map<String, dynamic>> _reviews = [
-      {
-        'profile_picture': 'lib/assets/profile.png',
-        'name': 'Raja Kumar',
-        'rating': 4,
-        'time': 'a week ago',
-        'description':
-            'He is very good trainer. He is very good trainer. He is very good trainer. He is very good trainer. He is very good trainer. '
-      },
-      {
-        'profile_picture': 'lib/assets/profile.png',
-        'name': 'Raja Kumar',
-        'rating': 4,
-        'time': 'a week ago',
-        'description': 'He is very good trainer'
-      },
-      {
-        'profile_picture': 'lib/assets/profile.png',
-        'name': 'Raja Kumar',
-        'rating': 4,
-        'time': 'a week ago',
-        'description': 'He is very good trainer'
-      },
-      {
-        'profile_picture': 'lib/assets/profile.png',
-        'name': 'Raja Kumar',
-        'rating': 4,
-        'time': 'a week ago',
-        'description': 'He is very good trainer'
-      },
-    ];
 
     // final int _ratings = 3;
     return Scaffold(
@@ -71,10 +47,9 @@ class MyTrainer extends StatelessWidget {
               future: myTrainer(),
               builder: (c, s) {
                 if (s.connectionState == ConnectionState.waiting)
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 else if (s.connectionState == ConnectionState.done) {
                   var mt = myTrainerModelFromJson(s.data.data);
-
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -137,48 +112,47 @@ class MyTrainer extends StatelessWidget {
               }),
           GestureDetector(
             onTap: () {
+              int _rating = 0;
               return showDialog(
                 context: (context),
                 builder: (context) => AlertDialog(
-                  title: Row(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        // radius: 30.0,
-                        child: Image.asset(
-                          'lib/assets/profile.png',
-                          fit: BoxFit.fill,
+                      TextField(
+                        controller: reviewController,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          hintText: 'Write your review here...',
+                          hintStyle: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(color: Colors.grey),
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2.0,
+                            ),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          'Raja Kumar',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
+                      SmoothStarRating(
+                        allowHalfRating: false,
+                        onRated: (double v) {
+                          _rating = v.toInt();
+                        },
+                        starCount: 5,
+                        rating: 0,
+                        size: 40.0,
+                        isReadOnly: false,
+                        color: Colors.amber,
+                        borderColor: Colors.yellow,
+                        spacing: 0.0,
                       ),
                     ],
-                  ),
-                  content: TextField(
-                    controller: reviewController,
-                    maxLines: 5,
-                    decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      hintText: 'Write your review here...',
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 2.0,
-                        ),
-                      ),
-                    ),
                   ),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
@@ -200,7 +174,28 @@ class MyTrainer extends StatelessWidget {
                       ),
                     ),
                     FlatButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        ApiResponse res = await ApiHelper().postReq(
+                          endpoint:
+                              'https://api.health2offer.com/core/trainerfeedback/',
+                          //TODO: Complete this
+                          data: {
+                            "feedback": reviewController.text.trim(),
+                            "rating": _rating.toString(),
+                            "source": 'App',
+                            "user": await ApiHelper().getUserObjectID(),
+                            //TODO: add trainer ID
+                            "trainer": trainerID
+                          },
+                        );
+
+                     
+                        if (res.error) {
+                          Fluttertoast.showToast(
+                              msg: 'Already Given the feedback');
+                        }
+
+                        // reviewController.dispose();
                         Navigator.pop(context);
                       },
                       color: Colors.red,
@@ -252,66 +247,67 @@ class MyTrainer extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: _reviews.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  padding: EdgeInsets.all(10.0),
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 30.0,
-                            child: Image.asset(
-                              _reviews[index]['profile_picture'],
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Text(
-                              _reviews[index]['name'],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline5
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          for (var i = 1; i <= _reviews[index]['rating']; i++)
-                            Icon(Icons.star, color: Colors.yellow),
-                          Spacer(),
-                          Text(
-                            _reviews[index]['time'],
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1
-                                .copyWith(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          _reviews[index]['description'],
-                          style: Theme.of(context).textTheme.bodyText1,
+            child: FutureBuilder(
+              future: trainerReview(),
+              builder: (c, s) {
+                if (s.connectionState == ConnectionState.waiting)
+                  return Center(child: CircularProgressIndicator());
+                else if (s.connectionState == ConnectionState.done) {
+                  var tr = trainerReviewModelFromJson(s.data.data);
+
+                  if (tr.length == 0) return Center(child: Text('No Reviews'));
+                  return ListView.builder(
+                    itemCount: tr.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: EdgeInsets.all(10.0),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                      ),
-                    ],
-                  ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                SmoothStarRating(
+                                  isReadOnly: true,
+                                  rating: double.parse(
+                                    tr[index].rating,
+                                  ),
+                                  color: Colors.yellow,
+                                  starCount: 5,
+                                  borderColor: Colors.yellow,
+                                ),
+                                Spacer(),
+                                Text(
+                                  ta.format(tr[index].date),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                tr[index].feedback,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+                return Center(
+                  child: Text('Something went wrong'),
                 );
               },
             ),

@@ -146,34 +146,35 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
                         backgroundColor: Colors.red,
                       )
                     : Icon(Icons.bar_chart, color: Colors.red),
-                label: 'Graph',
+                label: 'Info',
               ),
               BottomNavigationBarItem(
-                  icon: _currentIndex == 1
-                      ? CircleAvatar(
-                          child:
-                              Icon(Icons.person_outline, color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(Icons.person_outline, color: Colors.red),
-                  label: 'User'),
+                icon: _currentIndex == 1
+                    ? CircleAvatar(
+                        child: Icon(Icons.person_outline, color: Colors.white),
+                        backgroundColor: Colors.red,
+                      )
+                    : Icon(Icons.person_outline, color: Colors.red),
+                label: 'User',
+              ),
               BottomNavigationBarItem(
-                  icon: _currentIndex == 2
-                      ? CircleAvatar(
-                          child: Icon(Icons.autorenew, color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(Icons.autorenew, color: Colors.red),
-                  label: 'Renew'),
+                icon: _currentIndex == 2
+                    ? CircleAvatar(
+                        child: Icon(Icons.autorenew, color: Colors.white),
+                        backgroundColor: Colors.red,
+                      )
+                    : Icon(Icons.autorenew, color: Colors.red),
+                label: 'Subs',
+              ),
               BottomNavigationBarItem(
-                  icon: _currentIndex == 3
-                      ? CircleAvatar(
-                          child:
-                              Icon(Icons.fitness_center, color: Colors.white),
-                          backgroundColor: Colors.red,
-                        )
-                      : Icon(Icons.fitness_center, color: Colors.red),
-                  label: 'Workout'),
+                icon: _currentIndex == 3
+                    ? CircleAvatar(
+                        child: Icon(Icons.fitness_center, color: Colors.white),
+                        backgroundColor: Colors.red,
+                      )
+                    : Icon(Icons.fitness_center, color: Colors.red),
+                label: 'Workout',
+              ),
             ],
           ),
           Expanded(child: tabs[_currentIndex]),
@@ -190,6 +191,7 @@ class ClientsDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      cacheExtent: 999,
       physics: BouncingScrollPhysics(),
       children: [
         MyGoalTileTrainer(id: id),

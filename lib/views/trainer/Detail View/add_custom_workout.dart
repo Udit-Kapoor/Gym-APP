@@ -19,9 +19,9 @@ const List<String> dropDownMenuItemMuscle = [
 ];
 
 class AddCustomWorkout extends StatefulWidget {
+  final Function setState2;
 
-  
-  const AddCustomWorkout({Key key}) : super(key: key);
+  const AddCustomWorkout({Key key, this.setState2}) : super(key: key);
 
   @override
   _AddCustomWorkoutState createState() => _AddCustomWorkoutState();
@@ -105,10 +105,12 @@ class _AddCustomWorkoutState extends State<AddCustomWorkout> {
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: FloatingActionButton.extended(
-              onPressed: () {
-                if (nameController.text.isNotEmpty)
-                  createNewExercise(nameController.text, dropDownValue);
-                else
+              onPressed: () async {
+                if (nameController.text.isNotEmpty) {
+                  await createNewExercise(nameController.text, dropDownValue);
+                  Navigator.pop(context);
+                  widget.setState2();
+                } else
                   Fluttertoast.showToast(msg: 'No name found');
               },
               label: Text(
