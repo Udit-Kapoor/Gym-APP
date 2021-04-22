@@ -48,6 +48,14 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
                 else if (s.connectionState == ConnectionState.done) {
                   var cp = customerProfileModelFromJson(s.data.data);
                   return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CustomerProfileView(),
+                        ),
+                      );
+                    },
                     contentPadding: EdgeInsets.all(0),
                     leading: CircleAvatar(
                       radius: 30,
