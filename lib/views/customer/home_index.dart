@@ -79,7 +79,57 @@ class CustomerTransformationWidget extends StatefulWidget {
 
 class _CustomerTransformationWidgetState
     extends State<CustomerTransformationWidget> {
-  final _picker = ImagePicker();
+  PickedFile _imageFile;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    setState(() => this._imageFile = null);
+    final PickedFile imageFile = await showDialog<PickedFile>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        children: <Widget>[
+          ListTile(
+            leading: const Icon(Icons.camera_alt),
+            title: const Text('Take picture'),
+            onTap: () async {
+              final PickedFile pickedFile =
+                  await _picker.getImage(source: ImageSource.camera);
+              setState(() {
+                _imageFile = pickedFile;
+              });
+              Navigator.pop(ctx);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.image),
+            title: const Text('Pick from gallery'),
+            onTap: () async {
+              try {
+                final PickedFile pickedFile =
+                    await _picker.getImage(source: ImageSource.gallery);
+                setState(() {
+                  _imageFile = pickedFile;
+                });
+                Navigator.pop(ctx);
+              } catch (e) {
+                print(e);
+                Navigator.pop(ctx);
+              }
+            },
+          ),
+        ],
+      ),
+    );
+    if (_imageFile == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please pick one image first.')),
+      );
+      return;
+    }
+    setState(() => this._imageFile = imageFile);
+    print('picked image: ${this._imageFile}');
+    return;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,14 +189,8 @@ class _CustomerTransformationWidgetState
                 child: IconButton(
                   icon: Icon(Icons.add_a_photo),
                   onPressed: () async {
-                    PickedFile image = await _picker.getImage(
-                      source: ImageSource.gallery,
-                      imageQuality: 90,
-                    );
-
-                    if (image == null)
-                      Fluttertoast.showToast(msg: "No image selected");
-                    else {
+                    await _pickImage();
+                    if (_imageFile != null) {
                       SharedPreferences sp =
                           await SharedPreferences.getInstance();
                       MultipartRequest postImage = MultipartRequest(
@@ -168,8 +212,8 @@ class _CustomerTransformationWidgetState
                       postImage.files.add(
                         MultipartFile.fromBytes(
                           "image",
-                          File(image.path).readAsBytesSync(),
-                          filename: image.path.split("/").last,
+                          File(_imageFile.path).readAsBytesSync(),
+                          filename: _imageFile.path.split("/").last,
                         ),
                       );
 
