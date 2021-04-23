@@ -35,7 +35,7 @@ class _SupplementCartState extends State<SupplementCart> {
       floatingActionButton: FloatingActionButton.extended(
         //ToDo: Works only for Customer
         onPressed: () async => {
-          if (local.item == null)
+          if (local.item.isEmpty || local.item == null)
             {
               Fluttertoast.showToast(msg: "Nothing in the Cart"),
             }
