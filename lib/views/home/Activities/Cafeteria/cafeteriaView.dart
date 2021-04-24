@@ -85,7 +85,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
             ),
             onPressed: () => Navigator.pop(context)),
         title: Text(
-          "Cafetreia",
+          "Cafeteria",
           style: TextStyle(
               fontWeight: FontWeight.w700, fontSize: 20, color: Colors.black),
         ),
@@ -190,7 +190,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10.0, left: 40),
+            padding: const EdgeInsets.only(top: 10.0, left: 60),
             child: Row(
               children: [
                 Text(
@@ -198,7 +198,7 @@ class _CafeteriaViewState extends State<CafeteriaView> {
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 165.0),
+                  padding: const EdgeInsets.only(left: 150.0),
                   child: Text("Price (Rs)",
                       style:
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
