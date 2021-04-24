@@ -13,7 +13,6 @@ class QRCodeScan extends StatefulWidget {
 }
 
 class _QRCodeScanState extends State<QRCodeScan> {
-  Barcode result;
   QRViewController controller;
 
   bool showProgress = false;
@@ -33,6 +32,7 @@ class _QRCodeScanState extends State<QRCodeScan> {
     var scanArea = MediaQuery.of(context).size.width * 0.8;
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(),
       body: SafeArea(
         child: showProgress
@@ -44,22 +44,33 @@ class _QRCodeScanState extends State<QRCodeScan> {
                     this.controller = controller;
                   });
                   controller.scannedDataStream.listen((scanData) async {
-                    setState(() {
-                      result = scanData;
-                      showProgress = true;
-                      controller.stopCamera();
-                    });
-                    ApiResponse res =
-                        await ApiHelper().attendance(scanData.code);
-                   
-                    if (res.error) {
-                      Fluttertoast.showToast(msg: 'Not Marked');
-                    } else {
-                      Fluttertoast.showToast(msg: 'Marked Present');
-                    }
+                    if (scanData != null) {
+                      setState(() {
+                        showProgress = true;
+                        controller.stopCamera();
+                      });
+                      ApiResponse res =
+                          await ApiHelper().attendance(scanData.code);
 
-                    // controller.dispose();
-                    Navigator.of(context, rootNavigator: true).pop();
+                      if (res.error) {
+                        print('###########' + res.errorMessage + '###########');
+                        Navigator.of(context).pop();
+
+                        Future.delayed(Duration(seconds: 1));
+
+                        Fluttertoast.showToast(
+                            msg: 'Not Marked: ${res.errorMessage}');
+                      } else {
+                        Navigator.of(context).pop();
+                        Future.delayed(Duration(seconds: 1));
+
+                        Fluttertoast.showToast(
+                          msg: 'Marked Present',
+                        );
+                      }
+
+                      // controller.dispose();
+                    }
                   });
                 },
                 overlay: QrScannerOverlayShape(

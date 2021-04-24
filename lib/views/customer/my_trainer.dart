@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gym_app/apis/apis.dart';
@@ -8,8 +7,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:timeago/timeago.dart' as ta;
 
-//TODO: Ask brijesh for trainerID
-int trainerID = 9;
+int trainerID;
 
 class MyTrainer extends StatelessWidget {
   const MyTrainer({Key key}) : super(key: key);
@@ -50,6 +48,8 @@ class MyTrainer extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 else if (s.connectionState == ConnectionState.done) {
                   var mt = myTrainerModelFromJson(s.data.data);
+
+                  trainerID = mt.id;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -178,18 +178,15 @@ class MyTrainer extends StatelessWidget {
                         ApiResponse res = await ApiHelper().postReq(
                           endpoint:
                               'https://api.health2offer.com/core/trainerfeedback/',
-                          //TODO: Complete this
                           data: {
                             "feedback": reviewController.text.trim(),
                             "rating": _rating.toString(),
                             "source": 'App',
                             "user": await ApiHelper().getUserObjectID(),
-                            //TODO: add trainer ID
                             "trainer": trainerID
                           },
                         );
 
-                     
                         if (res.error) {
                           Fluttertoast.showToast(
                               msg: 'Already Given the feedback');

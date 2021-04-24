@@ -148,7 +148,10 @@ class ApiHelper {
       );
       return postReq.statusCode >= 200 && postReq.statusCode <= 205
           ? ApiResponse(data: postReq.body)
-          : ApiResponse(error: true, errorMessage:  postReq.statusCode.toString() + '\n'+ postReq.body);
+          : ApiResponse(
+              error: true,
+              errorMessage:
+                  postReq.statusCode.toString() + '\n' + postReq.body);
     } on SocketException {
       return ApiResponse(error: true, errorMessage: "NO INTERNET");
     } on HttpException {
@@ -162,9 +165,7 @@ class ApiHelper {
     final _sp = await s;
     bool isTrainer = await ApiHelper().getIsTrainer();
 
-
     int id = await ApiHelper().getUserObjectID();
-
 
     String query = isTrainer ? 'QRCodetrainer' : 'QRCodeCustomer';
 
@@ -179,7 +180,10 @@ class ApiHelper {
       );
       return att.statusCode >= 200 && att.statusCode <= 205
           ? ApiResponse(data: att.body)
-          : ApiResponse(error: true, data: att.statusCode);
+          : ApiResponse(
+              error: true,
+              data: att.body,
+              errorMessage: att.statusCode.toString());
     } on SocketException {
       return ApiResponse(error: true, errorMessage: "NO INTERNET");
     } on HttpException {

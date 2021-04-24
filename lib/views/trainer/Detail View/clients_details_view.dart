@@ -51,9 +51,7 @@ class _ClientsDetailsViewState extends State<ClientsDetailsView> {
   @override
   Widget build(BuildContext context) {
     tabs = [
-      ClientsDashboard(
-        id: widget.id,
-      ),
+      ClientsDashboard(id: widget.id),
       ClientsProfile(id: widget.id),
       ClientsGymSubscription(id: widget.id),
       CreateWorkout(id: widget.id),
