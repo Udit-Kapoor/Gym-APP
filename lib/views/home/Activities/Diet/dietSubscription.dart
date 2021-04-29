@@ -937,7 +937,7 @@ class _DietSubscriptionState extends State<DietSubscription> {
                                   items: <String>[
                                     'Lunch',
                                     'Dinner',
-                                    'Borh Lunch and Dinner',
+                                    'Both Lunch and Dinner',
                                   ].map<DropdownMenuItem<String>>(
                                       (String value) {
                                     return DropdownMenuItem<String>(
