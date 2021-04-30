@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,16 +45,23 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
               future: trainerPro(),
               builder: (c, s) {
                 if (s.connectionState == ConnectionState.waiting)
-                  return CircularProgressIndicator();
+                  return LinearProgressIndicator();
                 else if (s.connectionState == ConnectionState.done) {
                   var tp = trainerProfileModelFromJson(s.data.data);
+
+                  
                   return ListTile(
                     contentPadding: EdgeInsets.all(0),
                     leading: CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(
-                        tp.image ??
-                            "http://api.health2offer.com/media/customer/photo/noimage.jpg",
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: CachedNetworkImage(
+                          imageUrl: tp.image ??
+                              "http://api.health2offer.com/media/customer/photo/noimage.jpg",
+                          placeholder: (_, __) =>
+                              Center(child: CircularProgressIndicator()),
+                        ),
                       ),
                     ),
                     title: Text('Hi! ${tp.firstName}'),
