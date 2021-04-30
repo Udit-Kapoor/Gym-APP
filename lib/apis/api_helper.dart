@@ -92,10 +92,15 @@ class ApiHelper {
       var ut = login.data.userType;
       if (ut.isCustomer) {
         sp.setString("USER_TYPE", "CUSTOMER");
-        Navigator.pushReplacementNamed(ctx, '/CustomerHome');
+
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pushReplacementNamed(ctx, '/CustomerHome');
+        });
       } else {
         sp.setString("USER_TYPE", "TRAINER");
-        Navigator.pushReplacementNamed(ctx, '/TrainerHome');
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pushReplacementNamed(ctx, '/TrainerHome');
+        });
       }
 
       bool isTrainer = await ApiHelper().getIsTrainer();

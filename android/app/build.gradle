@@ -61,7 +61,7 @@ android {
             // TODO: REMOVE DEBUG SIGNING
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
-           myto signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
     }
 }
