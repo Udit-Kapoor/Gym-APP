@@ -17,7 +17,7 @@ class UpcomingBatchesTile extends StatelessWidget {
           else if (s.connectionState == ConnectionState.done) {
             var x = batchTimingsModelFromJson(s.data.data);
 
-            DateTime timeNow = DateTime.now();
+            
 
             List<Map> upTimingList = List.generate(x.length, (i) {
               return {

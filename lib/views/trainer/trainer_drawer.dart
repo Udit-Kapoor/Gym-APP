@@ -91,14 +91,7 @@ class _TrainerDrawerState extends State<TrainerDrawer> {
                           )),
                 );
               }),
-          DrawerTextList(
-              label: 'Complaint/Feedback',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ComplaintFeedback()),
-                );
-              }),
+         
           DrawerTextList(
             label: 'Help & Support',
             onTap: () => showDialog(

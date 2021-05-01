@@ -30,6 +30,9 @@
 .pub-cache/
 .pub/
 /build/
+/web/
+/android/
+/ios/
 
 # Manually added files and folders
 /test/

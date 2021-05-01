@@ -31,6 +31,36 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
   TextEditingController _topicController = TextEditingController();
   int rating = 0;
 
+  Future<void> complaintFeedback() async {
+    ApiResponse res = await ApiHelper().postReq(
+      endpoint: _method == ChoiceMethod.complaint
+          ? 'https://api.health2offer.com/customer/complaint/'
+          : 'https://api.health2offer.com/customer/feedback/',
+      data: _method == ChoiceMethod.complaint
+          ? {
+              "name": "Anonymous",
+              "topic": _topicController.text.trim(),
+              "complaint": _decriptionController.text.trim(),
+              "resolve": false,
+              "source": "App",
+              "user": await ApiHelper().getUserObjectID(),
+            }
+          : {
+              "name": "Anonymous",
+              "topic": _dropDownValue,
+              "feedback": _decriptionController.text.trim(),
+              "rating": rating.toString(),
+              "source": "App",
+              "user": await ApiHelper().getUserObjectID(),
+            },
+    );
+    if (res.error) {
+      Fluttertoast.showToast(msg: 'Something went wrong...');
+    } else {
+      Fluttertoast.showToast(msg: 'Success');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,28 +237,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: FlatButton(
-                onPressed: () async {
-                  ApiResponse res = await ApiHelper().postReq(
-                    endpoint: _method == ChoiceMethod.complaint
-                        ? 'https://api.health2offer.com/customer/complaint/'
-                        : 'https://api.health2offer.com/customer/feedback/',
-                    data: {
-                      "name": "default",
-                      "topic": _method == ChoiceMethod.complaint
-                          ? _topicController.text
-                          : _dropDownValue,
-                      "complaint": _decriptionController.text.trim(),
-                      "rating": rating.toString(),
-                      "source": 'App',
-                      "user": await ApiHelper().getUserObjectID(),
-                    },
-                  );
-                  if (res.error) {
-                    Fluttertoast.showToast(msg: 'Something went wrong...');
-                  } else {
-                    Fluttertoast.showToast(msg: 'Success');
-                  }
-                },
+                onPressed: complaintFeedback,
                 padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
