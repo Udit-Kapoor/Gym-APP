@@ -162,7 +162,6 @@ class TrainerProfileView extends StatelessWidget {
                               Expanded(child: Container()),
                             ],
                           ),
-                        
                           TextFieldWidget(
                             borderText: 'ID Proof',
                             bodyText: tp.idProof,

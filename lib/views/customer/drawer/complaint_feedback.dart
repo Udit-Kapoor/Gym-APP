@@ -31,7 +31,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
   TextEditingController _topicController = TextEditingController();
   int rating = 0;
 
-  Future<void> complaintFeedback() async {
+  Future<void> complaintFeedback(BuildContext ctx) async {
     ApiResponse res = await ApiHelper().postReq(
       endpoint: _method == ChoiceMethod.complaint
           ? 'https://api.health2offer.com/customer/complaint/'
@@ -58,6 +58,10 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
       Fluttertoast.showToast(msg: 'Something went wrong...');
     } else {
       Fluttertoast.showToast(msg: 'Success');
+
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.pop(ctx);
+      });
     }
   }
 
@@ -237,7 +241,9 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: FlatButton(
-                onPressed: complaintFeedback,
+                onPressed: () {
+                  complaintFeedback(context);
+                },
                 padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(

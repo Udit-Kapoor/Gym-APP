@@ -6,7 +6,9 @@ class TextFieldWidget extends StatelessWidget {
     @required this.borderText,
     @required this.bodyText,
     this.padding,
+    this.labelStyle,
   }) : super(key: key);
+  final TextStyle labelStyle;
   final String borderText;
   final String bodyText;
   final EdgeInsetsGeometry padding;
@@ -36,7 +38,7 @@ class TextFieldWidget extends StatelessWidget {
           hintStyle: Theme.of(context)
               .textTheme
               .headline5
-              .copyWith(color: Colors.black),
+              .copyWith(color: Colors.black, fontSize: 16),
         ),
       ),
     );

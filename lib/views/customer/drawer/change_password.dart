@@ -140,11 +140,11 @@ class ChangePassword extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: FlatButton(
                     onPressed: () async {
-                      await ApiHelper().changePassword({
+                      final response = await ApiHelper().changePassword({
                         "old_password": currentPassword.text,
                         "new_password1": newPassword.text,
                         "new_password2": confirmNewPassword.text
-                      });
+                      }, context);
                     },
                     padding:
                         EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),

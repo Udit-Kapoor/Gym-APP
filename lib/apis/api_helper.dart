@@ -61,7 +61,7 @@ class ApiHelper {
     }
   }
 
-  Future changePassword(Map data) async {
+  Future changePassword(Map data, BuildContext ctx) async {
     final _sp = await s;
     try {
       Response cp = await post(
@@ -74,6 +74,10 @@ class ApiHelper {
       );
       if (cp.statusCode >= 200 && cp.statusCode <= 205) {
         Fluttertoast.showToast(msg: "Password Changed");
+
+         Future.delayed(Duration(seconds: 2), () {
+        Navigator.pop(ctx);
+      });
       } else {
         Fluttertoast.showToast(msg: "Wrong Old Password");
       }
