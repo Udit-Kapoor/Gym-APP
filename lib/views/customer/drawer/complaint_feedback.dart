@@ -79,7 +79,7 @@ class _ComplaintFeedbackState extends State<ComplaintFeedback> {
         ),
         centerTitle: true,
         title: Text(
-          'Gym Subscription',
+          'Compaint and Feedback',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline6,
         ),
