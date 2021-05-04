@@ -8,7 +8,7 @@ class ClientMyAttendance extends StatelessWidget {
 
   const ClientMyAttendance({
     Key key,
-  @required  this.id,
+    @required this.id,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,6 @@ class ClientMyAttendance extends StatelessWidget {
             widget = Center(child: CircularProgressIndicator());
           } else if (s.hasData && s.connectionState == ConnectionState.done) {
             var ca = custAttendanceTrainerModelFromJson(s.data.data);
-           
 
             widget = Material(
               elevation: 4.0,
@@ -40,38 +39,39 @@ class ClientMyAttendance extends StatelessWidget {
                             fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          child: Wrap(
-                            children: [
-                              for (var att in ca.list)
-                                DayWiseAttendance(
-                                  date: att[0],
-                                  attend: att[1] == 'True' ? true : false,
-                                )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: CircularPercentIndicator(
-                            progressColor: Colors.blue[700],
-                            animation: true,
-                            animationDuration: 1000,
-                            radius: 70,
-                            percent: ca.percentage / 100,
-                            center:
-                                Text("${ca.percentage.round().toString()}%"),
-                            footer: Text(
-                              'Attendance\nPerc.',
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyText1,
+                    if (ca.list.isNotEmpty)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            child: Wrap(
+                              children: [
+                                for (var att in ca.list)
+                                  DayWiseAttendance(
+                                    date: att[0],
+                                    attend: att[1] == 'True' ? true : false,
+                                  )
+                              ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                          Expanded(
+                            child: CircularPercentIndicator(
+                              progressColor: Colors.blue[700],
+                              animation: true,
+                              animationDuration: 1000,
+                              radius: 70,
+                              percent: ca.percentage / 100,
+                              center:
+                                  Text("${ca.percentage.round().toString()}%"),
+                              footer: Text(
+                                'Attendance\nPerc.',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),

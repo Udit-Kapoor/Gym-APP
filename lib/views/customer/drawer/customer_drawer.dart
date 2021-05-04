@@ -63,8 +63,8 @@ class _CustomerDrawerState extends State<CustomerDrawer> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: CachedNetworkImage(
-                          imageUrl: cp.photo ??
-                              "http://api.health2offer.com/media/customer/photo/noimage.jpg",
+                          imageUrl: "https://api.health2offer.com" + cp.photo ??
+                              "/media/customer/photo/noimage.jpg",
                           placeholder: (_, __) =>
                               Center(child: CircularProgressIndicator()),
                         ),

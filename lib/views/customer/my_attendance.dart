@@ -35,6 +35,7 @@ class MyAttendance extends StatelessWidget {
                             fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                     ),
+                    if(ca.list.isNotEmpty)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
